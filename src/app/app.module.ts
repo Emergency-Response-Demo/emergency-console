@@ -4,9 +4,10 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { RouterModule } from '@angular/router';
 import { AppRoutes } from './app.routes';
-import { BsDropdownModule, ModalModule } from 'ngx-bootstrap';
+import { BsDropdownModule, ModalModule, AlertModule } from 'ngx-bootstrap';
 import { TableComponent } from './table/table.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
@@ -25,6 +26,8 @@ import { JWT_OPTIONS, JwtModule } from '@auth0/angular-jwt';
 import { StatusComponent } from './status/status.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AlertsComponent } from './alerts/alerts.component';
+import { InMemoryApiService } from './in-memory-api.service';
 
 export function jwtOptionsFactory(keycloakService: KeycloakService) {
   return {
@@ -46,7 +49,8 @@ export function jwtOptionsFactory(keycloakService: KeycloakService) {
     SidebarComponent,
     StatusComponent,
     ProfileComponent,
-    DashboardComponent
+    DashboardComponent,
+    AlertsComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +59,7 @@ export function jwtOptionsFactory(keycloakService: KeycloakService) {
     HttpClientModule,
     RouterModule.forRoot(AppRoutes),
     BsDropdownModule.forRoot(),
+    AlertModule.forRoot(),
     ModalModule.forRoot(),
     CommonModule,
     BrowserAnimationsModule,
@@ -70,6 +75,10 @@ export function jwtOptionsFactory(keycloakService: KeycloakService) {
         useFactory: jwtOptionsFactory,
         deps: [KeycloakService]
       }
+    }),
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryApiService, {
+      dataEncapsulation: false,
+      passThruUnknownUrl: true
     })
   ],
   providers: [],
