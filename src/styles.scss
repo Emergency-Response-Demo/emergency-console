@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@coreui/coreui/scss/coreui';
+
+// for adding theme to alerts
+@import '~@coreui/coreui/scss/bootstrap/functions';
+@import '~@coreui/coreui/scss/bootstrap/variables';
+@import '~@coreui/coreui/scss/bootstrap/mixins';
+@import '~ngx-toastr/toastr-bs4-alert';

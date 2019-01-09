@@ -2,9 +2,13 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.1.
 
-## Development server
+## Development build
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm run buildDev` for a dev build with output in `dist/` that will continuously watch the source code for changes. A production, minified build is built with `npm run build`. The production build is the default build action when running on [Openshift]()
+
+## Development Server
+
+Run `num run local` for a static Express server that will serve content from the generated `dist/` folder.
 
 ## Code scaffolding
 
@@ -13,10 +17,6 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Running end-to-end tests
 

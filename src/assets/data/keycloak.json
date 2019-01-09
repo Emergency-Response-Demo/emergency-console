@@ -1,0 +1,9 @@
+{
+  "realm": "java-js-realm",
+  "auth-server-url": "replaced at runtime",
+  "ssl-required": "external",
+  "resource": "js",
+  "public-client": true,
+  "confidential-port": 0,
+  "enabled": "replaced at runtime"
+}
