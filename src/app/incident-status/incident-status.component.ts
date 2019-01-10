@@ -9,6 +9,8 @@ import { IncidentStatusService } from './incident-status.service';
 })
 export class IncidentStatusComponent implements OnInit {
   incidentStatus: IncidentStatus;
+  incidentPercent: number;
+  incidentTotal: number;
 
   constructor(private incidentStatusService: IncidentStatusService) {
     this.incidentStatus = new IncidentStatus();
@@ -17,6 +19,8 @@ export class IncidentStatusComponent implements OnInit {
   ngOnInit() {
     this.incidentStatusService.getStatus().subscribe(res => {
       this.incidentStatus = res;
+      this.incidentTotal = this.incidentStatus.requested + this.incidentStatus.rescued;
+      this.incidentPercent = (this.incidentStatus.rescued / this.incidentTotal) * 100;
     });
   }
 }
