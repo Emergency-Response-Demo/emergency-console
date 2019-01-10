@@ -16,31 +16,10 @@ export const AppRoutes: Routes = [
     },
     children: [
       {
-        path: 'status',
-        component: StatusComponent,
-        data: {
-          breadcrumb: 'Status'
-        }
-      },
-      {
-        path: 'table',
-        component: TableComponent,
-        data: {
-          breadcrumb: 'Table'
-        }
-      },
-      {
         path: 'profile',
         component: ProfileComponent,
         data: {
           breadcrumb: 'Profile'
-        }
-      },
-      {
-        path: 'charts',
-        component: ChartsComponent,
-        data: {
-          breadcrumb: 'Charts'
         }
       },
       {

@@ -1,34 +1,7 @@
-<div class="row">
-  <div class="col-sm-6">
-    <div class="card mb-3">
-      <div class="card-header">Donut Chart</div>
-      <div class="card-body">
-        <h4 class="card-title">Sales statistics</h4>
-        <p class="card-text">
-          <canvas baseChart
-                  [data]="doughnutChartData"
-                  [labels]="doughnutChartLabels"
-                  [chartType]="doughnutChartType">
-          </canvas>
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6">
-    <div class="card mb-3">
-      <div class="card-header">Bar Chart</div>
-      <div class="card-body">
-        <h4 class="card-title">Light card title</h4>
-        <p class="card-text">
-          <canvas baseChart
-                  [datasets]="barChartData"
-                  [labels]="barChartLabels"
-                  [options]="barChartOptions"
-                  [legend]="barChartLegend"
-                  [chartType]="barChartType">
-          </canvas>
-        </p>
-      </div>
-    </div>
+<div class="card mb-3">
+  <div class="card-header">Responder Utilization</div>
+  <div class="card-body">
+    <div class="card-text">
+      <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" [colors]="doughnutChartColors"></canvas></div>
   </div>
 </div>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { AlertModel } from './alerts/alert-model';
 import { IncidentStatus } from './incident-status/incident-status';
+import { Responders } from './charts/responders';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,12 @@ export class InMemoryApiService implements InMemoryDbService {
       rescued: 104
     };
 
-    return { alerts, incidentStatus };
+    // tslint:disable-next-line:prefer-const
+    let responders: Responders = {
+      active: 40,
+      idle: 60
+    };
+
+    return { alerts, incidentStatus, responders };
   }
 }
