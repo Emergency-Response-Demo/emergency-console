@@ -28,6 +28,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { InMemoryApiService } from './in-memory-api.service';
+import { IncidentStatusComponent } from './incident-status/incident-status.component';
 
 export function jwtOptionsFactory(keycloakService: KeycloakService) {
   return {
@@ -50,7 +51,8 @@ export function jwtOptionsFactory(keycloakService: KeycloakService) {
     StatusComponent,
     ProfileComponent,
     DashboardComponent,
-    AlertsComponent
+    AlertsComponent,
+    IncidentStatusComponent
   ],
   imports: [
     BrowserModule,

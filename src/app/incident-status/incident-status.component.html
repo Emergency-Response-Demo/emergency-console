@@ -1,0 +1,27 @@
+<div class="card mb-3">
+  <div class="card-header">Incident Status</div>
+  <div class="card-body">
+    <div class="card-text">
+      <table class="table table-borderless">
+        <tr class="text-center">
+          <td>
+            <span class="badge badge-danger badge-pill app-badge">{{ incidentStatus.requested }}</span> <br />
+            Requested
+          </td>
+          <td>
+            <span class="badge badge-warning badge-pill app-badge">{{ incidentStatus.claimed }}</span> <br />
+            Claimed
+          </td>
+          <td>
+            <span class="badge badge-info badge-pill app-badge">{{ incidentStatus.pickedUp }}</span> <br />
+            Picked Up
+          </td>
+          <td>
+            <span class="badge badge-success badge-pill app-badge">{{ incidentStatus.rescued }}</span> <br />
+            Rescued
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

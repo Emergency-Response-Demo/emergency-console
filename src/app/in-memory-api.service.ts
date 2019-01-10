@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { AlertModel } from './alerts/alert-model';
+import { IncidentStatus } from './incident-status/incident-status';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,15 @@ export class InMemoryApiService implements InMemoryDbService {
         msg: `Better check yourself, you're not looking too good.`
       }
     ];
-    return { alerts };
+
+    // tslint:disable-next-line:prefer-const
+    let incidentStatus: IncidentStatus = {
+      requested: 23,
+      claimed: 6,
+      pickedUp: 38,
+      rescued: 104
+    };
+
+    return { alerts, incidentStatus };
   }
 }

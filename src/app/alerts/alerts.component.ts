@@ -10,20 +10,6 @@ import { AlertService } from './alert.service';
 export class AlertsComponent implements OnInit {
   alertIcon: IconDefinition;
   alerts: AlertModel[];
-  defaultAlerts: AlertModel[] = [
-    {
-      type: 'success',
-      msg: `You successfully read this important alert message.`
-    },
-    {
-      type: 'info',
-      msg: `This alert needs your attention, but it's not super important.`
-    },
-    {
-      type: 'danger',
-      msg: `Better check yourself, you're not looking too good.`
-    }
-  ];
 
   constructor(private alertService: AlertService) {
     this.alerts = new Array();
