@@ -11,7 +11,9 @@ let proxy = require('http-proxy-middleware');
 
 let app = express();
 
-app.set('port', process.argv[2] || 8080);
+// these ENV variables are only set for local development. Default is for Openshift
+app.set('port', process.env.server_port || 8080);
+app.set('incident-service', process.env.incident_service || 'http://incident-service:8080')
 
 app.use(compression());
 
@@ -20,12 +22,14 @@ app.use(logger('combined'));
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // configure backend api whitelist to prevent CORS errors
-let proxyContext = '/springboot-api/*';
+let proxyContext = '/incident-service/*';
 let proxyOptions = {
-  target: 'http://springboot-app:8080',
+  target: app.get('incident-service'),
+  secure: false,
+  changeOrigin: true,
   logLevel: 'debug',
   pathRewrite: {
-    '^/springboot-app': ''
+    '^/incident-service': ''
   }
 };
 let backendProxy = proxy(proxyOptions);
