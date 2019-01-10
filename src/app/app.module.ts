@@ -11,7 +11,6 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { TableComponent } from './table/table.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -20,7 +19,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ChartsComponent } from './charts/charts.component';
 import { ChartsModule } from 'ng2-charts';
-import { DataTablesModule } from 'angular-datatables';
 import { FormComponent } from './form/form.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -32,6 +30,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { InMemoryApiService } from './in-memory-api.service';
 import { IncidentStatusComponent } from './incident-status/incident-status.component';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 export function jwtOptionsFactory(keycloakService: KeycloakService) {
   return {
@@ -44,7 +43,6 @@ export function jwtOptionsFactory(keycloakService: KeycloakService) {
 @NgModule({
   declarations: [
     AppComponent,
-    TableComponent,
     HomeComponent,
     HeaderComponent,
     BreadcrumbComponent,
@@ -70,7 +68,6 @@ export function jwtOptionsFactory(keycloakService: KeycloakService) {
     CommonModule,
     BrowserAnimationsModule,
     ChartsModule,
-    DataTablesModule,
     ToastrModule.forRoot({
       closeButton: true,
       progressBar: true
@@ -85,7 +82,8 @@ export function jwtOptionsFactory(keycloakService: KeycloakService) {
     HttpClientInMemoryWebApiModule.forRoot(InMemoryApiService, {
       dataEncapsulation: false,
       passThruUnknownUrl: true
-    })
+    }),
+    LeafletModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

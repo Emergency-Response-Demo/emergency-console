@@ -45,17 +45,11 @@
             "styles": [
               "node_modules/@coreui/icons/css/coreui-icons.css",
               "node_modules/simple-line-icons/css/simple-line-icons.css",
-              "src/styles.scss",
-              "node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css",
-              "node_modules/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
+              "node_modules/leaflet/dist/leaflet.css",
+              "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/chart.js/dist/Chart.min.js",
-              "node_modules/jquery/dist/jquery.js",
-              "node_modules/datatables.net/js/jquery.dataTables.js",
-              "node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js",
-              "node_modules/datatables.net-responsive/js/dataTables.responsive.js",
-              "node_modules/datatables.net-responsive-bs4/js/responsive.bootstrap4.js"
+              "node_modules/chart.js/dist/Chart.min.js"
             ]
           },
           "configurations": {

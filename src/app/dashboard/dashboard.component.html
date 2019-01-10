@@ -2,18 +2,16 @@
   <div class="col-md-12"><app-alerts></app-alerts></div>
 </div>
 <div class="row">
-  <div class="col-md-6">
-    <app-incident-status></app-incident-status>
-  </div>
-  <div class="col-md-6">
-    <app-charts></app-charts>
-  </div>
+  <div class="col-md-6"><app-incident-status></app-incident-status></div>
+  <div class="col-md-6"><app-charts></app-charts></div>
 </div>
 <div class="row">
   <div class="col-md-12">
-    <div class="card mb-3">
-      <div class="card-header">Map</div>
-      <div class="card-body"><div class="card-text">Map will go here</div></div>
+    <div class="card">
+      <div class="card-header">
+        Map
+      </div>
+      <div class="card-body"><div style="height: 400px;" leaflet [leafletOptions]="options" (leafletMapReady)="onMapReady($event)"></div></div>
     </div>
   </div>
 </div>

@@ -6,7 +6,6 @@
 @import '~@coreui/coreui/scss/bootstrap/mixins';
 @import '~ngx-toastr/toastr-bs4-alert';
 
-
 // Fix for bug with Angular 7
 // https://stackoverflow.com/questions/53989445/ngx-toastr-toast-not-showing-in-angular-7#
 #toast-container > div {
