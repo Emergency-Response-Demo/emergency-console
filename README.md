@@ -8,7 +8,7 @@ Run `npm run buildDev` for a dev build with output in `dist/` that will continuo
 
 ## Development Server
 
-Run `num run local` for a static Express server that will serve content from the generated `dist/` folder.
+Run `run-loca.sh` for a static Express server that will serve content from the generated `dist/` folder. It will also set environment variables to configure services that are remote. By default the server script attempts to run on port `8080` and looks for an `incident-service` as a backend.
 
 ## Code scaffolding
 
