@@ -7,7 +7,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { RouterModule } from '@angular/router';
 import { AppRoutes } from './app.routes';
-import { BsDropdownModule, ModalModule, AlertModule } from 'ngx-bootstrap';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TableComponent } from './table/table.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
@@ -63,6 +66,7 @@ export function jwtOptionsFactory(keycloakService: KeycloakService) {
     BsDropdownModule.forRoot(),
     AlertModule.forRoot(),
     ModalModule.forRoot(),
+    ProgressbarModule.forRoot(),
     CommonModule,
     BrowserAnimationsModule,
     ChartsModule,
