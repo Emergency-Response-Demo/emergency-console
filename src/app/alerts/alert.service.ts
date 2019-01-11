@@ -10,7 +10,9 @@ import { MessageService } from '../message/message.service';
   providedIn: 'root'
 })
 export class AlertService {
-  private alertsUrl = 'api/alerts';
+
+  // private alertsUrl = 'api/alertMock';
+  private alertsUrl = 'alert-service/alerts';
 
   getAlerts() {
     return this.http.get<AlertModel[]>(this.alertsUrl).pipe(

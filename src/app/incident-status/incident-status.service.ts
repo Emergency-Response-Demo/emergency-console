@@ -11,7 +11,7 @@ import { catchError } from 'rxjs/internal/operators/catchError';
 })
 export class IncidentStatusService {
 
-  // private statusUrl = 'api/incidentStatus';
+  // private statusUrl = 'api/incidentMock';
   private statusUrl = 'incident-service/incidents/stats';
 
   getStatus() {

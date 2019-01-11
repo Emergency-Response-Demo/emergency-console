@@ -11,7 +11,8 @@ import { of } from 'rxjs/internal/observable/of';
 })
 export class ChartsService {
 
-  private respondersUrl = 'api/responders';
+  // private respondersUrl = 'api/responderMock';
+  private respondersUrl = 'responder-service/responders/stats';
 
   getStatus() {
     return this.http.get<Responders>(this.respondersUrl).pipe(

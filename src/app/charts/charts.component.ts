@@ -16,7 +16,9 @@ export class ChartsComponent implements OnInit {
 
   ngOnInit() {
     this.chartsService.getStatus().subscribe(res => {
-      this.doughnutChartData = [res.active, res.idle];
+      const active: number = res.active;
+      const idle: number = res.total - active;
+      this.doughnutChartData = [active, idle];
     });
   }
 }
