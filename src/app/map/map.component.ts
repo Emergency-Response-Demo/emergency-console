@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { tileLayer, latLng, marker, icon } from 'leaflet';
+import { tileLayer, latLng, marker, icon, Icon } from 'leaflet';
 import { MapService } from './map.service';
 import { DashboardService } from '../dashboard/dashboard.service';
+import { MessageService } from '../message/message.service';
 
 @Component({
   selector: 'app-map',
@@ -52,6 +53,15 @@ export class MapComponent implements OnInit {
     shadowSize: [41, 41]
   });
 
+  greyIcon = icon({
+    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-grey.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
   layers = [];
 
   onMapReady(map: L.Map) {
@@ -66,22 +76,37 @@ export class MapComponent implements OnInit {
 
       for (const incident of res) {
         const newMarker = marker([incident.lat, incident.lon], {
-          icon: this.redIcon,
-          title: `Contact: ${incident.reporter.fullName}, ${incident.reporter.phoneNumber} Number of people: ${incident.numberOfPeople}`
-        });
+          icon: this.getIconColor(incident.missionStatus),
+          title: `Contact: ${incident.reporter.fullName}, ${incident.reporter.phoneNumber}, Number of people: ${incident.numberOfPeople}`
+        }).on('click', this.onClick.bind(this));
         this.layers.push(newMarker);
       }
-
-      // this.layers = [
-      //   marker([34.16877, -77.87045], { icon: this.yellowIcon }),
-      //   marker([34.18323, -77.84099], { icon: this.greenIcon }),
-      //   marker([34.2367, -77.83479], { icon: this.redIcon }),
-      //   marker([34.14338, -77.88274], { icon: this.blueIcon })
-      // ];
     });
   }
 
-  constructor(private mapService: MapService, private dashboardService: DashboardService) {
+  // very hacky, probably should be a map lookup
+  getIconColor(missionStatus: string): Icon {
+    let coloredIcon = this.blueIcon;
+
+    if (missionStatus === 'Requested') {
+      coloredIcon = this.redIcon;
+    } else if (missionStatus === 'Assigned') {
+      coloredIcon = this.yellowIcon;
+    } else if (missionStatus === 'PickedUp') {
+      coloredIcon = this.blueIcon;
+    } else if (missionStatus === 'Rescued') {
+      coloredIcon = this.greenIcon;
+    } else if (missionStatus === 'Cancelled') {
+      coloredIcon = this.greyIcon;
+    }
+
+    return coloredIcon;
+  }
+
+  onClick(obj) {
+    this.messageSerivce.info(obj.target.options.title);
+  }
+  constructor(private mapService: MapService, private dashboardService: DashboardService, private messageSerivce: MessageService) {
     this.dashboardService.reload$.subscribe(res => {
       console.log(`Map component ${res}`);
       this.load();
