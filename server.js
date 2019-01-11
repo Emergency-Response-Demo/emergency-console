@@ -11,9 +11,11 @@ let proxy = require('http-proxy-middleware');
 
 let app = express();
 
-// these ENV variables are only set for local development. Default is for Openshift
-app.set('port', process.env.server_port || 8080);
-app.set('incident-service', process.env.incident_service || 'http://incident-service:8080')
+// these ENV variables are only set for local development. Default to services on Openshift
+app.set('port', process.env.PORT || 8080);
+app.set('incident-service', process.env.INCIDENT || 'http://incident-service:8080');
+app.set('alert-service', process.env.ALERT || 'http://alert-service:8080');
+app.set('responder-service', process.env.RESPONDER || 'http://responder-service:8080');
 
 app.use(compression());
 
@@ -21,19 +23,47 @@ app.use(logger('combined'));
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// configure backend api whitelist to prevent CORS errors
-let proxyContext = '/incident-service/*';
-let proxyOptions = {
-  target: app.get('incident-service'),
-  secure: false,
-  changeOrigin: true,
-  logLevel: 'debug',
-  pathRewrite: {
-    '^/incident-service': ''
-  }
-};
-let backendProxy = proxy(proxyOptions);
-app.use(proxyContext, backendProxy);
+// incident server proxy
+app.use(
+  '/incident-service/*',
+  proxy({
+    target: app.get('incident-service'),
+    secure: false,
+    changeOrigin: true,
+    logLevel: 'debug',
+    pathRewrite: {
+      '^/incident-service': ''
+    }
+  })
+);
+
+// alert server proxy
+app.use(
+  '/alert-service/*',
+  proxy({
+    target: app.get('alert-service'),
+    secure: false,
+    changeOrigin: true,
+    logLevel: 'debug',
+    pathRewrite: {
+      '^/alert-service': ''
+    }
+  })
+);
+
+// responder server proxy
+app.use(
+  '/responder-service/*',
+  proxy({
+    target: app.get('responder-service'),
+    secure: false,
+    changeOrigin: true,
+    logLevel: 'debug',
+    pathRewrite: {
+      '^/responder-service': ''
+    }
+  })
+);
 
 app.use((req, res) => {
   // respond with index to process links
