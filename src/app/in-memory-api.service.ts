@@ -10,18 +10,18 @@ import { Responders } from './charts/responders';
 export class InMemoryApiService implements InMemoryDbService {
   createDb() {
     // tslint:disable-next-line:prefer-const
-    let alerts: AlertModel[] = [
+    let alertStatus: AlertModel[] = [
       {
         type: 'success',
-        msg: `You successfully read this important alert message.`
+        message: `You successfully read this important alert message.`
       },
       {
         type: 'info',
-        msg: `This alert needs your attention, but it's not super important.`
+        message: `This alert needs your attention, but it's not super important.`
       },
       {
         type: 'danger',
-        msg: `Better check yourself, you're not looking too good.`
+        message: `Better check yourself, you're not looking too good.`
       }
     ];
 
@@ -34,11 +34,11 @@ export class InMemoryApiService implements InMemoryDbService {
     };
 
     // tslint:disable-next-line:prefer-const
-    let responders: Responders = {
+    let responderStatus: Responders = {
       active: 40,
-      idle: 60
+      total: 100
     };
 
-    return { alerts, incidentStatus, responders };
+    return { alertStatus, incidentStatus, responderStatus };
   }
 }
