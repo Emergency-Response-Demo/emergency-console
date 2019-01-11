@@ -31,6 +31,7 @@ import { AlertsComponent } from './alerts/alerts.component';
 import { InMemoryApiService } from './in-memory-api.service';
 import { IncidentStatusComponent } from './incident-status/incident-status.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { MapComponent } from './map/map.component';
 
 export function jwtOptionsFactory(keycloakService: KeycloakService) {
   return {
@@ -53,7 +54,8 @@ export function jwtOptionsFactory(keycloakService: KeycloakService) {
     ProfileComponent,
     DashboardComponent,
     AlertsComponent,
-    IncidentStatusComponent
+    IncidentStatusComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
