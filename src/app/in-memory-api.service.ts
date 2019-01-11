@@ -30,7 +30,8 @@ export class InMemoryApiService implements InMemoryDbService {
       requested: 23,
       assigned: 6,
       pickedUp: 38,
-      rescued: 104
+      rescued: 104,
+      cancelled: 34
     };
 
     // tslint:disable-next-line:prefer-const

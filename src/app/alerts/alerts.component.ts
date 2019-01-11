@@ -15,7 +15,6 @@ export class AlertsComponent implements OnInit {
   constructor(private alertService: AlertService, private dashboardService: DashboardService) {
     this.alerts = new Array();
     this.dashboardService.reload$.subscribe(res => {
-      console.log(`Alert component ${res}`);
       this.load();
     });
   }

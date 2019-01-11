@@ -15,7 +15,6 @@ export class ChartsComponent implements OnInit {
 
   constructor(private chartsService: ChartsService, private dashboardService: DashboardService) {
     this.dashboardService.reload$.subscribe(res => {
-      console.log(`Chart component ${res}`);
       this.load();
     });
   }

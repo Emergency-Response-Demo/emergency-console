@@ -1,6 +1,9 @@
 <div class="row">
   <div class="col-xs-12 mb-2 ml-3">
-    <button type="button" class="btn btn-primary btn-lg" (click)="refresh()"><fa-icon [icon]="refreshIcon"></fa-icon>&nbsp;&nbsp;Reload</button>
+    <button type="button" class="btn btn-primary" (click)="refresh()" [disabled]="isPolling"><fa-icon [icon]="refreshIcon"></fa-icon>&nbsp;&nbsp;Poll</button
+    >&nbsp;
+    <button type="button" class="btn btn-secondary" (click)="stop()" [disabled]="!isPolling"><fa-icon [icon]="stopIcon"></fa-icon>&nbsp;&nbsp;Stop</button
+    >&nbsp;
   </div>
 </div>
 <div class="row">

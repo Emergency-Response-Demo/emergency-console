@@ -12,7 +12,7 @@ import { MessageService } from '../message/message.service';
 export class MapComponent implements OnInit {
   options = {
     layers: [tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: 'Red Hat' })],
-    zoom: 10,
+    zoom: 12,
     center: latLng(34.210383, -77.886765)
   };
 
@@ -108,7 +108,6 @@ export class MapComponent implements OnInit {
   }
   constructor(private mapService: MapService, private dashboardService: DashboardService, private messageSerivce: MessageService) {
     this.dashboardService.reload$.subscribe(res => {
-      console.log(`Map component ${res}`);
       this.load();
     });
   }

@@ -9,23 +9,22 @@ import { DashboardService } from '../dashboard/dashboard.service';
   styleUrls: ['./incident-status.component.scss']
 })
 export class IncidentStatusComponent implements OnInit {
-  incidentStatus: IncidentStatus;
-  incidentPercent: number;
-  incidentTotal: number;
+  status: IncidentStatus;
+  percent: number;
+  total: number;
 
   constructor(private incidentStatusService: IncidentStatusService, private dashboardService: DashboardService) {
-    this.incidentStatus = new IncidentStatus();
+    this.status = new IncidentStatus();
     this.dashboardService.reload$.subscribe(res => {
-      console.log(`Incident component ${res}`);
       this.load();
     });
   }
 
   load(): void {
     this.incidentStatusService.getStatus().subscribe(res => {
-      this.incidentStatus = res;
-      this.incidentTotal = this.incidentStatus.requested + this.incidentStatus.rescued;
-      this.incidentPercent = (this.incidentStatus.rescued / this.incidentTotal) * 100;
+      this.status = res;
+      this.total = this.status.requested + this.status.rescued + this.status.assigned + this.status.pickedUp + this.status.cancelled;
+      this.percent = (this.status.rescued / this.total) * 100;
     });
   }
 

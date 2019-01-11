@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from '../message/message.service';
-import { IconDefinition, faSync } from '@fortawesome/free-solid-svg-icons';
+import { IconDefinition, faSync, faBan } from '@fortawesome/free-solid-svg-icons';
 import { DashboardService } from './dashboard.service';
+import { interval } from 'rxjs/internal/observable/interval';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,14 +10,27 @@ import { DashboardService } from './dashboard.service';
 })
 export class DashboardComponent implements OnInit {
   refreshIcon: IconDefinition;
+  stopIcon: IconDefinition;
+  polling: any;
+  isPolling = false;
 
-  constructor(private messageService: MessageService, private dashboardService: DashboardService) {
+  constructor(private dashboardService: DashboardService) {
     this.refreshIcon = faSync;
+    this.stopIcon = faBan;
   }
 
   refresh() {
-    this.messageService.info('Reloading data');
-    this.dashboardService.refresh();
+    this.isPolling = true;
+
+    this.polling = interval(1000).subscribe(n => {
+      console.log(`Polling loop ${n}`);
+      this.dashboardService.refresh();
+    });
+  }
+
+  stop() {
+    this.isPolling = false;
+    this.polling.unsubscribe();
   }
 
   ngOnInit() {}
