@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { tileLayer, latLng, marker, icon } from 'leaflet';
+import { MapService } from './map.service';
+import { DashboardService } from '../dashboard/dashboard.service';
 
 @Component({
   selector: 'app-map',
@@ -50,12 +52,7 @@ export class MapComponent implements OnInit {
     shadowSize: [41, 41]
   });
 
-  layers = [
-    marker([34.16877, -77.87045], { icon: this.yellowIcon }),
-    marker([34.18323, -77.84099], { icon: this.greenIcon }),
-    marker([34.2367, -77.83479], { icon: this.redIcon }),
-    marker([34.14338, -77.88274], { icon: this.blueIcon })
-  ];
+  layers = [];
 
   onMapReady(map: L.Map) {
     setTimeout(() => {
@@ -63,7 +60,35 @@ export class MapComponent implements OnInit {
     }, 0);
   }
 
-  constructor() {}
+  load(): void {
+    this.mapService.getData().subscribe(res => {
+      this.layers.splice(0, this.layers.length);
 
-  ngOnInit() {}
+      for (const incident of res) {
+        const newMarker = marker([incident.lat, incident.lon], {
+          icon: this.redIcon,
+          title: `Contact: ${incident.reporter.fullName}, ${incident.reporter.phoneNumber} Number of people: ${incident.numberOfPeople}`
+        });
+        this.layers.push(newMarker);
+      }
+
+      // this.layers = [
+      //   marker([34.16877, -77.87045], { icon: this.yellowIcon }),
+      //   marker([34.18323, -77.84099], { icon: this.greenIcon }),
+      //   marker([34.2367, -77.83479], { icon: this.redIcon }),
+      //   marker([34.14338, -77.88274], { icon: this.blueIcon })
+      // ];
+    });
+  }
+
+  constructor(private mapService: MapService, private dashboardService: DashboardService) {
+    this.dashboardService.reload$.subscribe(res => {
+      console.log(`Map component ${res}`);
+      this.load();
+    });
+  }
+
+  ngOnInit() {
+    this.load();
+  }
 }

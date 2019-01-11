@@ -28,7 +28,7 @@ export class InMemoryApiService implements InMemoryDbService {
     // tslint:disable-next-line:prefer-const
     let incidentMock: IncidentStatus = {
       requested: 23,
-      claimed: 6,
+      assigned: 6,
       pickedUp: 38,
       rescued: 104
     };
