@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IconDefinition, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { AlertModel } from './alert-model';
 import { AlertService } from './alert.service';
+import { DashboardService } from '../dashboard/dashboard.service';
 
 @Component({
   selector: 'app-alerts',
@@ -11,8 +12,18 @@ export class AlertsComponent implements OnInit {
   alertIcon: IconDefinition;
   alerts: AlertModel[];
 
-  constructor(private alertService: AlertService) {
+  constructor(private alertService: AlertService, private dashboardService: DashboardService) {
     this.alerts = new Array();
+    this.dashboardService.reload$.subscribe(res => {
+      console.log(`Alert component ${res}`);
+      this.load();
+    });
+  }
+
+  load(): void {
+    this.alertService.getAlerts().subscribe(res => {
+      this.alerts = res;
+    });
   }
 
   onClosed(dismissedAlert: any): void {
@@ -21,9 +32,6 @@ export class AlertsComponent implements OnInit {
 
   ngOnInit() {
     this.alertIcon = faExclamationTriangle;
-
-    this.alertService.getAlerts().subscribe(res => {
-      this.alerts = res;
-    });
+    this.load();
   }
 }

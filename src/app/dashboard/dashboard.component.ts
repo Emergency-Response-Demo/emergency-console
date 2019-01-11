@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from '../message/message.service';
 import { IconDefinition, faSync } from '@fortawesome/free-solid-svg-icons';
+import { DashboardService } from './dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,12 +11,13 @@ import { IconDefinition, faSync } from '@fortawesome/free-solid-svg-icons';
 export class DashboardComponent implements OnInit {
   refreshIcon: IconDefinition;
 
-  constructor(private messageService: MessageService) {
+  constructor(private messageService: MessageService, private dashboardService: DashboardService) {
     this.refreshIcon = faSync;
   }
 
   refresh() {
-    this.messageService.info('Reload not yet implemented');
+    this.messageService.info('Reloading data');
+    this.dashboardService.refresh();
   }
 
   ngOnInit() {}
