@@ -10,7 +10,7 @@ import { Responders } from './charts/responders';
 export class InMemoryApiService implements InMemoryDbService {
   createDb() {
     // tslint:disable-next-line:prefer-const
-    let alertStatus: AlertModel[] = [
+    let alertMock: AlertModel[] = [
       {
         type: 'success',
         message: `You successfully read this important alert message.`
@@ -26,7 +26,7 @@ export class InMemoryApiService implements InMemoryDbService {
     ];
 
     // tslint:disable-next-line:prefer-const
-    let incidentStatus: IncidentStatus = {
+    let incidentMock: IncidentStatus = {
       requested: 23,
       claimed: 6,
       pickedUp: 38,
@@ -34,11 +34,11 @@ export class InMemoryApiService implements InMemoryDbService {
     };
 
     // tslint:disable-next-line:prefer-const
-    let responderStatus: Responders = {
+    let responderMock: Responders = {
       active: 40,
       total: 100
     };
 
-    return { alertStatus, incidentStatus, responderStatus };
+    return { alertMock, incidentMock, responderMock };
   }
 }
