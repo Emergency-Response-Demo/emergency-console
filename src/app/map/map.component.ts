@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { tileLayer, latLng, marker, icon, Icon } from 'leaflet';
 import { MapService } from './map.service';
 import { DashboardService } from '../dashboard/dashboard.service';
 import { MessageService } from '../message/message.service';
+import { MapIcons } from './map-icons';
+import { IncidentStatus } from '../incident/incident-status';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
   options = {
@@ -15,52 +17,6 @@ export class MapComponent implements OnInit {
     zoom: 12,
     center: latLng(34.210383, -77.886765)
   };
-
-  // pulled this from https://github.com/pointhi/leaflet-color-markers
-  yellowIcon = icon({
-    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  });
-
-  blueIcon = icon({
-    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  });
-
-  greenIcon = icon({
-    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  });
-
-  redIcon = icon({
-    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  });
-
-  greyIcon = icon({
-    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-grey.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  });
 
   layers = [];
 
@@ -76,36 +32,46 @@ export class MapComponent implements OnInit {
 
       for (const incident of res) {
         const newMarker = marker([incident.lat, incident.lon], {
-          icon: this.getIconColor(incident.missionStatus),
-          title: `Contact: ${incident.reporter.fullName}, ${incident.reporter.phoneNumber}, Number of people: ${incident.numberOfPeople}`
-        }).on('click', this.onClick.bind(this));
+          icon: this.getIcon(incident.missionStatus)
+        }).bindPopup(this.getPopup(incident));
+
         this.layers.push(newMarker);
       }
     });
   }
 
-  // very hacky, probably should be a map lookup
-  getIconColor(missionStatus: string): Icon {
-    let coloredIcon = this.blueIcon;
+  getPopup(incident: any): string {
+    return `Number of people: ${incident.numberOfPeople}<br>
+    Medical Needed: ${incident.medicalNeeded}<br>
+    Status: ${incident.missionStatus}<br>
+    Reporter: ${incident.reporter.fullName}<br>
+    Phone Number: ${incident.reporter.phoneNumber}<br>
+    Reported: ${incident.reporter.reportTime}`;
+  }
 
-    if (missionStatus === 'Requested') {
-      coloredIcon = this.redIcon;
-    } else if (missionStatus === 'Assigned') {
-      coloredIcon = this.yellowIcon;
-    } else if (missionStatus === 'PickedUp') {
-      coloredIcon = this.blueIcon;
-    } else if (missionStatus === 'Rescued') {
-      coloredIcon = this.greenIcon;
-    } else if (missionStatus === 'Cancelled') {
-      coloredIcon = this.greyIcon;
+  getIcon(missionStatus: string): Icon {
+    switch (missionStatus) {
+      case 'Requested': {
+        return MapIcons.red;
+      }
+      case 'Assigned': {
+        return MapIcons.yellow;
+      }
+      case 'PickedUp': {
+        return MapIcons.blue;
+      }
+      case 'Rescued': {
+        return MapIcons.green;
+      }
+      case 'Cancelled': {
+        return MapIcons.grey;
+      }
+      default: {
+        return MapIcons.blue;
+      }
     }
-
-    return coloredIcon;
   }
 
-  onClick(obj) {
-    this.messageSerivce.info(obj.target.options.title);
-  }
   constructor(private mapService: MapService, private dashboardService: DashboardService, private messageSerivce: MessageService) {
     this.dashboardService.reload$.subscribe(res => {
       this.load();
