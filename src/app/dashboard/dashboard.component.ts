@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   refresh() {
     this.isPolling = true;
 
-    this.polling = interval(1000).subscribe(n => {
+    this.polling = interval(2000).subscribe(n => {
       console.log(`Polling loop ${n}`);
       this.dashboardService.refresh();
     });
