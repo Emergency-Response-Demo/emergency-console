@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   checkForMobile(event?) {
-    if (window.innerWidth < 425) {
+    if (window.innerWidth < 640) {
       this.toggleSidebar();
     }
   }
