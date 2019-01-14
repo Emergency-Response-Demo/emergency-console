@@ -1,9 +1,13 @@
-<div class="row ml-auto mb-2">
+<div class="row ml-auto">
   <div class="col-lg">
-    <button type="button" class="btn btn-primary" (click)="refresh()" [disabled]="isPolling"><fa-icon [icon]="refreshIcon"></fa-icon>&nbsp;&nbsp;Poll</button
-    >&nbsp;
-    <button type="button" class="btn btn-secondary" (click)="stop()" [disabled]="!isPolling"><fa-icon [icon]="stopIcon"></fa-icon>&nbsp;&nbsp;Stop</button
-    >&nbsp;
+    <div class="d-flex flex-row">
+      <div class="pr-1 mt-2">Auto Update</div>
+      <div class="p-1">
+        <label class="switch switch-label switch-primary">
+          <input type="checkbox" class="switch-input" [checked]="isPolling" (change)="togglePolling()" /> <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+        </label>
+      </div>
+    </div>
   </div>
 </div>
 <div class="row">

@@ -19,18 +19,17 @@ export class DashboardComponent implements OnInit {
     this.stopIcon = faBan;
   }
 
-  refresh() {
-    this.isPolling = true;
+  togglePolling() {
+    this.isPolling = !this.isPolling;
 
-    this.polling = interval(2000).subscribe(n => {
-      console.log(`Polling loop ${n}`);
-      this.dashboardService.refresh();
-    });
-  }
-
-  stop() {
-    this.isPolling = false;
-    this.polling.unsubscribe();
+    if (this.isPolling === true) {
+      this.polling = interval(2000).subscribe(n => {
+        // console.log(`Polling loop ${n}`);
+        this.dashboardService.refresh();
+      });
+    } else {
+      this.polling.unsubscribe();
+    }
   }
 
   ngOnInit() {}
