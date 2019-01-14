@@ -1,28 +1,30 @@
 <div class="card app-card">
   <div class="card-header">Incident Status</div>
   <div class="card-body">
-    <table class="table table-borderless">
-      <tr class="text-center">
-        <td>
-          <span class="badge badge-danger badge-pill app-badge">{{ status.requested }}</span> <br />
-          Requested
-        </td>
-        <td>
-          <span class="badge badge-warning badge-pill app-badge">{{ status.assigned }}</span> <br />
-          Assigned
-        </td>
-        <td>
-          <span class="badge badge-info badge-pill app-badge">{{ status.pickedUp }}</span> <br />
-          Picked Up
-        </td>
-        <td>
-          <span class="badge badge-success badge-pill app-badge">{{ status.rescued }}</span> <br />
-          Rescued
-        </td>
-      </tr>
-      <tr>
-        <td colspan="4"><progressbar max="100" [value]="percent" type="success" [animate]="true"> </progressbar></td>
-      </tr>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-borderless">
+        <tr class="text-center">
+          <td>
+            <span class="badge badge-danger badge-pill app-badge">{{ status.requested }}</span> <br />
+            Requested
+          </td>
+          <td>
+            <span class="badge badge-warning badge-pill app-badge">{{ status.assigned }}</span> <br />
+            Assigned
+          </td>
+          <td>
+            <span class="badge badge-info badge-pill app-badge">{{ status.pickedUp }}</span> <br />
+            Picked Up
+          </td>
+          <td>
+            <span class="badge badge-success badge-pill app-badge">{{ status.rescued }}</span> <br />
+            Rescued
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4"><progressbar max="100" [value]="percent" type="success" [animate]="true"> </progressbar></td>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
