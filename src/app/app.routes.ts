@@ -1,8 +1,7 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { FormComponent } from './form/form.component';
-import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export const AppRoutes: Routes = [
   {
@@ -17,13 +16,6 @@ export const AppRoutes: Routes = [
         component: ProfileComponent,
         data: {
           breadcrumb: 'Profile'
-        }
-      },
-      {
-        path: 'form',
-        component: FormComponent,
-        data: {
-          breadcrumb: 'Form'
         }
       },
       {

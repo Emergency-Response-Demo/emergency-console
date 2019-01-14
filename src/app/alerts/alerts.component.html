@@ -1,7 +1,0 @@
-<div class="card" *ngIf="alerts.length > 0">
-  <div class="card-body">
-    <div *ngFor="let alert of alerts">
-      <alert [type]="alert.type" [dismissible]="true" (onClosed)="onClosed(alert)">{{ alert.message }}</alert>
-    </div>
-  </div>
-</div>

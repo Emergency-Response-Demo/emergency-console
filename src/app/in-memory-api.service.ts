@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { AlertModel } from './alerts/alert-model';
-import { IncidentStatus } from './incident-status/incident-status';
+import { IncidentStatus } from './incident/incident-status';
 import { Responders } from './charts/responders';
 
 @Injectable({
