@@ -1,18 +1,15 @@
-<div class="row">
-  <div class="col-xs-12 mb-2 ml-3">
+<div class="row ml-auto mb-2">
+  <div class="col-lg">
     <button type="button" class="btn btn-primary" (click)="refresh()" [disabled]="isPolling"><fa-icon [icon]="refreshIcon"></fa-icon>&nbsp;&nbsp;Poll</button
     >&nbsp;
     <button type="button" class="btn btn-secondary" (click)="stop()" [disabled]="!isPolling"><fa-icon [icon]="stopIcon"></fa-icon>&nbsp;&nbsp;Stop</button
     >&nbsp;
   </div>
 </div>
-<div class="row">
-  <div class="col-md-12"><app-alerts></app-alerts></div>
-</div>
-<div class="row align-items-stretch">
-  <div class="col-md-6"><app-incident-status></app-incident-status></div>
-  <div class="col-md-6"><app-charts></app-charts></div>
+<div class="row mb-3">
+  <div class="col-lg"><app-incident></app-incident></div>
+  <div class="col-lg"><app-charts></app-charts></div>
 </div>
 <div class="row">
-  <div class="col-md-12"><app-map></app-map></div>
+  <div class="col-md"><app-map></app-map></div>
 </div>
