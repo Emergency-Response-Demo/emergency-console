@@ -1,12 +1,8 @@
-import { Component, OnInit, Renderer2} from '@angular/core';
-import { MessageItem } from '../message/message-item';
-import {
-  faEraser,
-  faSignOutAlt,
-  IconDefinition
-} from '@fortawesome/free-solid-svg-icons';
-import { MessageHistoryService } from '../message/message-history.service';
+import { Component, OnInit, Renderer2 } from '@angular/core';
+import { faEraser, faSignOutAlt, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { KeycloakService } from '../keycloak.service';
+import { AlertModel } from '../alerts/alert-model';
+import { AlertService } from '../alerts/alert.service';
 
 @Component({
   styleUrls: ['./header.component.css'],
@@ -19,36 +15,33 @@ export class HeaderComponent implements OnInit {
   formIcon: IconDefinition;
   sidebarVisible: boolean;
   username: string;
-  messages: MessageItem[];
+  alerts: AlertModel[];
   logoutUrl: string;
 
-  constructor(
-    private messageHistoryService: MessageHistoryService,
-    private renderer: Renderer2,
-    private keycloakService: KeycloakService
-  ) {
+  constructor(private alertService: AlertService, private renderer: Renderer2, private keycloakService: KeycloakService) {
     this.eraseIcon = faEraser;
     this.logoutIcon = faSignOutAlt;
     this.sidebarVisible = true;
-    this.messages = new Array();
+    this.alerts = new Array();
     this.username = '';
   }
 
-  clear() {
-    this.messageHistoryService.clear();
-  }
-
   toggleSidebar() {
-      this.sidebarVisible = !this.sidebarVisible;
-      if (this.sidebarVisible === false) {
-        this.renderer.removeClass(document.body, 'sidebar-show');
-      } else {
-        this.renderer.addClass(document.body, 'sidebar-show');
-      }
+    this.sidebarVisible = !this.sidebarVisible;
+    if (this.sidebarVisible === false) {
+      this.renderer.removeClass(document.body, 'sidebar-show');
+    } else {
+      this.renderer.addClass(document.body, 'sidebar-show');
+    }
   }
 
   ngOnInit(): void {
-    this.messages = this.messageHistoryService.getHistory();
+    this.alertService.getAlerts().subscribe(res => {
+      this.alerts = res.map((alert: AlertModel) => {
+        alert.type = `text-${alert.type}`;
+        return alert;
+      });
+    });
 
     const auth = this.keycloakService.getAuth();
 
