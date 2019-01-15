@@ -13,9 +13,9 @@ let app = express();
 
 // these ENV variables are only set for local development. Default to services on Openshift
 app.set('port', process.env.PORT || 8080);
-app.set('incident-service', process.env.INCIDENT || 'incident-service:8080');
-app.set('alert-service', process.env.ALERT || 'alert-service:8080');
-app.set('responder-service', process.env.RESPONDER || 'responder-service:8080');
+app.set('incident-service', process.env.INCIDENT || 'http://incident-service:8080');
+app.set('alert-service', process.env.ALERT || 'http://alert-service:8080');
+app.set('responder-service', process.env.RESPONDER || 'http://responder-service:8080');
 
 app.use(compression());
 
