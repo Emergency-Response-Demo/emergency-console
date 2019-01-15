@@ -17,6 +17,8 @@ export class ChartsComponent implements OnInit {
   type: string;
   options: any;
   total = 0;
+  active = 0;
+  idle = 0;
 
   constructor(private chartsService: ChartsService) {
     this.reload$ = new Subject();
@@ -30,10 +32,10 @@ export class ChartsComponent implements OnInit {
 
   load(): void {
     this.chartsService.getStatus().subscribe(res => {
-      const active: number = res.active;
+      this.active = res.active;
       this.total = res.total;
-      const idle = this.total - active;
-      this.data = [active, idle];
+      this.idle = this.total - this.active;
+      this.data = [this.active, this.idle];
     });
   }
 
