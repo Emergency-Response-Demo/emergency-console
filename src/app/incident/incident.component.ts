@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { IncidentStatus } from './incident-status';
 import { IncidentService } from './incident.service';
-import { DashboardService } from '../dashboard/dashboard.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-incident',
@@ -9,15 +9,16 @@ import { DashboardService } from '../dashboard/dashboard.service';
   styleUrls: ['./incident.component.css']
 })
 export class IncidentComponent implements OnInit {
+  @Input()
+  reload$: Subject<string>;
+
   status: IncidentStatus;
   percent: number;
   total: number;
 
-  constructor(private incidentService: IncidentService, private dashboardService: DashboardService) {
+  constructor(private incidentService: IncidentService) {
     this.status = new IncidentStatus();
-    this.dashboardService.reload$.subscribe(res => {
-      this.load();
-    });
+    this.reload$ = new Subject();
   }
 
   load(): void {
@@ -30,5 +31,9 @@ export class IncidentComponent implements OnInit {
 
   ngOnInit() {
     this.load();
+
+    this.reload$.subscribe(res => {
+      this.load();
+    });
   }
 }

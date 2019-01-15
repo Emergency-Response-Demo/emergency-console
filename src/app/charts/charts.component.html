@@ -1,13 +1,17 @@
 <div class="card app-card">
   <div class="card-header">Responder Utilization</div>
-  <div class="card-body">
+  <div class="card-body text-center">
+    <div class="card-subtitle text-muted">
+      There are {{ total }} total responders
+    </div>
     <canvas
       baseChart
       height="70vh"
-      [data]="doughnutChartData"
-      [labels]="doughnutChartLabels"
-      [chartType]="doughnutChartType"
-      [colors]="doughnutChartColors"
+      [data]="data"
+      [labels]="labels"
+      [chartType]="type"
+      [colors]="colors"
+      [options]="options"
     ></canvas>
   </div>
 </div>

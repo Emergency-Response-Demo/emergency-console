@@ -1,10 +1,8 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, Input } from '@angular/core';
 import { tileLayer, latLng, marker, icon, Icon } from 'leaflet';
 import { MapService } from './map.service';
-import { DashboardService } from '../dashboard/dashboard.service';
-import { MessageService } from '../message/message.service';
 import { MapIcons } from './map-icons';
-import { IncidentStatus } from '../incident/incident-status';
+import { Subject } from 'rxjs/internal/Subject';
 
 @Component({
   selector: 'app-map',
@@ -12,6 +10,9 @@ import { IncidentStatus } from '../incident/incident-status';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
+  @Input()
+  reload$: Subject<string>;
+
   options = {
     layers: [tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: 'Red Hat' })],
     zoom: 12,
@@ -72,13 +73,15 @@ export class MapComponent implements OnInit {
     }
   }
 
-  constructor(private mapService: MapService, private dashboardService: DashboardService, private messageSerivce: MessageService) {
-    this.dashboardService.reload$.subscribe(res => {
-      this.load();
-    });
+  constructor(private mapService: MapService) {
+    this.reload$ = new Subject();
   }
 
   ngOnInit() {
+    this.reload$.subscribe(res => {
+      this.load();
+    });
+
     this.load();
   }
 }

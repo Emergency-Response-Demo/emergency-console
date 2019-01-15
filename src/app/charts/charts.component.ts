@@ -1,33 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Color } from 'ng2-charts';
 import { ChartsService } from './charts.service';
-import { DashboardService } from '../dashboard/dashboard.service';
+import { Subject } from 'rxjs/internal/Subject';
 
 @Component({
   selector: 'app-charts',
   templateUrl: './charts.component.html'
 })
 export class ChartsComponent implements OnInit {
-  doughnutChartLabels: string[] = ['Active', 'Idle'];
-  doughnutChartData: number[] = [];
-  doughnutChartColors: Color[] = [{ backgroundColor: ['#20c997', '#20a8d8'] }];
-  doughnutChartType = 'doughnut';
+  @Input()
+  reload$: Subject<string>;
 
-  constructor(private chartsService: ChartsService, private dashboardService: DashboardService) {
-    this.dashboardService.reload$.subscribe(res => {
-      this.load();
-    });
+  labels: string[];
+  data: number[];
+  colors: Color[];
+  type: string;
+  options: any;
+  total = 0;
+
+  constructor(private chartsService: ChartsService) {
+    this.reload$ = new Subject();
+    this.data = new Array();
+    this.type = 'doughnut';
+
+    // colors pulled from https://coreui.io/docs/getting-started/ui-kit/
+    this.colors = [{ backgroundColor: ['#4dbd74', '#20a8d8'] }];
+    this.labels = ['Active', 'Idle'];
   }
 
   load(): void {
     this.chartsService.getStatus().subscribe(res => {
       const active: number = res.active;
-      const idle: number = res.total - active;
-      this.doughnutChartData = [active, idle];
+      this.total = res.total;
+      const idle = this.total - active;
+      this.data = [active, idle];
     });
   }
 
   ngOnInit() {
     this.load();
+
+    this.reload$.subscribe(res => {
+      this.load();
+    });
   }
 }

@@ -11,9 +11,9 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-lg mb-3"><app-incident></app-incident></div>
-  <div class="col-lg mb-3"><app-charts></app-charts></div>
+  <div class="col-lg mb-3"><app-incident [reload$]="reload$"></app-incident></div>
+  <div class="col-lg mb-3"><app-charts [reload$]="reload$"></app-charts></div>
 </div>
 <div class="row">
-  <div class="col-md"><app-map></app-map></div>
+  <div class="col-md"><app-map [reload$]="reload$"></app-map></div>
 </div>
