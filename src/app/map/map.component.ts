@@ -16,12 +16,6 @@ export class MapComponent implements OnInit {
   options: MapOptions;
   layers: Marker[];
 
-  onMapReady(map: L.Map) {
-    setTimeout(() => {
-      map.invalidateSize();
-    }, 0);
-  }
-
   load(): void {
     this.mapService.getData().subscribe(res => {
       const newMarkers: Marker[] = new Array();
