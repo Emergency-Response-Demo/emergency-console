@@ -1,8 +1,9 @@
-import { Component, OnInit, NgZone, Input } from '@angular/core';
-import { tileLayer, latLng, marker, icon, Icon } from 'leaflet';
+import { Component, OnInit, Input } from '@angular/core';
+import { tileLayer, latLng, marker, Icon, Marker, MapOptions } from 'leaflet';
 import { MapService } from './map.service';
 import { MapIcons } from './map-icons';
 import { Subject } from 'rxjs/internal/Subject';
+import { IncidentStatus } from '../incident/incident-status';
 
 @Component({
   selector: 'app-map',
@@ -12,14 +13,8 @@ import { Subject } from 'rxjs/internal/Subject';
 export class MapComponent implements OnInit {
   @Input()
   reload$: Subject<string>;
-
-  options = {
-    layers: [tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: 'Red Hat' })],
-    zoom: 12,
-    center: latLng(34.210383, -77.886765)
-  };
-
-  layers = [];
+  options: MapOptions;
+  layers: Marker[];
 
   onMapReady(map: L.Map) {
     setTimeout(() => {
@@ -29,15 +24,17 @@ export class MapComponent implements OnInit {
 
   load(): void {
     this.mapService.getData().subscribe(res => {
-      this.layers.splice(0, this.layers.length);
+      const newMarkers: Marker[] = new Array();
 
-      for (const incident of res) {
+      res.map(incident => {
         const newMarker = marker([incident.lat, incident.lon], {
           icon: this.getIcon(incident.missionStatus)
         }).bindPopup(this.getPopup(incident));
 
-        this.layers.push(newMarker);
-      }
+        newMarkers.push(newMarker);
+      });
+
+      this.layers = newMarkers;
     });
   }
 
@@ -75,6 +72,12 @@ export class MapComponent implements OnInit {
 
   constructor(private mapService: MapService) {
     this.reload$ = new Subject();
+    this.layers = [];
+    this.options = {
+      layers: [tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: 'Red Hat' })],
+      zoom: 12,
+      center: latLng(34.210383, -77.886765)
+    };
   }
 
   ngOnInit() {
