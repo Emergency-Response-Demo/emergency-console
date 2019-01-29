@@ -1,3 +1,12 @@
-.app-map {
-  height: 550px;
+mgl-map {
+  height: 40em;
+  width: 100%;
+}
+
+.marker {
+  background-size: cover;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  cursor: pointer;
 }

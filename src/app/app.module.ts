@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -27,6 +26,7 @@ import { KeycloakService } from './keycloak.service';
 import { MapComponent } from './map/map.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
 export function jwtOptionsFactory(keycloakService: KeycloakService) {
   return {
@@ -76,7 +76,9 @@ export function jwtOptionsFactory(keycloakService: KeycloakService) {
       dataEncapsulation: false,
       passThruUnknownUrl: true
     }),
-    LeafletModule.forRoot()
+    NgxMapboxGLModule.withConfig({
+      accessToken: 'pk.eyJ1IjoibWVjaGV2YXJyaWEiLCJhIjoiY2pxbXNuMXF0MGwzNTQ5bzJwNGtyMTRqdyJ9.WZfALlPxuOveabQDrroLcQ'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -45,7 +45,7 @@
             "styles": [
               "node_modules/@coreui/icons/css/coreui-icons.css",
               "node_modules/simple-line-icons/css/simple-line-icons.css",
-              "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/mapbox-gl/dist/mapbox-gl.css",
               "src/styles.scss"
             ],
             "scripts": [
