@@ -1,10 +1,10 @@
-import {enableProdMode} from '@angular/core';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import {AppModule} from './app/app.module';
-import {environment} from './environments/environment';
-import {KeycloakService} from './app/keycloak.service';
-import {mergeMap} from 'rxjs/operators';
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
+import { KeycloakService } from './app/keycloak.service';
+import { mergeMap } from 'rxjs/operators';
 
 if (environment.production) {
   enableProdMode();
@@ -17,17 +17,15 @@ KeycloakService.getConfig().subscribe(res => {
 
   if (enabled === true) {
     KeycloakService.init()
-        .pipe(
-            mergeMap(KeycloakService.loadProfile)
-        )
-        .subscribe(loadAngular, handleError);
+      .pipe(mergeMap(KeycloakService.loadProfile))
+      .subscribe(loadAngular, handleError);
   } else {
     loadAngular();
   }
 });
 
 function loadAngular() {
-    platformBrowserDynamic()
+  platformBrowserDynamic()
     .bootstrapModule(AppModule)
     .catch(err => console.log(err));
 }
