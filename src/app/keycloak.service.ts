@@ -6,15 +6,12 @@ import { KeycloakInstance, KeycloakInitOptions, KeycloakProfile } from 'keycloak
 import * as Keycloak from 'keycloak-js';
 import { Auth } from './auth';
 
-/*
- *  Example:
- * https://github.com/ssilvert/keycloak/blob/ACCOUNT-REST-STAN/themes/src/main/resources/theme/keycloak-preview/account/resources/app/keycloak-service/keycloak.service.ts
- */
+// tslint:disable-next-line:max-line-length
+// https://github.com/ssilvert/keycloak/blob/ACCOUNT-REST-STAN/themes/src/main/resources/theme/keycloak-preview/account/resources/app/keycloak-service/keycloak.service.ts
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class KeycloakService {
   static auth: Auth = {};
   static configPath = 'assets/data/keycloak.json';
@@ -25,7 +22,7 @@ export class KeycloakService {
 
   static initPromise(): Promise<KeycloakService> {
     const keycloakAuth: KeycloakInstance = Keycloak(this.configPath);
-    KeycloakService.auth.loggedIn = false;
+    KeycloakService.auth.isLoggedIn = false;
     KeycloakService.auth.logoutUrl = '';
 
     return new Promise((resolve, reject) => {
@@ -36,10 +33,11 @@ export class KeycloakService {
       keycloakAuth
         .init(initOptions)
         .success(() => {
-          KeycloakService.auth.loggedIn = true;
-          KeycloakService.auth.authz = keycloakAuth;
-          KeycloakService.auth.logoutUrl =
-          `${keycloakAuth.authServerUrl}/realms/${keycloakAuth.realm}/protocol/openid-connect/logout?redirect_uri=${window.location.href}`;
+          KeycloakService.auth.isLoggedIn = true;
+          KeycloakService.auth.instance = keycloakAuth;
+          // tslint:disable-next-line:max-line-length
+          KeycloakService.auth.logoutUrl = `${keycloakAuth.authServerUrl}/realms/${keycloakAuth.realm}/protocol/openid-connect/logout?redirect_uri=${window.location.href}`;
+          KeycloakService.auth.accountUrl = `${keycloakAuth.authServerUrl}/realms/${keycloakAuth.realm}/account`;
           resolve();
         })
         .error(() => {
@@ -49,9 +47,7 @@ export class KeycloakService {
   }
 
   static getConfig(): Observable<any> {
-    const http = new HttpClient(
-      new HttpXhrBackend({ build: () => new XMLHttpRequest() })
-    );
+    const http = new HttpClient(new HttpXhrBackend({ build: () => new XMLHttpRequest() }));
     return http.get(this.configPath);
   }
 
@@ -61,7 +57,7 @@ export class KeycloakService {
 
   private static profilePromise(): Promise<KeycloakProfile> {
     return new Promise((resolve, reject) => {
-      KeycloakService.auth.authz
+      KeycloakService.auth.instance
         .loadUserProfile()
         .success(res => {
           KeycloakService.auth.profile = res;
@@ -78,28 +74,27 @@ export class KeycloakService {
   }
 
   logout() {
-    console.log('*** LOGOUT');
-    KeycloakService.auth.loggedIn = false;
-    KeycloakService.auth.authz = null;
+    KeycloakService.auth.isLoggedIn = false;
+    KeycloakService.auth.instance = null;
 
     window.location.href = KeycloakService.auth.logoutUrl;
   }
 
   getToken(): Promise<string> {
-    return new Promise((resolve, reject) => {
-      if (KeycloakService.auth.loggedIn) {
-        if (KeycloakService.auth.authz.token) {
-          KeycloakService.auth.authz
+    return new Promise<string>((resolve, reject) => {
+      if (KeycloakService.auth.isLoggedIn) {
+        if (KeycloakService.auth.instance.token) {
+          KeycloakService.auth.instance
             .updateToken(5)
             .success(() => {
-              resolve(KeycloakService.auth.authz.token);
+              resolve(<string>KeycloakService.auth.instance.token);
             })
             .error(() => {
               reject('Failed to refresh token');
             });
         }
       } else {
-        resolve('');
+        resolve('Not logged in');
       }
     });
   }

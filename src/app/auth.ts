@@ -1,8 +1,9 @@
 import { KeycloakProfile, KeycloakInstance } from 'keycloak-js';
 
 export class Auth {
-  loggedIn?: boolean;
-  authz?: KeycloakInstance;
+  isLoggedIn?: boolean;
+  instance?: KeycloakInstance;
   logoutUrl?: string;
+  accountUrl?: string;
   profile?: KeycloakProfile;
 }
