@@ -24,7 +24,6 @@ import { InMemoryApiService } from './in-memory-api.service';
 import { IncidentComponent } from './incident/incident.component';
 import { KeycloakService } from './keycloak.service';
 import { MapComponent } from './map/map.component';
-import { ProfileComponent } from './profile/profile.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
@@ -44,7 +43,6 @@ export function jwtOptionsFactory(keycloakService: KeycloakService) {
     BreadcrumbComponent,
     ChartsComponent,
     SidebarComponent,
-    ProfileComponent,
     DashboardComponent,
     IncidentComponent,
     MapComponent
