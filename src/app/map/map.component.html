@@ -1,32 +1,30 @@
-<div class="card">
-  <div class="card-header">Map</div>
-  <div class="card-body">
-    <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[11]" [center]="center" *ngIf="mapItems">
-      <span *ngFor="let mapItem of mapItems">
-        <mgl-marker [lngLat]="[mapItem.lon, mapItem.lat]" #marker>
-          <div
-            class="marker"
-            [ngStyle]="{
-              'background-image': 'url(assets/img/marker-' + getIcon(mapItem.missionStatus) + '.svg)'
-            }"
-            (click)="markerClick([mapItem.lon, mapItem.lat])"
-          ></div>
-        </mgl-marker>
-        <mgl-popup [marker]="marker" [offset]="[0, -12]">
-          <div class="card-text">
-            <p>
-              <strong>Incident ID: </strong> {{ mapItem.id }}<br />
-              <strong>Long/Lat: </strong> {{ mapItem.lon + ',' + mapItem.lat }}<br />
-              <strong>Number of People: </strong> {{ mapItem.numberOfPeople }}<br />
-              <strong>Mission Status: </strong> {{ mapItem.missionStatus }}<br />
-              <strong>Medical Needed: </strong> {{ mapItem.medicalNeeded }}<br />
-              <strong>Reporter Name: </strong> {{ mapItem.reporter.fullName }}<br />
-              <strong>Reporter Phone number: </strong> {{ mapItem.reporter.phoneNumber }}<br />
-              <strong>Report Time: </strong> {{ mapItem.reporter.reportTime | date }}<br />
-            </p>
-          </div>
-        </mgl-popup>
-      </span>
-    </mgl-map>
-  </div>
+<div class="card-header">Map</div>
+<div class="card-body">
+  <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[11]" [center]="center" *ngIf="mapItems">
+    <span *ngFor="let mapItem of mapItems">
+      <mgl-marker [lngLat]="[mapItem.lon, mapItem.lat]" #marker>
+        <div
+          class="marker"
+          [ngStyle]="{
+            'background-image': 'url(assets/img/marker-' + getIcon(mapItem.missionStatus) + '.svg)'
+          }"
+          (click)="markerClick([mapItem.lon, mapItem.lat])"
+        ></div>
+      </mgl-marker>
+      <mgl-popup [marker]="marker" [offset]="[0, -12]">
+        <div class="card-text">
+          <p>
+            <strong>Incident ID: </strong> {{ mapItem.id }}<br />
+            <strong>Long/Lat: </strong> {{ mapItem.lon + ',' + mapItem.lat }}<br />
+            <strong>Number of People: </strong> {{ mapItem.numberOfPeople }}<br />
+            <strong>Mission Status: </strong> {{ mapItem.missionStatus }}<br />
+            <strong>Medical Needed: </strong> {{ mapItem.medicalNeeded }}<br />
+            <strong>Reporter Name: </strong> {{ mapItem.reporter.fullName }}<br />
+            <strong>Reporter Phone number: </strong> {{ mapItem.reporter.phoneNumber }}<br />
+            <strong>Report Time: </strong> {{ mapItem.reporter.reportTime | date }}<br />
+          </p>
+        </div>
+      </mgl-popup>
+    </span>
+  </mgl-map>
 </div>

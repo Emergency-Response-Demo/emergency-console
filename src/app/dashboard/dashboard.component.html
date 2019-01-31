@@ -1,19 +1,26 @@
-<div class="row ml-auto">
-  <div class="col-lg">
-    <div class="d-flex flex-row">
-      <div class="pr-1 mt-2">Auto Update</div>
-      <div class="p-1">
-        <label class="switch switch-label switch-primary">
-          <input type="checkbox" class="switch-input" [checked]="isPolling" (change)="togglePolling()" /> <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
-        </label>
-      </div>
-    </div>
+<div class="d-flex flex-row-reverse">
+  <div class="pr-1 mt-2">Auto Update</div>
+  <div class="p-1">
+    <label class="switch switch-label switch-primary">
+      <input type="checkbox" class="switch-input" [checked]="isPolling" (change)="togglePolling()" />
+      <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+    </label>
   </div>
 </div>
-<div class="row">
-  <div class="col-lg mb-3"><app-incident [reload$]="reload$"></app-incident></div>
-  <div class="col-lg mb-3"><app-charts [reload$]="reload$"></app-charts></div>
+<div class="card-deck mb-3">
+  <div class="card">
+    <div class="card-header">Incident Status</div>
+    <div class="card-body">
+      <app-incident [reload$]="reload$"></app-incident>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">Responder Utilization</div>
+    <app-charts [reload$]="reload$"></app-charts>
+  </div>
 </div>
-<div class="row">
-  <div class="col-md"><app-map [reload$]="reload$"></app-map></div>
+<div class="card-deck">
+  <div class="card">
+    <app-map [reload$]="reload$"></app-map>
+  </div>
 </div>
