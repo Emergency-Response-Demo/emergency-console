@@ -1,4 +1,4 @@
-# Frontend Manager
+# Emergency Console
 
 Management interface to demonstration system running as a series of microservices on [Openshift](https://www.openshift.com/). This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.1.
 
