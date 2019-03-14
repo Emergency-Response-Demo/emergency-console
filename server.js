@@ -82,7 +82,19 @@ app.use((req, res) => {
   res.type('txt').send('Not found');
 });
 
-// start server
-http.createServer(app).listen(app.get('port'), () => {
-  console.log('Express server listening on port ' + app.get('port'));
-});
+const certConfig = {
+  key: fs.readFileSync('server.key'),
+  cert: fs.readFileSync('server.cert')
+};
+
+// for local ssl
+if (app.get('port') !== 8080) {
+  https.createServer(certConfig, app).listen(app.get('port'), () => {
+    console.log('Express secure server listening on port ' + app.get('port'));
+  });
+} else {
+  // on openshift let route control ssl
+  http.createServer(app).listen(app.get('port'), () => {
+    console.log('Express server listening on port ' + app.get('port'));
+  });
+}

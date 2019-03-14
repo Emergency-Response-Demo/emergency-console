@@ -7,4 +7,6 @@ oc new-app \
 --code=https://github.com/NAPS-emergency-response-project/emergency-console \
 --name=emergency-console
 
-oc expose svc/emergency-console
+oc create route edge --service=nodejs-app --cert=server.cert --key=server.key
+
+oc set env --from=configmap/ntier-config dc/nodejs-app
