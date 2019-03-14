@@ -1,11 +1,11 @@
 {
-  "name": "frontend-manager",
+  "name": "emergency-console",
   "author": "Mike Echevarria <mechevar@redhat.com>",
   "version": "0.4.0",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/NAPS-emergency-response-project/frontend-manager"
+    "url": "https://github.com/NAPS-emergency-response-project/emergency-console"
   },
   "ng": "node_modules/@angular/cli/bin/ng",
   "scripts": {
