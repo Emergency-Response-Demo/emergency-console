@@ -4,7 +4,7 @@ export class MapItem {
     id: number;
     fullName: string;
     phoneNumber: string;
-    reportTime: any;
+    reportTime: Date;
   };
   lat: number;
   lon: number;
