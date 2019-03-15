@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
+import { MissionComponent } from './mission/mission.component';
 
 export const AppRoutes: Routes = [
   {
@@ -15,6 +16,13 @@ export const AppRoutes: Routes = [
         component: DashboardComponent,
         data: {
           breadcrumb: 'Dashboard'
+        }
+      },
+      {
+        path: 'mission',
+        component: MissionComponent,
+        data: {
+          breadcrumb: 'Mission'
         }
       }
     ]

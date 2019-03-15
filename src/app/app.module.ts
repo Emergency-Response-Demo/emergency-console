@@ -26,6 +26,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { KeycloakAngularModule } from 'keycloak-angular';
 import { AppInitService } from './app-init.service';
+import { MissionComponent } from './mission/mission.component';
 
 export function init(appInitService: AppInitService) {
   return () => appInitService.init();
@@ -41,7 +42,8 @@ export function init(appInitService: AppInitService) {
     SidebarComponent,
     DashboardComponent,
     IncidentComponent,
-    MapComponent
+    MapComponent,
+    MissionComponent
   ],
   imports: [
     BrowserModule,
