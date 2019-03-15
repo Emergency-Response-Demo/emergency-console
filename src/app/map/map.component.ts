@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MapService } from './map.service';
 import { Subject } from 'rxjs/internal/Subject';
 import { MapItem } from './map-item';
-import { MapMouseEvent } from 'mapbox-gl';
 
 @Component({
   selector: 'app-map',

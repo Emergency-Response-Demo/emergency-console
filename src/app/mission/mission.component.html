@@ -2,9 +2,46 @@
   <div class="card">
     <div class="card-header">Mission</div>
     <div class="card-body">
-      <p class="card-text">
-        Mission works!
-      </p>
+      <form class="card-text" (ngSubmit)="submit()" #userForm="ngForm">
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text"><fa-icon [icon]="userIcon"></fa-icon></div>
+            </div>
+            <input name="fullName" type="text" class="form-control" [(ngModel)]="model.fullName" placedholder="Full Name" readonly />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text"><fa-icon [icon]="phoneIcon"></fa-icon></div>
+            </div>
+            <input name="phoneNumber" type="text" class="form-control" [(ngModel)]="model.phoneNumber" placeholder="Phone Number"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text"><fa-icon [icon]="boatIcon"></fa-icon></div>
+            </div>
+            <input name="boatCapacity" type="number" class="form-control" [(ngModel)]="model.boatCapacity" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text"><fa-icon [icon]="medicalIcon"></fa-icon></div>
+            </div>
+            <select class="form-control" name="medical" [(ngModel)]="model.medical">
+              <option>true</option>
+              <option>false</option>
+            </select>
+          </div>
+        </div>
+        <label>Location</label>
+        <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[11]" [center]="center"></mgl-map>
+        <button type="submit" class="btn btn-primary mt-3">Available</button>
+      </form>
     </div>
   </div>
 </div>
