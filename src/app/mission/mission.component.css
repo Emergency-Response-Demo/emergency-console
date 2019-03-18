@@ -1,3 +1,11 @@
 mgl-map {
   height: 30em;
 }
+
+.marker {
+  background-size: cover;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  cursor: pointer;
+}

@@ -36,8 +36,17 @@
           </div>
         </div>
         <label>Location</label>
-        <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[11]" [center]="center"></mgl-map>
-        <button type="submit" class="btn btn-primary mt-3">Available</button>
+        <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[11]" [center]="center" (click)="setLocation($event)">
+          <mgl-marker [lngLat]="lngLat" #marker *ngIf="lngLat.length > 0">
+            <div
+              class="marker"
+              [ngStyle]="{
+                'background-image': 'url(assets/img/marker-grey.svg)'
+              }"
+            ></div>
+          </mgl-marker>
+        </mgl-map>
+        <button type="submit" class="btn btn-primary btn-lg mt-3">Available</button>
       </form>
     </div>
   </div>

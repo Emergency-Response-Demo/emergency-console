@@ -4,6 +4,7 @@ import { KeycloakService } from 'keycloak-angular';
 import { Responder } from './responder';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faShip, faPhone, faBriefcaseMedical } from '@fortawesome/free-solid-svg-icons';
+import { MapMouseEvent, LngLat } from 'mapbox-gl';
 
 @Component({
   selector: 'app-mission',
@@ -17,6 +18,7 @@ export class MissionComponent implements OnInit {
   boatIcon: IconDefinition;
   phoneIcon: IconDefinition;
   medicalIcon: IconDefinition;
+  lngLat: number[];
 
   constructor(private messageService: MessageService, private keycloak: KeycloakService) {
     this.model = new Responder();
@@ -25,11 +27,17 @@ export class MissionComponent implements OnInit {
     this.boatIcon = faShip;
     this.phoneIcon = faPhone;
     this.medicalIcon = faBriefcaseMedical;
+    this.lngLat = new Array();
   }
 
   submit(): void {
     this.messageService.info('You are now available to receive a rescue mission');
-    console.log(this.model);
+  }
+
+  setLocation(event: MapMouseEvent): void {
+    if (event.lngLat) {
+      this.lngLat = [event.lngLat.lng, event.lngLat.lat];
+    }
   }
 
   ngOnInit() {
