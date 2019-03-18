@@ -8,7 +8,7 @@
             <div class="input-group-prepend">
               <div class="input-group-text"><fa-icon [icon]="userIcon"></fa-icon></div>
             </div>
-            <input name="fullName" type="text" class="form-control" [(ngModel)]="model.fullName" placedholder="Full Name" readonly />
+            <input name="fullName" type="text" class="form-control" [(ngModel)]="model.fullName" placedholder="Full Name" readonly title="Full Name"/>
           </div>
         </div>
         <div class="form-group">
@@ -16,7 +16,7 @@
             <div class="input-group-prepend">
               <div class="input-group-text"><fa-icon [icon]="phoneIcon"></fa-icon></div>
             </div>
-            <input name="phoneNumber" type="text" class="form-control" [(ngModel)]="model.phoneNumber" placeholder="Phone Number"/>
+            <input name="phoneNumber" type="text" class="form-control" [(ngModel)]="model.phoneNumber" placeholder="Phone Number" readonly title="Phone Number"/>
           </div>
         </div>
         <div class="form-group">
@@ -24,7 +24,7 @@
             <div class="input-group-prepend">
               <div class="input-group-text"><fa-icon [icon]="boatIcon"></fa-icon></div>
             </div>
-            <input name="boatCapacity" type="number" class="form-control" [(ngModel)]="model.boatCapacity" />
+            <input name="boatCapacity" type="number" class="form-control" [(ngModel)]="model.boatCapacity" readonly title="Boat Capacity"/>
           </div>
         </div>
         <div class="form-group">
@@ -32,10 +32,7 @@
             <div class="input-group-prepend">
               <div class="input-group-text"><fa-icon [icon]="medicalIcon"></fa-icon></div>
             </div>
-            <select class="form-control" name="medical" [(ngModel)]="model.medical">
-              <option>true</option>
-              <option>false</option>
-            </select>
+            <input type="text" class="form-control" name="medical" [(ngModel)]="model.medical" readonly title="Provides Medical?"/>
           </div>
         </div>
         <label>Location</label>
