@@ -8,7 +8,7 @@
             <div class="input-group-prepend">
               <div class="input-group-text"><fa-icon [icon]="userIcon"></fa-icon></div>
             </div>
-            <input name="fullName" type="text" class="form-control" [(ngModel)]="model.fullName" placedholder="Full Name" readonly title="Full Name"/>
+            <input name="fullName" type="text" class="form-control" [(ngModel)]="model.fullName" placedholder="Full Name" readonly title="Full Name" />
           </div>
         </div>
         <div class="form-group">
@@ -16,7 +16,15 @@
             <div class="input-group-prepend">
               <div class="input-group-text"><fa-icon [icon]="phoneIcon"></fa-icon></div>
             </div>
-            <input name="phoneNumber" type="text" class="form-control" [(ngModel)]="model.phoneNumber" placeholder="Phone Number" readonly title="Phone Number"/>
+            <input
+              name="phoneNumber"
+              type="text"
+              class="form-control"
+              [(ngModel)]="model.phoneNumber"
+              placeholder="Phone Number"
+              readonly
+              title="Phone Number"
+            />
           </div>
         </div>
         <div class="form-group">
@@ -24,7 +32,7 @@
             <div class="input-group-prepend">
               <div class="input-group-text"><fa-icon [icon]="boatIcon"></fa-icon></div>
             </div>
-            <input name="boatCapacity" type="number" class="form-control" [(ngModel)]="model.boatCapacity" readonly title="Boat Capacity"/>
+            <input name="boatCapacity" type="number" class="form-control" [(ngModel)]="model.boatCapacity" readonly title="Boat Capacity" />
           </div>
         </div>
         <div class="form-group">
@@ -32,19 +40,27 @@
             <div class="input-group-prepend">
               <div class="input-group-text"><fa-icon [icon]="medicalIcon"></fa-icon></div>
             </div>
-            <input type="text" class="form-control" name="medical" [(ngModel)]="model.medical" readonly title="Provides Medical?"/>
+            <input type="text" class="form-control" name="medical" [(ngModel)]="model.medical" readonly title="Provides Medical?" />
           </div>
         </div>
         <label>Location</label>
         <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[11]" [center]="center" (click)="setLocation($event)">
-          <mgl-marker [lngLat]="lngLat" #marker *ngIf="lngLat.length > 0">
-            <div
-              class="marker"
-              [ngStyle]="{
-                'background-image': 'url(assets/img/marker-grey.svg)'
-              }"
-            ></div>
-          </mgl-marker>
+            <mgl-marker [lngLat]="start" #marker *ngIf="start.length > 0">
+              <div
+                class="marker"
+                [ngStyle]="{
+                  'background-image': 'url(assets/img/marker-grey.svg)'
+                }"
+              ></div>
+            </mgl-marker>
+            <mgl-marker [lngLat]="end" #marker *ngIf="end.length > 0">
+                <div
+                  class="marker"
+                  [ngStyle]="{
+                    'background-image': 'url(assets/img/marker-red.svg)'
+                  }"
+                ></div>
+              </mgl-marker>
         </mgl-map>
         <button type="submit" class="btn btn-primary btn-lg mt-3">Available</button>
       </form>

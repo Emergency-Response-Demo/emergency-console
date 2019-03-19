@@ -18,7 +18,8 @@ export class MissionComponent implements OnInit {
   boatIcon: IconDefinition;
   phoneIcon: IconDefinition;
   medicalIcon: IconDefinition;
-  lngLat: number[];
+  start: number[];
+  end: number[];
 
   constructor(private messageService: MessageService, private keycloak: KeycloakService) {
     this.model = new Responder();
@@ -27,7 +28,8 @@ export class MissionComponent implements OnInit {
     this.boatIcon = faShip;
     this.phoneIcon = faPhone;
     this.medicalIcon = faBriefcaseMedical;
-    this.lngLat = new Array();
+    this.start = new Array();
+    this.end = [-77.94346099447226, 34.21828123440535];
   }
 
   submit(): void {
@@ -36,7 +38,7 @@ export class MissionComponent implements OnInit {
 
   setLocation(event: MapMouseEvent): void {
     if (event.lngLat) {
-      this.lngLat = [event.lngLat.lng, event.lngLat.lat];
+      this.start = [event.lngLat.lng, event.lngLat.lat];
     }
   }
 

@@ -11,3 +11,12 @@
 #toast-container > div {
   opacity: 1;
 }
+
+// for all map markers
+.marker {
+  background-size: cover;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  cursor: pointer;
+}

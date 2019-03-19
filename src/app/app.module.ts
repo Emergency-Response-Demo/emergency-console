@@ -66,7 +66,8 @@ export function init(appInitService: AppInitService) {
       passThruUnknownUrl: true
     }),
     NgxMapboxGLModule.withConfig({
-      accessToken: 'pk.eyJ1IjoibWVjaGV2YXJyaWEiLCJhIjoiY2pxbXNuMXF0MGwzNTQ5bzJwNGtyMTRqdyJ9.WZfALlPxuOveabQDrroLcQ'
+      // value is in env.js
+      accessToken: window['_env'].accessToken
     }),
     KeycloakAngularModule
   ],
