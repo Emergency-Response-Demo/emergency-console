@@ -4,7 +4,9 @@ import { KeycloakService } from 'keycloak-angular';
 import { Responder } from './responder';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faShip, faPhone, faBriefcaseMedical } from '@fortawesome/free-solid-svg-icons';
-import { MapMouseEvent, LngLat } from 'mapbox-gl';
+import { MapMouseEvent, LngLatBoundsLike } from 'mapbox-gl';
+import { MissionService } from './mission.service';
+import { LineString } from 'geojson';
 
 @Component({
   selector: 'app-mission',
@@ -20,8 +22,11 @@ export class MissionComponent implements OnInit {
   medicalIcon: IconDefinition;
   start: number[];
   end: number[];
+  bounds: LngLatBoundsLike;
+  boundsOptions: any;
+  directions: LineString;
 
-  constructor(private messageService: MessageService, private keycloak: KeycloakService) {
+  constructor(private messageService: MessageService, private keycloak: KeycloakService, private missionService: MissionService) {
     this.model = new Responder();
     this.center = [-77.886765, 34.210383];
     this.userIcon = faUser;
@@ -29,11 +34,21 @@ export class MissionComponent implements OnInit {
     this.phoneIcon = faPhone;
     this.medicalIcon = faBriefcaseMedical;
     this.start = new Array();
-    this.end = [-77.94346099447226, 34.21828123440535];
+    this.end = new Array();
+    this.boundsOptions = {
+      padding: 100
+    };
   }
 
   submit(): void {
     this.messageService.info('You are now available to receive a rescue mission');
+    this.end = [-77.94346099447226, 34.21828123440535];
+    this.directions = null;
+
+    this.missionService.getDirections(this.start, this.end).subscribe(res => {
+      this.directions = res.routes[0].geometry;
+      this.bounds = [this.start[0], this.start[1], this.end[0], this.end[1]];
+    });
   }
 
   setLocation(event: MapMouseEvent): void {

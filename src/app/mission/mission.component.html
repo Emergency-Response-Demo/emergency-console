@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-header">Mission</div>
     <div class="card-body">
-      <form class="card-text" (ngSubmit)="submit()" #userForm="ngForm">
+      <form (ngSubmit)="submit()" #userForm="ngForm">
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-prepend">
@@ -44,25 +44,51 @@
           </div>
         </div>
         <label>Location</label>
-        <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[11]" [center]="center" (click)="setLocation($event)">
-            <mgl-marker [lngLat]="start" #marker *ngIf="start.length > 0">
-              <div
-                class="marker"
-                [ngStyle]="{
-                  'background-image': 'url(assets/img/location.svg)'
-                }"
-              ></div>
-            </mgl-marker>
-            <mgl-marker [lngLat]="end" #marker *ngIf="end.length > 0">
-                <div
-                  class="marker"
-                  [ngStyle]="{
-                    'background-image': 'url(assets/img/marker-red.svg)'
-                  }"
-                ></div>
-              </mgl-marker>
+        <mgl-map
+          [style]="'mapbox://styles/mapbox/streets-v9'"
+          [zoom]="[11]"
+          [center]="center"
+          (click)="setLocation($event)"
+          [fitBounds]="bounds"
+          [fitBoundsOptions]="boundsOptions"
+        >
+          <mgl-marker [lngLat]="start" #marker *ngIf="start.length > 0">
+            <div
+              class="marker"
+              [ngStyle]="{
+                'background-image': 'url(assets/img/location.svg)'
+              }"
+            ></div>
+          </mgl-marker>
+          <mgl-marker [lngLat]="end" #marker *ngIf="end.length > 0">
+            <div
+              class="marker"
+              [ngStyle]="{
+                'background-image': 'url(assets/img/marker-red.svg)'
+              }"
+            ></div>
+          </mgl-marker>
+          <mgl-geojson-source id="geojson">
+            <mgl-feature [geometry]="directions" *ngIf="directions"> </mgl-feature>
+          </mgl-geojson-source>
+          <mgl-layer
+            id="route"
+            type="line"
+            source="geojson"
+            [layout]="{
+              'line-join': 'round',
+              'line-cap': 'round'
+            }"
+            [paint]="{
+              'line-color': '#20a8d8',
+              'line-width': 8
+            }"
+          >
+          </mgl-layer>
         </mgl-map>
-        <button type="submit" class="btn btn-primary btn-lg mt-3">Available</button>
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary btn-lg mt-3">Available</button>
+        </div>
       </form>
     </div>
   </div>
