@@ -53,7 +53,7 @@
           [fitBoundsOptions]="boundsOptions"
           [accessToken]="accessToken"
         >
-          <mgl-marker [lngLat]="start" #marker *ngIf="start.length > 0">
+          <mgl-marker [lngLat]="start" #marker *ngIf="start">
             <div
               class="marker"
               [ngStyle]="{
@@ -61,7 +61,7 @@
               }"
             ></div>
           </mgl-marker>
-          <mgl-marker [lngLat]="end" #marker *ngIf="end.length > 0">
+          <mgl-marker [lngLat]="end" #marker *ngIf="end">
             <div
               class="marker"
               [ngStyle]="{
