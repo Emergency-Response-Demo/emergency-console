@@ -65,6 +65,20 @@ app.use(
   })
 );
 
+// mapbox directions service
+app.use(
+  '/mapbox/*',
+  proxy({
+    target: 'https://api.mapbox.com',
+    secure: false,
+    changeOrigin: true,
+    logLevel: 'debug',
+    pathRewrite: {
+      '^/mapbox': ''
+    }
+  })
+);
+
 app.use((req, res) => {
   // respond with index to process links
   if (req.accepts('html')) {
