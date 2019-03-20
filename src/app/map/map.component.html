@@ -1,6 +1,6 @@
 <div class="card-header">Map</div>
 <div class="card-body">
-  <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[11]" [center]="center" *ngIf="mapItems">
+  <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[11]" [center]="center" *ngIf="mapItems" [accessToken]="accessToken">
     <span *ngFor="let mapItem of mapItems">
       <mgl-marker [lngLat]="[mapItem.lon, mapItem.lat]" #marker>
         <div

@@ -14,10 +14,12 @@ export class MapComponent implements OnInit {
 
   mapItems: MapItem[];
   center: number[];
+  accessToken: string;
 
   constructor(private mapService: MapService) {
     this.reload$ = new Subject();
     this.center = [-77.886765, 34.210383];
+    this.accessToken = window['_env'].accessToken;
   }
 
   markerClick(lngLat: number[]): void {

@@ -65,10 +65,7 @@ export function init(appInitService: AppInitService) {
       dataEncapsulation: false,
       passThruUnknownUrl: true
     }),
-    NgxMapboxGLModule.withConfig({
-      // value is in env.js
-      accessToken: window['_env'].accessToken
-    }),
+    NgxMapboxGLModule,
     KeycloakAngularModule
   ],
   providers: [

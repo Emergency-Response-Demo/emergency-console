@@ -25,6 +25,7 @@ export class MissionComponent implements OnInit {
   bounds: LngLatBoundsLike;
   boundsOptions: any;
   directions: LineString;
+  accessToken: string;
 
   constructor(private messageService: MessageService, private keycloak: KeycloakService, private missionService: MissionService) {
     this.model = new Responder();
@@ -38,6 +39,7 @@ export class MissionComponent implements OnInit {
     this.boundsOptions = {
       padding: 100
     };
+    this.accessToken = window['_env'].accessToken;
   }
 
   submit(): void {

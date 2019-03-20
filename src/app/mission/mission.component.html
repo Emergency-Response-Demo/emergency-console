@@ -51,6 +51,7 @@
           (click)="setLocation($event)"
           [fitBounds]="bounds"
           [fitBoundsOptions]="boundsOptions"
+          [accessToken]="accessToken"
         >
           <mgl-marker [lngLat]="start" #marker *ngIf="start.length > 0">
             <div
