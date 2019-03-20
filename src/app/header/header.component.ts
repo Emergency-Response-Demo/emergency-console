@@ -51,12 +51,11 @@ export class HeaderComponent implements OnInit {
       this.renderer.addClass(document.body, 'sidebar-show');
     }
 
-    // only manually trigger events on a non-mobile interface
     if (window.innerWidth > 640) {
       interval(500).subscribe(() => {
         // triggering this event so that the mapbox api will auto resize the map on sidebar hide
         window.dispatchEvent(new Event('resize'));
-      });
+      }).unsubscribe();
     }
   }
 

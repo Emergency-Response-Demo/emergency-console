@@ -25,9 +25,10 @@
     </li>
     <li class="nav-item dropdown" dropdown placement="bottom right">
       <a class="nav-link dropdown-toggle mr-2" href role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="(false)">
-        <i class="icon-user mr-1"></i> {{ username }}
+        <i class="icon-user mr-1"></i>
       </a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" *dropdownMenu>
+          <div class="dropdown-header text-center"><strong>{{ username }}</strong></div>
         <a class="dropdown-item app-pointer">
           <li (click)="doAccount()"><fa-icon [icon]="accountIcon" class="mr-2"></fa-icon> Account</li>
         </a>
