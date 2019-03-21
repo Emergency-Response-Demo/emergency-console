@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MessageService } from '../message/message.service';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
@@ -11,9 +11,10 @@ import { LngLat } from 'mapbox-gl';
 })
 export class MissionService {
   getDirections(start: LngLat, end: LngLat) {
-    const accessToken = window['_env'].accessToken;
-    const url = `/mapbox/directions/v5/mapbox/driving/${start.lng},${start.lat};${end.lng},${end.lat}.json?access_token=${accessToken}&geometries=geojson`;
-    return this.http.get<any>(url).pipe(
+    const url = `/mapbox/directions/v5/mapbox/driving/${start.lng},${start.lat};${end.lng},${end.lat}.json`;
+    const httpParams = new HttpParams().set('access_token', window['_env'].accessToken).set('geometries', 'geojson');
+
+    return this.http.get<any>(url, { params: httpParams }).pipe(
       catchError(res => {
         return this.handleError('getDirections()', res);
       })

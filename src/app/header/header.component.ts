@@ -11,22 +11,15 @@ import { KeycloakService } from 'keycloak-angular';
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
-  logoutIcon: IconDefinition;
-  accountIcon: IconDefinition;
-  formIcon: IconDefinition;
-  sidebarVisible: boolean;
-  username: string;
-  alerts: AlertModel[];
+  logoutIcon: IconDefinition = faLock;
+  accountIcon: IconDefinition = faShieldAlt;
+  sidebarVisible = true;
+  username = '';
+  alerts: AlertModel[] = new Array();
   accountUrl: string;
   isLoggedIn: boolean;
 
   constructor(private alertService: AlertService, private renderer: Renderer2, private keycloak: KeycloakService) {
-    this.logoutIcon = faLock;
-    this.accountIcon = faShieldAlt;
-    this.sidebarVisible = true;
-    this.alerts = new Array();
-    this.username = '';
-
     // hide sidebar by default on mobile
     this.checkForMobile();
   }
@@ -52,10 +45,12 @@ export class HeaderComponent implements OnInit {
     }
 
     if (window.innerWidth > 640) {
-      interval(500).subscribe(() => {
-        // triggering this event so that the mapbox api will auto resize the map on sidebar hide
-        window.dispatchEvent(new Event('resize'));
-      }).unsubscribe();
+      interval(500)
+        .subscribe(() => {
+          // triggering this event so that the mapbox api will auto resize the map on sidebar hide
+          window.dispatchEvent(new Event('resize'));
+        })
+        .unsubscribe();
     }
   }
 

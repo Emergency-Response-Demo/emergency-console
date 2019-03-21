@@ -4,10 +4,10 @@ import { KeycloakService } from 'keycloak-angular';
 import { Responder } from './responder';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faShip, faPhone, faBriefcaseMedical } from '@fortawesome/free-solid-svg-icons';
-import { MapMouseEvent, LngLatBoundsLike, LngLat } from 'mapbox-gl';
+import { MapMouseEvent, LngLatBoundsLike, LngLat, FitBoundsOptions } from 'mapbox-gl';
 import { MissionService } from './mission.service';
 import { LineString } from 'geojson';
-import { BoundUtil } from '../bound-util';
+import { AppUtil } from '../app-util';
 
 @Component({
   selector: 'app-mission',
@@ -15,31 +15,22 @@ import { BoundUtil } from '../bound-util';
   styleUrls: ['./mission.component.css']
 })
 export class MissionComponent implements OnInit {
-  model: Responder;
-  center: LngLat;
-  userIcon: IconDefinition;
-  boatIcon: IconDefinition;
-  phoneIcon: IconDefinition;
-  medicalIcon: IconDefinition;
+  model: Responder = new Responder();
+  center: LngLat = new LngLat(-77.886765, 34.210383);
+  userIcon: IconDefinition = faUser;
+  boatIcon: IconDefinition = faShip;
+  phoneIcon: IconDefinition = faPhone;
+  medicalIcon: IconDefinition = faBriefcaseMedical;
+  boundsOptions: FitBoundsOptions = {
+    padding: 50
+  };
+  accessToken: string = window['_env'].accessToken;
+  directions: LineString;
   start: LngLat;
   end: LngLat;
   bounds: LngLatBoundsLike;
-  boundsOptions: any;
-  directions: LineString;
-  accessToken: string;
 
-  constructor(private messageService: MessageService, private keycloak: KeycloakService, private missionService: MissionService) {
-    this.model = new Responder();
-    this.center = new LngLat(-77.886765, 34.210383);
-    this.userIcon = faUser;
-    this.boatIcon = faShip;
-    this.phoneIcon = faPhone;
-    this.medicalIcon = faBriefcaseMedical;
-    this.boundsOptions = {
-      padding: 50
-    };
-    this.accessToken = window['_env'].accessToken;
-  }
+  constructor(private messageService: MessageService, private keycloak: KeycloakService, private missionService: MissionService) {}
 
   submit(): void {
     this.messageService.info('You are now available to receive a rescue mission');
@@ -48,7 +39,7 @@ export class MissionComponent implements OnInit {
 
     this.missionService.getDirections(this.start, this.end).subscribe(res => {
       this.directions = res.routes[0].geometry;
-      this.bounds = BoundUtil.getBounds(this.directions.coordinates);
+      this.bounds = AppUtil.getBounds(this.directions.coordinates);
     });
   }
 
