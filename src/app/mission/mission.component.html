@@ -2,95 +2,44 @@
   <div class="card">
     <div class="card-header">Mission</div>
     <div class="card-body">
-      <form (ngSubmit)="submit()" #userForm="ngForm">
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text"><fa-icon [icon]="userIcon"></fa-icon></div>
-            </div>
-            <input name="fullName" type="text" class="form-control" [(ngModel)]="model.fullName" placedholder="Full Name" readonly title="Full Name" />
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text"><fa-icon [icon]="phoneIcon"></fa-icon></div>
-            </div>
-            <input
-              name="phoneNumber"
-              type="text"
-              class="form-control"
-              [(ngModel)]="model.phoneNumber"
-              placeholder="Phone Number"
-              readonly
-              title="Phone Number"
-            />
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text"><fa-icon [icon]="boatIcon"></fa-icon></div>
-            </div>
-            <input name="boatCapacity" type="number" class="form-control" [(ngModel)]="model.boatCapacity" readonly title="Boat Capacity" />
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text"><fa-icon [icon]="medicalIcon"></fa-icon></div>
-            </div>
-            <input type="text" class="form-control" name="medical" [(ngModel)]="model.medical" readonly title="Provides Medical?" />
-          </div>
-        </div>
-        <label>Location</label>
-        <mgl-map
-          [style]="'mapbox://styles/mapbox/streets-v9'"
-          [zoom]="[11]"
-          [center]="center"
-          (click)="setLocation($event)"
-          [fitBounds]="bounds"
-          [fitBoundsOptions]="boundsOptions"
-          [accessToken]="accessToken"
-        >
-          <mgl-marker [lngLat]="start" #marker *ngIf="start">
-            <div
-              class="marker"
-              [ngStyle]="{
-                'background-image': 'url(assets/img/location.svg)'
-              }"
-            ></div>
+      <mgl-map
+        [style]="'mapbox://styles/mapbox/streets-v9'"
+        [zoom]="[11]"
+        [center]="center"
+        (click)="setLocation($event)"
+        [fitBounds]="bounds"
+        [fitBoundsOptions]="boundsOptions"
+        [accessToken]="accessToken"
+      >
+        <mgl-marker [lngLat]="end" *ngIf="end" #endMarker>
+          <div class="marker" [ngStyle]="endStyle"></div>
+        </mgl-marker>
+        <span *ngIf="start">
+          <mgl-marker [lngLat]="start" #startMarker>
+            <div class="marker" [ngStyle]="startStyle"></div>
           </mgl-marker>
-          <mgl-marker [lngLat]="end" #marker *ngIf="end">
-            <div
-              class="marker"
-              [ngStyle]="{
-                'background-image': 'url(assets/img/marker-red.svg)'
-              }"
-            ></div>
-          </mgl-marker>
-          <mgl-geojson-source id="geojson">
-            <mgl-feature [geometry]="directions" *ngIf="directions"> </mgl-feature>
-          </mgl-geojson-source>
-          <mgl-layer
-            id="route"
-            type="line"
-            source="geojson"
-            [layout]="{
-              'line-join': 'round',
-              'line-cap': 'round'
-            }"
-            [paint]="{
-              'line-color': '#20a8d8',
-              'line-width': 8
-            }"
-          >
-          </mgl-layer>
-        </mgl-map>
-        <div class="d-flex justify-content-center">
-          <button type="submit" class="btn btn-primary btn-lg mt-3">Available</button>
-        </div>
-      </form>
+          <mgl-popup [marker]="startMarker" [offset]="[0, -12]">
+            <div class="card-text">
+              <p>
+                <strong>Full Name: </strong> {{ model.fullName }}<br />
+                <strong>Phone Number: </strong> {{ model.phoneNumber }}<br />
+                <strong>Boat Capacity: </strong> {{ model.boatCapacity }}<br />
+                <strong>Has Medical: </strong> {{ model.medical }}<br />
+              </p>
+            </div>
+          </mgl-popup>
+        </span>
+        <mgl-geojson-source id="geojson">
+          <mgl-feature [geometry]="directions" *ngIf="directions"> </mgl-feature>
+        </mgl-geojson-source>
+        <mgl-layer id="route" type="line" source="geojson" [layout]="lineLayout" [paint]="linePaint" *ngIf="directions"> </mgl-layer>
+      </mgl-map>
+      <div class="d-flex justify-content-center mt-3">
+        <button type="button" class="btn btn-secondary btn-lg" [disabled]="!start" (click)="doAvailable()" *ngIf="missionStatus === null">Available</button>
+        <button type="button" class="btn btn-warning btn-lg" (click)="doStart()" *ngIf="missionStatus === 'Available'">Start</button>
+        <button type="button" class="btn btn-primary btn-lg" (click)="doPickedUp()" *ngIf="missionStatus === 'Start'">Picked Up</button>
+        <button type="button" class="btn btn-success btn-lg" (click)="doRescued()" *ngIf="missionStatus === 'Picked Up'">Rescued</button>
+      </div>
     </div>
   </div>
 </div>
