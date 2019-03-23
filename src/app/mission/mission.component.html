@@ -29,10 +29,8 @@
             </div>
           </mgl-popup>
         </span>
-        <mgl-geojson-source id="geojson">
-          <mgl-feature [geometry]="directions" *ngIf="directions"> </mgl-feature>
-        </mgl-geojson-source>
-        <mgl-layer id="route" type="line" source="geojson" [layout]="lineLayout" [paint]="linePaint" *ngIf="directions"> </mgl-layer>
+        <mgl-geojson-source id="geojson" [data]="data"> </mgl-geojson-source>
+        <mgl-layer id="route" type="line" source="geojson" [layout]="lineLayout" [paint]="linePaint"> </mgl-layer>
       </mgl-map>
       <div class="d-flex justify-content-center mt-3">
         <button type="button" class="btn btn-secondary btn-lg" [disabled]="!start" (click)="doAvailable()" *ngIf="missionStatus === null">Available</button>
