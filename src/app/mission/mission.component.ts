@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService } from '../message/message.service';
 import { KeycloakService } from 'keycloak-angular';
 import { Responder } from './responder';
-import { MapMouseEvent, LngLatBoundsLike, LngLat, FitBoundsOptions, LinePaint, LineLayout } from 'mapbox-gl';
+import { MapMouseEvent, LngLatBoundsLike, LngLat, FitBoundsOptions, LinePaint, LineLayout, Map } from 'mapbox-gl';
 import { MissionService } from './mission.service';
 import { AppUtil } from '../app-util';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { timeout } from 'rxjs/operators';
 
 @Component({
   selector: 'app-mission',
@@ -12,6 +15,9 @@ import { AppUtil } from '../app-util';
   styleUrls: ['./mission.component.css']
 })
 export class MissionComponent implements OnInit {
+  map: Map;
+  isLoading = false;
+  loadingIcon: IconDefinition = faCircleNotch;
   model: Responder = new Responder();
   center: LngLat = new LngLat(-77.886765, 34.210383);
   boundsOptions: FitBoundsOptions = {
@@ -59,20 +65,28 @@ export class MissionComponent implements OnInit {
 
   constructor(private messageService: MessageService, private keycloak: KeycloakService, private missionService: MissionService) {}
 
+  private setDirections(): void {
+    setTimeout(() => {
+      this.missionService.getDirections(this.start, this.end).subscribe(res => {
+        const coordinates = res.routes[0].geometry.coordinates;
+        this.data.features[0].geometry.coordinates = coordinates;
+        this.data = { ...this.data };
+        this.bounds = AppUtil.getBounds(coordinates);
+        this.linePaint = { ...this.linePaint };
+        this.isLoading = false;
+      });
+    }, 1000);
+  }
+
   doAvailable(): void {
+    this.isLoading = true;
     this.missionStatus = 'Available';
     this.messageService.info('You are now available to receive a rescue mission');
     this.endStyle['background-image'] = 'url(assets/img/marker-red.svg)';
     this.end = new LngLat(-77.94346099447226, 34.21828123440535);
+    this.linePaint['line-color'] = this.RED;
 
-    this.missionService.getDirections(this.start, this.end).subscribe(res => {
-      const coordinates = res.routes[0].geometry.coordinates;
-      this.data.features[0].geometry.coordinates = coordinates;
-      this.data = { ...this.data };
-      this.bounds = AppUtil.getBounds(coordinates);
-      this.linePaint['line-color'] = this.RED;
-      this.linePaint = { ...this.linePaint };
-    });
+    this.setDirections();
   }
 
   doStart(): void {
@@ -84,21 +98,15 @@ export class MissionComponent implements OnInit {
   }
 
   doPickedUp(): void {
-    this.messageService.info('Victim picked up');
+    this.isLoading = true;
     this.missionStatus = 'Picked Up';
-
+    this.messageService.info('Victim picked up');
+    this.linePaint['line-color'] = this.BLUE;
     this.start = this.end;
     this.end = new LngLat(-77.949, 34.1706);
     this.endStyle['background-image'] = 'url(assets/img/marker-blue.svg)';
 
-    this.missionService.getDirections(this.start, this.end).subscribe(res => {
-      const coordinates = res.routes[0].geometry.coordinates;
-      this.data.features[0].geometry.coordinates = coordinates;
-      this.data = { ...this.data };
-      this.bounds = AppUtil.getBounds(coordinates);
-      this.linePaint['line-color'] = this.BLUE;
-      this.linePaint = { ...this.linePaint };
-    });
+    this.setDirections();
   }
 
   doRescued(): void {

@@ -10,6 +10,7 @@
         [fitBounds]="bounds"
         [fitBoundsOptions]="boundsOptions"
         [accessToken]="accessToken"
+        (load)="map = $event"
       >
         <mgl-marker [lngLat]="end" *ngIf="end" #endMarker>
           <div class="marker" [ngStyle]="endStyle"></div>
@@ -33,10 +34,18 @@
         <mgl-layer id="route" type="line" source="geojson" [layout]="lineLayout" [paint]="linePaint"> </mgl-layer>
       </mgl-map>
       <div class="d-flex justify-content-center mt-3">
-        <button type="button" class="btn btn-secondary btn-lg" [disabled]="!start" (click)="doAvailable()" *ngIf="missionStatus === null">Available</button>
-        <button type="button" class="btn btn-warning btn-lg" (click)="doStart()" *ngIf="missionStatus === 'Available'">Start</button>
-        <button type="button" class="btn btn-primary btn-lg" (click)="doPickedUp()" *ngIf="missionStatus === 'Start'">Picked Up</button>
-        <button type="button" class="btn btn-success btn-lg" (click)="doRescued()" *ngIf="missionStatus === 'Picked Up'">Rescued</button>
+        <button type="button" class="btn btn-secondary btn-lg" [disabled]="!start" (click)="doAvailable()" *ngIf="missionStatus === null">
+          Available
+        </button>
+        <button type="button" class="btn btn-warning btn-lg" (click)="doStart()" [disabled]="isLoading" *ngIf="missionStatus === 'Available'">
+          <fa-icon [icon]="loadingIcon" [spin]="true" *ngIf="isLoading"></fa-icon> Start
+        </button>
+        <button type="button" class="btn btn-primary btn-lg" (click)="doPickedUp()" *ngIf="missionStatus === 'Start'">
+          Picked Up
+        </button>
+        <button type="button" class="btn btn-success btn-lg" (click)="doRescued()" *ngIf="missionStatus === 'Picked Up'" [disabled]="isLoading">
+          <fa-icon [icon]="loadingIcon" [spin]="true" *ngIf="isLoading"></fa-icon> Rescued
+        </button>
       </div>
     </div>
   </div>
