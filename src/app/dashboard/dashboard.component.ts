@@ -8,17 +8,13 @@ import { Subject } from 'rxjs/internal/Subject';
   templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
-  refreshIcon: IconDefinition;
-  stopIcon: IconDefinition;
+  refreshIcon: IconDefinition = faSync;
+  stopIcon: IconDefinition = faBan;
   polling: any;
   isPolling = false;
-  reload$: Subject<string>;
+  reload$: Subject<string> = new Subject();
 
-  constructor() {
-    this.refreshIcon = faSync;
-    this.stopIcon = faBan;
-    this.reload$ = new Subject();
-  }
+  constructor() {}
 
   togglePolling() {
     this.isPolling = !this.isPolling;
