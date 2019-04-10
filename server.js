@@ -16,6 +16,7 @@ app.set('port', process.env.PORT || 8080);
 app.set('incident-service', process.env.INCIDENT || 'http://incident-service:8080');
 app.set('alert-service', process.env.ALERT || 'http://alert-service:8080');
 app.set('responder-service', process.env.RESPONDER || 'http://responder-service:8080');
+app.set('mission-service', process.env.MISSION || 'http://mission-service:8080');
 
 app.use(compression());
 
@@ -61,6 +62,20 @@ app.use(
     logLevel: 'debug',
     pathRewrite: {
       '^/responder-service': ''
+    }
+  })
+);
+
+// mission server proxy
+app.use(
+  '/mission-service/*',
+  proxy({
+    target: app.get('mission-service'),
+    secure: false,
+    changeOrigin: true,
+    logLevel: 'debug',
+    pathRewrite: {
+      '^/mission-service': ''
     }
   })
 );
