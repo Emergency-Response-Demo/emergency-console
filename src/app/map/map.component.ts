@@ -34,7 +34,7 @@ export class MapComponent implements OnInit {
   // icons colored with coreui hex codes from https://iconscout.com/icon/location-62
   getIcon(missionStatus: string): string {
     switch (missionStatus) {
-      case 'Requested': {
+      case 'REPORTED': {
         return 'red';
       }
       case 'CREATED': {
@@ -46,7 +46,7 @@ export class MapComponent implements OnInit {
       case 'DROPPED': {
         return 'green';
       }
-      case 'Cancelled': {
+      case 'CANCELLED': {
         return 'grey';
       }
       default: {
