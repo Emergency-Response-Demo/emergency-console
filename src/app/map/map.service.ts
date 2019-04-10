@@ -1,33 +1,34 @@
 import { Injectable } from '@angular/core';
 import { MessageService } from '../message/message.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { of } from 'rxjs/internal/observable/of';
+import { from } from 'rxjs/internal/observable/from';
 import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/internal/operators/catchError';
+import { mergeMap } from 'rxjs/internal/operators/mergeMap';
+import { tap } from 'rxjs/internal/operators/tap';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapService {
+  private mapUrl = 'mission-service/api/missions';
 
-  private mapUrl = 'incident-service/incidents/map';
+  getIds(): Observable<string[]> {
+    return this.http.get<string[]>(this.mapUrl);
+  }
 
-  getData() {
-    return this.http.get<any>(this.mapUrl).pipe(
-      catchError(res => {
-        return this.handleError('getData()', res);
-      })
+  getMissions(ids: string[]): Observable<any> {
+    return from(ids).pipe(
+      mergeMap(id => this.http.get(`${this.mapUrl}/${id}`))
     );
   }
 
   private handleError(method: string, res: HttpErrorResponse): Observable<any> {
     this.messageService.error(`${method} ${res.message}`);
     console.error(res.error);
-    return of(null);
+    return from(null);
   }
 
-  constructor(
-    private messageService: MessageService,
-    private http: HttpClient
-  ) {}
+  constructor(private messageService: MessageService, private http: HttpClient) {}
 }

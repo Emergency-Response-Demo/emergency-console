@@ -2,26 +2,21 @@
 <div class="card-body">
   <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[11]" [center]="center" *ngIf="mapItems" [accessToken]="accessToken">
     <span *ngFor="let mapItem of mapItems">
-      <mgl-marker [lngLat]="[mapItem.lon, mapItem.lat]" #marker>
+      <mgl-marker [lngLat]="[mapItem.incidentLong, mapItem.incidentLat]" #marker>
         <div
           class="marker"
           [ngStyle]="{
             'background-image': 'url(assets/img/marker-' + getIcon(mapItem.missionStatus) + '.svg)'
           }"
-          (click)="markerClick([mapItem.lon, mapItem.lat])"
+          (click)="markerClick([mapItem.incidentLong, mapItem.incidentLat])"
         ></div>
       </mgl-marker>
       <mgl-popup [marker]="marker" [offset]="[0, -12]">
         <div class="card-text">
           <p>
-            <strong>Incident ID: </strong> {{ mapItem.id }}<br />
-            <strong>Long/Lat: </strong> {{ mapItem.lon + ',' + mapItem.lat }}<br />
-            <strong>Number of People: </strong> {{ mapItem.numberOfPeople }}<br />
-            <strong>Mission Status: </strong> {{ mapItem.missionStatus }}<br />
-            <strong>Medical Needed: </strong> {{ mapItem.medicalNeeded }}<br />
-            <strong>Reporter Name: </strong> {{ mapItem.reporter.fullName }}<br />
-            <strong>Reporter Phone number: </strong> {{ mapItem.reporter.phoneNumber }}<br />
-            <strong>Report Time: </strong> {{ mapItem.reporter.reportTime | date }}<br />
+            <strong>Incident ID: </strong> {{ mapItem.incidentId }}<br />
+            <strong>Long/Lat: </strong> {{ mapItem.incidentId + ',' + mapItem.incidentLat }}<br />
+            <strong>Mission Status: </strong> {{ mapItem.status }}<br />
           </p>
         </div>
       </mgl-popup>

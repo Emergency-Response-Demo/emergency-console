@@ -10,25 +10,21 @@ import { MapItem } from './map-item';
 })
 export class MapComponent implements OnInit {
   @Input()
-  reload$: Subject<string>;
+  reload$: Subject<string> = new Subject();
 
-  mapItems: MapItem[];
-  center: number[];
-  accessToken: string;
+  mapItems: MapItem[] = new Array();
+  center: number[] = [-77.886765, 34.210383];
+  accessToken: string = window['_env'].accessToken;
 
-  constructor(private mapService: MapService) {
-    this.reload$ = new Subject();
-    this.center = [-77.886765, 34.210383];
-    this.accessToken = window['_env'].accessToken;
-  }
+  constructor(private mapService: MapService) {}
 
   markerClick(lngLat: number[]): void {
     this.center = lngLat;
   }
 
   load(): void {
-    this.mapService.getData().subscribe(res => {
-      this.mapItems = res;
+    this.mapService.getIds().subscribe((ids: string[]) => {
+      this.mapService.getMissions(ids).subscribe((item: MapItem) => this.mapItems.push(item));
     });
   }
 
@@ -57,7 +53,7 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.reload$.subscribe(res => {
+    this.reload$.subscribe(() => {
       this.load();
     });
 

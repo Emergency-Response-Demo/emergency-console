@@ -1,14 +1,14 @@
 export class MapItem {
-  id: number;
-  reporter: {
-    id: number;
-    fullName: string;
-    phoneNumber: string;
-    reportTime: Date;
-  };
-  lat: number;
-  lon: number;
-  numberOfPeople: number;
-  missionStatus: string;
-  medicalNeeded: boolean;
+  id: string;
+  incidentId: string;
+  responderId: string;
+  responderStartLat: number;
+  responderStartLong: number;
+  incidentLat: number;
+  incidentLong: number;
+  destinationLat: number;
+  destinationLong: number;
+  responderLocationHistory: any;
+  status: string;
+  route: any;
 }
