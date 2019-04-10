@@ -6,7 +6,7 @@
         <div
           class="marker"
           [ngStyle]="{
-            'background-image': 'url(assets/img/marker-' + getIcon(mapItem.missionStatus) + '.svg)'
+            'background-image': 'url(assets/img/marker-' + getIcon(mapItem.status) + '.svg)'
           }"
           (click)="markerClick([mapItem.incidentLong, mapItem.incidentLat])"
         ></div>

@@ -5,8 +5,6 @@ import { from } from 'rxjs/internal/observable/from';
 import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { mergeMap } from 'rxjs/internal/operators/mergeMap';
-import { tap } from 'rxjs/internal/operators/tap';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +18,8 @@ export class MapService {
 
   getMissions(ids: string[]): Observable<any> {
     return from(ids).pipe(
-      mergeMap(id => this.http.get(`${this.mapUrl}/${id}`))
+      mergeMap(id => this.http.get(`${this.mapUrl}/${id}`)),
+      catchError(res => this.handleError('getMissions()', res))
     );
   }
 

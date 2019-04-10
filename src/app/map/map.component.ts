@@ -23,9 +23,12 @@ export class MapComponent implements OnInit {
   }
 
   load(): void {
-    this.mapService.getIds().subscribe((ids: string[]) => {
-      this.mapService.getMissions(ids).subscribe((item: MapItem) => this.mapItems.push(item));
-    });
+    this.mapService
+      .getIds()
+      .toPromise()
+      .then((ids: string[]) => {
+        this.mapService.getMissions(ids).subscribe((item: MapItem) => this.mapItems.push(item));
+      });
   }
 
   // icons colored with coreui hex codes from https://iconscout.com/icon/location-62
@@ -34,13 +37,13 @@ export class MapComponent implements OnInit {
       case 'Requested': {
         return 'red';
       }
-      case 'Assigned': {
+      case 'CREATED': {
         return 'yellow';
       }
-      case 'PickedUp': {
+      case 'PICKEDUP': {
         return 'blue';
       }
-      case 'Rescued': {
+      case 'DROPPED': {
         return 'green';
       }
       case 'Cancelled': {
