@@ -5,9 +5,8 @@ import { Responder } from './responder';
 import { MapMouseEvent, LngLatBoundsLike, LngLat, FitBoundsOptions, LinePaint, LineLayout, Map } from 'mapbox-gl';
 import { MissionService } from './mission.service';
 import { AppUtil } from '../app-util';
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
-import { timeout } from 'rxjs/operators';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'app-mission',

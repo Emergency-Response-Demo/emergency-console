@@ -9,26 +9,19 @@ import { Subject } from 'rxjs/internal/Subject';
 })
 export class ChartsComponent implements OnInit {
   @Input()
-  reload$: Subject<string>;
+  reload$: Subject<string> = new Subject();
 
-  labels: string[];
-  data: number[];
-  colors: Color[];
-  type: string;
-  options: any;
+  labels: string[] = ['Active', 'Idle'];
+  data: number[] = new Array();
+
+  // colors pulled from https://coreui.io/docs/getting-started/ui-kit/
+  colors: Color[] = [{ backgroundColor: ['#4dbd74', '#20a8d8'] }];
+  type = 'doughnut';
   total = 0;
   active = 0;
   idle = 0;
 
-  constructor(private chartsService: ChartsService) {
-    this.reload$ = new Subject();
-    this.data = new Array();
-    this.type = 'doughnut';
-
-    // colors pulled from https://coreui.io/docs/getting-started/ui-kit/
-    this.colors = [{ backgroundColor: ['#4dbd74', '#20a8d8'] }];
-    this.labels = ['Active', 'Idle'];
-  }
+  constructor(private chartsService: ChartsService) {}
 
   load(): void {
     this.chartsService.getStatus().subscribe(res => {
