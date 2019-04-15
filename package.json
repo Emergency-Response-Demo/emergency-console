@@ -35,7 +35,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.17",
     "@fortawesome/free-brands-svg-icons": "^5.8.1",
     "@fortawesome/free-solid-svg-icons": "^5.8.1",
-    "@types/mapbox-gl": "^0.51.3",
+    "@types/mapbox-gl": "^0.51.4",
     "@types/node": "^11.13.4",
     "angular-in-memory-web-api": "^0.8.0",
     "chart.js": "^2.7.3",
@@ -45,11 +45,11 @@
     "express": "^4.16.4",
     "http-proxy-middleware": "^0.19.1",
     "keycloak-angular": "^6.1.0",
-    "mapbox-gl": "^0.52.0",
+    "mapbox-gl": "^0.53.1",
     "morgan": "~1.9.1",
     "ng2-charts": "^2.2.2",
     "ngx-bootstrap": "~4.0.1",
-    "ngx-mapbox-gl": "^3.0.1",
+    "ngx-mapbox-gl": "^3.1.0",
     "ngx-toastr": "^10.0.2",
     "npm-sort": "0.0.4",
     "replace": "^1.1.0",
@@ -59,7 +59,6 @@
     "tslib": "^1.9.0",
     "tslint": "~5.12.1",
     "typescript": "~3.2.4",
-    "webpack-bundle-analyzer": "^3.3.2",
     "zone.js": "^0.8.26"
   }
 }
