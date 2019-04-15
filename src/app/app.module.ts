@@ -6,7 +6,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ChartsModule } from 'ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -19,7 +18,6 @@ import { ChartsComponent } from './charts/charts.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-import { InMemoryApiService } from './in-memory-api.service';
 import { IncidentComponent } from './incident/incident.component';
 import { MapComponent } from './map/map.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -60,10 +58,6 @@ export function init(appInitService: AppInitService) {
     ToastrModule.forRoot({
       closeButton: true,
       progressBar: true
-    }),
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryApiService, {
-      dataEncapsulation: false,
-      passThruUnknownUrl: true
     }),
     NgxMapboxGLModule,
     KeycloakAngularModule

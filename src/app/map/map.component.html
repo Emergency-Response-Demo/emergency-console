@@ -1,7 +1,52 @@
 <div class="card-header">Map</div>
 <div class="card-body">
-  <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[11]" [center]="center" *ngIf="mapItems" [accessToken]="accessToken">
-    <span *ngFor="let mapItem of mapItems">
+  <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[11]" [center]="center" [accessToken]="accessToken">
+    <span *ngFor="let responder of responders">
+      <mgl-marker [lngLat]="[responder.lon, responder.lat]" #marker>
+        <div
+          class="marker"
+          [ngStyle]="{
+            'background-image': 'url(assets/img/location.svg)'
+          }"
+          (click)="markerClick([responder.lon, responder.lat])"
+        ></div>
+      </mgl-marker>
+      <mgl-popup [marker]="marker" [offset]="[0, -12]">
+          <div class="card-text">
+            <p>
+              <strong>Responder ID: </strong> {{ responder.id }}<br />
+              <strong>Long/Lat: </strong> {{ responder.lon + ',' + responder.lat }}<br />
+              <strong>Mission ID: </strong> {{ responder.missionId }}<br />
+            </p>
+          </div>
+        </mgl-popup>
+    </span>
+    <span *ngFor="let shelter of shelters">
+      <mgl-marker [lngLat]="[shelter.lon, shelter.lat]" #marker>
+        <div class="marker" [ngStyle]="{
+            'background-image': 'url(assets/img/marker-green.svg)'
+          }" (click)="markerClick([shelter.lon, shelter.lat])"></div>
+      </mgl-marker>
+    </span>
+    <span *ngFor="let incident of incidents">
+      <mgl-marker [lngLat]="[incident.lon, incident.lat]" #marker>
+        <div class="marker" [ngStyle]="{
+            'background-image': 'url(assets/img/marker-' + getIcon(incident.status) + '.svg)'
+          }" (click)="markerClick([incident.lon, incident.lat])"></div>
+      </mgl-marker>
+      <mgl-popup [marker]="marker" [offset]="[0, -12]">
+        <div class="card-text">
+          <p>
+            <strong>Incident ID: </strong> {{ incident.id }}<br />
+            <strong>Mission ID: </strong> {{ incident.missionId }}<br />
+            <strong>Long/Lat: </strong> {{ incident.lon + ',' + incident.lat }}<br />
+            <strong>Incident Status: </strong> {{ incident.status }}<br />
+          </p>
+        </div>
+      </mgl-popup>
+    </span>
+
+    <!-- <span *ngFor="let mapItem of mapItems">
       <mgl-marker [lngLat]="[mapItem.incidentLong, mapItem.incidentLat]" #marker>
         <div
           class="marker"
@@ -20,6 +65,6 @@
           </p>
         </div>
       </mgl-popup>
-    </span>
+    </span> -->
   </mgl-map>
 </div>

@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MapService } from './map.service';
 import { Subject } from 'rxjs/internal/Subject';
-import { MapItem } from './map-item';
+import { Incident } from '../incident';
+import { Responder } from '../responder';
+import { Shelter } from '../shelter';
 
 @Component({
   selector: 'app-map',
@@ -12,7 +14,9 @@ export class MapComponent implements OnInit {
   @Input()
   reload$: Subject<string> = new Subject();
 
-  mapItems: MapItem[] = new Array();
+  responders: Responder[] = new Array();
+  incidents: Incident[] = new Array();
+  shelters: Shelter[] = new Array();
   center: number[] = [-77.886765, 34.210383];
   accessToken: string = window['_env'].accessToken;
 
@@ -23,12 +27,46 @@ export class MapComponent implements OnInit {
   }
 
   load(): void {
-    this.mapService
-      .getIds()
-      .toPromise()
-      .then((ids: string[]) => {
-        this.mapService.getMissions(ids).subscribe((item: MapItem) => this.mapItems.push(item));
+    this.mapService.getMissions().subscribe(res => {
+      res.forEach(mission => {
+        const status = mission.status;
+
+        if (status === 'CREATED') {
+          this.incidents.push({
+            missionId: mission.id,
+            id: mission.incidentId,
+            lat: mission.incidentLat,
+            lon: mission.incidentLong,
+            status: mission.status
+          });
+        }
+        if (status === 'PICKEDUP' || status === 'CREATED') {
+          let lat = mission.responderStartLat;
+          let lon = mission.responderStartLong;
+          if (mission.responderLocationHistory.length > 1) {
+            lat = mission.responderLocationHistory.pop().location.lat;
+            lon = mission.responderLocationHistory.pop().location.long;
+          }
+          this.responders.push({
+            missionId: mission.id,
+            id: mission.responderId,
+            lat: lat,
+            lon: lon
+          });
+        }
+        if (status === 'DROPPED' || status === 'PICKEDUP') {
+          const found = this.shelters.filter(shelter => {
+            return shelter.lat === mission.destinationLat && shelter.lon === mission.destinationLong;
+          });
+          if (!found) {
+            this.shelters.push({
+              lat: mission.destinationLat,
+              lon: mission.destinationLong
+            });
+          }
+        }
       });
+    });
   }
 
   // icons colored with coreui hex codes from https://iconscout.com/icon/location-62
@@ -56,9 +94,7 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.reload$.subscribe(() => {
-      this.load();
-    });
+    this.reload$.subscribe(() => this.load());
 
     this.load();
   }

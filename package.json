@@ -37,7 +37,6 @@
     "@fortawesome/free-solid-svg-icons": "^5.8.1",
     "@types/mapbox-gl": "^0.51.4",
     "@types/node": "^11.13.4",
-    "angular-in-memory-web-api": "^0.8.0",
     "chart.js": "^2.7.3",
     "codelyzer": "^4.5.0",
     "compression": "^1.7.4",

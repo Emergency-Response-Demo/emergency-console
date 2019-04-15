@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Responders } from './responders';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
@@ -10,15 +9,12 @@ import { of } from 'rxjs/internal/observable/of';
   providedIn: 'root'
 })
 export class ChartsService {
-
   // private respondersUrl = 'api/responderMock';
   private respondersUrl = 'responder-service/stats';
 
   getStatus() {
-    return this.http.get<Responders>(this.respondersUrl).pipe(
-      catchError(res => {
-        return this.handleError('getStatus()', res);
-      })
+    return this.http.get<any>(this.respondersUrl).pipe(
+      catchError(res => this.handleError('getStatus()', res))
     );
   }
 
@@ -28,8 +24,5 @@ export class ChartsService {
     return of(null);
   }
 
-  constructor(
-    private messageService: MessageService,
-    private http: HttpClient
-  ) {}
+  constructor(private messageService: MessageService, private http: HttpClient) {}
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from '../message/message.service';
 import { KeycloakService } from 'keycloak-angular';
-import { Responder } from './responder';
+import { Responder } from '../responder';
 import { MapMouseEvent, LngLatBoundsLike, LngLat, FitBoundsOptions, LinePaint, LineLayout, Map } from 'mapbox-gl';
 import { MissionService } from './mission.service';
 import { AppUtil } from '../app-util';

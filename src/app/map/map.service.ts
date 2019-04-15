@@ -4,7 +4,6 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { from } from 'rxjs/internal/observable/from';
 import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/internal/operators/catchError';
-import { mergeMap } from 'rxjs/internal/operators/mergeMap';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +11,9 @@ import { mergeMap } from 'rxjs/internal/operators/mergeMap';
 export class MapService {
   private mapUrl = 'mission-service/api/missions';
 
-  getIds(): Observable<string[]> {
-    return this.http.get<string[]>(this.mapUrl);
-  }
-
-  getMissions(ids: string[]): Observable<any> {
-    return from(ids).pipe(
-      mergeMap(id => this.http.get(`${this.mapUrl}/${id}`)),
-      catchError(res => this.handleError('getMissions()', res))
+  getMissions(): Observable<any[]> {
+    return this.http.get<any[]>(this.mapUrl).pipe(
+      catchError(err => this.handleError('getMissions()', err))
     );
   }
 
