@@ -10,10 +10,14 @@
       <mgl-popup [marker]="marker" [offset]="[0, -12]">
         <div class="card-text">
           <p>
-            <strong>Responder ID: </strong> {{ responder.id }}<br />
-            <strong>Long/Lat: </strong> {{ responder.lon + ',' + responder.lat }}<br />
             <strong>Mission ID: </strong> {{ responder.missionId }}<br />
             <strong>Mission Status: </strong> {{ responder.status }}<br />
+            <strong>Responder ID: </strong> {{ responder.id }}<br />
+            <strong>Long/Lat: </strong> {{ responder.lon + ',' + responder.lat }}<br />
+            <strong>Full Name: </strong> {{ responder.fullName }}<br />
+            <strong>Phone Number: </strong> {{ responder.phoneNumber }}<br />
+            <strong>Provides Medical?: </strong> {{ responder.medical }}<br />
+            <strong>Boat Capcacity: </strong> {{ responder.boatCapacity }}<br />
           </p>
         </div>
       </mgl-popup>
@@ -25,14 +29,14 @@
           }" (click)="markerClick([shelter.lon, shelter.lat])"></div>
       </mgl-marker>
       <mgl-popup [marker]="marker" [offset]="[0, -12]">
-          <div class="card-text">
-            <p>
-              <strong>Shelter Name: </strong> {{ shelter.name }}<br />
-              <strong>Rescued: </strong> {{ shelter.rescued }}<br />
-              <strong>Long/Lat: </strong> {{ shelter.lon + ',' + shelter.lat }}<br />
-            </p>
-          </div>
-        </mgl-popup>
+        <div class="card-text">
+          <p>
+            <strong>Shelter Name: </strong> {{ shelter.name }}<br />
+            <strong>Rescued: </strong> {{ shelter.rescued }}<br />
+            <strong>Long/Lat: </strong> {{ shelter.lon + ',' + shelter.lat }}<br />
+          </p>
+        </div>
+      </mgl-popup>
     </span>
     <span *ngFor="let incident of incidents">
       <mgl-marker [lngLat]="[incident.lon, incident.lat]" #marker>
@@ -43,10 +47,14 @@
       <mgl-popup [marker]="marker" [offset]="[0, -12]">
         <div class="card-text">
           <p>
-            <strong>Incident ID: </strong> {{ incident.id }}<br />
             <strong>Mission ID: </strong> {{ incident.missionId }}<br />
+            <strong>Mission Status: </strong> {{ incident.status }}<br />
+            <strong>Incident ID: </strong> {{ incident.id }}<br />
             <strong>Long/Lat: </strong> {{ incident.lon + ',' + incident.lat }}<br />
-            <strong>Incident Status: </strong> {{ incident.status }}<br />
+            <strong>Name: </strong> {{ incident.victimName }}<br />
+            <strong>Phone Number: </strong> {{ incident.victimPhoneNumber }}<br />
+            <strong>Medical Needed?: </strong> {{ incident.medicalNeeded }}<br />
+            <strong>Number of People: </strong> {{ incident.numberOfPeople }}<br />
           </p>
         </div>
       </mgl-popup>
