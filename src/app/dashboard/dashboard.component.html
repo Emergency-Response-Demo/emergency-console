@@ -11,7 +11,7 @@
   <div class="card">
     <div class="card-header">Incident Status</div>
     <div class="card-body">
-      <app-incident [reload$]="reload$"></app-incident>
+      <app-incident [stats$]="stats$"></app-incident>
     </div>
   </div>
   <div class="card">
@@ -21,6 +21,6 @@
 </div>
 <div class="card-deck">
   <div class="card">
-    <app-map [reload$]="reload$"></app-map>
+    <app-map [reload$]="reload$" [stats$]="stats$"></app-map>
   </div>
 </div>
