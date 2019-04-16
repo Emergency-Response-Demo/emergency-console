@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { from } from 'rxjs/internal/observable/from';
 import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/internal/operators/catchError';
+import { Mission } from '../mission';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ import { catchError } from 'rxjs/internal/operators/catchError';
 export class MapService {
   private mapUrl = 'mission-service/api/missions';
 
-  getMissions(): Observable<any[]> {
-    return this.http.get<any[]>(this.mapUrl).pipe(
+  getMissions(): Observable<Mission[]> {
+    return this.http.get<Mission[]>(this.mapUrl).pipe(
       catchError(err => this.handleError('getMissions()', err))
     );
   }
