@@ -14,11 +14,7 @@ export class MissionService {
     const url = `/mapbox/directions/v5/mapbox/driving/${start.lng},${start.lat};${end.lng},${end.lat}.json`;
     const httpParams = new HttpParams().set('access_token', window['_env'].accessToken).set('geometries', 'geojson');
 
-    return this.http.get<any>(url, { params: httpParams }).pipe(
-      catchError(res => {
-        return this.handleError('getDirections()', res);
-      })
-    );
+    return this.http.get<any>(url, { params: httpParams }).pipe(catchError(res => this.handleError('getDirections()', res)));
   }
 
   private handleError(method: string, res: HttpErrorResponse): Observable<any> {
