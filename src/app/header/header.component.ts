@@ -4,6 +4,7 @@ import { AlertModel } from '../alerts/alert-model';
 import { AlertService } from '../alerts/alert.service';
 import { interval } from 'rxjs/internal/observable/interval';
 import { KeycloakService } from 'keycloak-angular';
+import { timeout } from 'rxjs/operators';
 
 @Component({
   styleUrls: ['./header.component.css'],
@@ -45,12 +46,9 @@ export class HeaderComponent implements OnInit {
     }
 
     if (window.innerWidth > 640) {
-      interval(500)
-        .subscribe(() => {
-          // triggering this event so that the mapbox api will auto resize the map on sidebar hide
-          window.dispatchEvent(new Event('resize'));
-        })
-        .unsubscribe();
+      setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+      }, 500);
     }
   }
 
