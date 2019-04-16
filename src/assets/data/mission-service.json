@@ -1,0 +1,7573 @@
+[ {
+  "id" : "6c6186cc-422f-462a-999b-d0c01f923910",
+  "incidentId" : "6b3189df-a3ab-4530-b678-4553252b5cdf",
+  "responderId" : "11",
+  "responderStartLat" : 34.12112,
+  "responderStartLong" : -77.94435,
+  "incidentLat" : 34.135280931954675,
+  "incidentLong" : -77.9005042934802,
+  "destinationLat" : 34.1706,
+  "destinationLong" : -77.949,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418022398,
+    "location" : {
+      "lat" : 34.126066,
+      "long" : -77.899588
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023195,
+    "location" : {
+      "lat" : 34.133943,
+      "long" : -77.904213
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023300,
+    "location" : {
+      "lat" : 34.140097,
+      "long" : -77.921611
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023600,
+    "location" : {
+      "lat" : 34.134939,
+      "long" : -77.903954
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023800,
+    "location" : {
+      "lat" : 34.123697,
+      "long" : -77.915514
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023991,
+    "location" : {
+      "lat" : 34.135253,
+      "long" : -77.901343
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024003,
+    "location" : {
+      "lat" : 34.14353,
+      "long" : -77.912679
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024389,
+    "location" : {
+      "lat" : 34.118771,
+      "long" : -77.922709
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024596,
+    "location" : {
+      "lat" : 34.138468,
+      "long" : -77.904155
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024893,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025093,
+    "location" : {
+      "lat" : 34.133583,
+      "long" : -77.897724
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025199,
+    "location" : {
+      "lat" : 34.136921,
+      "long" : -77.894249
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025297,
+    "location" : {
+      "lat" : 34.140556,
+      "long" : -77.913835
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025499,
+    "location" : {
+      "lat" : 34.140666,
+      "long" : -77.912618
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025793,
+    "location" : {
+      "lat" : 34.170729,
+      "long" : -77.948447
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025895,
+    "location" : {
+      "lat" : 34.132819,
+      "long" : -77.895631
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025904,
+    "location" : {
+      "lat" : 34.135231,
+      "long" : -77.90125
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026192,
+    "location" : {
+      "lat" : 34.118109,
+      "long" : -77.921636
+    },
+    "long" : 0.0
+  } ],
+  "status" : "COMPLETED",
+  "route" : {
+    "distance" : 13973.7,
+    "duration" : 1151.1,
+    "steps" : [ {
+      "distance" : 122.4,
+      "duration" : 32.8,
+      "name" : "River Vista South",
+      "instruction" : "Head east on River Vista South",
+      "weight" : 68.8,
+      "loc" : {
+        "lat" : 34.118694,
+        "long" : -77.924008
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 136.2,
+      "duration" : 31.200000000000003,
+      "name" : "River Vista South",
+      "instruction" : "Turn right to stay on River Vista South",
+      "weight" : 64.7,
+      "loc" : {
+        "lat" : 34.118771,
+        "long" : -77.922709
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 909.3,
+      "duration" : 50.599999999999994,
+      "name" : "River Road",
+      "instruction" : "Turn left onto River Road",
+      "weight" : 53.099999999999994,
+      "loc" : {
+        "lat" : 34.118109,
+        "long" : -77.921636
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1495.0,
+      "duration" : 97.30000000000001,
+      "name" : "Sanders Drive",
+      "instruction" : "Turn right onto Sanders Drive",
+      "weight" : 97.9,
+      "loc" : {
+        "lat" : 34.123697,
+        "long" : -77.915514
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1325.4,
+      "duration" : 71.39999999999999,
+      "name" : "Carolina Beach Road (US 421)",
+      "instruction" : "Turn left onto Carolina Beach Road (US 421)",
+      "weight" : 88.1,
+      "loc" : {
+        "lat" : 34.126066,
+        "long" : -77.899588
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 536.6,
+      "duration" : 51.0,
+      "name" : "Carolina Beach Road (US 421)",
+      "instruction" : "Make a U-turn and continue on Carolina Beach Road (US 421)",
+      "weight" : 103.7,
+      "loc" : {
+        "lat" : 34.136921,
+        "long" : -77.894249
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 211.5,
+      "duration" : 28.0,
+      "name" : "Julia Drive",
+      "instruction" : "Turn right onto Julia Drive",
+      "weight" : 51.599999999999994,
+      "loc" : {
+        "lat" : 34.132819,
+        "long" : -77.895631
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 605.9,
+      "duration" : 62.4,
+      "name" : "Julia Drive",
+      "instruction" : "Turn left to stay on Julia Drive",
+      "weight" : 72.69999999999999,
+      "loc" : {
+        "lat" : 34.133583,
+        "long" : -77.897724
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 113.3,
+      "duration" : 14.3,
+      "name" : "Marquette Drive",
+      "instruction" : "Turn right onto Marquette Drive",
+      "weight" : 23.9,
+      "loc" : {
+        "lat" : 34.133943,
+        "long" : -77.904213
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 267.2,
+      "duration" : 28.4,
+      "name" : "Hanna Drive",
+      "instruction" : "Turn right onto Hanna Drive",
+      "weight" : 34.5,
+      "loc" : {
+        "lat" : 34.134939,
+        "long" : -77.903954
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 8.9,
+      "duration" : 0.6,
+      "name" : "Vallie Lane",
+      "instruction" : "Turn right onto Vallie Lane",
+      "weight" : 0.6,
+      "loc" : {
+        "lat" : 34.135253,
+        "long" : -77.901343
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Vallie Lane",
+      "instruction" : "You have arrived at your 1st destination, straight ahead",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.135231,
+        "long" : -77.90125
+      },
+      "destination" : true,
+      "wayPoint" : false
+    }, {
+      "distance" : 248.3,
+      "duration" : 102.0,
+      "name" : "Vallie Lane",
+      "instruction" : "Head west on Vallie Lane",
+      "weight" : 54.400000000000006,
+      "loc" : {
+        "lat" : 34.135231,
+        "long" : -77.90125
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 323.9,
+      "duration" : 37.9,
+      "name" : "Marquette Drive",
+      "instruction" : "Turn right onto Marquette Drive",
+      "weight" : 72.5,
+      "loc" : {
+        "lat" : 34.13562,
+        "long" : -77.903787
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 580.3,
+      "duration" : 70.0,
+      "name" : "Normandy Drive",
+      "instruction" : "Turn left onto Normandy Drive",
+      "weight" : 79.19999999999999,
+      "loc" : {
+        "lat" : 34.138468,
+        "long" : -77.904155
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 407.0,
+      "duration" : 36.7,
+      "name" : "Lorraine Circle",
+      "instruction" : "Turn right onto Lorraine Circle",
+      "weight" : 43.9,
+      "loc" : {
+        "lat" : 34.139587,
+        "long" : -77.909671
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 370.2,
+      "duration" : 40.900000000000006,
+      "name" : "Ilex Drive",
+      "instruction" : "Turn right onto Ilex Drive",
+      "weight" : 74.9,
+      "loc" : {
+        "lat" : 34.140666,
+        "long" : -77.912618
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 384.4,
+      "duration" : 26.6,
+      "name" : "Silver Lake Road",
+      "instruction" : "Turn left onto Silver Lake Road",
+      "weight" : 31.5,
+      "loc" : {
+        "lat" : 34.14353,
+        "long" : -77.912679
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 755.7,
+      "duration" : 80.39999999999999,
+      "name" : "Lorraine Circle North",
+      "instruction" : "Turn right onto Lorraine Circle North",
+      "weight" : 81.2,
+      "loc" : {
+        "lat" : 34.140556,
+        "long" : -77.913835
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 5172.299999999999,
+      "duration" : 288.6,
+      "name" : "River Road",
+      "instruction" : "Enter the traffic circle and take the 1st exit onto River Road",
+      "weight" : 289.9,
+      "loc" : {
+        "lat" : 34.140097,
+        "long" : -77.921611
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "River Road",
+      "instruction" : "You have arrived at your destination, on the left",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.170729,
+        "long" : -77.948447
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "296a0d0b-abfa-45d0-970d-296b48780a37",
+  "incidentId" : "72d36a5f-85a3-4fd5-b2d5-1fa6abb64662",
+  "responderId" : "54",
+  "responderStartLat" : 34.27772,
+  "responderStartLong" : -77.8355,
+  "incidentLat" : 34.2340288490692,
+  "incidentLong" : -77.83670248837765,
+  "destinationLat" : 34.2461,
+  "destinationLong" : -77.9519,
+  "status" : "CREATED"
+}, {
+  "id" : "27235aaa-ceb0-44ef-8084-1a23c2fd3307",
+  "incidentId" : "e90fa350-e660-4716-bb13-158fbcb39754",
+  "responderId" : "91",
+  "responderStartLat" : 34.23446,
+  "responderStartLong" : -77.89876,
+  "incidentLat" : 34.24312721453826,
+  "incidentLong" : -77.93349352662592,
+  "destinationLat" : 34.2461,
+  "destinationLong" : -77.9519,
+  "status" : "CREATED"
+}, {
+  "id" : "31a19ea1-a27f-44e2-b33e-e5cdabe80a5a",
+  "incidentId" : "ecce5f36-aa7d-45cd-8749-4c090836af31",
+  "responderId" : "52",
+  "responderStartLat" : 34.19029,
+  "responderStartLong" : -77.82106,
+  "incidentLat" : 34.173741685127055,
+  "incidentLong" : -77.84598586289418,
+  "destinationLat" : 34.1706,
+  "destinationLong" : -77.949,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418022105,
+    "location" : {
+      "lat" : 34.199221,
+      "long" : -77.839857
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418022794,
+    "location" : {
+      "lat" : 34.179911,
+      "long" : -77.927715
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023294,
+    "location" : {
+      "lat" : 34.170531,
+      "long" : -77.948371
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023298,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023397,
+    "location" : {
+      "lat" : 34.199647,
+      "long" : -77.871519
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023891,
+    "location" : {
+      "lat" : 34.175223,
+      "long" : -77.84964
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024097,
+    "location" : {
+      "lat" : 34.195311,
+      "long" : -77.870857
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024499,
+    "location" : {
+      "lat" : 34.137424,
+      "long" : -77.877152
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025400,
+    "location" : {
+      "lat" : 34.175223,
+      "long" : -77.84964
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025689,
+    "location" : {
+      "lat" : 34.165069,
+      "long" : -77.863504
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025795,
+    "location" : {
+      "lat" : 34.195061,
+      "long" : -77.829873
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025888,
+    "location" : {
+      "lat" : 34.185261,
+      "long" : -77.860888
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026096,
+    "location" : {
+      "lat" : 34.134993,
+      "long" : -77.88247
+    },
+    "long" : 0.0
+  } ],
+  "status" : "UPDATED",
+  "route" : {
+    "distance" : 23572.5,
+    "duration" : 1506.0,
+    "steps" : [ {
+      "distance" : 376.6,
+      "duration" : 52.0,
+      "name" : "Inlet View Drive",
+      "instruction" : "Head northwest on Inlet View Drive",
+      "weight" : 85.0,
+      "loc" : {
+        "lat" : 34.191931,
+        "long" : -77.829127
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1055.4,
+      "duration" : 116.3,
+      "name" : "Shinnwood Road",
+      "instruction" : "Turn left onto Shinnwood Road",
+      "weight" : 131.5,
+      "loc" : {
+        "lat" : 34.195061,
+        "long" : -77.829873
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 3207.1,
+      "duration" : 196.40000000000003,
+      "name" : "Greenville Loop Road",
+      "instruction" : "Turn left onto Greenville Loop Road",
+      "weight" : 241.90000000000003,
+      "loc" : {
+        "lat" : 34.199221,
+        "long" : -77.839857
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 500.6,
+      "duration" : 34.300000000000004,
+      "name" : "Pine Grove Drive",
+      "instruction" : "Make a sharp left onto Pine Grove Drive",
+      "weight" : 35.7,
+      "loc" : {
+        "lat" : 34.199647,
+        "long" : -77.871519
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1466.5,
+      "duration" : 89.2,
+      "name" : "Pine Grove Drive",
+      "instruction" : "Make a slight left to stay on Pine Grove Drive",
+      "weight" : 107.4,
+      "loc" : {
+        "lat" : 34.195311,
+        "long" : -77.870857
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 2024.3,
+      "duration" : 121.80000000000001,
+      "name" : "Masonboro Sound Road",
+      "instruction" : "Turn left onto Masonboro Sound Road",
+      "weight" : 122.6,
+      "loc" : {
+        "lat" : 34.185261,
+        "long" : -77.860888
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Masonboro Sound Road",
+      "instruction" : "You have arrived at your 1st destination",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.175223,
+        "long" : -77.84964
+      },
+      "destination" : false,
+      "wayPoint" : true
+    }, {
+      "distance" : 1973.7,
+      "duration" : 127.8,
+      "name" : "Masonboro Sound Road",
+      "instruction" : "Head southwest on Masonboro Sound Road",
+      "weight" : 151.2,
+      "loc" : {
+        "lat" : 34.175223,
+        "long" : -77.84964
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 3342.5,
+      "duration" : 187.4,
+      "name" : "Masonboro Loop Road",
+      "instruction" : "Turn left onto Masonboro Loop Road",
+      "weight" : 189.1,
+      "loc" : {
+        "lat" : 34.165069,
+        "long" : -77.863504
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 635.3,
+      "duration" : 37.0,
+      "name" : "Grissom Road",
+      "instruction" : "Keep right onto Grissom Road",
+      "weight" : 37.0,
+      "loc" : {
+        "lat" : 34.137424,
+        "long" : -77.877152
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 6628.1,
+      "duration" : 363.99999999999994,
+      "name" : "Piner Road",
+      "instruction" : "Go straight onto Piner Road",
+      "weight" : 435.20000000000005,
+      "loc" : {
+        "lat" : 34.134993,
+        "long" : -77.88247
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 2339.2,
+      "duration" : 178.5,
+      "name" : "Sunnyvale Drive",
+      "instruction" : "Turn left onto Sunnyvale Drive",
+      "weight" : 192.39999999999998,
+      "loc" : {
+        "lat" : 34.179911,
+        "long" : -77.927715
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 23.1,
+      "duration" : 1.3,
+      "name" : "River Road",
+      "instruction" : "Turn right onto River Road",
+      "weight" : 1.3,
+      "loc" : {
+        "lat" : 34.170531,
+        "long" : -77.948371
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "River Road",
+      "instruction" : "You have arrived at your destination, on the left",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.170729,
+        "long" : -77.948447
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "c1277c01-4511-4aaa-9413-2e7fb2bde3e0",
+  "incidentId" : "88bf727b-bf48-4ea6-bff0-0d6ab0d80352",
+  "responderId" : "3",
+  "responderStartLat" : 34.2367,
+  "responderStartLong" : -77.83479,
+  "incidentLat" : 34.21120318341209,
+  "incidentLong" : -77.8753002670001,
+  "destinationLat" : 34.2461,
+  "destinationLong" : -77.9519,
+  "status" : "CREATED"
+}, {
+  "id" : "fa40d5be-329c-4975-b028-a27c4d34c8da",
+  "incidentId" : "3fd8bd88-e4f2-498c-a911-ec2d2c214178",
+  "responderId" : "16",
+  "responderStartLat" : 34.25137,
+  "responderStartLong" : -77.82163,
+  "incidentLat" : 34.2447473561757,
+  "incidentLong" : -77.79341765667634,
+  "destinationLat" : 34.2461,
+  "destinationLong" : -77.9519,
+  "status" : "CREATED"
+}, {
+  "id" : "a0f6f7d8-7082-4d74-aa98-ae84171fb6b2",
+  "incidentId" : "da560bf7-b332-4bad-ad92-13bc6819b0c3",
+  "responderId" : "88",
+  "responderStartLat" : 34.21988,
+  "responderStartLong" : -77.85591,
+  "incidentLat" : 34.18439433071664,
+  "incidentLong" : -77.83830255755468,
+  "destinationLat" : 34.1706,
+  "destinationLong" : -77.949,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418023895,
+    "location" : {
+      "lat" : 34.186602,
+      "long" : -77.834819
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024188,
+    "location" : {
+      "lat" : 34.187344,
+      "long" : -77.834992
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024597,
+    "location" : {
+      "lat" : 34.170729,
+      "long" : -77.948447
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024798,
+    "location" : {
+      "lat" : 34.187344,
+      "long" : -77.834992
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024991,
+    "location" : {
+      "lat" : 34.221108,
+      "long" : -77.84449
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025104,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025108,
+    "location" : {
+      "lat" : 34.222213,
+      "long" : -77.858822
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025195,
+    "location" : {
+      "lat" : 34.210308,
+      "long" : -77.836893
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025498,
+    "location" : {
+      "lat" : 34.207512,
+      "long" : -77.878301
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025600,
+    "location" : {
+      "lat" : 34.197198,
+      "long" : -77.843019
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025798,
+    "location" : {
+      "lat" : 34.22695,
+      "long" : -77.855081
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025902,
+    "location" : {
+      "lat" : 34.197198,
+      "long" : -77.843019
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026092,
+    "location" : {
+      "lat" : 34.186602,
+      "long" : -77.834819
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026204,
+    "location" : {
+      "lat" : 34.219352,
+      "long" : -77.832635
+    },
+    "long" : 0.0
+  } ],
+  "status" : "UPDATED",
+  "route" : {
+    "distance" : 22843.1,
+    "duration" : 1759.1,
+    "steps" : [ {
+      "distance" : 384.4,
+      "duration" : 49.9,
+      "name" : "Eastwinds Road",
+      "instruction" : "Head west on Eastwinds Road",
+      "weight" : 62.2,
+      "loc" : {
+        "lat" : 34.219847,
+        "long" : -77.855923
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 629.3,
+      "duration" : 48.1,
+      "name" : "Rose Avenue",
+      "instruction" : "Turn right onto Rose Avenue",
+      "weight" : 60.0,
+      "loc" : {
+        "lat" : 34.222213,
+        "long" : -77.858822
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1171.2,
+      "duration" : 126.7,
+      "name" : "Hooker Road",
+      "instruction" : "Turn right onto Hooker Road",
+      "weight" : 150.4,
+      "loc" : {
+        "lat" : 34.22695,
+        "long" : -77.855081
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1242.4,
+      "duration" : 77.10000000000001,
+      "name" : "Wrightsville Avenue",
+      "instruction" : "Turn left onto Wrightsville Avenue",
+      "weight" : 89.00000000000001,
+      "loc" : {
+        "lat" : 34.221108,
+        "long" : -77.84449
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1093.2,
+      "duration" : 61.60000000000001,
+      "name" : "Oleander Drive (US 17; US 76)",
+      "instruction" : "Turn right onto Oleander Drive (US 17)",
+      "weight" : 68.2,
+      "loc" : {
+        "lat" : 34.219352,
+        "long" : -77.832635
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1736.4,
+      "duration" : 113.3,
+      "name" : "Greenville Loop Road",
+      "instruction" : "Turn left onto Greenville Loop Road",
+      "weight" : 149.5,
+      "loc" : {
+        "lat" : 34.210308,
+        "long" : -77.836893
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1599.9,
+      "duration" : 184.6,
+      "name" : "Old Military Road",
+      "instruction" : "Turn left onto Old Military Road",
+      "weight" : 226.8,
+      "loc" : {
+        "lat" : 34.197198,
+        "long" : -77.843019
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 84.1,
+      "duration" : 6.1,
+      "name" : "",
+      "instruction" : "Turn left",
+      "weight" : 6.1,
+      "loc" : {
+        "lat" : 34.187344,
+        "long" : -77.834992
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "",
+      "instruction" : "You have arrived at your 1st destination",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.186602,
+        "long" : -77.834819
+      },
+      "destination" : false,
+      "wayPoint" : true
+    }, {
+      "distance" : 84.1,
+      "duration" : 73.80000000000001,
+      "name" : "",
+      "instruction" : "Head north",
+      "weight" : 8.6,
+      "loc" : {
+        "lat" : 34.186602,
+        "long" : -77.834819
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1599.9,
+      "duration" : 175.1,
+      "name" : "Cedar Island",
+      "instruction" : "Turn right onto Cedar Island",
+      "weight" : 211.8,
+      "loc" : {
+        "lat" : 34.187344,
+        "long" : -77.834992
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 2835.9,
+      "duration" : 168.39999999999998,
+      "name" : "Greenville Loop Road",
+      "instruction" : "Turn left onto Greenville Loop Road",
+      "weight" : 170.50000000000003,
+      "loc" : {
+        "lat" : 34.197198,
+        "long" : -77.843019
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1083.3,
+      "duration" : 69.3,
+      "name" : "Pine Grove Drive",
+      "instruction" : "Turn right onto Pine Grove Drive",
+      "weight" : 92.9,
+      "loc" : {
+        "lat" : 34.199647,
+        "long" : -77.871519
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 9299.1,
+      "duration" : 605.1,
+      "name" : "Long Leaf Hills Drive",
+      "instruction" : "Turn left onto Long Leaf Hills Drive",
+      "weight" : 705.0,
+      "loc" : {
+        "lat" : 34.207512,
+        "long" : -77.878301
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "River Road",
+      "instruction" : "You have arrived at your destination, on the right",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.170729,
+        "long" : -77.948447
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "aac2aadc-a482-46ff-bf01-fcd1d5705dc9",
+  "incidentId" : "234d788f-815a-43cf-b7d1-51b0d9e58621",
+  "responderId" : "67",
+  "responderStartLat" : 34.15723,
+  "responderStartLong" : -77.88839,
+  "incidentLat" : 34.177740616668096,
+  "incidentLong" : -77.84797955318972,
+  "destinationLat" : 34.1706,
+  "destinationLong" : -77.949,
+  "status" : "CREATED"
+}, {
+  "id" : "301b3d79-f62b-4bd4-9fe8-63368a74aa97",
+  "incidentId" : "75c24851-28f5-4aef-b34c-ff8f517ad4d2",
+  "responderId" : "126",
+  "responderStartLat" : 34.21807,
+  "responderStartLong" : -77.95796,
+  "incidentLat" : 34.15902166448566,
+  "incidentLong" : -77.90161683794102,
+  "destinationLat" : 34.1706,
+  "destinationLong" : -77.949,
+  "status" : "CREATED"
+}, {
+  "id" : "024a67cf-6323-4d71-b2d9-ca2bde625028",
+  "incidentId" : "0878da17-0dff-42a7-96fb-0ebbe6808b58",
+  "responderId" : "81",
+  "responderStartLat" : 34.18426,
+  "responderStartLong" : -77.83705,
+  "incidentLat" : 34.20411161439374,
+  "incidentLong" : -77.84174997145391,
+  "destinationLat" : 34.1706,
+  "destinationLong" : -77.949,
+  "status" : "CREATED"
+}, {
+  "id" : "334d75a1-98f7-44d0-94e5-e1afc7e05d76",
+  "incidentId" : "4b271cc5-8ece-4b6e-9a02-834ffa6b6669",
+  "responderId" : "117",
+  "responderStartLat" : 34.11746,
+  "responderStartLong" : -77.91521,
+  "incidentLat" : 34.11816289058406,
+  "incidentLong" : -77.90060179071381,
+  "destinationLat" : 34.0583,
+  "destinationLong" : -77.8885,
+  "status" : "CREATED"
+}, {
+  "id" : "fa78710d-de59-4971-9a88-8dc1e41733fc",
+  "incidentId" : "aa0b9123-e93b-44c8-88e7-b0b8e6e5d388",
+  "responderId" : "89",
+  "responderStartLat" : 34.28171,
+  "responderStartLong" : -77.86502,
+  "incidentLat" : 34.25810081462233,
+  "incidentLong" : -77.91009354942304,
+  "destinationLat" : 34.2461,
+  "destinationLong" : -77.9519,
+  "status" : "CREATED"
+}, {
+  "id" : "0fccca1f-5506-4d43-a1ee-e57092c140ed",
+  "incidentId" : "2c49aa97-6970-4dc2-81e0-e4a6827444c6",
+  "responderId" : "103",
+  "responderStartLat" : 34.21517,
+  "responderStartLong" : -77.91073,
+  "incidentLat" : 34.19817026579058,
+  "incidentLong" : -77.8768865535952,
+  "destinationLat" : 34.1706,
+  "destinationLong" : -77.949,
+  "status" : "CREATED"
+}, {
+  "id" : "45d69bad-7739-46fd-b383-9c0b3be8e501",
+  "incidentId" : "940da84e-f69a-425a-8551-d3965c12ef4f",
+  "responderId" : "87",
+  "responderStartLat" : 34.14343,
+  "responderStartLong" : -77.86994,
+  "incidentLat" : 34.15220152617123,
+  "incidentLong" : -77.86720478312552,
+  "destinationLat" : 34.1706,
+  "destinationLong" : -77.949,
+  "status" : "CREATED"
+}, {
+  "id" : "cffa5371-64ce-4c70-88b7-ee0ef5b0b89b",
+  "incidentId" : "fe42babf-f465-4215-ba6d-f83d3c37f5ce",
+  "responderId" : "113",
+  "responderStartLat" : 34.21879,
+  "responderStartLong" : -77.974,
+  "incidentLat" : 34.146907481429366,
+  "incidentLong" : -77.93229201996506,
+  "destinationLat" : 34.1706,
+  "destinationLong" : -77.949,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418023401,
+    "location" : {
+      "lat" : 34.191555,
+      "long" : -77.946985
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023594,
+    "location" : {
+      "lat" : 34.170729,
+      "long" : -77.948447
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023700,
+    "location" : {
+      "lat" : 34.231331,
+      "long" : -77.992674
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023899,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024100,
+    "location" : {
+      "lat" : 34.15089,
+      "long" : -77.941506
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025202,
+    "location" : {
+      "lat" : 34.150297,
+      "long" : -77.937743
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025392,
+    "location" : {
+      "lat" : 34.226341,
+      "long" : -77.94884
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025591,
+    "location" : {
+      "lat" : 34.233472,
+      "long" : -77.989908
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025891,
+    "location" : {
+      "lat" : 34.148502,
+      "long" : -77.931788
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025995,
+    "location" : {
+      "lat" : 34.211743,
+      "long" : -77.945904
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026002,
+    "location" : {
+      "lat" : 34.146905,
+      "long" : -77.932286
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026088,
+    "location" : {
+      "lat" : 34.144363,
+      "long" : -77.933541
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026429,
+    "location" : {
+      "lat" : 34.146905,
+      "long" : -77.932286
+    },
+    "long" : 0.0
+  } ],
+  "status" : "UPDATED",
+  "route" : {
+    "distance" : 21261.3,
+    "duration" : 1271.3,
+    "steps" : [ {
+      "distance" : 1895.9,
+      "duration" : 99.7,
+      "name" : "River Road Southeast (NC 133)",
+      "instruction" : "Head north on River Road Southeast (NC 133)",
+      "weight" : 100.5,
+      "loc" : {
+        "lat" : 34.217726,
+        "long" : -77.981531
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 416.4,
+      "duration" : 24.400000000000002,
+      "name" : "NC 133 North",
+      "instruction" : "Take the ramp on the right onto NC 133 North",
+      "weight" : 30.4,
+      "loc" : {
+        "lat" : 34.231331,
+        "long" : -77.992674
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 4016.5,
+      "duration" : 155.10000000000002,
+      "name" : "Ocean Highway East (NC 133 North; US 17 North; US 74 East; US 76 East)",
+      "instruction" : "Merge left onto NC 133 North",
+      "weight" : 160.9,
+      "loc" : {
+        "lat" : 34.233472,
+        "long" : -77.989908
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1675.2,
+      "duration" : 112.3,
+      "name" : "US 421 Truck",
+      "instruction" : "Take the ramp onto US 421 Truck",
+      "weight" : 125.5,
+      "loc" : {
+        "lat" : 34.226341,
+        "long" : -77.94884
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 2527.8,
+      "duration" : 179.1,
+      "name" : "Burnett Boulevard",
+      "instruction" : "Make a slight right onto Burnett Boulevard",
+      "weight" : 193.79999999999998,
+      "loc" : {
+        "lat" : 34.211743,
+        "long" : -77.945904
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 5291.5,
+      "duration" : 311.8,
+      "name" : "Shipyard Boulevard (US 117)",
+      "instruction" : "Turn right onto US 117",
+      "weight" : 313.99999999999994,
+      "loc" : {
+        "lat" : 34.191555,
+        "long" : -77.946985
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 959.5,
+      "duration" : 58.4,
+      "name" : "River Road",
+      "instruction" : "Enter the traffic circle and take the 2nd exit onto River Road",
+      "weight" : 68.9,
+      "loc" : {
+        "lat" : 34.15089,
+        "long" : -77.941506
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 183.7,
+      "duration" : 18.3,
+      "name" : "",
+      "instruction" : "Turn right",
+      "weight" : 18.3,
+      "loc" : {
+        "lat" : 34.148502,
+        "long" : -77.931788
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "",
+      "instruction" : "You have arrived at your 1st destination",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.146905,
+        "long" : -77.932286
+      },
+      "destination" : false,
+      "wayPoint" : true
+    }, {
+      "distance" : 306.4,
+      "duration" : 33.2,
+      "name" : "",
+      "instruction" : "Head south",
+      "weight" : 42.2,
+      "loc" : {
+        "lat" : 34.146905,
+        "long" : -77.932286
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 921.4,
+      "duration" : 94.1,
+      "name" : "Old Towne Street",
+      "instruction" : "Turn right onto Old Towne Street",
+      "weight" : 94.2,
+      "loc" : {
+        "lat" : 34.144363,
+        "long" : -77.933541
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 3066.7999999999997,
+      "duration" : 184.9,
+      "name" : "River Road",
+      "instruction" : "Turn left onto River Road",
+      "weight" : 218.5,
+      "loc" : {
+        "lat" : 34.150297,
+        "long" : -77.937743
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "River Road",
+      "instruction" : "You have arrived at your destination, on the left",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.170729,
+        "long" : -77.948447
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "8aff7311-2a84-4a79-9c53-043d34753424",
+  "incidentId" : "e3904c9b-0115-4d90-ade1-93e7db5cf2c2",
+  "responderId" : "129",
+  "responderStartLat" : 34.16427,
+  "responderStartLong" : -77.93684,
+  "incidentLat" : 34.14639231482723,
+  "incidentLong" : -77.92287889587067,
+  "destinationLat" : 34.1706,
+  "destinationLong" : -77.949,
+  "status" : "CREATED"
+}, {
+  "id" : "220c1f65-7efe-4c16-9fad-4820780c6914",
+  "incidentId" : "4d548a71-c3ba-47f8-bcad-3892b251586a",
+  "responderId" : "13",
+  "responderStartLat" : 34.26845,
+  "responderStartLong" : -77.84534,
+  "incidentLat" : 34.245153846401394,
+  "incidentLong" : -77.87889345699136,
+  "destinationLat" : 34.2461,
+  "destinationLong" : -77.9519,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418022690,
+    "location" : {
+      "lat" : 34.253974,
+      "long" : -77.889365
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418022990,
+    "location" : {
+      "lat" : 34.269104,
+      "long" : -77.845089
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023601,
+    "location" : {
+      "lat" : 34.246579,
+      "long" : -77.949977
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023802,
+    "location" : {
+      "lat" : 34.244664,
+      "long" : -77.878769
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024191,
+    "location" : {
+      "lat" : 34.244569,
+      "long" : -77.879315
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024203,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024392,
+    "location" : {
+      "lat" : 34.269919,
+      "long" : -77.84452
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024795,
+    "location" : {
+      "lat" : 34.250415,
+      "long" : -77.889611
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026097,
+    "location" : {
+      "lat" : 34.250827,
+      "long" : -77.94737
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026193,
+    "location" : {
+      "lat" : 34.262342,
+      "long" : -77.829192
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026292,
+    "location" : {
+      "lat" : 34.244664,
+      "long" : -77.878769
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026301,
+    "location" : {
+      "lat" : 34.246785,
+      "long" : -77.947456
+    },
+    "long" : 0.0
+  } ],
+  "status" : "UPDATED",
+  "route" : {
+    "distance" : 15241.5,
+    "duration" : 869.3,
+    "steps" : [ {
+      "distance" : 96.4,
+      "duration" : 28.0,
+      "name" : "",
+      "instruction" : "Head north",
+      "weight" : 39.3,
+      "loc" : {
+        "lat" : 34.268511,
+        "long" : -77.845649
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 105.4,
+      "duration" : 13.0,
+      "name" : "",
+      "instruction" : "Turn left",
+      "weight" : 25.700000000000003,
+      "loc" : {
+        "lat" : 34.269104,
+        "long" : -77.845089
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1642.8,
+      "duration" : 91.6,
+      "name" : "Gordon Road",
+      "instruction" : "Turn right onto Gordon Road",
+      "weight" : 135.5,
+      "loc" : {
+        "lat" : 34.269919,
+        "long" : -77.84452
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 5015.2,
+      "duration" : 287.0,
+      "name" : "Market Street (US 17 Business)",
+      "instruction" : "Turn right onto Market Street (US 17 Business)",
+      "weight" : 336.5,
+      "loc" : {
+        "lat" : 34.262342,
+        "long" : -77.829192
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Market Street (US 17 Business)",
+      "instruction" : "You have arrived at your 1st destination, on the right",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.244664,
+        "long" : -77.878769
+      },
+      "destination" : true,
+      "wayPoint" : false
+    }, {
+      "distance" : 51.3,
+      "duration" : 4.0,
+      "name" : "Market Street (US 17 Business)",
+      "instruction" : "Head west on Market Street (US 17 Business)",
+      "weight" : 9.8,
+      "loc" : {
+        "lat" : 34.244664,
+        "long" : -77.878769
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1308.6,
+      "duration" : 109.00000000000001,
+      "name" : "New Centre Drive",
+      "instruction" : "Turn right onto New Centre Drive",
+      "weight" : 119.9,
+      "loc" : {
+        "lat" : 34.244569,
+        "long" : -77.879315
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 396.5,
+      "duration" : 25.6,
+      "name" : "North Kerr Avenue",
+      "instruction" : "Turn right onto North Kerr Avenue",
+      "weight" : 37.8,
+      "loc" : {
+        "lat" : 34.250415,
+        "long" : -77.889611
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 5938.0,
+      "duration" : 247.4,
+      "name" : "Martin Luther King Jr Parkway (US 74)",
+      "instruction" : "Turn left onto Martin Luther King Jr Parkway (US 74)",
+      "weight" : 294.09999999999997,
+      "loc" : {
+        "lat" : 34.253974,
+        "long" : -77.889365
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 454.4,
+      "duration" : 31.799999999999997,
+      "name" : "North 3rd Street",
+      "instruction" : "Continue onto North 3rd Street",
+      "weight" : 56.900000000000006,
+      "loc" : {
+        "lat" : 34.250827,
+        "long" : -77.94737
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 232.9,
+      "duration" : 31.9,
+      "name" : "Harnett Street",
+      "instruction" : "Turn right onto Harnett Street",
+      "weight" : 32.0,
+      "loc" : {
+        "lat" : 34.246785,
+        "long" : -77.947456
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Harnett Street",
+      "instruction" : "You have arrived at your destination, straight ahead",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.246579,
+        "long" : -77.949977
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "b497dc6a-f837-4966-8f83-f626a20a9171",
+  "incidentId" : "42581b35-1cd0-47e5-a3c0-994f2d54d098",
+  "responderId" : "123",
+  "responderStartLat" : 34.24775,
+  "responderStartLong" : -77.92075,
+  "incidentLat" : 34.24619783732461,
+  "incidentLong" : -77.87686781241901,
+  "destinationLat" : 34.2461,
+  "destinationLong" : -77.9519,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418022497,
+    "location" : {
+      "lat" : 34.246663,
+      "long" : -77.876278
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418022798,
+    "location" : {
+      "lat" : 34.246579,
+      "long" : -77.949977
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023597,
+    "location" : {
+      "lat" : 34.244569,
+      "long" : -77.879315
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023993,
+    "location" : {
+      "lat" : 34.246785,
+      "long" : -77.947456
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024094,
+    "location" : {
+      "lat" : 34.237992,
+      "long" : -77.918238
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024793,
+    "location" : {
+      "lat" : 34.246569,
+      "long" : -77.87548
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024890,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025290,
+    "location" : {
+      "lat" : 34.250415,
+      "long" : -77.889611
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025397,
+    "location" : {
+      "lat" : 34.246569,
+      "long" : -77.87548
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025494,
+    "location" : {
+      "lat" : 34.253974,
+      "long" : -77.889365
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025802,
+    "location" : {
+      "lat" : 34.245295,
+      "long" : -77.875129
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026000,
+    "location" : {
+      "lat" : 34.246663,
+      "long" : -77.876278
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026493,
+    "location" : {
+      "lat" : 34.245295,
+      "long" : -77.875129
+    },
+    "long" : 0.0
+  } ],
+  "status" : "UPDATED",
+  "route" : {
+    "distance" : 14315.3,
+    "duration" : 966.6,
+    "steps" : [ {
+      "distance" : 1106.4,
+      "duration" : 89.5,
+      "name" : "North 23rd Street",
+      "instruction" : "Head south on North 23rd Street",
+      "weight" : 120.6,
+      "loc" : {
+        "lat" : 34.24775,
+        "long" : -77.920198
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 4046.3,
+      "duration" : 276.4,
+      "name" : "Market Street (US 17 Business)",
+      "instruction" : "Turn left onto Market Street (US 17 Business)",
+      "weight" : 348.20000000000005,
+      "loc" : {
+        "lat" : 34.237992,
+        "long" : -77.918238
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 145.3,
+      "duration" : 19.9,
+      "name" : "Lennon Drive",
+      "instruction" : "Turn left onto Lennon Drive",
+      "weight" : 35.1,
+      "loc" : {
+        "lat" : 34.245295,
+        "long" : -77.875129
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 74.1,
+      "duration" : 5.3,
+      "name" : "Penny Lane",
+      "instruction" : "Turn left onto Penny Lane",
+      "weight" : 5.3,
+      "loc" : {
+        "lat" : 34.246569,
+        "long" : -77.87548
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Penny Lane",
+      "instruction" : "You have arrived at your 1st destination, on the left",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.246663,
+        "long" : -77.876278
+      },
+      "destination" : true,
+      "wayPoint" : false
+    }, {
+      "distance" : 74.1,
+      "duration" : 73.30000000000001,
+      "name" : "Penny Lane",
+      "instruction" : "Head east on Penny Lane",
+      "weight" : 9.9,
+      "loc" : {
+        "lat" : 34.246663,
+        "long" : -77.876278
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 145.3,
+      "duration" : 28.4,
+      "name" : "Lennon Drive",
+      "instruction" : "Turn right onto Lennon Drive",
+      "weight" : 42.3,
+      "loc" : {
+        "lat" : 34.246569,
+        "long" : -77.87548
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 393.3,
+      "duration" : 28.099999999999998,
+      "name" : "Market Street (US 17 Business)",
+      "instruction" : "Turn right onto Market Street (US 17 Business)",
+      "weight" : 34.2,
+      "loc" : {
+        "lat" : 34.245295,
+        "long" : -77.875129
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1308.6,
+      "duration" : 109.00000000000001,
+      "name" : "New Centre Drive",
+      "instruction" : "Turn right onto New Centre Drive",
+      "weight" : 119.9,
+      "loc" : {
+        "lat" : 34.244569,
+        "long" : -77.879315
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 396.5,
+      "duration" : 25.6,
+      "name" : "North Kerr Avenue",
+      "instruction" : "Turn right onto North Kerr Avenue",
+      "weight" : 37.8,
+      "loc" : {
+        "lat" : 34.250415,
+        "long" : -77.889611
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 5938.0,
+      "duration" : 247.4,
+      "name" : "Martin Luther King Jr Parkway (US 74)",
+      "instruction" : "Turn left onto Martin Luther King Jr Parkway (US 74)",
+      "weight" : 294.09999999999997,
+      "loc" : {
+        "lat" : 34.253974,
+        "long" : -77.889365
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 454.4,
+      "duration" : 31.799999999999997,
+      "name" : "North 3rd Street",
+      "instruction" : "Continue onto North 3rd Street",
+      "weight" : 56.900000000000006,
+      "loc" : {
+        "lat" : 34.250827,
+        "long" : -77.94737
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 232.9,
+      "duration" : 31.9,
+      "name" : "Harnett Street",
+      "instruction" : "Turn right onto Harnett Street",
+      "weight" : 32.0,
+      "loc" : {
+        "lat" : 34.246785,
+        "long" : -77.947456
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Harnett Street",
+      "instruction" : "You have arrived at your destination, straight ahead",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.246579,
+        "long" : -77.949977
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "7d473976-870c-490f-a6dd-a524e4376968",
+  "incidentId" : "abbabbea-0518-4dc7-a664-9e77be7dddaf",
+  "responderId" : "99",
+  "responderStartLat" : 34.13046,
+  "responderStartLong" : -77.86591,
+  "incidentLat" : 34.06138438151927,
+  "incidentLong" : -77.89230698084384,
+  "destinationLat" : 34.0583,
+  "destinationLong" : -77.8885,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418022195,
+    "location" : {
+      "lat" : 34.089031,
+      "long" : -77.896358
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418022997,
+    "location" : {
+      "lat" : 34.064706,
+      "long" : -77.89834
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023589,
+    "location" : {
+      "lat" : 34.061641,
+      "long" : -77.892312
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023693,
+    "location" : {
+      "lat" : 34.036159,
+      "long" : -77.892153
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023902,
+    "location" : {
+      "lat" : 34.061908,
+      "long" : -77.891438
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024294,
+    "location" : {
+      "lat" : 34.053359,
+      "long" : -77.884521
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024301,
+    "location" : {
+      "lat" : 34.129049,
+      "long" : -77.869495
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024397,
+    "location" : {
+      "lat" : 34.063654,
+      "long" : -77.894221
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024891,
+    "location" : {
+      "lat" : 34.036396,
+      "long" : -77.893782
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025088,
+    "location" : {
+      "lat" : 34.061641,
+      "long" : -77.892312
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025500,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025691,
+    "location" : {
+      "lat" : 34.061641,
+      "long" : -77.891596
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026196,
+    "location" : {
+      "lat" : 34.061635,
+      "long" : -77.894251
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026200,
+    "location" : {
+      "lat" : 34.132813,
+      "long" : -77.877451
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026302,
+    "location" : {
+      "lat" : 34.061641,
+      "long" : -77.891596
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026503,
+    "location" : {
+      "lat" : 34.064664,
+      "long" : -77.898149
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026504,
+    "location" : {
+      "lat" : 34.058143,
+      "long" : -77.888517
+    },
+    "long" : 0.0
+  } ],
+  "status" : "UPDATED",
+  "route" : {
+    "distance" : 17071.7,
+    "duration" : 1402.9,
+    "steps" : [ {
+      "distance" : 121.4,
+      "duration" : 30.5,
+      "name" : "Rude Dog Lane",
+      "instruction" : "Head southwest on Rude Dog Lane",
+      "weight" : 38.3,
+      "loc" : {
+        "lat" : 34.129889,
+        "long" : -77.868653
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 844.6,
+      "duration" : 99.4,
+      "name" : "State Road 1521",
+      "instruction" : "Turn right onto State Road 1521",
+      "weight" : 133.0,
+      "loc" : {
+        "lat" : 34.129049,
+        "long" : -77.869495
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 5319.6,
+      "duration" : 311.49999999999994,
+      "name" : "Myrtle Grove Road",
+      "instruction" : "Turn left onto Myrtle Grove Road",
+      "weight" : 314.5,
+      "loc" : {
+        "lat" : 34.132813,
+        "long" : -77.877451
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 2780.8,
+      "duration" : 137.0,
+      "name" : "Carolina Beach Road (US 421)",
+      "instruction" : "Turn left onto Carolina Beach Road (US 421)",
+      "weight" : 202.60000000000002,
+      "loc" : {
+        "lat" : 34.089031,
+        "long" : -77.896358
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 397.2,
+      "duration" : 47.9,
+      "name" : "South Seabreeze Road",
+      "instruction" : "Turn left onto South Seabreeze Road",
+      "weight" : 54.9,
+      "loc" : {
+        "lat" : 34.064706,
+        "long" : -77.89834
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 224.7,
+      "duration" : 30.1,
+      "name" : "Navigator Lane",
+      "instruction" : "Turn right onto Navigator Lane",
+      "weight" : 64.1,
+      "loc" : {
+        "lat" : 34.063654,
+        "long" : -77.894221
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 178.7,
+      "duration" : 18.200000000000003,
+      "name" : "Salt Spray Lane",
+      "instruction" : "Turn left onto Salt Spray Lane",
+      "weight" : 18.200000000000003,
+      "loc" : {
+        "lat" : 34.061635,
+        "long" : -77.894251
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Salt Spray Lane",
+      "instruction" : "You have arrived at your 1st destination, on the right",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.061641,
+        "long" : -77.892312
+      },
+      "destination" : true,
+      "wayPoint" : false
+    }, {
+      "distance" : 66.0,
+      "duration" : 9.2,
+      "name" : "Salt Spray Lane",
+      "instruction" : "Head east on Salt Spray Lane",
+      "weight" : 20.6,
+      "loc" : {
+        "lat" : 34.061641,
+        "long" : -77.892312
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 33.2,
+      "duration" : 79.3,
+      "name" : "",
+      "instruction" : "Turn left",
+      "weight" : 484.0,
+      "loc" : {
+        "lat" : 34.061641,
+        "long" : -77.891596
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 33.2,
+      "duration" : 12.3,
+      "name" : "",
+      "instruction" : "Make a U-turn",
+      "weight" : 15.2,
+      "loc" : {
+        "lat" : 34.061908,
+        "long" : -77.891438
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 244.7,
+      "duration" : 41.8,
+      "name" : "Salt Spray Lane",
+      "instruction" : "Turn right onto Salt Spray Lane",
+      "weight" : 55.9,
+      "loc" : {
+        "lat" : 34.061641,
+        "long" : -77.891596
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 224.7,
+      "duration" : 30.700000000000003,
+      "name" : "Navigator Lane",
+      "instruction" : "Turn right onto Navigator Lane",
+      "weight" : 53.8,
+      "loc" : {
+        "lat" : 34.061635,
+        "long" : -77.894251
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 379.0,
+      "duration" : 43.6,
+      "name" : "South Seabreeze Road",
+      "instruction" : "Turn left onto South Seabreeze Road",
+      "weight" : 43.7,
+      "loc" : {
+        "lat" : 34.063654,
+        "long" : -77.894221
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 3310.6000000000004,
+      "duration" : 195.9,
+      "name" : "Carolina Beach Road (US 421)",
+      "instruction" : "Turn left onto Carolina Beach Road (US 421)",
+      "weight" : 262.1,
+      "loc" : {
+        "lat" : 34.064664,
+        "long" : -77.898149
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 154.2,
+      "duration" : 24.4,
+      "name" : "Carl Winner Drive",
+      "instruction" : "Turn left onto Carl Winner Drive",
+      "weight" : 56.400000000000006,
+      "loc" : {
+        "lat" : 34.036396,
+        "long" : -77.893782
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 2040.6,
+      "duration" : 210.7,
+      "name" : "Canal Drive",
+      "instruction" : "Turn left onto Canal Drive",
+      "weight" : 242.5,
+      "loc" : {
+        "lat" : 34.036159,
+        "long" : -77.892153
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 718.4,
+      "duration" : 80.39999999999999,
+      "name" : "Florida Avenue",
+      "instruction" : "Turn left onto Florida Avenue",
+      "weight" : 80.39999999999999,
+      "loc" : {
+        "lat" : 34.053359,
+        "long" : -77.884521
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Florida Avenue",
+      "instruction" : "You have arrived at your destination, straight ahead",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.058143,
+        "long" : -77.888517
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "80017224-1ac0-43c6-9950-85cb27dd043e",
+  "incidentId" : "ec1d8589-f897-477f-bdd9-038d1568e9fc",
+  "responderId" : "83",
+  "responderStartLat" : 34.23763,
+  "responderStartLong" : -77.8917,
+  "incidentLat" : 34.226944438684114,
+  "incidentLong" : -77.89374904961016,
+  "destinationLat" : 34.2461,
+  "destinationLong" : -77.9519,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418021891,
+    "location" : {
+      "lat" : 34.239533,
+      "long" : -77.889347
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023399,
+    "location" : {
+      "lat" : 34.22855,
+      "long" : -77.893876
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023495,
+    "location" : {
+      "lat" : 34.227074,
+      "long" : -77.891386
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023499,
+    "location" : {
+      "lat" : 34.253974,
+      "long" : -77.889365
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023893,
+    "location" : {
+      "lat" : 34.225676,
+      "long" : -77.88593
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024099,
+    "location" : {
+      "lat" : 34.226951,
+      "long" : -77.893712
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024196,
+    "location" : {
+      "lat" : 34.246579,
+      "long" : -77.949977
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024601,
+    "location" : {
+      "lat" : 34.225676,
+      "long" : -77.88593
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025206,
+    "location" : {
+      "lat" : 34.246785,
+      "long" : -77.947456
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025400,
+    "location" : {
+      "lat" : 34.225321,
+      "long" : -77.892155
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025491,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025690,
+    "location" : {
+      "lat" : 34.250827,
+      "long" : -77.94737
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025889,
+    "location" : {
+      "lat" : 34.226951,
+      "long" : -77.893712
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025993,
+    "location" : {
+      "lat" : 34.228534,
+      "long" : -77.89231
+    },
+    "long" : 0.0
+  } ],
+  "status" : "UPDATED",
+  "route" : {
+    "distance" : 13708.6,
+    "duration" : 968.9,
+    "steps" : [ {
+      "distance" : 222.5,
+      "duration" : 28.8,
+      "name" : "Cinema Drive",
+      "instruction" : "Head east on Cinema Drive",
+      "weight" : 42.0,
+      "loc" : {
+        "lat" : 34.239148,
+        "long" : -77.891717
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1573.0,
+      "duration" : 106.2,
+      "name" : "South Kerr Avenue",
+      "instruction" : "Turn right onto South Kerr Avenue",
+      "weight" : 119.2,
+      "loc" : {
+        "lat" : 34.239533,
+        "long" : -77.889347
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 780.1,
+      "duration" : 99.5,
+      "name" : "Hoggard Street",
+      "instruction" : "Turn right onto Hoggard Street",
+      "weight" : 132.4,
+      "loc" : {
+        "lat" : 34.225676,
+        "long" : -77.88593
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 144.7,
+      "duration" : 35.3,
+      "name" : "Ashley Circle",
+      "instruction" : "Turn left onto Ashley Circle",
+      "weight" : 63.2,
+      "loc" : {
+        "lat" : 34.228534,
+        "long" : -77.89231
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 178.7,
+      "duration" : 19.6,
+      "name" : "Decatur Drive",
+      "instruction" : "Turn left onto Decatur Drive",
+      "weight" : 19.6,
+      "loc" : {
+        "lat" : 34.22855,
+        "long" : -77.893876
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Decatur Drive",
+      "instruction" : "You have arrived at your 1st destination",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.226951,
+        "long" : -77.893712
+      },
+      "destination" : false,
+      "wayPoint" : true
+    }, {
+      "distance" : 233.1,
+      "duration" : 30.5,
+      "name" : "Decatur Drive",
+      "instruction" : "Head southeast on Decatur Drive",
+      "weight" : 61.8,
+      "loc" : {
+        "lat" : 34.226951,
+        "long" : -77.893712
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 210.9,
+      "duration" : 23.4,
+      "name" : "Winston Boulevard",
+      "instruction" : "Turn left onto Winston Boulevard",
+      "weight" : 37.7,
+      "loc" : {
+        "lat" : 34.225321,
+        "long" : -77.892155
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 552.0,
+      "duration" : 81.80000000000001,
+      "name" : "Hoggard Street",
+      "instruction" : "Turn right onto Hoggard Street",
+      "weight" : 114.4,
+      "loc" : {
+        "lat" : 34.227074,
+        "long" : -77.891386
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 3188.3,
+      "duration" : 232.70000000000002,
+      "name" : "South Kerr Avenue",
+      "instruction" : "Turn left onto South Kerr Avenue",
+      "weight" : 270.00000000000006,
+      "loc" : {
+        "lat" : 34.225676,
+        "long" : -77.88593
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 5938.0,
+      "duration" : 247.4,
+      "name" : "Martin Luther King Jr Parkway (US 74)",
+      "instruction" : "Turn left onto Martin Luther King Jr Parkway (US 74)",
+      "weight" : 294.09999999999997,
+      "loc" : {
+        "lat" : 34.253974,
+        "long" : -77.889365
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 454.4,
+      "duration" : 31.799999999999997,
+      "name" : "North 3rd Street",
+      "instruction" : "Continue onto North 3rd Street",
+      "weight" : 56.900000000000006,
+      "loc" : {
+        "lat" : 34.250827,
+        "long" : -77.94737
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 232.9,
+      "duration" : 31.9,
+      "name" : "Harnett Street",
+      "instruction" : "Turn right onto Harnett Street",
+      "weight" : 32.0,
+      "loc" : {
+        "lat" : 34.246785,
+        "long" : -77.947456
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Harnett Street",
+      "instruction" : "You have arrived at your destination, straight ahead",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.246579,
+        "long" : -77.949977
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "306e3f46-2508-41f2-8173-d0aaba2b3ccf",
+  "incidentId" : "d6b9a33a-3fcb-4abf-9939-9b9e2f132844",
+  "responderId" : "143",
+  "responderStartLat" : 34.17898,
+  "responderStartLong" : -77.93643,
+  "incidentLat" : 34.14719583361082,
+  "incidentLong" : -77.92861376592873,
+  "destinationLat" : 34.1706,
+  "destinationLong" : -77.949,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418022389,
+    "location" : {
+      "lat" : 34.140091,
+      "long" : -77.921868
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023089,
+    "location" : {
+      "lat" : 34.170729,
+      "long" : -77.948447
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023392,
+    "location" : {
+      "lat" : 34.15089,
+      "long" : -77.941506
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023796,
+    "location" : {
+      "lat" : 34.147984,
+      "long" : -77.92844
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024403,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024909,
+    "location" : {
+      "lat" : 34.18132,
+      "long" : -77.950597
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026189,
+    "location" : {
+      "lat" : 34.147984,
+      "long" : -77.92844
+    },
+    "long" : 0.0
+  } ],
+  "status" : "UPDATED",
+  "route" : {
+    "distance" : 13100.7,
+    "duration" : 750.3,
+    "steps" : [ {
+      "distance" : 1443.4,
+      "duration" : 87.0,
+      "name" : "Raleigh Street",
+      "instruction" : "Head west on Raleigh Street",
+      "weight" : 119.6,
+      "loc" : {
+        "lat" : 34.179796,
+        "long" : -77.936351
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 3929.8,
+      "duration" : 225.19999999999996,
+      "name" : "River Road",
+      "instruction" : "Turn left onto River Road",
+      "weight" : 226.39999999999998,
+      "loc" : {
+        "lat" : 34.18132,
+        "long" : -77.950597
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1273.1000000000001,
+      "duration" : 73.69999999999999,
+      "name" : "River Road",
+      "instruction" : "Enter the traffic circle and take the 2nd exit onto River Road",
+      "weight" : 74.69999999999999,
+      "loc" : {
+        "lat" : 34.15089,
+        "long" : -77.941506
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "River Road",
+      "instruction" : "You have arrived at your 1st destination, on the right",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.147984,
+        "long" : -77.92844
+      },
+      "destination" : true,
+      "wayPoint" : false
+    }, {
+      "distance" : 1204.0,
+      "duration" : 66.9,
+      "name" : "River Road",
+      "instruction" : "Head east on River Road",
+      "weight" : 67.1,
+      "loc" : {
+        "lat" : 34.147984,
+        "long" : -77.92844
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 5250.4,
+      "duration" : 297.5,
+      "name" : "River Road",
+      "instruction" : "Enter the traffic circle and take the 4th exit onto River Road",
+      "weight" : 301.1,
+      "loc" : {
+        "lat" : 34.140091,
+        "long" : -77.921868
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "River Road",
+      "instruction" : "You have arrived at your destination, on the left",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.170729,
+        "long" : -77.948447
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "fee1b6a7-9478-45f4-b478-f5defcc27656",
+  "incidentId" : "f61bc52b-8497-4533-9a5b-18f42a0495c5",
+  "responderId" : "107",
+  "responderStartLat" : 34.21105,
+  "responderStartLong" : -77.93218,
+  "incidentLat" : 34.183553562859075,
+  "incidentLong" : -77.86721067613725,
+  "destinationLat" : 34.1706,
+  "destinationLong" : -77.949,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418022898,
+    "location" : {
+      "lat" : 34.21098,
+      "long" : -77.933407
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023291,
+    "location" : {
+      "lat" : 34.198212,
+      "long" : -77.89439
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023396,
+    "location" : {
+      "lat" : 34.212542,
+      "long" : -77.932083
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023890,
+    "location" : {
+      "lat" : 34.195311,
+      "long" : -77.870857
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023989,
+    "location" : {
+      "lat" : 34.181885,
+      "long" : -77.865155
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023992,
+    "location" : {
+      "lat" : 34.193325,
+      "long" : -77.868439
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024096,
+    "location" : {
+      "lat" : 34.225286,
+      "long" : -77.931494
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024498,
+    "location" : {
+      "lat" : 34.181358,
+      "long" : -77.866753
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024988,
+    "location" : {
+      "lat" : 34.212653,
+      "long" : -77.933899
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025291,
+    "location" : {
+      "lat" : 34.182313,
+      "long" : -77.86674
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025399,
+    "location" : {
+      "lat" : 34.209807,
+      "long" : -77.881422
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025495,
+    "location" : {
+      "lat" : 34.181358,
+      "long" : -77.866753
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025688,
+    "location" : {
+      "lat" : 34.181663,
+      "long" : -77.861216
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025803,
+    "location" : {
+      "lat" : 34.22584,
+      "long" : -77.924751
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026095,
+    "location" : {
+      "lat" : 34.182555,
+      "long" : -77.866438
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026101,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026300,
+    "location" : {
+      "lat" : 34.182555,
+      "long" : -77.866438
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026388,
+    "location" : {
+      "lat" : 34.170729,
+      "long" : -77.948447
+    },
+    "long" : 0.0
+  } ],
+  "status" : "UPDATED",
+  "route" : {
+    "distance" : 24183.7,
+    "duration" : 1883.3,
+    "steps" : [ {
+      "distance" : 139.4,
+      "duration" : 12.5,
+      "name" : "Lake Forest Parkway",
+      "instruction" : "Head northwest on Lake Forest Parkway",
+      "weight" : 27.5,
+      "loc" : {
+        "lat" : 34.211056,
+        "long" : -77.932147
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 192.7,
+      "duration" : 32.0,
+      "name" : "Lake Branch Parkway",
+      "instruction" : "Turn right onto Lake Branch Parkway",
+      "weight" : 41.6,
+      "loc" : {
+        "lat" : 34.21098,
+        "long" : -77.933407
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 170.0,
+      "duration" : 33.1,
+      "name" : "Lee Drive",
+      "instruction" : "Turn right onto Lee Drive",
+      "weight" : 57.4,
+      "loc" : {
+        "lat" : 34.212653,
+        "long" : -77.933899
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1480.0,
+      "duration" : 186.2,
+      "name" : "South 13th Street",
+      "instruction" : "Turn left onto South 13th Street",
+      "weight" : 199.7,
+      "loc" : {
+        "lat" : 34.212542,
+        "long" : -77.932083
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 623.2,
+      "duration" : 48.3,
+      "name" : "Dawson Street (US 17; US 76)",
+      "instruction" : "Turn right onto Dawson Street (US 17)",
+      "weight" : 48.8,
+      "loc" : {
+        "lat" : 34.225286,
+        "long" : -77.931494
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 4440.0,
+      "duration" : 294.1,
+      "name" : "US 17; US 76",
+      "instruction" : "Go straight onto US 17",
+      "weight" : 320.1,
+      "loc" : {
+        "lat" : 34.22584,
+        "long" : -77.924751
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1968.1,
+      "duration" : 131.4,
+      "name" : "Pine Grove Drive",
+      "instruction" : "Make a slight right onto Pine Grove Drive",
+      "weight" : 133.20000000000002,
+      "loc" : {
+        "lat" : 34.209807,
+        "long" : -77.881422
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1868.8,
+      "duration" : 109.3,
+      "name" : "Pine Grove Drive",
+      "instruction" : "Make a slight left to stay on Pine Grove Drive",
+      "weight" : 117.4,
+      "loc" : {
+        "lat" : 34.195311,
+        "long" : -77.870857
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 513.6,
+      "duration" : 37.4,
+      "name" : "Beasley Road",
+      "instruction" : "Turn right onto Beasley Road",
+      "weight" : 50.4,
+      "loc" : {
+        "lat" : 34.181663,
+        "long" : -77.861216
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 144.9,
+      "duration" : 48.7,
+      "name" : "Aventuras Drive",
+      "instruction" : "Turn right onto Aventuras Drive",
+      "weight" : 49.5,
+      "loc" : {
+        "lat" : 34.181358,
+        "long" : -77.866753
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Aventuras Drive",
+      "instruction" : "You have arrived at your 1st destination, on the left",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.182555,
+        "long" : -77.866438
+      },
+      "destination" : true,
+      "wayPoint" : false
+    }, {
+      "distance" : 218.8,
+      "duration" : 101.8,
+      "name" : "Aventuras Drive",
+      "instruction" : "Head northeast on Aventuras Drive",
+      "weight" : 506.5,
+      "loc" : {
+        "lat" : 34.182555,
+        "long" : -77.866438
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 257.5,
+      "duration" : 41.0,
+      "name" : "Aventuras Drive",
+      "instruction" : "Make a U-turn and continue on Aventuras Drive",
+      "weight" : 44.3,
+      "loc" : {
+        "lat" : 34.181885,
+        "long" : -77.865155
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 106.2,
+      "duration" : 44.5,
+      "name" : "Aventuras Drive",
+      "instruction" : "Turn left to stay on Aventuras Drive",
+      "weight" : 56.9,
+      "loc" : {
+        "lat" : 34.182313,
+        "long" : -77.86674
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1881.5,
+      "duration" : 122.7,
+      "name" : "Beasley Road",
+      "instruction" : "Turn right onto Beasley Road",
+      "weight" : 159.2,
+      "loc" : {
+        "lat" : 34.181358,
+        "long" : -77.866753
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 288.8,
+      "duration" : 25.7,
+      "name" : "Pine Grove Drive",
+      "instruction" : "Turn left onto Pine Grove Drive",
+      "weight" : 51.5,
+      "loc" : {
+        "lat" : 34.193325,
+        "long" : -77.868439
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 2398.2,
+      "duration" : 161.70000000000002,
+      "name" : "Holly Tree Road",
+      "instruction" : "Turn left onto Holly Tree Road",
+      "weight" : 198.6,
+      "loc" : {
+        "lat" : 34.195125,
+        "long" : -77.870697
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 7492.0,
+      "duration" : 452.9,
+      "name" : "Shipyard Boulevard (US 117)",
+      "instruction" : "Turn left onto Shipyard Boulevard (US 117)",
+      "weight" : 544.1,
+      "loc" : {
+        "lat" : 34.198212,
+        "long" : -77.89439
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "River Road",
+      "instruction" : "You have arrived at your destination, on the right",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.170729,
+        "long" : -77.948447
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "5b8815ac-8c39-46a5-97ed-14d467251b0e",
+  "incidentId" : "c2863660-a416-49d9-b886-889f0f24c688",
+  "responderId" : "18",
+  "responderStartLat" : 34.22543,
+  "responderStartLong" : -77.89744,
+  "incidentLat" : 34.17556399909323,
+  "incidentLong" : -77.92640608544058,
+  "destinationLat" : 34.1706,
+  "destinationLong" : -77.949,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418023189,
+    "location" : {
+      "lat" : 34.161257,
+      "long" : -77.93842
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023400,
+    "location" : {
+      "lat" : 34.224404,
+      "long" : -77.902751
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024099,
+    "location" : {
+      "lat" : 34.224319,
+      "long" : -77.903231
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025098,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025201,
+    "location" : {
+      "lat" : 34.175083,
+      "long" : -77.925665
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025491,
+    "location" : {
+      "lat" : 34.170729,
+      "long" : -77.948447
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025890,
+    "location" : {
+      "lat" : 34.2253,
+      "long" : -77.904675
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025994,
+    "location" : {
+      "lat" : 34.226451,
+      "long" : -77.900706
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026394,
+    "location" : {
+      "lat" : 34.175083,
+      "long" : -77.925665
+    },
+    "long" : 0.0
+  } ],
+  "status" : "UPDATED",
+  "route" : {
+    "distance" : 10435.599999999999,
+    "duration" : 710.8,
+    "steps" : [ {
+      "distance" : 318.3,
+      "duration" : 43.1,
+      "name" : "Winston Boulevard",
+      "instruction" : "Head west on Winston Boulevard",
+      "weight" : 59.0,
+      "loc" : {
+        "lat" : 34.22561,
+        "long" : -77.897404
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 305.9,
+      "duration" : 31.9,
+      "name" : "Rosemont Avenue",
+      "instruction" : "Turn left onto Rosemont Avenue",
+      "weight" : 37.5,
+      "loc" : {
+        "lat" : 34.226451,
+        "long" : -77.900706
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 45.4,
+      "duration" : 10.0,
+      "name" : "Wilshire Boulevard",
+      "instruction" : "Turn right onto Wilshire Boulevard",
+      "weight" : 12.8,
+      "loc" : {
+        "lat" : 34.224404,
+        "long" : -77.902751
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 172.9,
+      "duration" : 23.5,
+      "name" : "Wrightsville Avenue",
+      "instruction" : "Turn right onto Wrightsville Avenue",
+      "weight" : 35.8,
+      "loc" : {
+        "lat" : 34.224319,
+        "long" : -77.903231
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 6217.9,
+      "duration" : 396.1,
+      "name" : "Independence Boulevard",
+      "instruction" : "Make a sharp left onto Independence Boulevard",
+      "weight" : 571.9000000000001,
+      "loc" : {
+        "lat" : 34.2253,
+        "long" : -77.904675
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Independence Boulevard",
+      "instruction" : "You have arrived at your 1st destination, on the right",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.175083,
+        "long" : -77.925665
+      },
+      "destination" : true,
+      "wayPoint" : false
+    }, {
+      "distance" : 1934.9,
+      "duration" : 119.3,
+      "name" : "Independence Boulevard",
+      "instruction" : "Head southwest on Independence Boulevard",
+      "weight" : 149.7,
+      "loc" : {
+        "lat" : 34.175083,
+        "long" : -77.925665
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1440.3,
+      "duration" : 86.9,
+      "name" : "River Road",
+      "instruction" : "Turn right onto River Road",
+      "weight" : 87.4,
+      "loc" : {
+        "lat" : 34.161257,
+        "long" : -77.93842
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "River Road",
+      "instruction" : "You have arrived at your destination, on the left",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.170729,
+        "long" : -77.948447
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "986fbc4c-c63b-46ec-825f-e2519d9e1b06",
+  "incidentId" : "fa9676fb-aebf-40b6-ba0c-21cd3e408cc9",
+  "responderId" : "26",
+  "responderStartLat" : 34.16838,
+  "responderStartLong" : -77.88663,
+  "incidentLat" : 34.18045081730031,
+  "incidentLong" : -77.84381829140845,
+  "destinationLat" : 34.1706,
+  "destinationLong" : -77.949,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418022692,
+    "location" : {
+      "lat" : 34.183538,
+      "long" : -77.846371
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418022993,
+    "location" : {
+      "lat" : 34.164462,
+      "long" : -77.882105
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023804,
+    "location" : {
+      "lat" : 34.180664,
+      "long" : -77.847356
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024192,
+    "location" : {
+      "lat" : 34.182952,
+      "long" : -77.844154
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024296,
+    "location" : {
+      "lat" : 34.170729,
+      "long" : -77.948447
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024393,
+    "location" : {
+      "lat" : 34.156013,
+      "long" : -77.867608
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024796,
+    "location" : {
+      "lat" : 34.182952,
+      "long" : -77.844154
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025188,
+    "location" : {
+      "lat" : 34.165778,
+      "long" : -77.886724
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025292,
+    "location" : {
+      "lat" : 34.180664,
+      "long" : -77.847356
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025790,
+    "location" : {
+      "lat" : 34.195125,
+      "long" : -77.870697
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025989,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026103,
+    "location" : {
+      "lat" : 34.198212,
+      "long" : -77.89439
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026107,
+    "location" : {
+      "lat" : 34.168311,
+      "long" : -77.886478
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026194,
+    "location" : {
+      "lat" : 34.165069,
+      "long" : -77.863504
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026292,
+    "location" : {
+      "lat" : 34.183538,
+      "long" : -77.846371
+    },
+    "long" : 0.0
+  } ],
+  "status" : "UPDATED",
+  "route" : {
+    "distance" : 20113.2,
+    "duration" : 1434.2,
+    "steps" : [ {
+      "distance" : 16.0,
+      "duration" : 2.3,
+      "name" : "Dover Road",
+      "instruction" : "Head southeast on Dover Road",
+      "weight" : 5.7,
+      "loc" : {
+        "lat" : 34.168375,
+        "long" : -77.886633
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 283.8,
+      "duration" : 44.8,
+      "name" : "Yorkshire Lane",
+      "instruction" : "Turn right onto Yorkshire Lane",
+      "weight" : 67.5,
+      "loc" : {
+        "lat" : 34.168311,
+        "long" : -77.886478
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 458.7,
+      "duration" : 32.3,
+      "name" : "Lansdowne Road",
+      "instruction" : "Turn left onto Lansdowne Road",
+      "weight" : 41.2,
+      "loc" : {
+        "lat" : 34.165778,
+        "long" : -77.886724
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1833.8,
+      "duration" : 116.3,
+      "name" : "Navaho Trail",
+      "instruction" : "Turn right onto Navaho Trail",
+      "weight" : 143.8,
+      "loc" : {
+        "lat" : 34.164462,
+        "long" : -77.882105
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1096.0,
+      "duration" : 60.60000000000001,
+      "name" : "Masonboro Loop Road",
+      "instruction" : "Turn left onto Masonboro Loop Road",
+      "weight" : 67.7,
+      "loc" : {
+        "lat" : 34.156013,
+        "long" : -77.867608
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 2631.9,
+      "duration" : 165.5,
+      "name" : "Masonboro Sound Road",
+      "instruction" : "Turn right onto Masonboro Sound Road",
+      "weight" : 168.89999999999998,
+      "loc" : {
+        "lat" : 34.165069,
+        "long" : -77.863504
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 332.3,
+      "duration" : 56.3,
+      "name" : "Magnolia Drive",
+      "instruction" : "Turn right onto Magnolia Drive",
+      "weight" : 68.0,
+      "loc" : {
+        "lat" : 34.180664,
+        "long" : -77.847356
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 215.6,
+      "duration" : 85.5,
+      "name" : "Sylvan Lane",
+      "instruction" : "Turn right onto Sylvan Lane",
+      "weight" : 490.2,
+      "loc" : {
+        "lat" : 34.183538,
+        "long" : -77.846371
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Sylvan Lane",
+      "instruction" : "You have arrived at your 1st destination, on the right",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.182952,
+        "long" : -77.844154
+      },
+      "destination" : true,
+      "wayPoint" : false
+    }, {
+      "distance" : 215.6,
+      "duration" : 23.3,
+      "name" : "Sylvan Lane",
+      "instruction" : "Head west on Sylvan Lane",
+      "weight" : 54.5,
+      "loc" : {
+        "lat" : 34.182952,
+        "long" : -77.844154
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 332.3,
+      "duration" : 54.6,
+      "name" : "Magnolia Drive",
+      "instruction" : "Turn left onto Magnolia Drive",
+      "weight" : 83.7,
+      "loc" : {
+        "lat" : 34.183538,
+        "long" : -77.846371
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1366.1,
+      "duration" : 85.70000000000002,
+      "name" : "Masonboro Sound Road",
+      "instruction" : "Turn right onto Masonboro Sound Road",
+      "weight" : 90.90000000000002,
+      "loc" : {
+        "lat" : 34.180664,
+        "long" : -77.847356
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1441.1,
+      "duration" : 92.4,
+      "name" : "Pine Grove Drive",
+      "instruction" : "Turn right onto Pine Grove Drive",
+      "weight" : 118.8,
+      "loc" : {
+        "lat" : 34.185261,
+        "long" : -77.860888
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 2398.2,
+      "duration" : 161.70000000000002,
+      "name" : "Holly Tree Road",
+      "instruction" : "Turn left onto Holly Tree Road",
+      "weight" : 198.6,
+      "loc" : {
+        "lat" : 34.195125,
+        "long" : -77.870697
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 7492.0,
+      "duration" : 452.9,
+      "name" : "Shipyard Boulevard (US 117)",
+      "instruction" : "Turn left onto Shipyard Boulevard (US 117)",
+      "weight" : 544.1,
+      "loc" : {
+        "lat" : 34.198212,
+        "long" : -77.89439
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "River Road",
+      "instruction" : "You have arrived at your destination, on the right",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.170729,
+        "long" : -77.948447
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "6f0ae414-0a40-4896-af8b-d032b151ebc2",
+  "incidentId" : "9e07d61b-f968-44ea-8eaa-2bae26cf10d7",
+  "responderId" : "119",
+  "responderStartLat" : 34.19878,
+  "responderStartLong" : -77.91638,
+  "incidentLat" : 34.175067611864954,
+  "incidentLong" : -77.94716328712254,
+  "destinationLat" : 34.1706,
+  "destinationLong" : -77.949,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418023491,
+    "location" : {
+      "lat" : 34.174775,
+      "long" : -77.949296
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024104,
+    "location" : {
+      "lat" : 34.174775,
+      "long" : -77.949296
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024492,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025108,
+    "location" : {
+      "lat" : 34.202317,
+      "long" : -77.918325
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025394,
+    "location" : {
+      "lat" : 34.195784,
+      "long" : -77.920834
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025401,
+    "location" : {
+      "lat" : 34.170729,
+      "long" : -77.948447
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025799,
+    "location" : {
+      "lat" : 34.201993,
+      "long" : -77.921554
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025997,
+    "location" : {
+      "lat" : 34.193443,
+      "long" : -77.920091
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026106,
+    "location" : {
+      "lat" : 34.19824,
+      "long" : -77.916524
+    },
+    "long" : 0.0
+  } ],
+  "status" : "COMPLETED",
+  "route" : {
+    "distance" : 7071.7,
+    "duration" : 542.2,
+    "steps" : [ {
+      "distance" : 55.4,
+      "duration" : 12.2,
+      "name" : "Lynnwood Drive",
+      "instruction" : "Head southwest on Lynnwood Drive",
+      "weight" : 25.5,
+      "loc" : {
+        "lat" : 34.198631,
+        "long" : -77.916151
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 517.0,
+      "duration" : 53.6,
+      "name" : "Waverly Drive",
+      "instruction" : "Turn right onto Waverly Drive",
+      "weight" : 85.0,
+      "loc" : {
+        "lat" : 34.19824,
+        "long" : -77.916524
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 304.8,
+      "duration" : 36.9,
+      "name" : "Druid Lane",
+      "instruction" : "Turn left onto Druid Lane",
+      "weight" : 68.0,
+      "loc" : {
+        "lat" : 34.202317,
+        "long" : -77.918325
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 857.6,
+      "duration" : 100.6,
+      "name" : "Delaney Avenue",
+      "instruction" : "Turn left onto Delaney Avenue",
+      "weight" : 101.69999999999999,
+      "loc" : {
+        "lat" : 34.201993,
+        "long" : -77.921554
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 284.9,
+      "duration" : 38.2,
+      "name" : "South 17th Street",
+      "instruction" : "Turn left onto South 17th Street",
+      "weight" : 97.30000000000001,
+      "loc" : {
+        "lat" : 34.195784,
+        "long" : -77.920834
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 4595.2,
+      "duration" : 273.2,
+      "name" : "Shipyard Boulevard (US 117)",
+      "instruction" : "Turn right onto Shipyard Boulevard (US 117)",
+      "weight" : 286.90000000000003,
+      "loc" : {
+        "lat" : 34.193443,
+        "long" : -77.920091
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "River Road",
+      "instruction" : "You have arrived at your 1st destination, on the left",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.174775,
+        "long" : -77.949296
+      },
+      "destination" : true,
+      "wayPoint" : false
+    }, {
+      "distance" : 456.9,
+      "duration" : 27.5,
+      "name" : "River Road",
+      "instruction" : "Head south on River Road",
+      "weight" : 27.799999999999997,
+      "loc" : {
+        "lat" : 34.174775,
+        "long" : -77.949296
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "River Road",
+      "instruction" : "You have arrived at your destination, on the right",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.170729,
+        "long" : -77.948447
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "8634b7b5-6dd8-4b40-87df-6d32aa11e5dd",
+  "incidentId" : "6d56b361-0b93-41d8-b058-80ff11053e39",
+  "responderId" : "93",
+  "responderStartLat" : 34.23047,
+  "responderStartLong" : -77.89127,
+  "incidentLat" : 34.24890230819421,
+  "incidentLong" : -77.92057756726221,
+  "destinationLat" : 34.2461,
+  "destinationLong" : -77.9519,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418022299,
+    "location" : {
+      "lat" : 34.230853,
+      "long" : -77.892078
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418022891,
+    "location" : {
+      "lat" : 34.248963,
+      "long" : -77.920181
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023002,
+    "location" : {
+      "lat" : 34.229418,
+      "long" : -77.903303
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023302,
+    "location" : {
+      "lat" : 34.250827,
+      "long" : -77.94737
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023795,
+    "location" : {
+      "lat" : 34.230372,
+      "long" : -77.891988
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024006,
+    "location" : {
+      "lat" : 34.246785,
+      "long" : -77.947456
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024402,
+    "location" : {
+      "lat" : 34.230423,
+      "long" : -77.904633
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024598,
+    "location" : {
+      "lat" : 34.260568,
+      "long" : -77.919618
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024791,
+    "location" : {
+      "lat" : 34.240262,
+      "long" : -77.904504
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024907,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025100,
+    "location" : {
+      "lat" : 34.248977,
+      "long" : -77.92058
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025205,
+    "location" : {
+      "lat" : 34.248963,
+      "long" : -77.920181
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026090,
+    "location" : {
+      "lat" : 34.237992,
+      "long" : -77.918238
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026389,
+    "location" : {
+      "lat" : 34.248977,
+      "long" : -77.92058
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026496,
+    "location" : {
+      "lat" : 34.249132,
+      "long" : -77.921846
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026506,
+    "location" : {
+      "lat" : 34.260195,
+      "long" : -77.924979
+    },
+    "long" : 0.0
+  } ],
+  "status" : "COMPLETED",
+  "route" : {
+    "distance" : 10309.0,
+    "duration" : 775.6,
+    "steps" : [ {
+      "distance" : 66.0,
+      "duration" : 15.3,
+      "name" : "Patrick Avenue",
+      "instruction" : "Head west on Patrick Avenue",
+      "weight" : 23.2,
+      "loc" : {
+        "lat" : 34.230371,
+        "long" : -77.89127
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 54.1,
+      "duration" : 21.6,
+      "name" : "Marlboro Street",
+      "instruction" : "Turn right onto Marlboro Street",
+      "weight" : 21.7,
+      "loc" : {
+        "lat" : 34.230372,
+        "long" : -77.891988
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1082.2,
+      "duration" : 64.6,
+      "name" : "Randall Parkway",
+      "instruction" : "Turn left onto Randall Parkway",
+      "weight" : 106.7,
+      "loc" : {
+        "lat" : 34.230853,
+        "long" : -77.892078
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 187.4,
+      "duration" : 32.5,
+      "name" : "",
+      "instruction" : "Turn right",
+      "weight" : 37.6,
+      "loc" : {
+        "lat" : 34.229418,
+        "long" : -77.903303
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1097.0,
+      "duration" : 85.7,
+      "name" : "Covil Avenue",
+      "instruction" : "Turn right onto Covil Avenue",
+      "weight" : 129.7,
+      "loc" : {
+        "lat" : 34.230423,
+        "long" : -77.904633
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1287.9,
+      "duration" : 77.0,
+      "name" : "Market Street (US 17 Business)",
+      "instruction" : "Turn left onto Market Street (US 17 Business)",
+      "weight" : 88.79999999999998,
+      "loc" : {
+        "lat" : 34.240262,
+        "long" : -77.904504
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1241.3,
+      "duration" : 92.0,
+      "name" : "North 23rd Street",
+      "instruction" : "Turn right onto North 23rd Street",
+      "weight" : 123.70000000000002,
+      "loc" : {
+        "lat" : 34.237992,
+        "long" : -77.918238
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 155.3,
+      "duration" : 88.9,
+      "name" : "",
+      "instruction" : "Turn left",
+      "weight" : 493.6,
+      "loc" : {
+        "lat" : 34.248963,
+        "long" : -77.920181
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 118.5,
+      "duration" : 16.5,
+      "name" : "",
+      "instruction" : "Make a U-turn",
+      "weight" : 16.5,
+      "loc" : {
+        "lat" : 34.249132,
+        "long" : -77.921846
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "",
+      "instruction" : "You have arrived at your 1st destination, on the right",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.248977,
+        "long" : -77.92058
+      },
+      "destination" : true,
+      "wayPoint" : false
+    }, {
+      "distance" : 36.7,
+      "duration" : 10.5,
+      "name" : "",
+      "instruction" : "Head east",
+      "weight" : 43.6,
+      "loc" : {
+        "lat" : 34.248977,
+        "long" : -77.92058
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1292.0,
+      "duration" : 72.1,
+      "name" : "North 23rd Street",
+      "instruction" : "Turn left onto North 23rd Street",
+      "weight" : 113.8,
+      "loc" : {
+        "lat" : 34.248963,
+        "long" : -77.920181
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 503.6,
+      "duration" : 29.0,
+      "name" : "",
+      "instruction" : "Take the ramp on the left",
+      "weight" : 34.5,
+      "loc" : {
+        "lat" : 34.260568,
+        "long" : -77.919618
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 2499.9,
+      "duration" : 106.19999999999999,
+      "name" : "Martin Luther King Jr Parkway (US 74 West)",
+      "instruction" : "Merge left onto US 74 West",
+      "weight" : 118.70000000000002,
+      "loc" : {
+        "lat" : 34.260195,
+        "long" : -77.924979
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 454.4,
+      "duration" : 31.799999999999997,
+      "name" : "North 3rd Street",
+      "instruction" : "Continue onto North 3rd Street",
+      "weight" : 56.900000000000006,
+      "loc" : {
+        "lat" : 34.250827,
+        "long" : -77.94737
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 232.9,
+      "duration" : 31.9,
+      "name" : "Harnett Street",
+      "instruction" : "Turn right onto Harnett Street",
+      "weight" : 32.0,
+      "loc" : {
+        "lat" : 34.246785,
+        "long" : -77.947456
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Harnett Street",
+      "instruction" : "You have arrived at your destination, straight ahead",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.246579,
+        "long" : -77.949977
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "30415c0e-898e-4a4d-bfce-c675a84adbdf",
+  "incidentId" : "844a6fe8-4aee-4793-8578-a0d59e814d21",
+  "responderId" : "65",
+  "responderStartLat" : 34.22267,
+  "responderStartLong" : -77.81822,
+  "incidentLat" : 34.222247858787966,
+  "incidentLong" : -77.81161578780798,
+  "destinationLat" : 34.2461,
+  "destinationLong" : -77.9519,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418022902,
+    "location" : {
+      "lat" : 34.21964,
+      "long" : -77.81495
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023894,
+    "location" : {
+      "lat" : 34.222286,
+      "long" : -77.811753
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024105,
+    "location" : {
+      "lat" : 34.222286,
+      "long" : -77.811753
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024200,
+    "location" : {
+      "lat" : 34.246785,
+      "long" : -77.947456
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024504,
+    "location" : {
+      "lat" : 34.250827,
+      "long" : -77.94737
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024797,
+    "location" : {
+      "lat" : 34.24796,
+      "long" : -77.863736
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024990,
+    "location" : {
+      "lat" : 34.220753,
+      "long" : -77.812563
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025194,
+    "location" : {
+      "lat" : 34.223004,
+      "long" : -77.812876
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025389,
+    "location" : {
+      "lat" : 34.221167,
+      "long" : -77.818062
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025599,
+    "location" : {
+      "lat" : 34.222374,
+      "long" : -77.811718
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025701,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026091,
+    "location" : {
+      "lat" : 34.21964,
+      "long" : -77.81495
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026203,
+    "location" : {
+      "lat" : 34.221712,
+      "long" : -77.8139
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026499,
+    "location" : {
+      "lat" : 34.246579,
+      "long" : -77.949977
+    },
+    "long" : 0.0
+  } ],
+  "status" : "COMPLETED",
+  "route" : {
+    "distance" : 16741.1,
+    "duration" : 1024.7,
+    "steps" : [ {
+      "distance" : 200.4,
+      "duration" : 60.6,
+      "name" : "Eastwood Road",
+      "instruction" : "Head east on Eastwood Road",
+      "weight" : 109.9,
+      "loc" : {
+        "lat" : 34.222297,
+        "long" : -77.818292
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 332.9,
+      "duration" : 22.7,
+      "name" : "Eastwood Road (US 74; US 76)",
+      "instruction" : "Turn left to stay on Eastwood Road (US 74)",
+      "weight" : 37.2,
+      "loc" : {
+        "lat" : 34.221167,
+        "long" : -77.818062
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 253.5,
+      "duration" : 35.4,
+      "name" : "Summer Rest Road",
+      "instruction" : "Turn left onto Summer Rest Road",
+      "weight" : 73.2,
+      "loc" : {
+        "lat" : 34.21964,
+        "long" : -77.81495
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 163.2,
+      "duration" : 32.5,
+      "name" : "Blue Avenue",
+      "instruction" : "Turn left onto Blue Avenue",
+      "weight" : 41.8,
+      "loc" : {
+        "lat" : 34.220753,
+        "long" : -77.812563
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 171.8,
+      "duration" : 32.9,
+      "name" : "Summer Haven Avenue",
+      "instruction" : "Turn right onto Summer Haven Avenue",
+      "weight" : 44.9,
+      "loc" : {
+        "lat" : 34.221712,
+        "long" : -77.8139
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 127.5,
+      "duration" : 18.6,
+      "name" : "Beech Street",
+      "instruction" : "Turn right onto Beech Street",
+      "weight" : 23.6,
+      "loc" : {
+        "lat" : 34.223004,
+        "long" : -77.812876
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 10.3,
+      "duration" : 1.0,
+      "name" : "Summer Rest Road",
+      "instruction" : "Turn right onto Summer Rest Road",
+      "weight" : 1.0,
+      "loc" : {
+        "lat" : 34.222374,
+        "long" : -77.811718
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Summer Rest Road",
+      "instruction" : "You have arrived at your 1st destination, on the left",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.222286,
+        "long" : -77.811753
+      },
+      "destination" : true,
+      "wayPoint" : false
+    }, {
+      "distance" : 443.5,
+      "duration" : 55.5,
+      "name" : "Summer Rest Road",
+      "instruction" : "Head south on Summer Rest Road",
+      "weight" : 59.1,
+      "loc" : {
+        "lat" : 34.222286,
+        "long" : -77.811753
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 5578.9,
+      "duration" : 334.3,
+      "name" : "Wrightsville Avenue (US 74; US 76)",
+      "instruction" : "Turn right onto Wrightsville Avenue (US 74)",
+      "weight" : 360.70000000000005,
+      "loc" : {
+        "lat" : 34.21964,
+        "long" : -77.81495
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 8771.7,
+      "duration" : 367.5,
+      "name" : "Martin Luther King Jr Parkway (US 74)",
+      "instruction" : "Continue onto Martin Luther King Jr Parkway (US 74)",
+      "weight" : 404.49999999999994,
+      "loc" : {
+        "lat" : 34.24796,
+        "long" : -77.863736
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 454.4,
+      "duration" : 31.799999999999997,
+      "name" : "North 3rd Street",
+      "instruction" : "Continue onto North 3rd Street",
+      "weight" : 56.900000000000006,
+      "loc" : {
+        "lat" : 34.250827,
+        "long" : -77.94737
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 232.9,
+      "duration" : 31.9,
+      "name" : "Harnett Street",
+      "instruction" : "Turn right onto Harnett Street",
+      "weight" : 32.0,
+      "loc" : {
+        "lat" : 34.246785,
+        "long" : -77.947456
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Harnett Street",
+      "instruction" : "You have arrived at your destination, straight ahead",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.246579,
+        "long" : -77.949977
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "8e6220f8-aab6-4521-8593-9921c94fbb6a",
+  "incidentId" : "5f486d18-b7f2-41e0-a226-1540eef57bcc",
+  "responderId" : "135",
+  "responderStartLat" : 34.1875,
+  "responderStartLong" : -77.99419,
+  "incidentLat" : 34.20098031520003,
+  "incidentLong" : -77.95309239559788,
+  "destinationLat" : 34.1706,
+  "destinationLong" : -77.949,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418023496,
+    "location" : {
+      "lat" : 34.208176,
+      "long" : -77.95042
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024092,
+    "location" : {
+      "lat" : 34.231331,
+      "long" : -77.992674
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024202,
+    "location" : {
+      "lat" : 34.200608,
+      "long" : -77.953073
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024605,
+    "location" : {
+      "lat" : 34.233472,
+      "long" : -77.989908
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024992,
+    "location" : {
+      "lat" : 34.226341,
+      "long" : -77.94884
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025196,
+    "location" : {
+      "lat" : 34.207807,
+      "long" : -77.949243
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025294,
+    "location" : {
+      "lat" : 34.199296,
+      "long" : -77.94942
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025488,
+    "location" : {
+      "lat" : 34.203893,
+      "long" : -77.954302
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025697,
+    "location" : {
+      "lat" : 34.200608,
+      "long" : -77.953073
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025791,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026102,
+    "location" : {
+      "lat" : 34.191555,
+      "long" : -77.946985
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026198,
+    "location" : {
+      "lat" : 34.191258,
+      "long" : -77.986796
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026288,
+    "location" : {
+      "lat" : 34.211743,
+      "long" : -77.945904
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026492,
+    "location" : {
+      "lat" : 34.205579,
+      "long" : -77.954536
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026503,
+    "location" : {
+      "lat" : 34.170729,
+      "long" : -77.948447
+    },
+    "long" : 0.0
+  } ],
+  "status" : "COMPLETED",
+  "route" : {
+    "distance" : 18481.3,
+    "duration" : 1246.6,
+    "steps" : [ {
+      "distance" : 1313.1,
+      "duration" : 126.8,
+      "name" : "Tylers Cove Way",
+      "instruction" : "Head north on Tylers Cove Way",
+      "weight" : 158.2,
+      "loc" : {
+        "lat" : 34.187505,
+        "long" : -77.993687
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 5144.1,
+      "duration" : 257.0,
+      "name" : "River Road Southeast (NC 133)",
+      "instruction" : "Turn left onto River Road Southeast (NC 133)",
+      "weight" : 258.5,
+      "loc" : {
+        "lat" : 34.191258,
+        "long" : -77.986796
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 416.4,
+      "duration" : 24.400000000000002,
+      "name" : "NC 133 North",
+      "instruction" : "Take the ramp on the right onto NC 133 North",
+      "weight" : 30.4,
+      "loc" : {
+        "lat" : 34.231331,
+        "long" : -77.992674
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 4016.5,
+      "duration" : 155.10000000000002,
+      "name" : "Ocean Highway East (NC 133 North; US 17 North; US 74 East; US 76 East)",
+      "instruction" : "Merge left onto NC 133 North",
+      "weight" : 160.9,
+      "loc" : {
+        "lat" : 34.233472,
+        "long" : -77.989908
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1675.2,
+      "duration" : 112.3,
+      "name" : "US 421 Truck",
+      "instruction" : "Take the ramp onto US 421 Truck",
+      "weight" : 125.5,
+      "loc" : {
+        "lat" : 34.226341,
+        "long" : -77.94884
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 554.9,
+      "duration" : 40.6,
+      "name" : "Burnett Boulevard",
+      "instruction" : "Make a slight right onto Burnett Boulevard",
+      "weight" : 46.7,
+      "loc" : {
+        "lat" : 34.211743,
+        "long" : -77.945904
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 123.2,
+      "duration" : 34.3,
+      "name" : "Myers Street",
+      "instruction" : "Turn right onto Myers Street",
+      "weight" : 74.5,
+      "loc" : {
+        "lat" : 34.207807,
+        "long" : -77.949243
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 490.9,
+      "duration" : 57.9,
+      "name" : "Myers Street",
+      "instruction" : "Turn left to stay on Myers Street",
+      "weight" : 91.5,
+      "loc" : {
+        "lat" : 34.208176,
+        "long" : -77.95042
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 240.6,
+      "duration" : 16.9,
+      "name" : "",
+      "instruction" : "Turn left",
+      "weight" : 26.3,
+      "loc" : {
+        "lat" : 34.205579,
+        "long" : -77.954536
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 450.7,
+      "duration" : 114.5,
+      "name" : "Myers Street",
+      "instruction" : "Turn left onto Myers Street",
+      "weight" : 148.9,
+      "loc" : {
+        "lat" : 34.203893,
+        "long" : -77.954302
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Myers Street",
+      "instruction" : "You have arrived at your 1st destination, on the left",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.200608,
+        "long" : -77.953073
+      },
+      "destination" : true,
+      "wayPoint" : false
+    }, {
+      "distance" : 350.0,
+      "duration" : 40.0,
+      "name" : "Myers Street",
+      "instruction" : "Head east on Myers Street",
+      "weight" : 80.9,
+      "loc" : {
+        "lat" : 34.200608,
+        "long" : -77.953073
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 137.3,
+      "duration" : 17.3,
+      "name" : "",
+      "instruction" : "Turn left",
+      "weight" : 26.2,
+      "loc" : {
+        "lat" : 34.198361,
+        "long" : -77.951732
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 106.0,
+      "duration" : 31.4,
+      "name" : "Central Boulevard",
+      "instruction" : "Turn right onto Central Boulevard",
+      "weight" : 44.0,
+      "loc" : {
+        "lat" : 34.198956,
+        "long" : -77.950468
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 905.9,
+      "duration" : 63.7,
+      "name" : "Burnett Boulevard",
+      "instruction" : "Turn right onto Burnett Boulevard",
+      "weight" : 77.4,
+      "loc" : {
+        "lat" : 34.199296,
+        "long" : -77.94942
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 2556.5,
+      "duration" : 154.4,
+      "name" : "Shipyard Boulevard (US 117)",
+      "instruction" : "Turn right onto Shipyard Boulevard (US 117)",
+      "weight" : 155.9,
+      "loc" : {
+        "lat" : 34.191555,
+        "long" : -77.946985
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "River Road",
+      "instruction" : "You have arrived at your destination, on the right",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.170729,
+        "long" : -77.948447
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "c3beea34-3b93-44b0-ac91-caf69052d8a0",
+  "incidentId" : "841ca4fe-3402-4e96-8b7d-23564716a24a",
+  "responderId" : "102",
+  "responderStartLat" : 34.29079,
+  "responderStartLong" : -77.95484,
+  "incidentLat" : 34.23659551177744,
+  "incidentLong" : -77.86873070379293,
+  "destinationLat" : 34.2461,
+  "destinationLong" : -77.9519,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418022592,
+    "location" : {
+      "lat" : 34.234718,
+      "long" : -77.86937
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418022796,
+    "location" : {
+      "lat" : 34.246579,
+      "long" : -77.949977
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023592,
+    "location" : {
+      "lat" : 34.236544,
+      "long" : -77.872642
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023791,
+    "location" : {
+      "lat" : 34.317644,
+      "long" : -77.875304
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024089,
+    "location" : {
+      "lat" : 34.318103,
+      "long" : -77.880272
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024288,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024700,
+    "location" : {
+      "lat" : 34.236384,
+      "long" : -77.868262
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025096,
+    "location" : {
+      "lat" : 34.254942,
+      "long" : -77.870916
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025192,
+    "location" : {
+      "lat" : 34.238385,
+      "long" : -77.871786
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025597,
+    "location" : {
+      "lat" : 34.237236,
+      "long" : -77.867697
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025700,
+    "location" : {
+      "lat" : 34.246785,
+      "long" : -77.947456
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025893,
+    "location" : {
+      "lat" : 34.236384,
+      "long" : -77.868262
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026201,
+    "location" : {
+      "lat" : 34.309124,
+      "long" : -77.869601
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026498,
+    "location" : {
+      "lat" : 34.250827,
+      "long" : -77.94737
+    },
+    "long" : 0.0
+  } ],
+  "status" : "COMPLETED",
+  "route" : {
+    "distance" : 30612.9,
+    "duration" : 1316.9,
+    "steps" : [ {
+      "distance" : 9259.5,
+      "duration" : 305.9,
+      "name" : "Wilmington Bypass (I-140 East)",
+      "instruction" : "Head northeast on I-140 East",
+      "weight" : 311.5,
+      "loc" : {
+        "lat" : 34.295659,
+        "long" : -77.962525
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 464.7,
+      "duration" : 17.8,
+      "name" : "",
+      "instruction" : "Take exit 20 towards I-40: Wilmington",
+      "weight" : 17.8,
+      "loc" : {
+        "lat" : 34.318103,
+        "long" : -77.880272
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1131.5,
+      "duration" : 41.6,
+      "name" : "",
+      "instruction" : "Keep right towards I-40 East: Wilmington",
+      "weight" : 47.2,
+      "loc" : {
+        "lat" : 34.317644,
+        "long" : -77.875304
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 8251.2,
+      "duration" : 342.9,
+      "name" : "I-40",
+      "instruction" : "Merge left onto I-40",
+      "weight" : 404.79999999999995,
+      "loc" : {
+        "lat" : 34.309124,
+        "long" : -77.869601
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 398.3,
+      "duration" : 45.099999999999994,
+      "name" : "Oriole Drive",
+      "instruction" : "Turn left onto Oriole Drive",
+      "weight" : 57.5,
+      "loc" : {
+        "lat" : 34.238385,
+        "long" : -77.871786
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 108.1,
+      "duration" : 7.5,
+      "name" : "Racine Drive",
+      "instruction" : "Turn right onto Racine Drive",
+      "weight" : 7.5,
+      "loc" : {
+        "lat" : 34.237236,
+        "long" : -77.867697
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Racine Drive",
+      "instruction" : "You have arrived at your 1st destination, on the right",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.236384,
+        "long" : -77.868262
+      },
+      "destination" : true,
+      "wayPoint" : false
+    }, {
+      "distance" : 211.5,
+      "duration" : 28.6,
+      "name" : "Racine Drive",
+      "instruction" : "Head southwest on Racine Drive",
+      "weight" : 59.5,
+      "loc" : {
+        "lat" : 34.236384,
+        "long" : -77.868262
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 365.6,
+      "duration" : 48.1,
+      "name" : "New Centre Drive",
+      "instruction" : "Turn right onto New Centre Drive",
+      "weight" : 60.6,
+      "loc" : {
+        "lat" : 34.234718,
+        "long" : -77.86937
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 2091.1,
+      "duration" : 97.39999999999999,
+      "name" : "South College Road (US 117; NC 132)",
+      "instruction" : "Turn right onto South College Road (US 117)",
+      "weight" : 121.9,
+      "loc" : {
+        "lat" : 34.236544,
+        "long" : -77.872642
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 7644.2,
+      "duration" : 318.29999999999995,
+      "name" : "Martin Luther King Jr Parkway (US 74)",
+      "instruction" : "Turn left onto Martin Luther King Jr Parkway (US 74)",
+      "weight" : 375.8,
+      "loc" : {
+        "lat" : 34.254942,
+        "long" : -77.870916
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 454.4,
+      "duration" : 31.799999999999997,
+      "name" : "North 3rd Street",
+      "instruction" : "Continue onto North 3rd Street",
+      "weight" : 56.900000000000006,
+      "loc" : {
+        "lat" : 34.250827,
+        "long" : -77.94737
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 232.9,
+      "duration" : 31.9,
+      "name" : "Harnett Street",
+      "instruction" : "Turn right onto Harnett Street",
+      "weight" : 32.0,
+      "loc" : {
+        "lat" : 34.246785,
+        "long" : -77.947456
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Harnett Street",
+      "instruction" : "You have arrived at your destination, straight ahead",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.246579,
+        "long" : -77.949977
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "2c42588a-99e0-44a1-898f-07e9302b19c5",
+  "incidentId" : "3d2aa38e-3f59-4e19-bf41-8213d932379c",
+  "responderId" : "56",
+  "responderStartLat" : 34.11707,
+  "responderStartLong" : -77.9499,
+  "incidentLat" : 34.0582601846184,
+  "incidentLong" : -77.8946396603285,
+  "destinationLat" : 34.0583,
+  "destinationLong" : -77.8885,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418022200,
+    "location" : {
+      "lat" : 34.226341,
+      "long" : -77.94884
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418022488,
+    "location" : {
+      "lat" : 34.058943,
+      "long" : -77.899959
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418022588,
+    "location" : {
+      "lat" : 34.058892,
+      "long" : -77.89597
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418022601,
+    "location" : {
+      "lat" : 34.064706,
+      "long" : -77.89834
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418022999,
+    "location" : {
+      "lat" : 34.141272,
+      "long" : -77.894922
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023191,
+    "location" : {
+      "lat" : 34.058339,
+      "long" : -77.898177
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023198,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023591,
+    "location" : {
+      "lat" : 34.058892,
+      "long" : -77.89597
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023792,
+    "location" : {
+      "lat" : 34.233472,
+      "long" : -77.989908
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023901,
+    "location" : {
+      "lat" : 34.036159,
+      "long" : -77.892153
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024091,
+    "location" : {
+      "lat" : 34.231331,
+      "long" : -77.992674
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024398,
+    "location" : {
+      "lat" : 34.064706,
+      "long" : -77.89834
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025089,
+    "location" : {
+      "lat" : 34.058339,
+      "long" : -77.898177
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025490,
+    "location" : {
+      "lat" : 34.036396,
+      "long" : -77.893782
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025698,
+    "location" : {
+      "lat" : 34.058143,
+      "long" : -77.888517
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026197,
+    "location" : {
+      "lat" : 34.095388,
+      "long" : -77.966316
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026298,
+    "location" : {
+      "lat" : 34.064623,
+      "long" : -77.89861
+    },
+    "long" : 0.0
+  } ],
+  "status" : "COMPLETED",
+  "route" : {
+    "distance" : 49820.3,
+    "duration" : 2855.5,
+    "steps" : [ {
+      "distance" : 622.3,
+      "duration" : 45.6,
+      "name" : "Dora's Way Southeast",
+      "instruction" : "Head southwest on Dora's Way Southeast",
+      "weight" : 50.7,
+      "loc" : {
+        "lat" : 34.097708,
+        "long" : -77.960181
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 16746.8,
+      "duration" : 849.5999999999999,
+      "name" : "River Road Southeast (NC 133)",
+      "instruction" : "Turn right onto River Road Southeast (NC 133)",
+      "weight" : 852.0999999999997,
+      "loc" : {
+        "lat" : 34.095388,
+        "long" : -77.966316
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 416.4,
+      "duration" : 24.400000000000002,
+      "name" : "NC 133 North",
+      "instruction" : "Take the ramp on the right onto NC 133 North",
+      "weight" : 30.4,
+      "loc" : {
+        "lat" : 34.231331,
+        "long" : -77.992674
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 4016.5,
+      "duration" : 155.10000000000002,
+      "name" : "Ocean Highway East (NC 133 North; US 17 North; US 74 East; US 76 East)",
+      "instruction" : "Merge left onto NC 133 North",
+      "weight" : 160.9,
+      "loc" : {
+        "lat" : 34.233472,
+        "long" : -77.989908
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 10871.5,
+      "duration" : 627.8999999999997,
+      "name" : "US 421 Truck",
+      "instruction" : "Take the ramp onto US 421 Truck",
+      "weight" : 777.1999999999999,
+      "loc" : {
+        "lat" : 34.226341,
+        "long" : -77.94884
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 8733.5,
+      "duration" : 412.00000000000006,
+      "name" : "US 421",
+      "instruction" : "Make a slight right onto US 421",
+      "weight" : 416.4000000000001,
+      "loc" : {
+        "lat" : 34.141272,
+        "long" : -77.894922
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 30.0,
+      "duration" : 8.0,
+      "name" : "Anchorview Drive",
+      "instruction" : "Turn right onto Anchorview Drive",
+      "weight" : 15.4,
+      "loc" : {
+        "lat" : 34.064706,
+        "long" : -77.89834
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 645.0,
+      "duration" : 38.599999999999994,
+      "name" : "River Road",
+      "instruction" : "Turn left onto River Road",
+      "weight" : 46.400000000000006,
+      "loc" : {
+        "lat" : 34.064623,
+        "long" : -77.89861
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 213.6,
+      "duration" : 19.8,
+      "name" : "River Road",
+      "instruction" : "Turn left to stay on River Road",
+      "weight" : 53.4,
+      "loc" : {
+        "lat" : 34.058943,
+        "long" : -77.899959
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 215.3,
+      "duration" : 15.5,
+      "name" : "",
+      "instruction" : "Turn left",
+      "weight" : 15.5,
+      "loc" : {
+        "lat" : 34.058339,
+        "long" : -77.898177
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "",
+      "instruction" : "You have arrived at your 1st destination, straight ahead",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.058892,
+        "long" : -77.89597
+      },
+      "destination" : true,
+      "wayPoint" : false
+    }, {
+      "distance" : 215.3,
+      "duration" : 85.10000000000001,
+      "name" : "",
+      "instruction" : "Head west",
+      "weight" : 31.4,
+      "loc" : {
+        "lat" : 34.058892,
+        "long" : -77.89597
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 858.6,
+      "duration" : 52.8,
+      "name" : "",
+      "instruction" : "Turn right",
+      "weight" : 56.400000000000006,
+      "loc" : {
+        "lat" : 34.058339,
+        "long" : -77.898177
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 30.0,
+      "duration" : 17.9,
+      "name" : "Anchorview Drive",
+      "instruction" : "Turn right onto Anchorview Drive",
+      "weight" : 53.9,
+      "loc" : {
+        "lat" : 34.064623,
+        "long" : -77.89861
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 3292.3,
+      "duration" : 187.7,
+      "name" : "Carolina Beach Road (US 421)",
+      "instruction" : "Make a sharp right onto Carolina Beach Road (US 421)",
+      "weight" : 221.2,
+      "loc" : {
+        "lat" : 34.064706,
+        "long" : -77.89834
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 154.2,
+      "duration" : 24.4,
+      "name" : "Carl Winner Drive",
+      "instruction" : "Turn left onto Carl Winner Drive",
+      "weight" : 56.400000000000006,
+      "loc" : {
+        "lat" : 34.036396,
+        "long" : -77.893782
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 2040.6,
+      "duration" : 210.7,
+      "name" : "Canal Drive",
+      "instruction" : "Turn left onto Canal Drive",
+      "weight" : 242.5,
+      "loc" : {
+        "lat" : 34.036159,
+        "long" : -77.892153
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 718.4,
+      "duration" : 80.39999999999999,
+      "name" : "Florida Avenue",
+      "instruction" : "Turn left onto Florida Avenue",
+      "weight" : 80.39999999999999,
+      "loc" : {
+        "lat" : 34.053359,
+        "long" : -77.884521
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Florida Avenue",
+      "instruction" : "You have arrived at your destination, straight ahead",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.058143,
+        "long" : -77.888517
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "f956c490-c760-476e-aa7e-1a68c24a3a40",
+  "incidentId" : "118ced6c-a0e6-4a07-8ec7-544ac551e4e8",
+  "responderId" : "122",
+  "responderStartLat" : 34.13402,
+  "responderStartLong" : -77.93135,
+  "incidentLat" : 34.14483315288585,
+  "incidentLong" : -77.9057891086663,
+  "destinationLat" : 34.1706,
+  "destinationLong" : -77.949,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418022205,
+    "location" : {
+      "lat" : 34.139899,
+      "long" : -77.921881
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418022800,
+    "location" : {
+      "lat" : 34.140097,
+      "long" : -77.921611
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023000,
+    "location" : {
+      "lat" : 34.140556,
+      "long" : -77.913835
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023201,
+    "location" : {
+      "lat" : 34.14495,
+      "long" : -77.906595
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023794,
+    "location" : {
+      "lat" : 34.13875,
+      "long" : -77.932054
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024400,
+    "location" : {
+      "lat" : 34.150105,
+      "long" : -77.90343
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024790,
+    "location" : {
+      "lat" : 34.146946,
+      "long" : -77.900358
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024889,
+    "location" : {
+      "lat" : 34.144992,
+      "long" : -77.910343
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025203,
+    "location" : {
+      "lat" : 34.147165,
+      "long" : -77.903174
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025788,
+    "location" : {
+      "lat" : 34.143878,
+      "long" : -77.909445
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025900,
+    "location" : {
+      "lat" : 34.144857,
+      "long" : -77.905814
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025906,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026089,
+    "location" : {
+      "lat" : 34.145867,
+      "long" : -77.901965
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026100,
+    "location" : {
+      "lat" : 34.143346,
+      "long" : -77.908656
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026102,
+    "location" : {
+      "lat" : 34.140556,
+      "long" : -77.913835
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026390,
+    "location" : {
+      "lat" : 34.170729,
+      "long" : -77.948447
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026495,
+    "location" : {
+      "lat" : 34.144857,
+      "long" : -77.905814
+    },
+    "long" : 0.0
+  } ],
+  "status" : "COMPLETED",
+  "route" : {
+    "distance" : 12083.1,
+    "duration" : 919.7,
+    "steps" : [ {
+      "distance" : 417.0,
+      "duration" : 28.8,
+      "name" : "",
+      "instruction" : "Head northwest",
+      "weight" : 44.3,
+      "loc" : {
+        "lat" : 34.136031,
+        "long" : -77.928942
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 977.1,
+      "duration" : 82.89999999999999,
+      "name" : "",
+      "instruction" : "Turn right",
+      "weight" : 83.60000000000001,
+      "loc" : {
+        "lat" : 34.13875,
+        "long" : -77.932054
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 788.7,
+      "duration" : 85.39999999999999,
+      "name" : "Lorraine Drive North",
+      "instruction" : "Enter the traffic circle and take the 2nd exit onto Lorraine Drive North",
+      "weight" : 104.69999999999999,
+      "loc" : {
+        "lat" : 34.139899,
+        "long" : -77.921881
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1507.6,
+      "duration" : 94.8,
+      "name" : "Silver Lake Road",
+      "instruction" : "Turn left onto Silver Lake Road",
+      "weight" : 109.2,
+      "loc" : {
+        "lat" : 34.140556,
+        "long" : -77.913835
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 451.1,
+      "duration" : 22.5,
+      "name" : "Carolina Beach Road (US 421)",
+      "instruction" : "Turn right onto Carolina Beach Road (US 421)",
+      "weight" : 34.0,
+      "loc" : {
+        "lat" : 34.150105,
+        "long" : -77.90343
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 190.6,
+      "duration" : 25.4,
+      "name" : "Archmill Way",
+      "instruction" : "Turn right onto Archmill Way",
+      "weight" : 25.4,
+      "loc" : {
+        "lat" : 34.146946,
+        "long" : -77.900358
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 182.3,
+      "duration" : 24.3,
+      "name" : "Mimies Way",
+      "instruction" : "Continue right onto Mimies Way",
+      "weight" : 24.3,
+      "loc" : {
+        "lat" : 34.145867,
+        "long" : -77.901965
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 365.8,
+      "duration" : 48.8,
+      "name" : "Beamon Lane",
+      "instruction" : "Continue left onto Beamon Lane",
+      "weight" : 48.8,
+      "loc" : {
+        "lat" : 34.147165,
+        "long" : -77.903174
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Beamon Lane",
+      "instruction" : "You have arrived at your 1st destination",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.144857,
+        "long" : -77.905814
+      },
+      "destination" : false,
+      "wayPoint" : true
+    }, {
+      "distance" : 106.4,
+      "duration" : 19.7,
+      "name" : "Beamon Lane",
+      "instruction" : "Head southwest on Beamon Lane",
+      "weight" : 53.3,
+      "loc" : {
+        "lat" : 34.144857,
+        "long" : -77.905814
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 264.4,
+      "duration" : 42.4,
+      "name" : "Loman Lane",
+      "instruction" : "Turn left onto Loman Lane",
+      "weight" : 59.2,
+      "loc" : {
+        "lat" : 34.14495,
+        "long" : -77.906595
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 98.1,
+      "duration" : 12.5,
+      "name" : "Perth Drive",
+      "instruction" : "Turn right onto Perth Drive",
+      "weight" : 20.9,
+      "loc" : {
+        "lat" : 34.143346,
+        "long" : -77.908656
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 152.1,
+      "duration" : 21.1,
+      "name" : "Perth Drive",
+      "instruction" : "Turn right to stay on Perth Drive",
+      "weight" : 54.4,
+      "loc" : {
+        "lat" : 34.143878,
+        "long" : -77.909445
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 654.2,
+      "duration" : 42.1,
+      "name" : "Silver Lake Road",
+      "instruction" : "Turn left onto Silver Lake Road",
+      "weight" : 47.1,
+      "loc" : {
+        "lat" : 34.144992,
+        "long" : -77.910343
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 755.7,
+      "duration" : 80.39999999999999,
+      "name" : "Lorraine Circle North",
+      "instruction" : "Turn right onto Lorraine Circle North",
+      "weight" : 81.2,
+      "loc" : {
+        "lat" : 34.140556,
+        "long" : -77.913835
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 5172.299999999999,
+      "duration" : 288.6,
+      "name" : "River Road",
+      "instruction" : "Enter the traffic circle and take the 1st exit onto River Road",
+      "weight" : 289.9,
+      "loc" : {
+        "lat" : 34.140097,
+        "long" : -77.921611
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "River Road",
+      "instruction" : "You have arrived at your destination, on the left",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.170729,
+        "long" : -77.948447
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "2211be26-cf95-47fb-b604-6a64ca953cf7",
+  "incidentId" : "9599d059-0e9b-49f8-aa76-73c918c18995",
+  "responderId" : "121",
+  "responderStartLat" : 34.14557,
+  "responderStartLong" : -77.952,
+  "incidentLat" : 34.07231104953472,
+  "incidentLong" : -77.89905110963582,
+  "destinationLat" : 34.0583,
+  "destinationLong" : -77.8885,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418022191,
+    "location" : {
+      "lat" : 34.140091,
+      "long" : -77.921868
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418022696,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418022994,
+    "location" : {
+      "lat" : 34.123928,
+      "long" : -77.915159
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023095,
+    "location" : {
+      "lat" : 34.072271,
+      "long" : -77.899051
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023101,
+    "location" : {
+      "lat" : 34.072278,
+      "long" : -77.897926
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023595,
+    "location" : {
+      "lat" : 34.036396,
+      "long" : -77.893782
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023888,
+    "location" : {
+      "lat" : 34.072271,
+      "long" : -77.899051
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024193,
+    "location" : {
+      "lat" : 34.072307,
+      "long" : -77.895989
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024199,
+    "location" : {
+      "lat" : 34.053359,
+      "long" : -77.884521
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024395,
+    "location" : {
+      "lat" : 34.126066,
+      "long" : -77.899588
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024502,
+    "location" : {
+      "lat" : 34.036159,
+      "long" : -77.892153
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025107,
+    "location" : {
+      "lat" : 34.149164,
+      "long" : -77.94064
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025699,
+    "location" : {
+      "lat" : 34.058143,
+      "long" : -77.888517
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025796,
+    "location" : {
+      "lat" : 34.150646,
+      "long" : -77.94126
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026195,
+    "location" : {
+      "lat" : 34.072307,
+      "long" : -77.895989
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026293,
+    "location" : {
+      "lat" : 34.072266,
+      "long" : -77.899866
+    },
+    "long" : 0.0
+  } ],
+  "status" : "UPDATED",
+  "route" : {
+    "distance" : 20404.8,
+    "duration" : 1358.3000000000002,
+    "steps" : [ {
+      "distance" : 177.0,
+      "duration" : 35.5,
+      "name" : "",
+      "instruction" : "Head southeast",
+      "weight" : 75.3,
+      "loc" : {
+        "lat" : 34.149672,
+        "long" : -77.942323
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 178.1,
+      "duration" : 13.1,
+      "name" : "",
+      "instruction" : "Turn left",
+      "weight" : 15.0,
+      "loc" : {
+        "lat" : 34.149164,
+        "long" : -77.94064
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 2428.7000000000003,
+      "duration" : 135.2,
+      "name" : "River Road",
+      "instruction" : "Enter the traffic circle and take the 1st exit onto River Road",
+      "weight" : 135.79999999999998,
+      "loc" : {
+        "lat" : 34.150646,
+        "long" : -77.94126
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 2114.3,
+      "duration" : 113.7,
+      "name" : "River Road",
+      "instruction" : "Enter the traffic circle and take the 2nd exit onto River Road",
+      "weight" : 120.7,
+      "loc" : {
+        "lat" : 34.140091,
+        "long" : -77.921868
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1464.4,
+      "duration" : 101.2,
+      "name" : "Sanders Drive",
+      "instruction" : "Turn left onto Sanders Drive",
+      "weight" : 130.2,
+      "loc" : {
+        "lat" : 34.123928,
+        "long" : -77.915159
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 6055.3,
+      "duration" : 284.0999999999999,
+      "name" : "Carolina Beach Road (US 421)",
+      "instruction" : "Turn right onto Carolina Beach Road (US 421)",
+      "weight" : 291.50000000000006,
+      "loc" : {
+        "lat" : 34.126066,
+        "long" : -77.899588
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 282.1,
+      "duration" : 25.4,
+      "name" : "Valley Brook Road",
+      "instruction" : "Turn right onto Valley Brook Road",
+      "weight" : 25.4,
+      "loc" : {
+        "lat" : 34.072307,
+        "long" : -77.895989
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Valley Brook Road",
+      "instruction" : "You have arrived at your 1st destination",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.072271,
+        "long" : -77.899051
+      },
+      "destination" : false,
+      "wayPoint" : true
+    }, {
+      "distance" : 75.1,
+      "duration" : 10.6,
+      "name" : "Valley Brook Road",
+      "instruction" : "Head west on Valley Brook Road",
+      "weight" : 31.0,
+      "loc" : {
+        "lat" : 34.072271,
+        "long" : -77.899051
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 372.7,
+      "duration" : 78.9,
+      "name" : "Fern Valley Road",
+      "instruction" : "Turn right onto Fern Valley Road",
+      "weight" : 104.8,
+      "loc" : {
+        "lat" : 34.072266,
+        "long" : -77.899866
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 178.5,
+      "duration" : 19.7,
+      "name" : "Valley Brook Road",
+      "instruction" : "Turn left onto Valley Brook Road",
+      "weight" : 43.7,
+      "loc" : {
+        "lat" : 34.072278,
+        "long" : -77.897926
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 4165.1,
+      "duration" : 225.4,
+      "name" : "Carolina Beach Road (US 421)",
+      "instruction" : "Turn right onto Carolina Beach Road (US 421)",
+      "weight" : 259.3,
+      "loc" : {
+        "lat" : 34.072307,
+        "long" : -77.895989
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 154.2,
+      "duration" : 24.4,
+      "name" : "Carl Winner Drive",
+      "instruction" : "Turn left onto Carl Winner Drive",
+      "weight" : 56.400000000000006,
+      "loc" : {
+        "lat" : 34.036396,
+        "long" : -77.893782
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 2040.6,
+      "duration" : 210.7,
+      "name" : "Canal Drive",
+      "instruction" : "Turn left onto Canal Drive",
+      "weight" : 242.5,
+      "loc" : {
+        "lat" : 34.036159,
+        "long" : -77.892153
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 718.4,
+      "duration" : 80.39999999999999,
+      "name" : "Florida Avenue",
+      "instruction" : "Turn left onto Florida Avenue",
+      "weight" : 80.39999999999999,
+      "loc" : {
+        "lat" : 34.053359,
+        "long" : -77.884521
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Florida Avenue",
+      "instruction" : "You have arrived at your destination, straight ahead",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.058143,
+        "long" : -77.888517
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "185ee869-9561-4e0b-a5b6-7e6892fd97bd",
+  "incidentId" : "eec3944a-e7d8-43e8-b646-318b02c94dc8",
+  "responderId" : "125",
+  "responderStartLat" : 34.16527,
+  "responderStartLong" : -77.92232,
+  "incidentLat" : 34.1882879490469,
+  "incidentLong" : -77.8946891062065,
+  "destinationLat" : 34.1706,
+  "destinationLong" : -77.949,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418023100,
+    "location" : {
+      "lat" : 34.18726,
+      "long" : -77.894841
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023493,
+    "location" : {
+      "lat" : 34.187412,
+      "long" : -77.896346
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024093,
+    "location" : {
+      "lat" : 34.184231,
+      "long" : -77.906975
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024300,
+    "location" : {
+      "lat" : 34.166876,
+      "long" : -77.921045
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024501,
+    "location" : {
+      "lat" : 34.161257,
+      "long" : -77.93842
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025092,
+    "location" : {
+      "lat" : 34.176078,
+      "long" : -77.891251
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025396,
+    "location" : {
+      "lat" : 34.183735,
+      "long" : -77.902393
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025489,
+    "location" : {
+      "lat" : 34.184261,
+      "long" : -77.916594
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025696,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025801,
+    "location" : {
+      "lat" : 34.182768,
+      "long" : -77.903188
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025892,
+    "location" : {
+      "lat" : 34.18726,
+      "long" : -77.894841
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025894,
+    "location" : {
+      "lat" : 34.187072,
+      "long" : -77.890583
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025898,
+    "location" : {
+      "lat" : 34.170729,
+      "long" : -77.948447
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026000,
+    "location" : {
+      "lat" : 34.185225,
+      "long" : -77.894362
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026199,
+    "location" : {
+      "lat" : 34.167429,
+      "long" : -77.921578
+    },
+    "long" : 0.0
+  } ],
+  "status" : "COMPLETED",
+  "route" : {
+    "distance" : 14084.199999999999,
+    "duration" : 1033.0,
+    "steps" : [ {
+      "distance" : 201.8,
+      "duration" : 47.099999999999994,
+      "name" : "Terrington Drive",
+      "instruction" : "Head north on Terrington Drive",
+      "weight" : 73.3,
+      "loc" : {
+        "lat" : 34.16512,
+        "long" : -77.921325
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 79.5,
+      "duration" : 8.3,
+      "name" : "Belfairs Drive",
+      "instruction" : "Turn left onto Belfairs Drive",
+      "weight" : 8.8,
+      "loc" : {
+        "lat" : 34.166876,
+        "long" : -77.921045
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 2469.0,
+      "duration" : 205.20000000000002,
+      "name" : "Echo Farms Boulevard",
+      "instruction" : "Enter the traffic circle and take the 1st exit onto Echo Farms Boulevard",
+      "weight" : 271.3,
+      "loc" : {
+        "lat" : 34.167429,
+        "long" : -77.921578
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 396.5,
+      "duration" : 34.6,
+      "name" : "Semmes Drive",
+      "instruction" : "Turn right onto Semmes Drive",
+      "weight" : 66.7,
+      "loc" : {
+        "lat" : 34.184231,
+        "long" : -77.906975
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 130.1,
+      "duration" : 15.4,
+      "name" : "Burney Street",
+      "instruction" : "Turn left onto Burney Street",
+      "weight" : 27.5,
+      "loc" : {
+        "lat" : 34.182768,
+        "long" : -77.903188
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1175.0,
+      "duration" : 87.9,
+      "name" : "Robert E Lee Drive",
+      "instruction" : "Turn right onto Robert E Lee Drive",
+      "weight" : 100.89999999999999,
+      "loc" : {
+        "lat" : 34.183735,
+        "long" : -77.902393
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 311.6,
+      "duration" : 31.0,
+      "name" : "Bedford Forest Drive",
+      "instruction" : "Turn left onto Bedford Forest Drive",
+      "weight" : 44.1,
+      "loc" : {
+        "lat" : 34.185225,
+        "long" : -77.894362
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 139.5,
+      "duration" : 12.5,
+      "name" : "Pine Valley Drive",
+      "instruction" : "Turn right onto Pine Valley Drive",
+      "weight" : 12.5,
+      "loc" : {
+        "lat" : 34.187412,
+        "long" : -77.896346
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Pine Valley Drive",
+      "instruction" : "You have arrived at your 1st destination, on the left",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.18726,
+        "long" : -77.894841
+      },
+      "destination" : true,
+      "wayPoint" : false
+    }, {
+      "distance" : 392.9,
+      "duration" : 46.5,
+      "name" : "Pine Valley Drive",
+      "instruction" : "Head east on Pine Valley Drive",
+      "weight" : 63.3,
+      "loc" : {
+        "lat" : 34.18726,
+        "long" : -77.894841
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1224.7,
+      "duration" : 69.7,
+      "name" : "South College Road (NC 132)",
+      "instruction" : "Turn right onto South College Road (NC 132)",
+      "weight" : 70.6,
+      "loc" : {
+        "lat" : 34.187072,
+        "long" : -77.890583
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 2869.6,
+      "duration" : 179.8,
+      "name" : "South 17th Street",
+      "instruction" : "Turn right onto South 17th Street",
+      "weight" : 261.0,
+      "loc" : {
+        "lat" : 34.176078,
+        "long" : -77.891251
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 3253.8,
+      "duration" : 208.09999999999997,
+      "name" : "Independence Boulevard",
+      "instruction" : "Make a sharp left onto Independence Boulevard",
+      "weight" : 262.9,
+      "loc" : {
+        "lat" : 34.184261,
+        "long" : -77.916594
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1440.3,
+      "duration" : 86.9,
+      "name" : "River Road",
+      "instruction" : "Turn right onto River Road",
+      "weight" : 87.4,
+      "loc" : {
+        "lat" : 34.161257,
+        "long" : -77.93842
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "River Road",
+      "instruction" : "You have arrived at your destination, on the left",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.170729,
+        "long" : -77.948447
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "bcd744ac-1173-4c31-b18c-53ce79fdb65e",
+  "incidentId" : "19decce2-edd4-4d23-a62e-0be06a2ab1a0",
+  "responderId" : "1",
+  "responderStartLat" : 34.16877,
+  "responderStartLong" : -77.87045,
+  "incidentLat" : 34.23038031849737,
+  "incidentLong" : -77.82518152965532,
+  "destinationLat" : 34.2461,
+  "destinationLong" : -77.9519,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418022596,
+    "location" : {
+      "lat" : 34.230571,
+      "long" : -77.825037
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023403,
+    "location" : {
+      "lat" : 34.206824,
+      "long" : -77.877344
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024101,
+    "location" : {
+      "lat" : 34.209178,
+      "long" : -77.87545
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024489,
+    "location" : {
+      "lat" : 34.231857,
+      "long" : -77.829116
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024589,
+    "location" : {
+      "lat" : 34.24796,
+      "long" : -77.863736
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024593,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024799,
+    "location" : {
+      "lat" : 34.224424,
+      "long" : -77.823855
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025099,
+    "location" : {
+      "lat" : 34.250827,
+      "long" : -77.94737
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025391,
+    "location" : {
+      "lat" : 34.168732,
+      "long" : -77.869495
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025392,
+    "location" : {
+      "lat" : 34.16713,
+      "long" : -77.870598
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025495,
+    "location" : {
+      "lat" : 34.246579,
+      "long" : -77.949977
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025590,
+    "location" : {
+      "lat" : 34.169147,
+      "long" : -77.870467
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025898,
+    "location" : {
+      "lat" : 34.230297,
+      "long" : -77.824509
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025995,
+    "location" : {
+      "lat" : 34.165811,
+      "long" : -77.863256
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026294,
+    "location" : {
+      "lat" : 34.230571,
+      "long" : -77.825037
+    },
+    "long" : 0.0
+  } ],
+  "status" : "COMPLETED",
+  "route" : {
+    "distance" : 27863.800000000003,
+    "duration" : 1647.8,
+    "steps" : [ {
+      "distance" : 38.1,
+      "duration" : 13.2,
+      "name" : "Hounds Chase Drive",
+      "instruction" : "Head northeast on Hounds Chase Drive",
+      "weight" : 23.8,
+      "loc" : {
+        "lat" : 34.168831,
+        "long" : -77.870627
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 101.0,
+      "duration" : 13.9,
+      "name" : "Elk Tril Drive",
+      "instruction" : "Turn right onto Elk Tril Drive",
+      "weight" : 27.7,
+      "loc" : {
+        "lat" : 34.169147,
+        "long" : -77.870467
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 206.1,
+      "duration" : 27.700000000000003,
+      "name" : "Fawn Creek Drive",
+      "instruction" : "Turn right onto Fawn Creek Drive",
+      "weight" : 61.0,
+      "loc" : {
+        "lat" : 34.168732,
+        "long" : -77.869495
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 691.4,
+      "duration" : 51.8,
+      "name" : "Navaho Trail",
+      "instruction" : "Turn left onto Navaho Trail",
+      "weight" : 88.19999999999999,
+      "loc" : {
+        "lat" : 34.16713,
+        "long" : -77.870598
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 5109.3,
+      "duration" : 304.5,
+      "name" : "Masonboro Loop Road",
+      "instruction" : "Turn left onto Masonboro Loop Road",
+      "weight" : 322.5,
+      "loc" : {
+        "lat" : 34.165811,
+        "long" : -77.863256
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 331.0,
+      "duration" : 53.6,
+      "name" : "South Wallace Avenue",
+      "instruction" : "Turn right onto South Wallace Avenue",
+      "weight" : 65.4,
+      "loc" : {
+        "lat" : 34.206824,
+        "long" : -77.877344
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 6112.5,
+      "duration" : 328.6,
+      "name" : "Oleander Drive (US 17; US 76)",
+      "instruction" : "Turn right onto Oleander Drive (US 17)",
+      "weight" : 356.5,
+      "loc" : {
+        "lat" : 34.209178,
+        "long" : -77.87545
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 425.3,
+      "duration" : 57.599999999999994,
+      "name" : "Drysdale Drive",
+      "instruction" : "Turn right onto Drysdale Drive",
+      "weight" : 57.9,
+      "loc" : {
+        "lat" : 34.231857,
+        "long" : -77.829116
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Drysdale Drive",
+      "instruction" : "You have arrived at your 1st destination, on the right",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.230571,
+        "long" : -77.825037
+      },
+      "destination" : true,
+      "wayPoint" : false
+    }, {
+      "distance" : 57.3,
+      "duration" : 9.0,
+      "name" : "Drysdale Drive",
+      "instruction" : "Head southeast on Drysdale Drive",
+      "weight" : 22.4,
+      "loc" : {
+        "lat" : 34.230571,
+        "long" : -77.825037
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 731.6,
+      "duration" : 80.9,
+      "name" : "Pembroke Jones Drive",
+      "instruction" : "Turn right onto Pembroke Jones Drive",
+      "weight" : 94.80000000000001,
+      "loc" : {
+        "lat" : 34.230297,
+        "long" : -77.824509
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 4601.2,
+      "duration" : 275.8,
+      "name" : "Eastwood Road (US 74; US 76)",
+      "instruction" : "Turn right onto Eastwood Road (US 74)",
+      "weight" : 301.4,
+      "loc" : {
+        "lat" : 34.224424,
+        "long" : -77.823855
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 8771.7,
+      "duration" : 367.5,
+      "name" : "Martin Luther King Jr Parkway (US 74)",
+      "instruction" : "Continue onto Martin Luther King Jr Parkway (US 74)",
+      "weight" : 404.49999999999994,
+      "loc" : {
+        "lat" : 34.24796,
+        "long" : -77.863736
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 454.4,
+      "duration" : 31.799999999999997,
+      "name" : "North 3rd Street",
+      "instruction" : "Continue onto North 3rd Street",
+      "weight" : 56.900000000000006,
+      "loc" : {
+        "lat" : 34.250827,
+        "long" : -77.94737
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 232.9,
+      "duration" : 31.9,
+      "name" : "Harnett Street",
+      "instruction" : "Turn right onto Harnett Street",
+      "weight" : 32.0,
+      "loc" : {
+        "lat" : 34.246785,
+        "long" : -77.947456
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Harnett Street",
+      "instruction" : "You have arrived at your destination, straight ahead",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.246579,
+        "long" : -77.949977
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "37b985b9-3047-4803-af76-a8383d863449",
+  "incidentId" : "d779c228-a6b7-4f33-85dc-ea1e93513fd7",
+  "responderId" : "98",
+  "responderStartLat" : 34.25881,
+  "responderStartLong" : -77.85262,
+  "incidentLat" : 34.21882758733947,
+  "incidentLong" : -77.87343371733469,
+  "destinationLat" : 34.2461,
+  "destinationLong" : -77.9519,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418022101,
+    "location" : {
+      "lat" : 34.250497,
+      "long" : -77.856967
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023896,
+    "location" : {
+      "lat" : 34.212763,
+      "long" : -77.872901
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023988,
+    "location" : {
+      "lat" : 34.250827,
+      "long" : -77.94737
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024190,
+    "location" : {
+      "lat" : 34.218133,
+      "long" : -77.87354
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024603,
+    "location" : {
+      "lat" : 34.241271,
+      "long" : -77.856641
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024800,
+    "location" : {
+      "lat" : 34.246579,
+      "long" : -77.949977
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024992,
+    "location" : {
+      "lat" : 34.233966,
+      "long" : -77.841141
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024998,
+    "location" : {
+      "lat" : 34.218133,
+      "long" : -77.87354
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025090,
+    "location" : {
+      "lat" : 34.217982,
+      "long" : -77.872091
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025196,
+    "location" : {
+      "lat" : 34.212979,
+      "long" : -77.874876
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025493,
+    "location" : {
+      "lat" : 34.246785,
+      "long" : -77.947456
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025601,
+    "location" : {
+      "lat" : 34.218289,
+      "long" : -77.875076
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025795,
+    "location" : {
+      "lat" : 34.253348,
+      "long" : -77.84947
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025901,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026204,
+    "location" : {
+      "lat" : 34.222759,
+      "long" : -77.841616
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026298,
+    "location" : {
+      "lat" : 34.253974,
+      "long" : -77.889365
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026494,
+    "location" : {
+      "lat" : 34.214369,
+      "long" : -77.887475
+    },
+    "long" : 0.0
+  } ],
+  "status" : "COMPLETED",
+  "route" : {
+    "distance" : 23138.9,
+    "duration" : 1520.4,
+    "steps" : [ {
+      "distance" : 686.4,
+      "duration" : 69.9,
+      "name" : "Fitzgerald Drive",
+      "instruction" : "Head southeast on Fitzgerald Drive",
+      "weight" : 83.8,
+      "loc" : {
+        "lat" : 34.258994,
+        "long" : -77.85225
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 758.7,
+      "duration" : 45.8,
+      "name" : "Market Street (US 17 Business)",
+      "instruction" : "Turn right onto Market Street (US 17 Business)",
+      "weight" : 77.6,
+      "loc" : {
+        "lat" : 34.253348,
+        "long" : -77.84947
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1128.1,
+      "duration" : 77.3,
+      "name" : "Cardinal Drive",
+      "instruction" : "Turn left onto Cardinal Drive",
+      "weight" : 89.30000000000001,
+      "loc" : {
+        "lat" : 34.250497,
+        "long" : -77.856967
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1640.6,
+      "duration" : 81.9,
+      "name" : "Eastwood Road (US 74)",
+      "instruction" : "Turn left onto Eastwood Road (US 74)",
+      "weight" : 89.3,
+      "loc" : {
+        "lat" : 34.241271,
+        "long" : -77.856641
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1449.8,
+      "duration" : 106.5,
+      "name" : "Rogersville Road",
+      "instruction" : "Turn right onto Rogersville Road",
+      "weight" : 121.30000000000001,
+      "loc" : {
+        "lat" : 34.233966,
+        "long" : -77.841141
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 3568.8,
+      "duration" : 208.20000000000007,
+      "name" : "Wrightsville Avenue",
+      "instruction" : "Turn right onto Wrightsville Avenue",
+      "weight" : 231.00000000000003,
+      "loc" : {
+        "lat" : 34.222759,
+        "long" : -77.841616
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 609.1,
+      "duration" : 67.9,
+      "name" : "Wallace Avenue North",
+      "instruction" : "Turn right onto Wallace Avenue North",
+      "weight" : 75.5,
+      "loc" : {
+        "lat" : 34.212979,
+        "long" : -77.874876
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 142.3,
+      "duration" : 28.5,
+      "name" : "Barefoot Drive",
+      "instruction" : "Turn right onto Barefoot Drive",
+      "weight" : 28.5,
+      "loc" : {
+        "lat" : 34.218289,
+        "long" : -77.875076
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Barefoot Drive",
+      "instruction" : "You have arrived at your 1st destination, on the left",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.218133,
+        "long" : -77.87354
+      },
+      "destination" : true,
+      "wayPoint" : false
+    }, {
+      "distance" : 134.3,
+      "duration" : 28.9,
+      "name" : "Barefoot Drive",
+      "instruction" : "Head east on Barefoot Drive",
+      "weight" : 41.7,
+      "loc" : {
+        "lat" : 34.218133,
+        "long" : -77.87354
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 585.3,
+      "duration" : 42.8,
+      "name" : "Wood Dale Drive",
+      "instruction" : "Turn right onto Wood Dale Drive",
+      "weight" : 55.5,
+      "loc" : {
+        "lat" : 34.217982,
+        "long" : -77.872091
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1352.7,
+      "duration" : 126.29999999999998,
+      "name" : "Wrightsville Avenue",
+      "instruction" : "Turn right onto Wrightsville Avenue",
+      "weight" : 159.5,
+      "loc" : {
+        "lat" : 34.212763,
+        "long" : -77.872901
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 4457.4,
+      "duration" : 325.29999999999995,
+      "name" : "South Kerr Avenue",
+      "instruction" : "Turn right onto South Kerr Avenue",
+      "weight" : 362.9,
+      "loc" : {
+        "lat" : 34.214369,
+        "long" : -77.887475
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 5938.0,
+      "duration" : 247.4,
+      "name" : "Martin Luther King Jr Parkway (US 74)",
+      "instruction" : "Turn left onto Martin Luther King Jr Parkway (US 74)",
+      "weight" : 294.09999999999997,
+      "loc" : {
+        "lat" : 34.253974,
+        "long" : -77.889365
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 454.4,
+      "duration" : 31.799999999999997,
+      "name" : "North 3rd Street",
+      "instruction" : "Continue onto North 3rd Street",
+      "weight" : 56.900000000000006,
+      "loc" : {
+        "lat" : 34.250827,
+        "long" : -77.94737
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 232.9,
+      "duration" : 31.9,
+      "name" : "Harnett Street",
+      "instruction" : "Turn right onto Harnett Street",
+      "weight" : 32.0,
+      "loc" : {
+        "lat" : 34.246785,
+        "long" : -77.947456
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Harnett Street",
+      "instruction" : "You have arrived at your destination, straight ahead",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.246579,
+        "long" : -77.949977
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}, {
+  "id" : "b9c0e01d-34c2-4320-ab9d-e36a65324f0d",
+  "incidentId" : "caecdd39-29f5-4286-8495-27b2df77910e",
+  "responderId" : "97",
+  "responderStartLat" : 34.23536,
+  "responderStartLong" : -77.86422,
+  "incidentLat" : 34.22735956098925,
+  "incidentLong" : -77.88312854222879,
+  "destinationLat" : 34.2461,
+  "destinationLong" : -77.9519,
+  "responderLocationHistory" : [ {
+    "lat" : 0.0,
+    "timestamp" : 1555418022594,
+    "location" : {
+      "lat" : 34.227381,
+      "long" : -77.883
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023289,
+    "location" : {
+      "lat" : 34.228308,
+      "long" : -77.881598
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023598,
+    "location" : {
+      "lat" : 34.227268,
+      "long" : -77.882396
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418023695,
+    "location" : {
+      "lat" : 34.246785,
+      "long" : -77.947456
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024297,
+    "location" : {
+      "lat" : 0.0,
+      "long" : 0.0
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024595,
+    "location" : {
+      "lat" : 34.227253,
+      "long" : -77.879435
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418024788,
+    "location" : {
+      "lat" : 34.22716,
+      "long" : -77.882948
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025193,
+    "location" : {
+      "lat" : 34.227253,
+      "long" : -77.879435
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025589,
+    "location" : {
+      "lat" : 34.246579,
+      "long" : -77.949977
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025598,
+    "location" : {
+      "lat" : 34.228308,
+      "long" : -77.881598
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025893,
+    "location" : {
+      "lat" : 34.227381,
+      "long" : -77.883
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418025988,
+    "location" : {
+      "lat" : 34.254942,
+      "long" : -77.870916
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026104,
+    "location" : {
+      "lat" : 34.250827,
+      "long" : -77.94737
+    },
+    "long" : 0.0
+  }, {
+    "lat" : 0.0,
+    "timestamp" : 1555418026202,
+    "location" : {
+      "lat" : 34.238314,
+      "long" : -77.871531
+    },
+    "long" : 0.0
+  } ],
+  "status" : "COMPLETED",
+  "route" : {
+    "distance" : 15283.5,
+    "duration" : 894.5,
+    "steps" : [ {
+      "distance" : 754.3,
+      "duration" : 71.6,
+      "name" : "Oriole Drive",
+      "instruction" : "Head northwest on Oriole Drive",
+      "weight" : 71.9,
+      "loc" : {
+        "lat" : 34.235579,
+        "long" : -77.864073
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 1449.1,
+      "duration" : 111.3,
+      "name" : "North College Road (US 117; NC 132)",
+      "instruction" : "Turn left onto North College Road (US 117)",
+      "weight" : 174.7,
+      "loc" : {
+        "lat" : 34.238314,
+        "long" : -77.871531
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 230.9,
+      "duration" : 34.5,
+      "name" : "University Drive",
+      "instruction" : "Turn right onto University Drive",
+      "weight" : 65.6,
+      "loc" : {
+        "lat" : 34.227253,
+        "long" : -77.879435
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 189.5,
+      "duration" : 15.599999999999998,
+      "name" : "Tulane Drive",
+      "instruction" : "Turn left onto Tulane Drive",
+      "weight" : 29.1,
+      "loc" : {
+        "lat" : 34.228308,
+        "long" : -77.881598
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 25.0,
+      "duration" : 1.8,
+      "name" : "Fillmore Drive",
+      "instruction" : "Turn right to stay on Fillmore Drive",
+      "weight" : 1.8,
+      "loc" : {
+        "lat" : 34.22716,
+        "long" : -77.882948
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Fillmore Drive",
+      "instruction" : "You have arrived at your 1st destination, on the left",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.227381,
+        "long" : -77.883
+      },
+      "destination" : true,
+      "wayPoint" : false
+    }, {
+      "distance" : 617.0,
+      "duration" : 44.50000000000001,
+      "name" : "Fillmore Drive",
+      "instruction" : "Head north on Fillmore Drive",
+      "weight" : 46.199999999999996,
+      "loc" : {
+        "lat" : 34.227381,
+        "long" : -77.883
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 137.0,
+      "duration" : 11.7,
+      "name" : "Tulane Drive",
+      "instruction" : "Continue slightly left onto Tulane Drive",
+      "weight" : 23.1,
+      "loc" : {
+        "lat" : 34.227268,
+        "long" : -77.882396
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 230.9,
+      "duration" : 37.6,
+      "name" : "University Drive",
+      "instruction" : "Turn right onto University Drive",
+      "weight" : 49.7,
+      "loc" : {
+        "lat" : 34.228308,
+        "long" : -77.881598
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 3318.1,
+      "duration" : 183.9,
+      "name" : "South College Road (US 117; NC 132)",
+      "instruction" : "Turn left onto South College Road (US 117)",
+      "weight" : 263.6,
+      "loc" : {
+        "lat" : 34.227253,
+        "long" : -77.879435
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 7644.2,
+      "duration" : 318.29999999999995,
+      "name" : "Martin Luther King Jr Parkway (US 74)",
+      "instruction" : "Turn left onto Martin Luther King Jr Parkway (US 74)",
+      "weight" : 375.8,
+      "loc" : {
+        "lat" : 34.254942,
+        "long" : -77.870916
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 454.4,
+      "duration" : 31.799999999999997,
+      "name" : "North 3rd Street",
+      "instruction" : "Continue onto North 3rd Street",
+      "weight" : 56.900000000000006,
+      "loc" : {
+        "lat" : 34.250827,
+        "long" : -77.94737
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 232.9,
+      "duration" : 31.9,
+      "name" : "Harnett Street",
+      "instruction" : "Turn right onto Harnett Street",
+      "weight" : 32.0,
+      "loc" : {
+        "lat" : 34.246785,
+        "long" : -77.947456
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Harnett Street",
+      "instruction" : "You have arrived at your destination, straight ahead",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.246579,
+        "long" : -77.949977
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+} ]
