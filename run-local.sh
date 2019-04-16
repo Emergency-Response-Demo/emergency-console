@@ -7,6 +7,8 @@ export RESPONDER="http://responder-service-naps-emergency-response.apps.753d.ope
 export MISSION="http://mission-service-naps-emergency-response.apps.753d.openshift.opentlc.com"
 export AUTH_URL="https://sso-naps-emergency-response.apps.753d.openshift.opentlc.com/auth"
 export KEYCLOAK="true"
-export TOKEN="pk.eyJ1IjoibWVjaGV2YXJyaWEiLCJhIjoiY2pxbXNuMXF0MGwzNTQ5bzJwNGtyMTRqdyJ9.WZfALlPxuOveabQDrroLcQ"
+
+# https://account.mapbox.com/access-tokens/
+export TOKEN=${MAPBOX_TOKEN}
 
 npm run start
