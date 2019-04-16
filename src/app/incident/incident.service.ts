@@ -5,20 +5,18 @@ import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { MessageService } from '../message/message.service';
 import { catchError } from 'rxjs/internal/operators/catchError';
+import { Incident } from '../incident';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IncidentService {
 
-  // private statusUrl = 'api/incidentMock';
-  private statusUrl = 'incident-service/incidents/stats';
+  private reportedUrl = 'incident-service/incidents/reported';
 
-  getStatus() {
-    return this.http.get<IncidentStatus>(this.statusUrl).pipe(
-      catchError(res => {
-        return this.handleError('getStatus()', res);
-      })
+  getReported(): Observable<Incident[]> {
+    return this.http.get<Incident[]>(this.reportedUrl).pipe(
+      catchError(res => this.handleError('getReported()', res))
     );
   }
 
