@@ -4,6 +4,10 @@ import { Subject } from 'rxjs/internal/Subject';
 import { Incident } from '../incident';
 import { Responder } from '../responder';
 import { Shelter } from '../shelter';
+import { MessageService } from '../message/message.service';
+import { Mission } from '../mission';
+import { IncidentService } from '../incident/incident.service';
+import { IncidentStatus } from '../incident/incident-status';
 
 @Component({
   selector: 'app-map',
@@ -14,82 +18,135 @@ export class MapComponent implements OnInit {
   @Input()
   reload$: Subject<string> = new Subject();
 
+  @Input()
+  stats$: Subject<IncidentStatus> = new Subject();
+
+  stats: IncidentStatus;
   responders: Responder[] = new Array();
   incidents: Incident[] = new Array();
-  shelters: Shelter[] = new Array();
+  shelters: Shelter[] = [
+    {
+      name: 'Port City Marina',
+      lat: 34.2461,
+      lon: -77.9519,
+      rescued: 0
+    },
+    {
+      name: 'Wilmington Marine Center',
+      lat: 34.1706,
+      lon: -77.949,
+      rescued: 0
+    },
+    {
+      name: 'Carolina Beach Yacht Club',
+      lat: 34.0583,
+      lon: -77.8885,
+      rescued: 0
+    }
+  ];
   center: number[] = [-77.886765, 34.210383];
   accessToken: string = window['_env'].accessToken;
 
-  constructor(private mapService: MapService) {}
+  constructor(private mapService: MapService, private messageService: MessageService, private incidentService: IncidentService) {}
 
   markerClick(lngLat: number[]): void {
     this.center = lngLat;
   }
 
   load(): void {
-    this.mapService.getMissions().subscribe(res => {
-      res.forEach(mission => {
-        const status = mission.status;
-
-        if (status === 'CREATED') {
-          this.incidents.push({
-            missionId: mission.id,
-            id: mission.incidentId,
-            lat: mission.incidentLat,
-            lon: mission.incidentLong,
-            status: mission.status
-          });
-        }
-        if (status === 'PICKEDUP' || status === 'CREATED') {
-          let lat = mission.responderStartLat;
-          let lon = mission.responderStartLong;
-          if (mission.responderLocationHistory.length > 1) {
-            lat = mission.responderLocationHistory.pop().location.lat;
-            lon = mission.responderLocationHistory.pop().location.long;
-          }
-          this.responders.push({
-            missionId: mission.id,
-            id: mission.responderId,
-            lat: lat,
-            lon: lon
-          });
-        }
-        if (status === 'DROPPED' || status === 'PICKEDUP') {
-          const found = this.shelters.filter(shelter => {
-            return shelter.lat === mission.destinationLat && shelter.lon === mission.destinationLong;
-          });
-          if (!found) {
-            this.shelters.push({
-              lat: mission.destinationLat,
-              lon: mission.destinationLong
-            });
-          }
-        }
+    this.stats = {
+      requested: 0,
+      assigned: 0,
+      pickedUp: 0,
+      rescued: 0,
+      cancelled: 0
+    };
+    this.mapService.getMissions().subscribe((missions: Mission[]) => {
+      this.handleMissions(missions);
+      this.incidentService.getReported().subscribe((incidents: Incident[]) => {
+        this.handleIncidents(incidents);
+        this.stats$.next(this.stats);
       });
+    });
+  }
+
+  private handleIncidents(incidents: Incident[]): void {
+    incidents.forEach(incident => {
+      this.incidents.push(incident);
+      this.stats.requested++;
+    });
+  }
+
+  private handleMissions(missions: Mission[]): void {
+    missions.forEach((mission: Mission) => {
+      const status = mission.status;
+
+      switch (status) {
+        case 'CREATED': {
+          this.stats.assigned++;
+          this.handleCreated(mission);
+          break;
+        }
+        case 'UPDATED': {
+          this.stats.pickedUp++;
+          this.handleUpdated(mission);
+          break;
+        }
+        case 'COMPLETED': {
+          this.stats.rescued++;
+          this.handleCompleted(mission);
+          break;
+        }
+        default: {
+          this.messageService.warning(`status: '${status}' is not a known code`);
+          break;
+        }
+      }
+    });
+  }
+
+  private handleCreated(mission: Mission): void {
+    this.incidents.push({
+      missionId: mission.id,
+      id: mission.incidentId,
+      lat: mission.incidentLat,
+      lon: mission.incidentLong,
+      status: mission.status
+    });
+    this.responders.push({
+      missionId: mission.id,
+      id: mission.responderId,
+      lat: mission.responderStartLat,
+      lon: mission.responderStartLong,
+      status: mission.status
+    });
+  }
+
+  private handleUpdated(mission: Mission): void {
+    this.responders.push({
+      missionId: mission.id,
+      id: mission.responderId,
+      lat: mission.responderLocationHistory.pop().location.lat,
+      lon: mission.responderLocationHistory.pop().location.long,
+      status: mission.status
+    });
+  }
+
+  private handleCompleted(mission: Mission): void {
+    this.shelters = this.shelters.map(shelter => {
+      if (shelter.lon === mission.destinationLong && shelter.lat === mission.destinationLat) {
+        shelter.rescued++;
+      }
+      return shelter;
     });
   }
 
   // icons colored with coreui hex codes from https://iconscout.com/icon/location-62
   getIcon(missionStatus: string): string {
-    switch (missionStatus) {
-      case 'REPORTED': {
-        return 'red';
-      }
-      case 'CREATED': {
-        return 'yellow';
-      }
-      case 'PICKEDUP': {
-        return 'blue';
-      }
-      case 'DROPPED': {
-        return 'green';
-      }
-      case 'CANCELLED': {
-        return 'grey';
-      }
-      default: {
-        return 'blue';
-      }
+    if (missionStatus === 'REPORTED') {
+      return 'red';
+    } else {
+      return 'yellow';
     }
   }
 
