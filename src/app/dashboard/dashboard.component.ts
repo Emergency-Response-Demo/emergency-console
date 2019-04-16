@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IconDefinition, faSync, faBan } from '@fortawesome/free-solid-svg-icons';
 import { interval } from 'rxjs/internal/observable/interval';
 import { Subject } from 'rxjs/internal/Subject';
+import { IncidentStatus } from '../incident/incident-status';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +14,7 @@ export class DashboardComponent implements OnInit {
   polling: any;
   isPolling = false;
   reload$: Subject<string> = new Subject();
+  stats$: Subject<IncidentStatus> = new Subject();
 
   constructor() {}
 

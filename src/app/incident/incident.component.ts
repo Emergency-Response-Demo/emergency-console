@@ -10,30 +10,20 @@ import { Subject } from 'rxjs';
 })
 export class IncidentComponent implements OnInit {
   @Input()
-  reload$: Subject<string>;
+  stats$: Subject<IncidentStatus> = new Subject();
 
-  status: IncidentStatus;
-  percent: number;
-  total: number;
+  status: IncidentStatus = new IncidentStatus();
+  percent = 0;
+  total = 0;
 
-  constructor(private incidentService: IncidentService) {
-    this.status = new IncidentStatus();
-    this.reload$ = new Subject();
-  }
-
-  load(): void {
-    this.incidentService.getStatus().subscribe(res => {
-      this.status = res;
-      this.total = this.status.requested + this.status.rescued + this.status.assigned + this.status.pickedUp + this.status.cancelled;
-      this.percent = (this.status.rescued / this.total) * 100;
-    });
-  }
+  constructor() {}
 
   ngOnInit() {
-    this.load();
 
-    this.reload$.subscribe(res => {
-      this.load();
+    this.stats$.subscribe(newStatus => {
+      this.status = newStatus;
+      this.total = this.status.requested + this.status.rescued + this.status.assigned + this.status.pickedUp + this.status.cancelled;
+      this.percent = (this.status.rescued / this.total) * 100;
     });
   }
 }
