@@ -20,3 +20,10 @@
   border-radius: 50%;
   cursor: pointer;
 }
+
+.shelter {
+  @extend .marker;
+  width: 3em;
+  height: 3em;
+  border-radius: 40%;
+}
