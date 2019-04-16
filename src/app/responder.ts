@@ -7,4 +7,5 @@ export class Responder {
   boatCapacity?: number;
   medical?: boolean;
   missionId?: string;
+  status: string;
 }

@@ -8,5 +8,5 @@ export class Incident {
     victimPhoneNumber?: string;
     timestamp?: number;
     status: string;
-    missionId: string;
+    missionId?: string;
 }
