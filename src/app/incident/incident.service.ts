@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { IncidentStatus } from './incident-status';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
