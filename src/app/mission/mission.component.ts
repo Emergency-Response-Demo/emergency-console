@@ -128,10 +128,10 @@ export class MissionComponent implements OnInit {
     this.keycloak.isLoggedIn().then(isLoggedIn => {
       if (isLoggedIn) {
         this.keycloak.loadUserProfile().then(profile => {
-          this.model.fullName = `${profile.firstName} ${profile.lastName}`;
+          this.model.name = `${profile.firstName} ${profile.lastName}`;
           this.model.phoneNumber = profile['attributes'].phoneNumber;
           this.model.boatCapacity = profile['attributes'].boatCapacity;
-          this.model.medical = profile['attributes'].medical;
+          this.model.medicalKit = profile['attributes'].medical;
         });
       }
     });

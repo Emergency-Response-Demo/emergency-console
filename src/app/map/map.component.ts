@@ -8,6 +8,7 @@ import { MessageService } from '../message/message.service';
 import { Mission } from '../mission';
 import { IncidentService } from '../incident/incident.service';
 import { IncidentStatus } from '../incident/incident-status';
+import { ResponderService } from './responder.service';
 
 @Component({
   selector: 'app-map',
@@ -20,6 +21,9 @@ export class MapComponent implements OnInit {
 
   @Input()
   stats$: Subject<IncidentStatus> = new Subject();
+
+  @Input()
+  util$: Subject<any> = new Subject();
 
   stats: IncidentStatus;
   responders: Responder[] = new Array();
@@ -47,7 +51,12 @@ export class MapComponent implements OnInit {
   center: number[] = [-77.886765, 34.210383];
   accessToken: string = window['_env'].accessToken;
 
-  constructor(private mapService: MapService, private messageService: MessageService, private incidentService: IncidentService) {}
+  constructor(
+    private mapService: MapService,
+    private messageService: MessageService,
+    private incidentService: IncidentService,
+    private responderService: ResponderService
+  ) {}
 
   markerClick(lngLat: number[]): void {
     this.center = lngLat;
@@ -63,10 +72,36 @@ export class MapComponent implements OnInit {
     };
     this.mapService.getMissions().subscribe((missions: Mission[]) => {
       this.handleMissions(missions);
+
       this.incidentService.getReported().subscribe((incidents: Incident[]) => {
         this.handleIncidents(incidents);
-        this.stats$.next(this.stats);
       });
+
+      this.responderService.getAvailable().subscribe((allAvailable: Responder[]) => {
+        this.handleResponders(allAvailable);
+      });
+    });
+  }
+
+  private handleResponders(allAvailable: Responder[]): void {
+    const total = allAvailable.length;
+    const active = this.stats.assigned + this.stats.pickedUp;
+
+    this.util$.next({
+      active: active,
+      total: total
+    });
+
+    this.responders.forEach((responder: Responder) => {
+      const found = allAvailable.find((available: Responder) => {
+        return responder.id === available.id;
+      });
+      if (found) {
+        responder.name = found.name;
+        responder.phoneNumber = found.phoneNumber;
+        responder.medicalKit = found.medicalKit;
+        responder.boatCapacity = found.boatCapacity;
+      }
     });
   }
 
@@ -75,6 +110,7 @@ export class MapComponent implements OnInit {
       this.incidents.push(incident);
       this.stats.requested++;
     });
+    this.stats$.next(this.stats);
   }
 
   private handleMissions(missions: Mission[]): void {

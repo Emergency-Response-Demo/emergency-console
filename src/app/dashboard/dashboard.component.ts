@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   isPolling = false;
   reload$: Subject<string> = new Subject();
   stats$: Subject<IncidentStatus> = new Subject();
+  util$: Subject<any> = new Subject();
 
   constructor() {}
 

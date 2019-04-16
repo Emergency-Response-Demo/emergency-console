@@ -16,11 +16,11 @@
   </div>
   <div class="card">
     <div class="card-header">Responder Utilization</div>
-    <app-charts [reload$]="reload$"></app-charts>
+    <app-charts [util$]="util$"></app-charts>
   </div>
 </div>
 <div class="card-deck">
   <div class="card">
-    <app-map [reload$]="reload$" [stats$]="stats$"></app-map>
+    <app-map [reload$]="reload$" [stats$]="stats$" [util$]="util$"></app-map>
   </div>
 </div>

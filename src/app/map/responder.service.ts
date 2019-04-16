@@ -4,17 +4,17 @@ import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { MessageService } from '../message/message.service';
 import { of } from 'rxjs/internal/observable/of';
+import { Responder } from '../responder';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ChartsService {
-  // private respondersUrl = 'api/responderMock';
-  private respondersUrl = 'responder-service/stats';
+export class ResponderService {
+  private respondersUrl = 'responder-service/responders/available';
 
-  getStatus() {
-    return this.http.get<any>(this.respondersUrl).pipe(
-      catchError(res => this.handleError('getStatus()', res))
+  getAvailable(): Observable<Responder[]> {
+    return this.http.get<Responder[]>(this.respondersUrl).pipe(
+      catchError(res => this.handleError('getAvailable()', res))
     );
   }
 
