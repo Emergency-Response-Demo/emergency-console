@@ -7,4 +7,5 @@
   window._env.clientId = 'js';
   window._env.enabled = '';
   window._env.accessToken = '';
+  window._env.pollingInterval = '';
 })(this);

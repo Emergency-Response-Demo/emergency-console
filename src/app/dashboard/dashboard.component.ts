@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit {
   refreshIcon: IconDefinition = faSync;
   stopIcon: IconDefinition = faBan;
   polling: any;
+  interval: number = Number(window['_env'].pollingInterval) || 10000;
   isPolling = false;
   reload$: Subject<string> = new Subject();
   stats$: Subject<IncidentStatus> = new Subject();
@@ -23,7 +24,7 @@ export class DashboardComponent implements OnInit {
     this.isPolling = !this.isPolling;
 
     if (this.isPolling === true) {
-      this.polling = interval(10000).subscribe(n => {
+      this.polling = interval(this.interval).subscribe(n => {
         this.reload$.next('reload');
       });
     } else {

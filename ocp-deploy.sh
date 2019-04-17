@@ -14,3 +14,5 @@ oc set env --from=configmap/sso-config dc/${app_name}
 
 # https://account.mapbox.com/access-tokens/
 oc set env dc/${app_name} --overwrite TOKEN=${MAPBOX_TOKEN}
+
+oc set env dc/${app_name} --overwrite POLLING=10000

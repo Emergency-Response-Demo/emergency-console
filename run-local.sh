@@ -7,6 +7,7 @@ export RESPONDER="http://responder-service-naps-emergency-response.apps.753d.ope
 export MISSION="http://mission-service-naps-emergency-response.apps.753d.openshift.opentlc.com"
 export AUTH_URL="https://sso-naps-emergency-response.apps.753d.openshift.opentlc.com/auth"
 export KEYCLOAK="true"
+export POLLING="10000"
 
 # https://account.mapbox.com/access-tokens/
 export TOKEN=${MAPBOX_TOKEN}

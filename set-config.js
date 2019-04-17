@@ -7,6 +7,7 @@ const replace = require('replace');
 doReplace('url', process.env.AUTH_URL);
 doReplace('enabled', process.env.KEYCLOAK);
 doReplace('accessToken', process.env.TOKEN);
+doReplace('pollingInterval', process.env.POLLING);
 
 function doReplace(key, value) {
   const regex = key + ' = \'.*\'';
