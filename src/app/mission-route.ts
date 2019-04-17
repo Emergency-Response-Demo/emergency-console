@@ -1,4 +1,5 @@
 export class MissionRoute {
   id: string;
-  lngLat: number[][];
+  assignRoute: number[][];
+  deliverRoute: number[][];
 }

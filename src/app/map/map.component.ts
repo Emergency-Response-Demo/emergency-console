@@ -54,7 +54,20 @@ export class MapComponent implements OnInit {
   center: number[] = [-77.886765, 34.210383];
   accessToken: string = window['_env'].accessToken;
 
-  data: GeoJSON.FeatureCollection<GeoJSON.LineString> = {
+  assignData: GeoJSON.FeatureCollection<GeoJSON.LineString> = {
+    type: 'FeatureCollection',
+    features: [
+      {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'LineString',
+          coordinates: []
+        }
+      }
+    ]
+  };
+  deliverData: GeoJSON.FeatureCollection<GeoJSON.LineString> = {
     type: 'FeatureCollection',
     features: [
       {
@@ -77,8 +90,20 @@ export class MapComponent implements OnInit {
     'line-join': 'round',
     'line-cap': 'round'
   };
-  linePaint: LinePaint = {
-    'line-color': '#20a8d8',
+
+  readonly GREY = '#a4b7c1';
+  readonly YELLOW = '#ffc107';
+  readonly BLUE = '#20a8d8';
+  readonly RED = '#f86c6b';
+  readonly GREEN = '#4dbd74';
+
+  assignPaint: LinePaint = {
+    'line-color': this.YELLOW,
+    'line-width': 8
+  };
+
+  deliverPaint: LinePaint = {
+    'line-color': this.BLUE,
     'line-width': 8
   };
 
@@ -180,11 +205,18 @@ export class MapComponent implements OnInit {
       lon: mission.incidentLong,
       status: mission.status
     });
+    let lon = mission.responderStartLong;
+    let lat = mission.responderStartLat;
+
+    if (mission.responderLocationHistory.length > 0) {
+      lon = mission.responderLocationHistory.pop().location.long;
+      lat = mission.responderLocationHistory.pop().location.lat;
+    }
     this.responders.push({
       missionId: mission.id,
       id: mission.responderId,
-      lat: mission.responderStartLat,
-      lon: mission.responderStartLong,
+      lat: lat,
+      lon: lon,
       status: mission.status
     });
 
@@ -201,7 +233,7 @@ export class MapComponent implements OnInit {
       lon: mission.responderLocationHistory.pop().location.long,
       status: mission.status
     });
-    if (mission.route && mission.route.steps) {
+    if (mission.route && mission.route.steps.length > 0) {
       this.addRoute(mission.id, mission.route.steps);
     }
   }
@@ -209,10 +241,19 @@ export class MapComponent implements OnInit {
   private addRoute(id: string, steps: any): void {
     const missionRoute: MissionRoute = {
       id: id,
-      lngLat: []
+      assignRoute: [],
+      deliverRoute: []
     };
+    let foundWayPoint = false;
     steps.forEach((step: any) => {
-      missionRoute.lngLat.push([step.loc.long, step.loc.lat]);
+      if (step.wayPoint) {
+        foundWayPoint = true;
+      }
+      if (foundWayPoint) {
+        missionRoute.deliverRoute.push([step.loc.long, step.loc.lat]);
+      } else {
+        missionRoute.assignRoute.push([step.loc.long, step.loc.lat]);
+      }
     });
     this.missionRoutes.push(missionRoute);
   }
@@ -236,15 +277,19 @@ export class MapComponent implements OnInit {
   }
 
   onPopupOpen(id: string) {
-    this.data.features[0].geometry.coordinates = [];
-    this.data = { ...this.data };
+    this.assignData.features[0].geometry.coordinates = [];
+    this.assignData = { ...this.assignData };
+    this.deliverData.features[0].geometry.coordinates = [];
+    this.deliverData = { ...this.deliverData };
 
     if (id) {
       const missionRoute = this.missionRoutes.find((route: MissionRoute) => route.id === id);
       if (missionRoute) {
-        this.data.features[0].geometry.coordinates = missionRoute.lngLat;
-        this.data = { ...this.data };
-        this.bounds = AppUtil.getBounds(this.data.features[0].geometry.coordinates);
+        this.assignData.features[0].geometry.coordinates = missionRoute.assignRoute;
+        this.deliverData.features[0].geometry.coordinates = missionRoute.deliverRoute;
+        this.assignData = { ...this.assignData };
+        this.deliverData = { ...this.deliverData };
+        this.bounds = AppUtil.getBounds(this.assignData.features[0].geometry.coordinates.concat(this.deliverData.features[0].geometry.coordinates));
       }
     }
   }

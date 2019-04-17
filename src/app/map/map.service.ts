@@ -11,7 +11,7 @@ import { Mission } from '../mission';
 })
 export class MapService {
   private mapUrl = 'mission-service/api/missions';
-  // private testUrl = 'assets/data/mission-service.json';
+  // private mapUrl = 'assets/data/mission-service.json';
 
   getMissions(): Observable<Mission[]> {
     return this.http.get<Mission[]>(this.mapUrl).pipe(
