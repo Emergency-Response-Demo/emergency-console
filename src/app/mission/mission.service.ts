@@ -12,9 +12,13 @@ import { LngLat } from 'mapbox-gl';
 export class MissionService {
   getDirections(start: LngLat, end: LngLat) {
     const url = `/mapbox/directions/v5/mapbox/driving/${start.lng},${start.lat};${end.lng},${end.lat}.json`;
-    const httpParams = new HttpParams().set('access_token', window['_env'].accessToken).set('geometries', 'geojson');
+    const httpParams = new HttpParams()
+      .set('access_token', window['_env'].accessToken)
+      .set('geometries', 'geojson');
 
-    return this.http.get<any>(url, { params: httpParams }).pipe(catchError(res => this.handleError('getDirections()', res)));
+    return this.http.get<any>(url, { params: httpParams }).pipe(
+      catchError(res => this.handleError('getDirections()', res))
+    );
   }
 
   private handleError(method: string, res: HttpErrorResponse): Observable<any> {
@@ -23,5 +27,5 @@ export class MissionService {
     return of(null);
   }
 
-  constructor(private messageService: MessageService, private http: HttpClient) {}
+  constructor(private messageService: MessageService, private http: HttpClient) { }
 }
