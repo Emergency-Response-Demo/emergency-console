@@ -17,7 +17,7 @@
   background-size: cover;
   width: 3.5em;
   height: 3.5em;
-  border-radius: 50%;
+  border-radius: 40%;
   cursor: pointer;
 }
 
@@ -25,5 +25,4 @@
   @extend .marker;
   width: 3em;
   height: 3em;
-  border-radius: 40%;
 }
