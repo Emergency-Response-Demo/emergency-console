@@ -2759,8 +2759,8 @@
         "lat" : 34.147984,
         "long" : -77.92844
       },
-      "destination" : true,
-      "wayPoint" : false
+      "destination" : false,
+      "wayPoint" : true
     }, {
       "distance" : 1204.0,
       "duration" : 66.9,
@@ -3088,8 +3088,8 @@
         "lat" : 34.182555,
         "long" : -77.866438
       },
-      "destination" : true,
-      "wayPoint" : false
+      "destination" : false,
+      "wayPoint" : true
     }, {
       "distance" : 218.8,
       "duration" : 101.8,
