@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
     this.isPolling = !this.isPolling;
 
     if (this.isPolling === true) {
-      this.polling = interval(2000).subscribe(n => {
+      this.polling = interval(10000).subscribe(n => {
         this.reload$.next('reload');
       });
     } else {
