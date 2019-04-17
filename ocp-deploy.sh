@@ -2,17 +2,18 @@
 
 oc project naps-emergency-response
 
-app_name=emergency-console
 oc new-app \
 --image-stream=nodejs \
---code=https://github.com/NAPS-emergency-response-project/${app_name} \
---name=${app_name}
+--code=https://github.com/NAPS-emergency-response-project/emergency-console \
+--name=emergency-console
 
-oc create route edge --service=${app_name} --cert=server.cert --key=server.key
+oc create route edge --service=emergency-console --cert=server.cert --key=server.key
 
-oc set env --from=configmap/sso-config dc/${app_name}
+oc set env --from=configmap/sso-config dc/emergency-console
 
 # https://account.mapbox.com/access-tokens/
-oc set env dc/${app_name} --overwrite TOKEN=${MAPBOX_TOKEN}
+oc create configmap emergency-console-config \
+--from-literal=TOKEN=${MAPBOX_TOKEN} \
+--from-literal=POLLING=10000
 
-oc set env dc/${app_name} --overwrite POLLING=10000
+oc set env --from=configmap/emergency-console-config dc/emergency-console
