@@ -9,6 +9,9 @@ import { Mission } from '../mission';
 import { IncidentService } from '../incident/incident.service';
 import { IncidentStatus } from '../incident/incident-status';
 import { ResponderService } from './responder.service';
+import { LineLayout, LinePaint, LngLatBoundsLike, FitBoundsOptions } from 'mapbox-gl';
+import { MissionRoute } from '../mission-route';
+import { AppUtil } from '../app-util';
 
 @Component({
   selector: 'app-map',
@@ -51,12 +54,40 @@ export class MapComponent implements OnInit {
   center: number[] = [-77.886765, 34.210383];
   accessToken: string = window['_env'].accessToken;
 
+  data: GeoJSON.FeatureCollection<GeoJSON.LineString> = {
+    type: 'FeatureCollection',
+    features: [
+      {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'LineString',
+          coordinates: []
+        }
+      }
+    ]
+  };
+  missionRoutes: MissionRoute[] = new Array();
+  bounds: LngLatBoundsLike;
+  boundsOptions: FitBoundsOptions = {
+    padding: 50
+  };
+
+  lineLayout: LineLayout = {
+    'line-join': 'round',
+    'line-cap': 'round'
+  };
+  linePaint: LinePaint = {
+    'line-color': '#20a8d8',
+    'line-width': 8
+  };
+
   constructor(
     private mapService: MapService,
     private messageService: MessageService,
     private incidentService: IncidentService,
     private responderService: ResponderService
-  ) {}
+  ) { }
 
   markerClick(lngLat: number[]): void {
     this.center = lngLat;
@@ -156,6 +187,10 @@ export class MapComponent implements OnInit {
       lon: mission.responderStartLong,
       status: mission.status
     });
+
+    if (mission.route && mission.route.steps) {
+      this.addRoute(mission.id, mission.route.steps);
+    }
   }
 
   private handleUpdated(mission: Mission): void {
@@ -166,6 +201,20 @@ export class MapComponent implements OnInit {
       lon: mission.responderLocationHistory.pop().location.long,
       status: mission.status
     });
+    if (mission.route && mission.route.steps) {
+      this.addRoute(mission.id, mission.route.steps);
+    }
+  }
+
+  private addRoute(id: string, steps: any): void {
+    const missionRoute: MissionRoute = {
+      id: id,
+      lngLat: []
+    };
+    steps.forEach((step: any) => {
+      missionRoute.lngLat.push([step.loc.long, step.loc.lat]);
+    });
+    this.missionRoutes.push(missionRoute);
   }
 
   private handleCompleted(mission: Mission): void {
@@ -183,6 +232,20 @@ export class MapComponent implements OnInit {
       return 'red';
     } else {
       return 'yellow';
+    }
+  }
+
+  onPopupOpen(id: string) {
+    this.data.features[0].geometry.coordinates = [];
+    this.data = { ...this.data };
+
+    if (id) {
+      const missionRoute = this.missionRoutes.find((route: MissionRoute) => route.id === id);
+      if (missionRoute) {
+        this.data.features[0].geometry.coordinates = missionRoute.lngLat;
+        this.data = { ...this.data };
+        this.bounds = AppUtil.getBounds(this.data.features[0].geometry.coordinates);
+      }
     }
   }
 

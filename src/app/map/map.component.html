@@ -1,13 +1,14 @@
 <div class="card-header">Map</div>
 <div class="card-body">
-  <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[11]" [center]="center" [accessToken]="accessToken">
+  <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'" [zoom]="[11]" [center]="center" [accessToken]="accessToken" [fitBounds]="bounds"
+    [fitBoundsOptions]="boundsOptions">
     <span *ngFor="let responder of responders">
       <mgl-marker [lngLat]="[responder.lon, responder.lat]" #marker>
         <div class="marker" (click)="markerClick([responder.lon, responder.lat])" [ngStyle]="{
           'background-image': 'url(assets/img/location.svg)'
         }"></div>
       </mgl-marker>
-      <mgl-popup [marker]="marker" [offset]="[0, -12]">
+      <mgl-popup [marker]="marker" [offset]="[0, -12]" (open)="onPopupOpen(responder.missionId)">
         <div class="card-text">
           <p>
             <strong>Mission ID: </strong> {{ responder.missionId }}<br />
@@ -44,7 +45,7 @@
             'background-image': 'url(assets/img/marker-' + getIcon(incident.status) + '.svg)'
           }" (click)="markerClick([incident.lon, incident.lat])"></div>
       </mgl-marker>
-      <mgl-popup [marker]="marker" [offset]="[0, -12]">
+      <mgl-popup [marker]="marker" [offset]="[0, -12]" (open)="onPopupOpen(incident.missionId)">
         <div class="card-text">
           <p>
             <strong>Mission ID: </strong> {{ incident.missionId }}<br />
@@ -59,6 +60,8 @@
         </div>
       </mgl-popup>
     </span>
+    <mgl-geojson-source id="geojson" [data]="data"> </mgl-geojson-source>
+    <mgl-layer id="route" type="line" source="geojson" [layout]="lineLayout" [paint]="linePaint"> </mgl-layer>
   </mgl-map>
   <div id="legend" class="legend">
     <div><img class="legend-icon" src="assets/img/marker-red.svg" alt="Requested" /> Requested</div>
