@@ -10,8 +10,8 @@ import { LngLat } from 'mapbox-gl';
   providedIn: 'root'
 })
 export class MissionService {
-  getDirections(start: LngLat, end: LngLat) {
-    const url = `/mapbox/directions/v5/mapbox/driving/${start.lng},${start.lat};${end.lng},${end.lat}.json`;
+  getDirections(start: LngLat, incident: LngLat, shelter: LngLat) {
+    const url = `/mapbox/directions/v5/mapbox/driving/${start.lng},${start.lat};${incident.lng},${incident.lat};${shelter.lng},${shelter.lat}.json`;
     const httpParams = new HttpParams()
       .set('access_token', window['_env'].accessToken)
       .set('geometries', 'geojson');

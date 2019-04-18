@@ -12,8 +12,8 @@
         [accessToken]="accessToken"
         (load)="map = $event"
       >
-        <mgl-marker [lngLat]="end" *ngIf="end" #endMarker>
-          <div class="marker" [ngStyle]="endStyle"></div>
+        <mgl-marker [lngLat]="incident" *ngIf="incident" #endMarker>
+          <div class="marker" [ngStyle]="incidentStyle"></div>
         </mgl-marker>
         <span *ngIf="start">
           <mgl-marker [lngLat]="start" #startMarker>
@@ -30,6 +30,9 @@
             </div>
           </mgl-popup>
         </span>
+        <mgl-marker [lngLat]="shelter" *ngIf="shelter" #endMarker>
+          <div class="marker" [ngStyle]="shelterStyle"></div>
+        </mgl-marker>
         <mgl-geojson-source id="geojson" [data]="data"> </mgl-geojson-source>
         <mgl-layer id="route" type="line" source="geojson" [layout]="lineLayout" [paint]="linePaint"> </mgl-layer>
       </mgl-map>
