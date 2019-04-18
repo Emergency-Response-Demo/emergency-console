@@ -11,16 +11,17 @@
   <div class="card">
     <div class="card-header">Incident Status</div>
     <div class="card-body">
-      <app-incident [stats$]="stats$"></app-incident>
+      <app-incident [status]="incidentStatus"></app-incident>
     </div>
   </div>
   <div class="card">
     <div class="card-header">Responder Utilization</div>
-    <app-charts [util$]="util$"></app-charts>
+    <app-charts [status]="responderStatus"></app-charts>
   </div>
 </div>
 <div class="card-deck">
   <div class="card">
-    <app-map [reload$]="reload$" [stats$]="stats$" [util$]="util$"></app-map>
+    <app-map [shelters]="shelters" [responders]="responders" [incidents]="incidents" [missionRoutes]="missionRoutes">
+    </app-map>
   </div>
 </div>

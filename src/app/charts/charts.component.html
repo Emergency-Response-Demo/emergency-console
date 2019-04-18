@@ -1,4 +1,4 @@
-<div class="card-body text-center">
-  <div class="card-subtitle text-muted">There are {{ total }} total responders. {{ active }} active, {{ idle }} idle</div>
-  <canvas baseChart height="70vh" [data]="data" [labels]="labels" [chartType]="type" [colors]="colors" [legend]="true"></canvas>
+<div class="card-body text-center" *ngIf="status">
+  <div class="card-subtitle text-muted">There are {{ status.total }} total responders. {{ status.active }} active, {{ status.idle }} idle</div>
+  <canvas baseChart height="70vh" [data]="status.data" [labels]="labels" [chartType]="type" [colors]="colors" [legend]="true"></canvas>
 </div>
