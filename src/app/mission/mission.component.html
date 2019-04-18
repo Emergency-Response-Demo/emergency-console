@@ -33,8 +33,10 @@
         <mgl-marker [lngLat]="shelter" *ngIf="shelter" #endMarker>
           <div class="marker" [ngStyle]="shelterStyle"></div>
         </mgl-marker>
-        <mgl-geojson-source id="geojson" [data]="data"> </mgl-geojson-source>
-        <mgl-layer id="route" type="line" source="geojson" [layout]="lineLayout" [paint]="linePaint"> </mgl-layer>
+        <mgl-geojson-source id="assignJson" [data]="assignData"> </mgl-geojson-source>
+        <mgl-layer id="assignRoute" type="line" source="assignJson" [layout]="lineLayout" [paint]="assignPaint"> </mgl-layer>
+        <mgl-geojson-source id="deliverjson" [data]="deliverData"> </mgl-geojson-source>
+        <mgl-layer id="deliverRoute" type="line" source="deliverjson" [layout]="lineLayout" [paint]="deliverPaint"> </mgl-layer>
       </mgl-map>
 
       <app-legend [bottom]="'110px'"></app-legend>
