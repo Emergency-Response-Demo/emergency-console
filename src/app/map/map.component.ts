@@ -54,32 +54,8 @@ export class MapComponent implements OnInit {
   center: number[] = [-77.886765, 34.210383];
   accessToken: string = window['_env'].accessToken;
 
-  assignData: GeoJSON.FeatureCollection<GeoJSON.LineString> = {
-    type: 'FeatureCollection',
-    features: [
-      {
-        type: 'Feature',
-        properties: {},
-        geometry: {
-          type: 'LineString',
-          coordinates: []
-        }
-      }
-    ]
-  };
-  deliverData: GeoJSON.FeatureCollection<GeoJSON.LineString> = {
-    type: 'FeatureCollection',
-    features: [
-      {
-        type: 'Feature',
-        properties: {},
-        geometry: {
-          type: 'LineString',
-          coordinates: []
-        }
-      }
-    ]
-  };
+  assignData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
+  deliverData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
   missionRoutes: MissionRoute[] = new Array();
   bounds: LngLatBoundsLike;
   boundsOptions: FitBoundsOptions = {
@@ -205,18 +181,12 @@ export class MapComponent implements OnInit {
       lon: mission.incidentLong,
       status: mission.status
     });
-    let lon = mission.responderStartLong;
-    let lat = mission.responderStartLat;
 
-    if (mission.responderLocationHistory.length > 0) {
-      lon = mission.responderLocationHistory.pop().location.long;
-      lat = mission.responderLocationHistory.pop().location.lat;
-    }
     this.responders.push({
       missionId: mission.id,
       id: mission.responderId,
-      lat: lat,
-      lon: lon,
+      lat: mission.responderStartLat,
+      lon: mission.responderStartLong,
       status: mission.status
     });
 
@@ -229,8 +199,8 @@ export class MapComponent implements OnInit {
     this.responders.push({
       missionId: mission.id,
       id: mission.responderId,
-      lat: mission.responderLocationHistory.pop().location.lat,
-      lon: mission.responderLocationHistory.pop().location.long,
+      lat: mission.responderStartLat,
+      lon: mission.responderStartLong,
       status: mission.status
     });
     if (mission.route && mission.route.steps.length > 0) {
@@ -246,13 +216,13 @@ export class MapComponent implements OnInit {
     };
     let foundWayPoint = false;
     steps.forEach((step: any) => {
-      if (step.wayPoint) {
-        foundWayPoint = true;
-      }
       if (foundWayPoint) {
         missionRoute.deliverRoute.push([step.loc.long, step.loc.lat]);
       } else {
         missionRoute.assignRoute.push([step.loc.long, step.loc.lat]);
+      }
+      if (step.wayPoint) {
+        foundWayPoint = true;
       }
     });
     this.missionRoutes.push(missionRoute);
