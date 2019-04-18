@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { faTachometerAlt, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { faGithub, faWpforms } from '@fortawesome/free-brands-svg-icons';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-sidebar',

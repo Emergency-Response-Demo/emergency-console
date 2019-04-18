@@ -11,7 +11,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 @Component({
   selector: 'app-mission',
   templateUrl: './mission.component.html',
-  styleUrls: ['./mission.component.css']
+  styleUrls: ['./mission.component.scss']
 })
 export class MissionComponent implements OnInit {
   map: Map;

@@ -25,6 +25,7 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { KeycloakAngularModule } from 'keycloak-angular';
 import { AppInitService } from './app-init.service';
 import { MissionComponent } from './mission/mission.component';
+import { LegendComponent } from './legend/legend.component';
 
 export function init(appInitService: AppInitService) {
   return () => appInitService.init();
@@ -41,7 +42,8 @@ export function init(appInitService: AppInitService) {
     DashboardComponent,
     IncidentComponent,
     MapComponent,
-    MissionComponent
+    MissionComponent,
+    LegendComponent
   ],
   imports: [
     BrowserModule,

@@ -34,12 +34,7 @@
         <mgl-layer id="route" type="line" source="geojson" [layout]="lineLayout" [paint]="linePaint"> </mgl-layer>
       </mgl-map>
 
-      <div id="legend" class="legend">
-        <div><span [ngStyle]="{ 'background-color': RED }"></span>Requested</div>
-        <div><span [ngStyle]="{ 'background-color': YELLOW }"></span>Assigned</div>
-        <div><span [ngStyle]="{ 'background-color': BLUE }"></span>Picked Up</div>
-        <div><span [ngStyle]="{ 'background-color': GREEN }"></span>Rescued</div>
-      </div>
+      <app-legend [bottom]="'110px'"></app-legend>
 
       <div class="d-flex justify-content-center mt-3">
         <button type="button" class="btn btn-secondary btn-lg" [disabled]="!start" (click)="doAvailable()" *ngIf="missionStatus === null">
