@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Incident } from '../incident';
-import { Responder } from '../responder';
-import { Shelter } from '../shelter';
-import { IncidentStatus } from '../incident/incident-status';
+import { Incident } from '../models/incident';
+import { Responder } from '../models/responder';
+import { Shelter } from '../models/shelter';
+import { IncidentStatus } from '../models/incident-status';
 import { LineLayout, LinePaint, LngLatBoundsLike, FitBoundsOptions } from 'mapbox-gl';
-import { MissionRoute } from '../mission-route';
+import { MissionRoute } from '../models/mission-route';
 import { AppUtil } from '../app-util';
 
 @Component({

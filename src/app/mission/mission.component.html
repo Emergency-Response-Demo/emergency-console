@@ -10,11 +10,12 @@
         [fitBounds]="bounds"
         [fitBoundsOptions]="boundsOptions"
         [accessToken]="accessToken"
-        (load)="map = $event"
-      >
-        <mgl-marker [lngLat]="incident" *ngIf="incident" #endMarker>
-          <div class="marker" [ngStyle]="incidentStyle"></div>
-        </mgl-marker>
+        (load)="map = $event">
+        <span *ngIf="incident">
+          <mgl-marker [lngLat]="incident" #endMarker>
+            <div class="marker" [ngStyle]="incidentStyle"></div>
+          </mgl-marker>
+        </span>
         <span *ngIf="start">
           <mgl-marker [lngLat]="start" #startMarker>
             <div class="marker" [ngStyle]="startStyle"></div>
@@ -31,9 +32,21 @@
             </div>
           </mgl-popup>
         </span>
-        <mgl-marker [lngLat]="shelter" *ngIf="shelter" #endMarker>
-          <div class="marker" [ngStyle]="shelterStyle"></div>
-        </mgl-marker>
+        <span *ngFor="let shelter of shelters">
+          <mgl-marker [lngLat]="[shelter.lon, shelter.lat]" #marker>
+            <div class="shelter" [ngStyle]="{
+                'background-image': 'url(assets/img/shelter.svg)'
+              }"></div>
+          </mgl-marker>
+          <mgl-popup [marker]="marker" [offset]="[0, -12]">
+            <div class="card-text">
+              <p>
+                <strong>Shelter Name: </strong> {{ shelter.name }}<br />
+                <strong>Long/Lat: </strong> {{ shelter.lon + ',' + shelter.lat }}<br />
+              </p>
+            </div>
+          </mgl-popup>
+        </span>
         <mgl-geojson-source id="assignJson" [data]="assignData"> </mgl-geojson-source>
         <mgl-layer id="assignRoute" type="line" source="assignJson" [layout]="lineLayout" [paint]="assignPaint"> </mgl-layer>
         <mgl-geojson-source id="deliverjson" [data]="deliverData"> </mgl-geojson-source>

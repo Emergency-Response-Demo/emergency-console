@@ -1,7 +1,7 @@
 import { Component, OnInit, Renderer2, HostListener } from '@angular/core';
 import { IconDefinition, faShieldAlt, faLock } from '@fortawesome/free-solid-svg-icons';
-import { AlertModel } from '../alerts/alert-model';
-import { AlertService } from '../alerts/alert.service';
+import { AlertModel } from '../models/alert-model';
+import { AlertService } from '../services/alert.service';
 import { interval } from 'rxjs/internal/observable/interval';
 import { KeycloakService } from 'keycloak-angular';
 import { timeout } from 'rxjs/operators';

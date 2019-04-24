@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {BreadCrumb} from './breadcrumb';
+import {BreadCrumb} from '../models/breadcrumb';
 import {distinctUntilChanged, filter, map} from 'rxjs/operators';
 
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Color } from 'ng2-charts';
-import { ResponderStatus } from '../responder-status';
+import { ResponderStatus } from '../models/responder-status';
 
 @Component({
   selector: 'app-charts',

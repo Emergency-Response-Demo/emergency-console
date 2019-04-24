@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IncidentStatus } from './incident-status';
+import { IncidentStatus } from '../models/incident-status';
 
 @Component({
   selector: 'app-incident',

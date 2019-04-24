@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { IconDefinition, faSync, faBan } from '@fortawesome/free-solid-svg-icons';
 import { interval } from 'rxjs/internal/observable/interval';
-import { IncidentStatus } from '../incident/incident-status';
-import { Shelter } from '../shelter';
-import { Responder } from '../responder';
-import { Incident } from '../incident';
-import { MissionRoute } from '../mission-route';
-import { MapService } from '../map/map.service';
-import { MessageService } from '../message/message.service';
-import { IncidentService } from '../incident/incident.service';
-import { ResponderService } from '../map/responder.service';
-import { Mission } from '../mission';
-import { ResponderStatus } from '../responder-status';
+import { IncidentStatus } from '../models/incident-status';
+import { Shelter } from '../models/shelter';
+import { Responder } from '../models/responder';
+import { Incident } from '../models/incident';
+import { MissionRoute } from '../models/mission-route';
+import { MessageService } from '../services/message.service';
+import { IncidentService } from '../services/incident.service';
+import { ResponderService } from '../services/responder.service';
+import { Mission } from '../models/mission';
+import { ResponderStatus } from '../models/responder-status';
+import { ShelterService } from '../services/shelter.service';
+import { MissionService } from '../services/mission.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,28 +33,14 @@ export class DashboardComponent implements OnInit {
   pickedUp: number;
   rescued: number;
   missionRoutes: MissionRoute[] = new Array();
-  shelters: Shelter[] = [{
-    name: 'Port City Marina',
-    lat: 34.2461,
-    lon: -77.9519,
-    rescued: 0
-  }, {
-    name: 'Wilmington Marine Center',
-    lat: 34.1706,
-    lon: -77.949,
-    rescued: 0
-  }, {
-    name: 'Carolina Beach Yacht Club',
-    lat: 34.0583,
-    lon: -77.8885,
-    rescued: 0
-  }];
+  shelters: Shelter[];
 
   constructor(
-    private mapService: MapService,
     private messageService: MessageService,
     private incidentService: IncidentService,
-    private responderService: ResponderService
+    private responderService: ResponderService,
+    private shelterService: ShelterService,
+    private missionService: MissionService
   ) { }
 
   togglePolling() {
@@ -73,16 +60,12 @@ export class DashboardComponent implements OnInit {
     this.assigned = 0;
     this.pickedUp = 0;
     this.rescued = 0;
-    this.mapService.getMissions().subscribe((missions: Mission[]) => {
+    this.shelterService.getShelters().subscribe((shelters: Shelter[]) => this.shelters = shelters);
+
+    this.missionService.getMissions().subscribe((missions: Mission[]) => {
       this.handleMissions(missions);
-
-      this.incidentService.getReported().subscribe((incidents: Incident[]) => {
-        this.handleIncidents(incidents);
-      });
-
-      this.responderService.getAvailable().subscribe((allAvailable: Responder[]) => {
-        this.handleResponders(allAvailable);
-      });
+      this.incidentService.getReported().subscribe((incidents: Incident[]) => this.handleIncidents(incidents));
+      this.responderService.getAvailable().subscribe((allAvailable: Responder[]) => this.handleResponders(allAvailable));
     });
   }
 

@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from '../message/message.service';
+import { MessageService } from '../services/message.service';
 import { KeycloakService } from 'keycloak-angular';
-import { Responder } from '../responder';
+import { Responder } from '../models/responder';
 import { MapMouseEvent, LngLatBoundsLike, LngLat, FitBoundsOptions, LinePaint, LineLayout, Map } from 'mapbox-gl';
-import { MissionService } from './mission.service';
+import { MissionService } from '../services/mission.service';
 import { AppUtil } from '../app-util';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { Shelter } from '../models/shelter';
+import { ShelterService } from '../services/shelter.service';
 
 @Component({
   selector: 'app-mission',
@@ -27,9 +29,9 @@ export class MissionComponent implements OnInit {
   deliverData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
   start: LngLat;
   incident: LngLat;
-  shelter: LngLat = new LngLat(-77.949, 34.1706);
   bounds: LngLatBoundsLike;
   missionStatus: string = null;
+  shelters: Shelter[];
 
   readonly GREY = '#a4b7c1';
   readonly YELLOW = '#ffc107';
@@ -59,11 +61,15 @@ export class MissionComponent implements OnInit {
     'line-width': 8
   };
 
-  constructor(private messageService: MessageService, private keycloak: KeycloakService, private missionService: MissionService) { }
+  constructor(
+    private messageService: MessageService,
+    private keycloak: KeycloakService,
+    private missionService: MissionService,
+    private shelterService: ShelterService) { }
 
   private setDirections(): void {
     setTimeout(() => {
-      this.missionService.getDirections(this.start, this.incident, this.shelter).subscribe(res => {
+      this.missionService.getDirections(this.start, this.incident, this.shelters[0]).subscribe(res => {
         const coordinates: number[][] = res.routes[0].geometry.coordinates;
         const incidentIndex = coordinates.findIndex((entry: number[]) => {
           return entry[0] === res.waypoints[1].location[0] && entry[1] === res.waypoints[1].location[1];
@@ -80,9 +86,17 @@ export class MissionComponent implements OnInit {
 
   doAvailable(): void {
     this.isLoading = true;
+
+    // check if responder exists
+
+    // If not exist, create new responder
+
+    // Set available to true
+
+    // ask mission service for mission MISSIONS_EP + "/responders/:id"
     this.missionStatus = 'Available';
     this.assignPaint['line-color'] = this.RED;
-    this.assignPaint = {...this.assignPaint };
+    this.assignPaint = { ...this.assignPaint };
     this.messageService.info('You are now available to receive a rescue mission');
     this.incidentStyle['background-image'] = 'url(assets/img/marker-red.svg)';
     this.incident = new LngLat(-77.94346099447226, 34.21828123440535);
@@ -94,7 +108,7 @@ export class MissionComponent implements OnInit {
     this.messageService.info('Mission started');
     this.missionStatus = 'Start';
     this.assignPaint['line-color'] = this.YELLOW;
-    this.assignPaint = {...this.assignPaint };
+    this.assignPaint = { ...this.assignPaint };
     this.incidentStyle['background-image'] = 'url(assets/img/marker-yellow.svg)';
     this.locationRecurse(this.assignData.features[0].geometry.coordinates);
   }
@@ -145,5 +159,6 @@ export class MissionComponent implements OnInit {
         });
       }
     });
+    this.shelterService.getShelters().subscribe((shelters: Shelter[]) => this.shelters = shelters);
   }
 }
