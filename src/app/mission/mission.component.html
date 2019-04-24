@@ -12,33 +12,34 @@
         [accessToken]="accessToken"
         (load)="map = $event">
         <span *ngIf="incident">
-          <mgl-marker [lngLat]="incident" #endMarker>
+          <mgl-marker [lngLat]="incident" #incidentMarker>
             <div class="marker" [ngStyle]="incidentStyle"></div>
           </mgl-marker>
         </span>
-        <span *ngIf="start">
-          <mgl-marker [lngLat]="start" #startMarker>
+        <span *ngIf="responder.lon != 0 && responder.lat != 0">
+          <mgl-marker [lngLat]="[responder.lon, responder.lat]" #responderMarker>
             <div class="marker" [ngStyle]="startStyle"></div>
           </mgl-marker>
-          <mgl-popup [marker]="startMarker" [offset]="[0, -12]">
+          <mgl-popup [marker]="responderMarker" [offset]="[0, -12]">
             <div class="card-text">
               <p>
-                <strong>Full Name: </strong> {{ model.name }}<br />
-                <strong>Phone Number: </strong> {{ model.phoneNumber }}<br />
-                <strong>Boat Capacity: </strong> {{ model.boatCapacity }}<br />
-                <strong>Has Medical: </strong> {{ model.medicalKit }}<br />
-                {{ startMarker.lngLat }}
+                <strong>ID: </strong> {{ responder.id }}<br />
+                <strong>Full Name: </strong> {{ responder.name }}<br />
+                <strong>Phone Number: </strong> {{ responder.phoneNumber }}<br />
+                <strong>Boat Capacity: </strong> {{ responder.boatCapacity }}<br />
+                <strong>Has Medical: </strong> {{ responder.medicalKit }}<br />
+                <strong>Lng/Lat: </strong> {{ responder.lon}}, {{ responder.lat}}
               </p>
             </div>
           </mgl-popup>
         </span>
         <span *ngFor="let shelter of shelters">
-          <mgl-marker [lngLat]="[shelter.lon, shelter.lat]" #marker>
+          <mgl-marker [lngLat]="[shelter.lon, shelter.lat]" #shelterMarker>
             <div class="shelter" [ngStyle]="{
                 'background-image': 'url(assets/img/shelter.svg)'
               }"></div>
           </mgl-marker>
-          <mgl-popup [marker]="marker" [offset]="[0, -12]">
+          <mgl-popup [marker]="shelterMarker" [offset]="[0, -12]">
             <div class="card-text">
               <p>
                 <strong>Shelter Name: </strong> {{ shelter.name }}<br />
@@ -56,16 +57,36 @@
       <app-legend [bottom]="'110px'"></app-legend>
 
       <div class="d-flex justify-content-center mt-3">
-        <button type="button" class="btn btn-secondary btn-lg" [disabled]="!start" (click)="doAvailable()" *ngIf="missionStatus === null">
+        <button
+          type="button"
+          class="btn btn-secondary btn-lg"
+          [disabled]="responder.lon === 0 && responder.lat === 0"
+          (click)="doAvailable()"
+          *ngIf="missionStatus === null">
           Available
         </button>
-        <button type="button" class="btn btn-warning btn-lg" (click)="doStart()" [disabled]="isLoading" *ngIf="missionStatus === 'Available'">
+        <button
+          type="button"
+          class="btn btn-warning btn-lg"
+          (click)="doStart()"
+          [disabled]="isLoading"
+          *ngIf="missionStatus === 'Available'">
           <fa-icon [icon]="loadingIcon" [spin]="true" *ngIf="isLoading"></fa-icon> Start
         </button>
-        <button type="button" class="btn btn-primary btn-lg" (click)="doPickedUp()" *ngIf="missionStatus === 'Start'">
+        <button
+          type="button"
+          class="btn btn-primary btn-lg"
+          (click)="doPickedUp()"
+          *ngIf="missionStatus === 'Start'"
+          [disabled]="inRecursion">
           Picked Up
         </button>
-        <button type="button" class="btn btn-success btn-lg" (click)="doRescued()" *ngIf="missionStatus === 'Picked Up'" [disabled]="isLoading">
+        <button
+          type="button"
+          class="btn btn-success btn-lg"
+          (click)="doRescued()"
+          *ngIf="missionStatus === 'Picked Up'"
+          [disabled]="isLoading || inRecursion">
           <fa-icon [icon]="loadingIcon" [spin]="true" *ngIf="isLoading"></fa-icon> Rescued
         </button>
       </div>

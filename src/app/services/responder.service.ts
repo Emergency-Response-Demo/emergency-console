@@ -10,19 +10,31 @@ import { Responder } from '../models/responder';
   providedIn: 'root'
 })
 export class ResponderService {
-  private respondersUrl = 'responder-service/responders/available';
+  private url = 'responder-service/responder';
 
   getAvailable(): Observable<Responder[]> {
-    return this.http.get<Responder[]>(this.respondersUrl).pipe(
+    const url = 'responder-service/responders/available';
+    return this.http.get<Responder[]>(url).pipe(
       catchError(res => this.handleError('getAvailable()', res))
     );
   }
 
-  private handleError(method: string, res: HttpErrorResponse): Observable<any> {
-    this.messageService.error(`${method} ${res.message}`);
-    console.error(res.error);
-    return of(null);
+  getResponder(name: string): Observable<Responder> {
+    const url = `responder-service/responder/byname/${name}`;
+    return this.http.get<Responder>(url).pipe(
+      catchError(res => this.handleError('getResponder()', res))
+    );
   }
 
-  constructor(private messageService: MessageService, private http: HttpClient) {}
+  private handleError(method: string, res: HttpErrorResponse): Observable<any> {
+    if (res.status === 404 && method === 'getResponder()') {
+      return of(new Responder());
+    } else {
+      this.messageService.error(`${method} ${res.message}`);
+      console.error(res.error);
+      return of(null);
+    }
+  }
+
+  constructor(private messageService: MessageService, private http: HttpClient) { }
 }

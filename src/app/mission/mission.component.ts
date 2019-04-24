@@ -9,6 +9,7 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Shelter } from '../models/shelter';
 import { ShelterService } from '../services/shelter.service';
+import { ResponderService } from '../services/responder.service';
 
 @Component({
   selector: 'app-mission',
@@ -19,7 +20,7 @@ export class MissionComponent implements OnInit {
   map: Map;
   isLoading = false;
   loadingIcon: IconDefinition = faCircleNotch;
-  model: Responder = new Responder();
+  responder: Responder = new Responder();
   center: LngLat = new LngLat(-77.886765, 34.210383);
   boundsOptions: FitBoundsOptions = {
     padding: 50
@@ -27,11 +28,11 @@ export class MissionComponent implements OnInit {
   accessToken: string = window['_env'].accessToken;
   assignData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
   deliverData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
-  start: LngLat;
   incident: LngLat;
   bounds: LngLatBoundsLike;
   missionStatus: string = null;
   shelters: Shelter[];
+  inRecursion = false;
 
   readonly GREY = '#a4b7c1';
   readonly YELLOW = '#ffc107';
@@ -65,11 +66,13 @@ export class MissionComponent implements OnInit {
     private messageService: MessageService,
     private keycloak: KeycloakService,
     private missionService: MissionService,
-    private shelterService: ShelterService) { }
+    private shelterService: ShelterService,
+    private responderService: ResponderService
+  ) { }
 
   private setDirections(): void {
     setTimeout(() => {
-      this.missionService.getDirections(this.start, this.incident, this.shelters[0]).subscribe(res => {
+      this.missionService.getDirections(this.responder, this.incident, this.shelters[0]).subscribe(res => {
         const coordinates: number[][] = res.routes[0].geometry.coordinates;
         const incidentIndex = coordinates.findIndex((entry: number[]) => {
           return entry[0] === res.waypoints[1].location[0] && entry[1] === res.waypoints[1].location[1];
@@ -86,13 +89,7 @@ export class MissionComponent implements OnInit {
 
   doAvailable(): void {
     this.isLoading = true;
-
-    // check if responder exists
-
-    // If not exist, create new responder
-
     // Set available to true
-
     // ask mission service for mission MISSIONS_EP + "/responders/:id"
     this.missionStatus = 'Available';
     this.assignPaint['line-color'] = this.RED;
@@ -110,15 +107,18 @@ export class MissionComponent implements OnInit {
     this.assignPaint['line-color'] = this.YELLOW;
     this.assignPaint = { ...this.assignPaint };
     this.incidentStyle['background-image'] = 'url(assets/img/marker-yellow.svg)';
+    this.inRecursion = true;
     this.locationRecurse(this.assignData.features[0].geometry.coordinates);
   }
 
   private locationRecurse(coordinates: number[][]): void {
     if (coordinates.length < 1) {
+      this.inRecursion = false;
       return;
     } else {
       setTimeout(() => {
-        this.start = new LngLat(coordinates[0][0], coordinates[0][1]);
+        this.responder.lon = coordinates[0][0];
+        this.responder.lat = coordinates[0][1];
         coordinates.shift();
         this.locationRecurse(coordinates);
       }, 1000);
@@ -129,13 +129,15 @@ export class MissionComponent implements OnInit {
     this.missionStatus = 'Picked Up';
     this.messageService.info('Victim picked up');
     this.incident = null;
+    this.inRecursion = true;
     this.locationRecurse(this.deliverData.features[0].geometry.coordinates);
   }
 
   doRescued(): void {
     this.messageService.success('Victim rescued');
     this.missionStatus = null;
-    this.start = null;
+    this.responder.lon = 0;
+    this.responder.lat = 0;
     this.assignData.features[0].geometry.coordinates = [];
     this.assignData = { ...this.assignData };
     this.deliverData.features[0].geometry.coordinates = [];
@@ -144,7 +146,8 @@ export class MissionComponent implements OnInit {
 
   setLocation(event: MapMouseEvent): void {
     if (event.lngLat && this.missionStatus === null) {
-      this.start = event.lngLat;
+      this.responder.lon = event.lngLat.lng;
+      this.responder.lat = event.lngLat.lat;
     }
   }
 
@@ -152,10 +155,10 @@ export class MissionComponent implements OnInit {
     this.keycloak.isLoggedIn().then(isLoggedIn => {
       if (isLoggedIn) {
         this.keycloak.loadUserProfile().then(profile => {
-          this.model.name = `${profile.firstName} ${profile.lastName}`;
-          this.model.phoneNumber = profile['attributes'].phoneNumber;
-          this.model.boatCapacity = profile['attributes'].boatCapacity;
-          this.model.medicalKit = profile['attributes'].medical;
+          this.responder.name = `${profile.firstName} ${profile.lastName}`;
+          this.responder.phoneNumber = profile['attributes'].phoneNumber;
+          this.responder.boatCapacity = profile['attributes'].boatCapacity;
+          this.responder.medicalKit = profile['attributes'].medical;
         });
       }
     });

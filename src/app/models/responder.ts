@@ -1,9 +1,9 @@
 export class Responder {
-  id: number;
+  id = 0;
   name?: string;
   phoneNumber?: string;
-  lat: number;
-  lon: number;
+  lat = 0;
+  lon = 0;
   boatCapacity?: number;
   medicalKit?: boolean;
   missionId?: string;
