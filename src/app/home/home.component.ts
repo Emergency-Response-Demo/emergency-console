@@ -24,9 +24,19 @@ export class HomeComponent implements OnInit {
       if (isLoggedIn) {
         this.keycloak.loadUserProfile().then(profile => {
           this.fullName = `${profile.firstName} ${profile.lastName}`;
-          this.responderService.getResponder(this.fullName).subscribe((responder: Responder) => {
+          this.responderService.getByName(this.fullName).subscribe((responder: Responder) => {
             if (responder.id === 0) {
-              this.messageService.info('PLACEHOLDER: Registering as new responder');
+              responder.name = this.fullName;
+              responder.name = `${profile.firstName} ${profile.lastName}`;
+              responder.phoneNumber = profile['attributes'].phoneNumber[0];
+              responder.boatCapacity = profile['attributes'].boatCapacity[0];
+              responder.medicalKit = profile['attributes'].medical[0];
+              responder.person = true;
+              responder.available = false;
+
+              this.messageService.info('Registering as new responder');
+
+              this.responderService.add(responder).subscribe(() => this.messageService.success(`Succesfully registered ${this.fullName}`));
             }
           });
         });

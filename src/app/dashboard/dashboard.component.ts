@@ -111,7 +111,7 @@ export class DashboardComponent implements OnInit {
       id: mission.responderId,
       lat: mission.responderStartLat,
       lon: mission.responderStartLong,
-      status: mission.status
+      missionStatus: mission.status
     });
 
     if (mission.route && mission.route.steps) {
@@ -125,7 +125,7 @@ export class DashboardComponent implements OnInit {
       id: mission.responderId,
       lat: mission.responderStartLat,
       lon: mission.responderStartLong,
-      status: mission.status
+      missionStatus: mission.status
     });
     if (mission.route && mission.route.steps.length > 0) {
       this.addRoute(mission.id, mission.route.steps);
@@ -194,6 +194,7 @@ export class DashboardComponent implements OnInit {
         responder.phoneNumber = found.phoneNumber;
         responder.medicalKit = found.medicalKit;
         responder.boatCapacity = found.boatCapacity;
+        responder.person = found.person;
       }
     });
   }

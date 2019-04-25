@@ -155,10 +155,8 @@ export class MissionComponent implements OnInit {
     this.keycloak.isLoggedIn().then(isLoggedIn => {
       if (isLoggedIn) {
         this.keycloak.loadUserProfile().then(profile => {
-          this.responder.name = `${profile.firstName} ${profile.lastName}`;
-          this.responder.phoneNumber = profile['attributes'].phoneNumber;
-          this.responder.boatCapacity = profile['attributes'].boatCapacity;
-          this.responder.medicalKit = profile['attributes'].medical;
+          const name = `${profile.firstName} ${profile.lastName}`;
+          this.responderService.getByName(name).subscribe((responder: Responder) => this.responder = {...responder});
         });
       }
     });

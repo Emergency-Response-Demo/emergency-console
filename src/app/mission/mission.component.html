@@ -16,7 +16,7 @@
             <div class="marker" [ngStyle]="incidentStyle"></div>
           </mgl-marker>
         </span>
-        <span *ngIf="responder.lon != 0 && responder.lat != 0">
+        <span *ngIf="responder.lon && responder.lat">
           <mgl-marker [lngLat]="[responder.lon, responder.lat]" #responderMarker>
             <div class="marker" [ngStyle]="startStyle"></div>
           </mgl-marker>

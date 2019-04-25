@@ -10,7 +10,8 @@ import { Responder } from '../models/responder';
   providedIn: 'root'
 })
 export class ResponderService {
-  private url = 'responder-service/responder';
+
+  constructor(private messageService: MessageService, private http: HttpClient) { }
 
   getAvailable(): Observable<Responder[]> {
     const url = 'responder-service/responders/available';
@@ -19,10 +20,25 @@ export class ResponderService {
     );
   }
 
-  getResponder(name: string): Observable<Responder> {
+  getByName(name: string): Observable<Responder> {
     const url = `responder-service/responder/byname/${name}`;
     return this.http.get<Responder>(url).pipe(
       catchError(res => this.handleError('getResponder()', res))
+    );
+  }
+
+  add(responder: Responder): Observable<any> {
+    delete responder.id;
+    const url = 'responder-service/responder';
+    return this.http.post<any>(url, responder).pipe(
+      catchError(res => this.handleError('add()', res))
+    );
+  }
+
+  update(responder: Responder): Observable<any> {
+    const url = 'responder-service/responder';
+    return this.http.put<any>(url, responder).pipe(
+      catchError(res => this.handleError('update()', res))
     );
   }
 
@@ -35,6 +51,4 @@ export class ResponderService {
       return of(null);
     }
   }
-
-  constructor(private messageService: MessageService, private http: HttpClient) { }
 }

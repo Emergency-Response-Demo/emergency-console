@@ -2,11 +2,12 @@ export class Responder {
   id = 0;
   name?: string;
   phoneNumber?: string;
-  lat = 0;
-  lon = 0;
+  lat?: number;
+  lon?: number;
   boatCapacity?: number;
   medicalKit?: boolean;
   missionId?: string;
-  status: string;
+  missionStatus: string;
+  available?: boolean;
   person?: boolean;
 }
