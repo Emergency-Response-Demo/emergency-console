@@ -1,0 +1,138 @@
+{
+  "id" : "b43db786-41c9-469d-be73-bdad40621c72",
+  "incidentId" : "163daf49-30a3-4f4e-be8c-bf2675f6b676",
+  "responderId" : "71",
+  "responderStartLat" : 34.2461,
+  "responderStartLong" : -77.9519,
+  "incidentLat" : 34.21809216133874,
+  "incidentLong" : -77.95043888469345,
+  "destinationLat" : 34.2461,
+  "destinationLong" : -77.9519,
+  "responderLocationHistory" : [ ],
+  "status" : "CREATED",
+  "route" : {
+    "distance" : 7861.7,
+    "duration" : 993.4,
+    "steps" : [ {
+      "distance" : 251.8,
+      "duration" : 39.9,
+      "name" : "Harnett Street",
+      "instruction" : "Head northeast on Harnett Street",
+      "weight" : 62.0,
+      "loc" : {
+        "lat" : 34.246299,
+        "long" : -77.951437
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 3080.7,
+      "duration" : 328.0,
+      "name" : "North Front Street",
+      "instruction" : "Turn right onto North Front Street",
+      "weight" : 353.20000000000005,
+      "loc" : {
+        "lat" : 34.246677,
+        "long" : -77.948799
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 466.7,
+      "duration" : 105.3,
+      "name" : "",
+      "instruction" : "Turn right",
+      "weight" : 105.8,
+      "loc" : {
+        "lat" : 34.219354,
+        "long" : -77.94682
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 51.0,
+      "duration" : 13.8,
+      "name" : "",
+      "instruction" : "Keep left at the fork",
+      "weight" : 28.7,
+      "loc" : {
+        "lat" : 34.218667,
+        "long" : -77.950169
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 132.8,
+      "duration" : 29.9,
+      "name" : "",
+      "instruction" : "Turn right",
+      "weight" : 29.9,
+      "loc" : {
+        "lat" : 34.218297,
+        "long" : -77.949937
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "",
+      "instruction" : "You have arrived at your 1st destination, on the left",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.218031,
+        "long" : -77.950277
+      },
+      "destination" : false,
+      "wayPoint" : true
+    }, {
+      "distance" : 538.8,
+      "duration" : 126.60000000000001,
+      "name" : "",
+      "instruction" : "Head northeast",
+      "weight" : 157.9,
+      "loc" : {
+        "lat" : 34.218031,
+        "long" : -77.950277
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 3080.9,
+      "duration" : 319.19999999999993,
+      "name" : "South Front Street (US 421 Truck)",
+      "instruction" : "Turn left onto South Front Street (US 421 Truck)",
+      "weight" : 365.70000000000005,
+      "loc" : {
+        "lat" : 34.219354,
+        "long" : -77.94682
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 259.0,
+      "duration" : 30.700000000000003,
+      "name" : "Harnett Street",
+      "instruction" : "Turn left onto Harnett Street",
+      "weight" : 38.6,
+      "loc" : {
+        "lat" : 34.246683,
+        "long" : -77.948721
+      },
+      "destination" : false,
+      "wayPoint" : false
+    }, {
+      "distance" : 0.0,
+      "duration" : 0.0,
+      "name" : "Harnett Street",
+      "instruction" : "You have arrived at your destination, straight ahead",
+      "weight" : 0.0,
+      "loc" : {
+        "lat" : 34.246299,
+        "long" : -77.951437
+      },
+      "destination" : true,
+      "wayPoint" : false
+    } ]
+  }
+}

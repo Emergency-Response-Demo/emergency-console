@@ -13,6 +13,9 @@ import { Mission } from '../models/mission';
 import { ResponderStatus } from '../models/responder-status';
 import { ShelterService } from '../services/shelter.service';
 import { MissionService } from '../services/mission.service';
+import { takeUntil } from 'rxjs/operators';
+import { of } from 'rxjs/internal/observable/of';
+import { Subject } from 'rxjs/internal/Subject';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,6 +37,7 @@ export class DashboardComponent implements OnInit {
   rescued: number;
   missionRoutes: MissionRoute[] = new Array();
   shelters: Shelter[];
+  stop$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private messageService: MessageService,
@@ -47,11 +51,13 @@ export class DashboardComponent implements OnInit {
     this.isPolling = !this.isPolling;
 
     if (this.isPolling === true) {
-      this.polling = interval(this.interval).subscribe(n => {
+      this.polling = interval(this.interval).pipe(
+        takeUntil(this.stop$)
+      ).subscribe(() => {
         this.load();
       });
     } else {
-      this.polling.unsubscribe();
+      this.stop$.next(true);
     }
   }
 

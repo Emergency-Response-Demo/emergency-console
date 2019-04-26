@@ -99,6 +99,7 @@ export class MissionComponent implements OnInit {
         if (res === null) {
           this.messageService.info('There is no mission available at this time');
         } else {
+          // set mission to stuff
           console.log(res);
         }
       });
@@ -156,6 +157,8 @@ export class MissionComponent implements OnInit {
     this.assignData = { ...this.assignData };
     this.deliverData.features[0].geometry.coordinates = [];
     this.deliverData = { ...this.deliverData };
+
+    // update responder to available = false and lat/lon = 0
   }
 
   setLocation(event: MapMouseEvent): void {
