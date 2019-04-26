@@ -76,7 +76,7 @@ export class MissionComponent implements OnInit {
     this.isLoading = true;
     this.responder.available = true;
 
-    this.responderService.update(this.responder).subscribe(() => this.messageService.success('You are now available to receive a rescue mission'));
+    this.responderService.update(this.responder).subscribe(() => this.messageService.success('Waiting to receive a rescue mission'));
     setTimeout(() => {
       this.missionService.getByResponder(this.responder).subscribe((mission: Mission) => {
         if (mission === null) {
