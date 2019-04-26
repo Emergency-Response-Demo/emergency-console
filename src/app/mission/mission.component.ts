@@ -40,8 +40,8 @@ export class MissionComponent implements OnInit {
   readonly RED = '#f86c6b';
   readonly GREEN = '#4dbd74';
 
-  startStyle: any = {
-    'background-image': 'url(assets/img/location.svg)'
+  responderStyle: any = {
+    'background-image': 'url(assets/img/responder-person.svg)'
   };
   incidentStyle: any = {
     'background-image': 'url(assets/img/marker-red.svg)'

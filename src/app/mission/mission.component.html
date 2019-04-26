@@ -18,7 +18,7 @@
         </span>
         <span *ngIf="responder.lon && responder.lat">
           <mgl-marker [lngLat]="[responder.lon, responder.lat]" #responderMarker>
-            <div class="marker" [ngStyle]="startStyle"></div>
+            <div class="marker" [ngStyle]="responderStyle"></div>
           </mgl-marker>
           <mgl-popup [marker]="responderMarker" [offset]="[0, -12]">
             <div class="card-text">

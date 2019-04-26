@@ -52,6 +52,10 @@ export class MapComponent implements OnInit {
     'line-width': 8
   };
 
+  shelterStyle: any = {
+    'background-image': 'url(assets/img/shelter.svg)'
+  };
+
   constructor() { }
 
   markerClick(lngLat: number[]): void {
@@ -59,12 +63,12 @@ export class MapComponent implements OnInit {
   }
 
   // icons colored with coreui hex codes from https://iconscout.com/icon/location-62
-  getIcon(missionStatus: string): string {
-    if (missionStatus === 'REPORTED') {
-      return 'red';
-    } else {
-      return 'yellow';
-    }
+  getIncidentIcon(missionStatus: string): string {
+    return (missionStatus === 'REPORTED' ? 'marker-red.svg' : 'marker-yellow.svg');
+  }
+
+  getResponderIcon(person: boolean): string {
+    return (person ? 'responder-person.svg' : 'responder.svg');
   }
 
   onPopupOpen(id: string) {
