@@ -92,13 +92,20 @@ export class MissionComponent implements OnInit {
     this.isLoading = true;
     this.responder.available = true;
 
-    this.responderService.update(this.responder).subscribe(() => console.log('responder set to available'));
+    this.responderService.update(this.responder).subscribe(() => this.messageService.success('You are now available to receive a rescue mission'));
 
-    // ask mission service for mission MISSIONS_EP + "/responders/:id"
+    setTimeout(() => {
+      this.missionService.getByResponder(this.responder).subscribe((res: any) => {
+        if (res === null) {
+          this.messageService.info('There is no mission available at this time');
+        }
+      });
+    }, 10000);
+
+    // continue with simulation code
     this.missionStatus = 'Available';
     this.assignPaint['line-color'] = this.RED;
     this.assignPaint = { ...this.assignPaint };
-    this.messageService.info('You are now available to receive a rescue mission');
     this.incidentStyle['background-image'] = 'url(assets/img/marker-red.svg)';
     this.incident.lon = -77.94346099447226;
     this.incident.lat = 34.21828123440535;

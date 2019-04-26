@@ -13,12 +13,18 @@ import { Incident } from '../models/incident';
   providedIn: 'root'
 })
 export class MissionService {
-  private mapUrl = 'mission-service/api/missions';
-  // private mapUrl = 'assets/data/mission-service.json';
 
   getMissions(): Observable<Mission[]> {
-    return this.http.get<Mission[]>(this.mapUrl).pipe(
+    const url = 'mission-service/api/missions';
+    return this.http.get<Mission[]>(url).pipe(
       catchError(err => this.handleError('getMissions()', err))
+    );
+  }
+
+  getByResponder(responder: Responder): Observable<Mission> {
+    const url = `mission-service/api/missions/responders/${responder.id}`;
+    return this.http.get<Mission[]>(url).pipe(
+      catchError(err => this.handleError('getByResponder()', err))
     );
   }
 
