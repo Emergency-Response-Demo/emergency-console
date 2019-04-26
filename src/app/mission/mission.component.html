@@ -11,13 +11,13 @@
         [fitBoundsOptions]="boundsOptions"
         [accessToken]="accessToken"
         (load)="map = $event">
-        <span *ngIf="incident">
-          <mgl-marker [lngLat]="incident" #incidentMarker>
+        <span *ngIf="incident.lon && incident.lat">
+          <mgl-marker [lngLat]="[incident.lon, incident.lat]" #incidentMarker>
             <div class="marker" [ngStyle]="incidentStyle"></div>
           </mgl-marker>
         </span>
-        <span *ngIf="responder.lon && responder.lat">
-          <mgl-marker [lngLat]="[responder.lon, responder.lat]" #responderMarker>
+        <span *ngIf="responder.longitude && responder.latitude">
+          <mgl-marker [lngLat]="[responder.longitude, responder.latitude]" #responderMarker>
             <div class="marker" [ngStyle]="responderStyle"></div>
           </mgl-marker>
           <mgl-popup [marker]="responderMarker" [offset]="[0, -12]">
@@ -28,7 +28,7 @@
                 <strong>Phone Number: </strong> {{ responder.phoneNumber }}<br />
                 <strong>Boat Capacity: </strong> {{ responder.boatCapacity }}<br />
                 <strong>Has Medical: </strong> {{ responder.medicalKit }}<br />
-                <strong>Lng/Lat: </strong> {{ responder.lon}}, {{ responder.lat}}
+                <strong>Lng/Lat: </strong> {{ responder.longitude}}, {{ responder.latitude}}
               </p>
             </div>
           </mgl-popup>
@@ -60,7 +60,7 @@
         <button
           type="button"
           class="btn btn-secondary btn-lg"
-          [disabled]="responder.lon === 0 && responder.lat === 0"
+          [disabled]="responder.longitude === 0 && responder.latitude === 0"
           (click)="doAvailable()"
           *ngIf="missionStatus === null">
           Available

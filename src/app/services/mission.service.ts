@@ -4,10 +4,10 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
-import { LngLat } from 'mapbox-gl';
 import { Shelter } from '../models/shelter';
 import { Mission } from '../models/mission';
 import { Responder } from '../models/responder';
+import { Incident } from '../models/incident';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +22,9 @@ export class MissionService {
     );
   }
 
-  getDirections(responder: Responder, incident: LngLat, shelter: Shelter) {
-    const url = `/mapbox/directions/v5/mapbox/driving/${responder.lon},${responder.lat};${incident.lng},${incident.lat};${shelter.lon},${shelter.lat}.json`;
+  getDirections(responder: Responder, incident: Incident, shelter: Shelter) {
+    const params = `${responder.longitude},${responder.latitude};${incident.lon},${incident.lat};${shelter.lon},${shelter.lat}`;
+    const url = `/mapbox/directions/v5/mapbox/driving/${params}.json`;
     const httpParams = new HttpParams()
       .set('access_token', window['_env'].accessToken)
       .set('geometries', 'geojson');
@@ -35,7 +36,6 @@ export class MissionService {
 
   private handleError(method: string, res: HttpErrorResponse): Observable<any> {
     this.messageService.error(`${method} ${res.message}`);
-    console.error(res.error);
     return of(null);
   }
 

@@ -7,8 +7,8 @@
     [fitBounds]="bounds"
     [fitBoundsOptions]="boundsOptions">
     <span *ngFor="let responder of responders">
-      <mgl-marker [lngLat]="[responder.lon, responder.lat]" #responderMarker>
-        <div class="marker" (click)="markerClick([responder.lon, responder.lat])" [ngStyle]="{
+      <mgl-marker [lngLat]="[responder.longitude, responder.latitude]" #responderMarker>
+        <div class="marker" (click)="markerClick([responder.longitude, responder.latitude])" [ngStyle]="{
           'background-image': 'url(assets/img/' + getResponderIcon(responder.person) +')'
         }" ></div>
       </mgl-marker>
@@ -18,7 +18,7 @@
             <strong>Mission ID: </strong> {{ responder.missionId }}<br />
             <strong>Mission Status: </strong> {{ responder.missionStatus }}<br />
             <strong>Responder ID: </strong> {{ responder.id }}<br />
-            <strong>Long/Lat: </strong> {{ responder.lon + ',' + responder.lat }}<br />
+            <strong>Long/Lat: </strong> {{ responder.longitude + ',' + responder.latitude }}<br />
             <strong>Full Name: </strong> {{ responder.name }}<br />
             <strong>Phone Number: </strong> {{ responder.phoneNumber }}<br />
             <strong>Provides Medical?: </strong> {{ responder.medicalKit }}<br />

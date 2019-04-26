@@ -109,8 +109,8 @@ export class DashboardComponent implements OnInit {
     this.responders.push({
       missionId: mission.id,
       id: mission.responderId,
-      lat: mission.responderStartLat,
-      lon: mission.responderStartLong,
+      latitude: mission.responderStartLat,
+      longitude: mission.responderStartLong,
       missionStatus: mission.status
     });
 
@@ -123,8 +123,8 @@ export class DashboardComponent implements OnInit {
     this.responders.push({
       missionId: mission.id,
       id: mission.responderId,
-      lat: mission.responderStartLat,
-      lon: mission.responderStartLong,
+      latitude: mission.responderStartLat,
+      longitude: mission.responderStartLong,
       missionStatus: mission.status
     });
     if (mission.route && mission.route.steps.length > 0) {
