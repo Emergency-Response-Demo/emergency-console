@@ -60,17 +60,17 @@
         <button
           type="button"
           class="btn btn-secondary btn-lg"
-          [disabled]="responder.longitude === 0 && responder.latitude === 0"
+          [disabled]="(responder.longitude === 0 && responder.latitude === 0) || isLoading"
           (click)="doAvailable()"
-          *ngIf="missionStatus === null">
-          Available
+          *ngIf="missionStatus === null && responder.latitude != null">
+          <fa-icon [icon]="loadingIcon" [spin]="true" *ngIf="isLoading"></fa-icon> Available
         </button>
         <button
           type="button"
           class="btn btn-warning btn-lg"
           (click)="doStart()"
           [disabled]="isLoading"
-          *ngIf="missionStatus === 'Available'">
+          *ngIf="missionStatus === 'CREATED'">
           <fa-icon [icon]="loadingIcon" [spin]="true" *ngIf="isLoading"></fa-icon> Start
         </button>
         <button

@@ -14,7 +14,6 @@ import { ResponderStatus } from '../models/responder-status';
 import { ShelterService } from '../services/shelter.service';
 import { MissionService } from '../services/mission.service';
 import { takeUntil } from 'rxjs/operators';
-import { of } from 'rxjs/internal/observable/of';
 import { Subject } from 'rxjs/internal/Subject';
 
 @Component({

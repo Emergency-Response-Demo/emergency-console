@@ -11,6 +11,7 @@ import { Shelter } from '../models/shelter';
 import { ShelterService } from '../services/shelter.service';
 import { ResponderService } from '../services/responder.service';
 import { Incident } from '../models/incident';
+import { Mission } from '../models/mission';
 
 @Component({
   selector: 'app-mission',
@@ -71,49 +72,42 @@ export class MissionComponent implements OnInit {
     private responderService: ResponderService
   ) { }
 
-  private setDirections(): void {
-    setTimeout(() => {
-      this.missionService.getDirections(this.responder, this.incident, this.shelters[0]).subscribe(res => {
-        const coordinates: number[][] = res.routes[0].geometry.coordinates;
-        const incidentIndex = coordinates.findIndex((entry: number[]) => {
-          return entry[0] === res.waypoints[1].location[0] && entry[1] === res.waypoints[1].location[1];
-        });
-        this.assignData.features[0].geometry.coordinates = coordinates.slice(0, incidentIndex);
-        this.assignData = { ...this.assignData };
-        this.deliverData.features[0].geometry.coordinates = coordinates.slice(incidentIndex, coordinates.length);
-        this.deliverData = { ...this.deliverData };
-        this.bounds = AppUtil.getBounds(coordinates);
-        this.isLoading = false;
-      });
-    }, 1000);
-  }
-
   doAvailable(): void {
     this.isLoading = true;
     this.responder.available = true;
 
     this.responderService.update(this.responder).subscribe(() => this.messageService.success('You are now available to receive a rescue mission'));
-
     setTimeout(() => {
-      this.missionService.getByResponder(this.responder).subscribe((res: any) => {
-        if (res === null) {
+      this.missionService.getByResponder(this.responder).subscribe((mission: Mission) => {
+        if (mission === null) {
           this.messageService.info('There is no mission available at this time');
         } else {
-          // set mission to stuff
-          console.log(res);
+          this.messageService.success(`You have been assigned mission ${mission.id}`);
+          this.incident.lon = mission.incidentLong;
+          this.incident.lat = mission.incidentLat;
+          this.missionStatus = mission.status;
+          this.assignPaint['line-color'] = this.RED;
+          this.assignPaint = { ...this.assignPaint };
+          this.incidentStyle['background-image'] = 'url(assets/img/marker-red.svg)';
+
+          let foundWayPoint = false;
+          mission.route.steps.forEach((step: any) => {
+            if (foundWayPoint) {
+              this.deliverData.features[0].geometry.coordinates.push([step.loc.long, step.loc.lat]);
+            } else {
+              this.assignData.features[0].geometry.coordinates.push([step.loc.long, step.loc.lat]);
+            }
+            if (step.wayPoint) {
+              foundWayPoint = true;
+            }
+          });
+          this.deliverData = { ...this.deliverData };
+          this.assignData = { ...this.assignData };
+          this.bounds = AppUtil.getBounds(this.assignData.features[0].geometry.coordinates.concat(this.deliverData.features[0].geometry.coordinates));
+          this.isLoading = false;
         }
       });
     }, 11000);
-
-    // continue with simulation code
-    this.missionStatus = 'Available';
-    this.assignPaint['line-color'] = this.RED;
-    this.assignPaint = { ...this.assignPaint };
-    this.incidentStyle['background-image'] = 'url(assets/img/marker-red.svg)';
-    this.incident.lon = -77.94346099447226;
-    this.incident.lat = 34.21828123440535;
-
-    this.setDirections();
   }
 
   doStart(): void {
@@ -136,7 +130,7 @@ export class MissionComponent implements OnInit {
         this.responder.latitude = coordinates[0][1];
         coordinates.shift();
         this.locationRecurse(coordinates);
-      }, 1000);
+      }, 2000);
     }
   }
 
@@ -149,7 +143,6 @@ export class MissionComponent implements OnInit {
   }
 
   doRescued(): void {
-    this.messageService.success('Victim rescued');
     this.missionStatus = null;
     this.responder.longitude = 0;
     this.responder.latitude = 0;
@@ -158,7 +151,11 @@ export class MissionComponent implements OnInit {
     this.deliverData.features[0].geometry.coordinates = [];
     this.deliverData = { ...this.deliverData };
 
-    // update responder to available = false and lat/lon = 0
+    // Reset responder account
+    this.responder.available = false;
+    this.responder.latitude = null;
+    this.responder.longitude = null;
+    this.responderService.update(this.responder).subscribe(() => this.messageService.success('Victim rescued'));
   }
 
   setLocation(event: MapMouseEvent): void {
