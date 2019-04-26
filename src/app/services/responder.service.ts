@@ -13,6 +13,13 @@ export class ResponderService {
 
   constructor(private messageService: MessageService, private http: HttpClient) { }
 
+  getTotal(): Observable<any> {
+    const url = 'responder-service/stats';
+    return this.http.get<any>(url).pipe(
+      catchError(res => this.handleError('getTotal()', res))
+    );
+  }
+
   getAvailable(): Observable<Responder[]> {
     const url = 'responder-service/responders/available';
     return this.http.get<Responder[]>(url).pipe(

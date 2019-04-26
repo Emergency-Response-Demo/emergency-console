@@ -98,9 +98,11 @@ export class MissionComponent implements OnInit {
       this.missionService.getByResponder(this.responder).subscribe((res: any) => {
         if (res === null) {
           this.messageService.info('There is no mission available at this time');
+        } else {
+          console.log(res);
         }
       });
-    }, 10000);
+    }, 11000);
 
     // continue with simulation code
     this.missionStatus = 'Available';

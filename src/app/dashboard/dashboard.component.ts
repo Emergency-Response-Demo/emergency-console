@@ -65,7 +65,7 @@ export class DashboardComponent implements OnInit {
     this.missionService.getMissions().subscribe((missions: Mission[]) => {
       this.handleMissions(missions);
       this.incidentService.getReported().subscribe((incidents: Incident[]) => this.handleIncidents(incidents));
-      this.responderService.getAvailable().subscribe((allAvailable: Responder[]) => this.handleResponders(allAvailable));
+      this.responderService.getTotal().subscribe((stats: any) => this.handleResponders(stats));
     });
   }
 
@@ -175,8 +175,8 @@ export class DashboardComponent implements OnInit {
     this.incidentStatus.percent = (this.incidentStatus.rescued / this.incidentStatus.total) * 100;
   }
 
-  private handleResponders(allAvailable: Responder[]): void {
-    const total = allAvailable.length;
+  private handleResponders(stats: any): void {
+    const total = stats.total;
     const active = this.assigned + this.pickedUp;
     this.responderStatus = {
       active: active,
@@ -185,18 +185,18 @@ export class DashboardComponent implements OnInit {
       data: [active, total - active]
     };
 
-    this.responders.forEach((responder: Responder) => {
-      const found = allAvailable.find((available: Responder) => {
-        return responder.id === available.id;
-      });
-      if (found) {
-        responder.name = found.name;
-        responder.phoneNumber = found.phoneNumber;
-        responder.medicalKit = found.medicalKit;
-        responder.boatCapacity = found.boatCapacity;
-        responder.person = found.person;
-      }
-    });
+    // this.responders.forEach((responder: Responder) => {
+    //   const found = allAvailable.find((available: Responder) => {
+    //     return responder.id === available.id;
+    //   });
+    //   if (found) {
+    //     responder.name = found.name;
+    //     responder.phoneNumber = found.phoneNumber;
+    //     responder.medicalKit = found.medicalKit;
+    //     responder.boatCapacity = found.boatCapacity;
+    //     responder.person = found.person;
+    //   }
+    // });
   }
 
   ngOnInit() {
