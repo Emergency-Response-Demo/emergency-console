@@ -48,8 +48,8 @@
             </div>
           </mgl-popup>
         </span>
-        <mgl-geojson-source id="assignJson" [data]="assignData"> </mgl-geojson-source>
-        <mgl-layer id="assignRoute" type="line" source="assignJson" [layout]="lineLayout" [paint]="assignPaint"> </mgl-layer>
+        <mgl-geojson-source id="pickupJson" [data]="pickupData"> </mgl-geojson-source>
+        <mgl-layer id="pickupRoute" type="line" source="pickupJson" [layout]="lineLayout" [paint]="pickupPaint"> </mgl-layer>
         <mgl-geojson-source id="deliverjson" [data]="deliverData"> </mgl-geojson-source>
         <mgl-layer id="deliverRoute" type="line" source="deliverjson" [layout]="lineLayout" [paint]="deliverPaint"> </mgl-layer>
       </mgl-map>

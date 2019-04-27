@@ -11,10 +11,9 @@ import { Incident } from '../models/incident';
 })
 export class IncidentService {
 
-  private reportedUrl = 'incident-service/incidents/reported';
-
   getReported(): Observable<Incident[]> {
-    return this.http.get<Incident[]>(this.reportedUrl).pipe(
+    const url = 'incident-service/incidents/reported';
+    return this.http.get<Incident[]>(url).pipe(
       catchError(res => this.handleError('getReported()', res))
     );
   }

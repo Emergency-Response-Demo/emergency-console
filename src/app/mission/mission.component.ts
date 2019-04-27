@@ -20,6 +20,7 @@ import { Mission } from '../models/mission';
 })
 export class MissionComponent implements OnInit {
   map: Map;
+  stepTime = 3000;
   isLoading = false;
   loadingIcon: IconDefinition = faCircleNotch;
   responder: Responder = new Responder();
@@ -28,7 +29,7 @@ export class MissionComponent implements OnInit {
     padding: 50
   };
   accessToken: string = window['_env'].accessToken;
-  assignData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
+  pickupData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
   deliverData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
   incident: Incident = new Incident();
   bounds: LngLatBoundsLike;
@@ -59,7 +60,7 @@ export class MissionComponent implements OnInit {
     'line-color': this.BLUE,
     'line-width': 8
   };
-  assignPaint: LinePaint = {
+  pickupPaint: LinePaint = {
     'line-color': this.GREY,
     'line-width': 8
   };
@@ -77,6 +78,8 @@ export class MissionComponent implements OnInit {
     this.responder.available = true;
 
     this.responderService.update(this.responder).subscribe(() => this.messageService.success('Waiting to receive a rescue mission'));
+
+    // wait 11 seconds then ask for a mission
     setTimeout(() => {
       this.missionService.getByResponder(this.responder).subscribe((mission: Mission) => {
         if (mission === null) {
@@ -86,24 +89,19 @@ export class MissionComponent implements OnInit {
           this.incident.lon = mission.incidentLong;
           this.incident.lat = mission.incidentLat;
           this.missionStatus = mission.status;
-          this.assignPaint['line-color'] = this.RED;
-          this.assignPaint = { ...this.assignPaint };
+          this.pickupPaint['line-color'] = this.RED;
+          this.pickupPaint = { ...this.pickupPaint };
           this.incidentStyle['background-image'] = 'url(assets/img/marker-red.svg)';
 
-          let foundWayPoint = false;
-          mission.route.steps.forEach((step: any) => {
-            if (foundWayPoint) {
-              this.deliverData.features[0].geometry.coordinates.push([step.loc.long, step.loc.lat]);
-            } else {
-              this.assignData.features[0].geometry.coordinates.push([step.loc.long, step.loc.lat]);
-            }
-            if (step.wayPoint) {
-              foundWayPoint = true;
-            }
-          });
+          const mapRoute = AppUtil.getRoute(mission.id, mission.route.steps);
+
+          this.deliverData.features[0].geometry.coordinates = mapRoute.deliverRoute;
           this.deliverData = { ...this.deliverData };
-          this.assignData = { ...this.assignData };
-          this.bounds = AppUtil.getBounds(this.assignData.features[0].geometry.coordinates.concat(this.deliverData.features[0].geometry.coordinates));
+
+          this.pickupData.features[0].geometry.coordinates = mapRoute.pickupRoute;
+          this.pickupData = { ...this.pickupData };
+
+          this.bounds = AppUtil.getBounds(mapRoute.pickupRoute.concat(mapRoute.deliverRoute));
           this.isLoading = false;
         }
       });
@@ -113,11 +111,11 @@ export class MissionComponent implements OnInit {
   doStart(): void {
     this.messageService.info('Mission started');
     this.missionStatus = 'Start';
-    this.assignPaint['line-color'] = this.YELLOW;
-    this.assignPaint = { ...this.assignPaint };
+    this.pickupPaint['line-color'] = this.YELLOW;
+    this.pickupPaint = { ...this.pickupPaint };
     this.incidentStyle['background-image'] = 'url(assets/img/marker-yellow.svg)';
     this.inRecursion = true;
-    this.locationRecurse(this.assignData.features[0].geometry.coordinates);
+    this.locationRecurse(this.pickupData.features[0].geometry.coordinates);
   }
 
   private locationRecurse(coordinates: number[][]): void {
@@ -130,7 +128,7 @@ export class MissionComponent implements OnInit {
         this.responder.latitude = coordinates[0][1];
         coordinates.shift();
         this.locationRecurse(coordinates);
-      }, 2000);
+      }, this.stepTime);
     }
   }
 
@@ -146,8 +144,8 @@ export class MissionComponent implements OnInit {
     this.missionStatus = null;
     this.responder.longitude = 0;
     this.responder.latitude = 0;
-    this.assignData.features[0].geometry.coordinates = [];
-    this.assignData = { ...this.assignData };
+    this.pickupData.features[0].geometry.coordinates = [];
+    this.pickupData = { ...this.pickupData };
     this.deliverData.features[0].geometry.coordinates = [];
     this.deliverData = { ...this.deliverData };
 

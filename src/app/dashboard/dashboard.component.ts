@@ -15,6 +15,7 @@ import { ShelterService } from '../services/shelter.service';
 import { MissionService } from '../services/mission.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs/internal/Subject';
+import { AppUtil } from '../app-util';
 
 @Component({
   selector: 'app-dashboard',
@@ -120,7 +121,8 @@ export class DashboardComponent implements OnInit {
     });
 
     if (mission.route && mission.route.steps) {
-      this.addRoute(mission.id, mission.route.steps);
+      const missionRoute: MissionRoute = AppUtil.getRoute(mission.id, mission.route.steps);
+      this.missionRoutes.push(missionRoute);
     }
   }
 
@@ -133,7 +135,8 @@ export class DashboardComponent implements OnInit {
       missionStatus: mission.status
     });
     if (mission.route && mission.route.steps.length > 0) {
-      this.addRoute(mission.id, mission.route.steps);
+      const missionRoute: MissionRoute = AppUtil.getRoute(mission.id, mission.route.steps);
+      this.missionRoutes.push(missionRoute);
     }
   }
 
@@ -144,26 +147,6 @@ export class DashboardComponent implements OnInit {
       }
       return shelter;
     });
-  }
-
-  private addRoute(id: string, steps: any): void {
-    const missionRoute: MissionRoute = {
-      id: id,
-      assignRoute: [],
-      deliverRoute: []
-    };
-    let foundWayPoint = false;
-    steps.forEach((step: any) => {
-      if (foundWayPoint) {
-        missionRoute.deliverRoute.push([step.loc.long, step.loc.lat]);
-      } else {
-        missionRoute.assignRoute.push([step.loc.long, step.loc.lat]);
-      }
-      if (step.wayPoint) {
-        foundWayPoint = true;
-      }
-    });
-    this.missionRoutes.push(missionRoute);
   }
 
   private handleIncidents(incidents: Incident[]): void {
@@ -189,19 +172,6 @@ export class DashboardComponent implements OnInit {
       idle: total - active,
       data: [active, total - active]
     };
-
-    // this.responders.forEach((responder: Responder) => {
-    //   const found = allAvailable.find((available: Responder) => {
-    //     return responder.id === available.id;
-    //   });
-    //   if (found) {
-    //     responder.name = found.name;
-    //     responder.phoneNumber = found.phoneNumber;
-    //     responder.medicalKit = found.medicalKit;
-    //     responder.boatCapacity = found.boatCapacity;
-    //     responder.person = found.person;
-    //   }
-    // });
   }
 
   ngOnInit() {

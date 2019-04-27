@@ -34,6 +34,13 @@ export class ResponderService {
     );
   }
 
+  getById(id: number): Observable<Responder> {
+    const url = `responder-service/responder/${id}`;
+    return this.http.get<Responder>(url).pipe(
+      catchError(res => this.handleError('getById()', res))
+    );
+  }
+
   add(responder: Responder): Observable<any> {
     delete responder.id;
     const url = 'responder-service/responder';

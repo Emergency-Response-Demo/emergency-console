@@ -6,6 +6,8 @@ import { IncidentStatus } from '../models/incident-status';
 import { LineLayout, LinePaint, LngLatBoundsLike, FitBoundsOptions } from 'mapbox-gl';
 import { MissionRoute } from '../models/mission-route';
 import { AppUtil } from '../app-util';
+import { ResponderService } from '../services/responder.service';
+import { IncidentService } from '../services/incident.service';
 
 @Component({
   selector: 'app-map',
@@ -23,7 +25,7 @@ export class MapComponent implements OnInit {
   center: number[] = [-77.886765, 34.210383];
   accessToken: string = window['_env'].accessToken;
 
-  assignData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
+  pickupData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
   deliverData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
 
   bounds: LngLatBoundsLike;
@@ -42,7 +44,7 @@ export class MapComponent implements OnInit {
   readonly RED = '#f86c6b';
   readonly GREEN = '#4dbd74';
 
-  assignPaint: LinePaint = {
+  pickupPaint: LinePaint = {
     'line-color': this.YELLOW,
     'line-width': 8
   };
@@ -56,7 +58,7 @@ export class MapComponent implements OnInit {
     'background-image': 'url(assets/img/shelter.svg)'
   };
 
-  constructor() { }
+  constructor(public responderService: ResponderService, public incidentService: IncidentService) { }
 
   markerClick(lngLat: number[]): void {
     this.center = lngLat;
@@ -71,20 +73,35 @@ export class MapComponent implements OnInit {
     return (person ? 'responder-person.svg' : 'responder.svg');
   }
 
-  onPopupOpen(id: string) {
-    this.assignData.features[0].geometry.coordinates = [];
-    this.assignData = { ...this.assignData };
+  onResponderPopup(responderId: number, index: number, missionId: string): void {
+    this.responderService.getById(responderId).subscribe((responder: Responder) => {
+      this.responders[index].name = responder.name;
+      this.responders[index].phoneNumber = responder.phoneNumber;
+      this.responders[index].boatCapacity = responder.boatCapacity;
+      this.responders[index].medicalKit = responder.medicalKit;
+      this.responders[index].person = responder.person;
+    });
+    this.onPopup(missionId);
+  }
+
+  onIncidentPopup(incidentId: string, index: number, missionId: string): void {
+    this.onPopup(missionId);
+  }
+
+  private onPopup(id: string): void {
+    this.pickupData.features[0].geometry.coordinates = [];
+    this.pickupData = { ...this.pickupData };
     this.deliverData.features[0].geometry.coordinates = [];
     this.deliverData = { ...this.deliverData };
 
     if (id) {
       const missionRoute = this.missionRoutes.find((route: MissionRoute) => route.id === id);
       if (missionRoute) {
-        this.assignData.features[0].geometry.coordinates = missionRoute.assignRoute;
+        this.pickupData.features[0].geometry.coordinates = missionRoute.pickupRoute;
         this.deliverData.features[0].geometry.coordinates = missionRoute.deliverRoute;
-        this.assignData = { ...this.assignData };
+        this.pickupData = { ...this.pickupData };
         this.deliverData = { ...this.deliverData };
-        this.bounds = AppUtil.getBounds(this.assignData.features[0].geometry.coordinates.concat(this.deliverData.features[0].geometry.coordinates));
+        this.bounds = AppUtil.getBounds(missionRoute.pickupRoute.concat(missionRoute.deliverRoute));
       }
     }
   }
