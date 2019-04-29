@@ -15,10 +15,10 @@ import { IncidentService } from '../services/incident.service';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
-  @Input() responders: Responder[] = new Array();
-  @Input() incidents: Incident[] = new Array();
+  @Input() responders: Responder[];
+  @Input() incidents: Incident[];
   @Input() shelters: Shelter[];
-  @Input() missionRoutes: MissionRoute[] = new Array();
+  @Input() missionRoutes: MissionRoute[];
 
   stats: IncidentStatus;
 
@@ -75,16 +75,26 @@ export class MapComponent implements OnInit {
 
   onResponderPopup(responderId: number, index: number, missionId: string): void {
     this.responderService.getById(responderId).subscribe((responder: Responder) => {
-      this.responders[index].name = responder.name;
-      this.responders[index].phoneNumber = responder.phoneNumber;
-      this.responders[index].boatCapacity = responder.boatCapacity;
-      this.responders[index].medicalKit = responder.medicalKit;
-      this.responders[index].person = responder.person;
+      if (responder != null) {
+        this.responders[index].name = responder.name;
+        this.responders[index].phoneNumber = responder.phoneNumber;
+        this.responders[index].boatCapacity = responder.boatCapacity;
+        this.responders[index].medicalKit = responder.medicalKit;
+        this.responders[index].person = responder.person;
+      }
     });
     this.onPopup(missionId);
   }
 
   onIncidentPopup(incidentId: string, index: number, missionId: string): void {
+    // this.incidentService.getById(incidentId).subscribe((incident: Incident) => {
+    //   if (incident != null) {
+    //     this.incidents[index].victimName = incident.victimName;
+    //     this.incidents[index].victimPhoneNumber = incident.victimPhoneNumber;
+    //     this.incidents[index].medicalNeeded = incident.medicalNeeded;
+    //     this.incidents[index].numberOfPeople = incident.numberOfPeople;
+    //   }
+    // });
     this.onPopup(missionId);
   }
 
