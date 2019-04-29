@@ -10,4 +10,5 @@ export class Responder {
   missionStatus: string;
   available?: boolean;
   person?: boolean;
+  // enrolled?: boolean;
 }
