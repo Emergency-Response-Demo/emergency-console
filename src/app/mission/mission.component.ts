@@ -20,7 +20,7 @@ import { Mission } from '../models/mission';
 })
 export class MissionComponent implements OnInit {
   map: Map;
-  stepTime = 3000;
+  stepTime = 5000;
   isLoading = false;
   loadingIcon: IconDefinition = faCircleNotch;
   responder: Responder = new Responder();
@@ -82,7 +82,7 @@ export class MissionComponent implements OnInit {
     // wait 11 seconds then ask for a mission
     setTimeout(() => {
       this.missionService.getByResponder(this.responder).subscribe((mission: Mission) => {
-        if (mission === null) {
+        if (mission === null || mission.status === 'COMPLETED') {
           this.messageService.info('There is no mission available at this time');
         } else {
           this.messageService.success(`You have been assigned mission ${mission.id}`);
@@ -102,8 +102,8 @@ export class MissionComponent implements OnInit {
           this.pickupData = { ...this.pickupData };
 
           this.bounds = AppUtil.getBounds(mapRoute.pickupRoute.concat(mapRoute.deliverRoute));
-          this.isLoading = false;
         }
+        this.isLoading = false;
       });
     }, 11000);
   }
@@ -142,22 +142,14 @@ export class MissionComponent implements OnInit {
 
   doRescued(): void {
     this.missionStatus = null;
-    this.responder.longitude = 0;
-    this.responder.latitude = 0;
     this.pickupData.features[0].geometry.coordinates = [];
     this.pickupData = { ...this.pickupData };
     this.deliverData.features[0].geometry.coordinates = [];
     this.deliverData = { ...this.deliverData };
-
-    // Reset responder account
-    this.responder.available = false;
-    this.responder.latitude = null;
-    this.responder.longitude = null;
-    this.responderService.update(this.responder).subscribe(() => this.messageService.success('Victim rescued'));
   }
 
   setLocation(event: MapMouseEvent): void {
-    if (event.lngLat && this.missionStatus === null) {
+    if (event.lngLat && this.missionStatus === null && !this.isLoading) {
       this.responder.longitude = event.lngLat.lng;
       this.responder.latitude = event.lngLat.lat;
     }
