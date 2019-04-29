@@ -75,18 +75,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.incidents = new Array();
     this.responders = new Array();
 
-    this.shelterService.getShelters().subscribe((shelters: Shelter[]) => this.shelters = shelters);
+    this.shelterService.getShelters().subscribe((shelters: Shelter[]) => {
+      this.shelters = shelters;
 
-    this.missionService.getMissions().subscribe((missions: Mission[]) => {
-      this.handleMissions(missions);
-      this.finalMissionRoutes = this.missionRoutes;
-      this.incidentService.getReported().subscribe((incidents: Incident[]) => {
-        this.handleIncidents(incidents);
-        this.finalIncidents = this.incidents;
-      });
-      this.responderService.getTotal().subscribe((stats: any) => {
-        this.handleResponders(stats);
-        this.finalResponders = this.responders;
+      this.missionService.getMissions().subscribe((missions: Mission[]) => {
+        this.handleMissions(missions);
+        this.finalMissionRoutes = this.missionRoutes;
+        this.incidentService.getReported().subscribe((incidents: Incident[]) => {
+          this.handleIncidents(incidents);
+          this.finalIncidents = this.incidents;
+        });
+        this.responderService.getTotal().subscribe((stats: any) => {
+          this.handleResponders(stats);
+          this.finalResponders = this.responders;
+        });
       });
     });
   }
@@ -158,7 +160,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   private missionCompleted(mission: Mission): void {
-    this.shelters = this.shelters.map(shelter => {
+    this.shelters = this.shelters.map((shelter: Shelter) => {
       if (shelter.lon === mission.destinationLong && shelter.lat === mission.destinationLat) {
         shelter.rescued++;
       }
