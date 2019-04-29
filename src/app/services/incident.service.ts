@@ -18,6 +18,13 @@ export class IncidentService {
     );
   }
 
+  getById(id: string): Observable<Incident> {
+    const url = `incident-service/incidents/incident/${id}`;
+    return this.http.get<Incident>(url).pipe(
+      catchError(res => this.handleError('getById()', res))
+    );
+  }
+
   private handleError(method: string, res: HttpErrorResponse): Observable<any> {
     this.messageService.error(`${method} ${res.message}`);
     console.error(res.error);
