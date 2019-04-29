@@ -79,38 +79,44 @@ export class MissionComponent implements OnInit {
 
     this.responderService.update(this.responder).subscribe(() => this.messageService.success('Waiting to receive a rescue mission'));
 
-    // wait 11 seconds then ask for a mission
+    // wait 61 seconds then ask for a mission
     setTimeout(() => {
-      this.missionService.getByResponder(this.responder).subscribe((mission: Mission) => {
-        if (mission === null || mission.status === 'COMPLETED') {
-          this.messageService.info('There is no mission available at this time');
-        } else {
-          this.messageService.success(`You have been assigned mission ${mission.id}`);
-          this.incident.lon = mission.incidentLong;
-          this.incident.lat = mission.incidentLat;
-          this.missionStatus = mission.status;
-          this.pickupPaint['line-color'] = this.RED;
-          this.pickupPaint = { ...this.pickupPaint };
-          this.incidentStyle['background-image'] = 'url(assets/img/marker-red.svg)';
+      this.getMission();
+    }, 20000);
+  }
 
-          const mapRoute = AppUtil.getRoute(mission.id, mission.route.steps);
+  private getMission(): void {
 
-          this.deliverData.features[0].geometry.coordinates = mapRoute.deliverRoute;
-          this.deliverData = { ...this.deliverData };
+    this.missionService.getByResponder(this.responder).subscribe((mission: Mission) => {
+      if (mission === null || mission.status === 'COMPLETED') {
+        this.messageService.info('There is no mission available at this time');
+      } else {
+        this.messageService.success(`You have been assigned mission ${mission.id}`);
+        this.incident.lon = mission.incidentLong;
+        this.incident.lat = mission.incidentLat;
+        this.missionStatus = mission.status;
+        this.pickupPaint['line-color'] = this.RED;
+        this.pickupPaint = { ...this.pickupPaint };
+        this.incidentStyle['background-image'] = 'url(assets/img/marker-red.svg)';
 
-          this.pickupData.features[0].geometry.coordinates = mapRoute.pickupRoute;
-          this.pickupData = { ...this.pickupData };
+        const mapRoute = AppUtil.getRoute(mission.id, mission.route.steps);
 
-          this.bounds = AppUtil.getBounds(mapRoute.pickupRoute.concat(mapRoute.deliverRoute));
-        }
-        this.isLoading = false;
-      });
-    }, 11000);
+        this.deliverData.features[0].geometry.coordinates = mapRoute.deliverRoute;
+        this.deliverData = { ...this.deliverData };
+
+        this.pickupData.features[0].geometry.coordinates = mapRoute.pickupRoute;
+        this.pickupData = { ...this.pickupData };
+
+        this.bounds = AppUtil.getBounds(mapRoute.pickupRoute.concat(mapRoute.deliverRoute));
+      }
+      this.isLoading = false;
+    });
+
   }
 
   doStart(): void {
     this.messageService.info('Mission started');
-    this.missionStatus = 'Start';
+    this.missionStatus = 'CREATED';
     this.pickupPaint['line-color'] = this.YELLOW;
     this.pickupPaint = { ...this.pickupPaint };
     this.incidentStyle['background-image'] = 'url(assets/img/marker-yellow.svg)';
@@ -133,7 +139,7 @@ export class MissionComponent implements OnInit {
   }
 
   doPickedUp(): void {
-    this.missionStatus = 'Picked Up';
+    this.missionStatus = 'UPDATED';
     this.messageService.info('Victim picked up');
     this.incident = new Incident();
     this.inRecursion = true;
@@ -162,12 +168,14 @@ export class MissionComponent implements OnInit {
           const name = `${profile.firstName} ${profile.lastName}`;
           this.responderService.getByName(name).subscribe((responder: Responder) => {
             this.responder = responder;
-            this.responder.longitude = null;
-            this.responder.latitude = null;
           });
         });
       }
     });
     this.shelterService.getShelters().subscribe((shelters: Shelter[]) => this.shelters = shelters);
+    setTimeout(() => {
+      this.getMission();
+    }, 500);
+
   }
 }
