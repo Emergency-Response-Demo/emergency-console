@@ -20,7 +20,7 @@ import { Mission } from '../models/mission';
 })
 export class MissionComponent implements OnInit {
   map: Map;
-  stepTime = 5000;
+  stepTime = 10000;
   isLoading = false;
   loadingIcon: IconDefinition = faCircleNotch;
   responder: Responder = new Responder();
