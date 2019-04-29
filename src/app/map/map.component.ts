@@ -87,14 +87,14 @@ export class MapComponent implements OnInit {
   }
 
   onIncidentPopup(incidentId: string, index: number, missionId: string): void {
-    // this.incidentService.getById(incidentId).subscribe((incident: Incident) => {
-    //   if (incident != null) {
-    //     this.incidents[index].victimName = incident.victimName;
-    //     this.incidents[index].victimPhoneNumber = incident.victimPhoneNumber;
-    //     this.incidents[index].medicalNeeded = incident.medicalNeeded;
-    //     this.incidents[index].numberOfPeople = incident.numberOfPeople;
-    //   }
-    // });
+    this.incidentService.getById(incidentId).subscribe((incident: Incident) => {
+      if (incident != null) {
+        this.incidents[index].victimName = incident.victimName;
+        this.incidents[index].victimPhoneNumber = incident.victimPhoneNumber;
+        this.incidents[index].medicalNeeded = incident.medicalNeeded;
+        this.incidents[index].numberOfPeople = incident.numberOfPeople;
+      }
+    });
     this.onPopup(missionId);
   }
 
