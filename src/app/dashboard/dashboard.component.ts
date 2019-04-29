@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IconDefinition, faSync, faBan } from '@fortawesome/free-solid-svg-icons';
 import { interval } from 'rxjs/internal/observable/interval';
 import { IncidentStatus } from '../models/incident-status';
@@ -13,15 +13,13 @@ import { Mission } from '../models/mission';
 import { ResponderStatus } from '../models/responder-status';
 import { ShelterService } from '../services/shelter.service';
 import { MissionService } from '../services/mission.service';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs/internal/Subject';
 import { AppUtil } from '../app-util';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html'
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   refreshIcon: IconDefinition = faSync;
   stopIcon: IconDefinition = faBan;
   polling: any;
@@ -29,15 +27,23 @@ export class DashboardComponent implements OnInit {
   isPolling = false;
   incidentStatus: IncidentStatus = new IncidentStatus();
   responderStatus: ResponderStatus;
+
+  // use final variables as double buffer and prevent page flicker
   responders: Responder[] = new Array();
+  finalResponders: Responder[] = new Array();
+
   incidents: Incident[] = new Array();
+  finalIncidents: Incident[] = new Array();
+
+  missionRoutes: MissionRoute[] = new Array();
+  finalMissionRoutes: MissionRoute[] = new Array();
+
   requested: number;
   assigned: number;
   pickedUp: number;
   rescued: number;
-  missionRoutes: MissionRoute[] = new Array();
-  shelters: Shelter[];
-  stop$: Subject<boolean> = new Subject<boolean>();
+
+  shelters: Shelter[] = new Array();
 
   constructor(
     private messageService: MessageService,
@@ -51,27 +57,37 @@ export class DashboardComponent implements OnInit {
     this.isPolling = !this.isPolling;
 
     if (this.isPolling === true) {
-      this.polling = interval(this.interval).pipe(
-        takeUntil(this.stop$)
-      ).subscribe(() => {
+      this.polling = interval(this.interval).subscribe(n => {
         this.load();
       });
     } else {
-      this.stop$.next(true);
+      this.polling.unsubscribe();
     }
   }
 
   load() {
+    // init
     this.requested = 0;
     this.assigned = 0;
     this.pickedUp = 0;
     this.rescued = 0;
+    this.missionRoutes = new Array();
+    this.incidents = new Array();
+    this.responders = new Array();
+
     this.shelterService.getShelters().subscribe((shelters: Shelter[]) => this.shelters = shelters);
 
     this.missionService.getMissions().subscribe((missions: Mission[]) => {
       this.handleMissions(missions);
-      this.incidentService.getReported().subscribe((incidents: Incident[]) => this.handleIncidents(incidents));
-      this.responderService.getTotal().subscribe((stats: any) => this.handleResponders(stats));
+      this.finalMissionRoutes = this.missionRoutes;
+      this.incidentService.getReported().subscribe((incidents: Incident[]) => {
+        this.handleIncidents(incidents);
+        this.finalIncidents = this.incidents;
+      });
+      this.responderService.getTotal().subscribe((stats: any) => {
+        this.handleResponders(stats);
+        this.finalResponders = this.responders;
+      });
     });
   }
 
@@ -122,6 +138,7 @@ export class DashboardComponent implements OnInit {
 
     if (mission.route && mission.route.steps) {
       const missionRoute: MissionRoute = AppUtil.getRoute(mission.id, mission.route.steps);
+
       this.missionRoutes.push(missionRoute);
     }
   }
@@ -176,5 +193,11 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.load();
+  }
+
+  ngOnDestroy() {
+    if (this.polling) {
+      this.polling.unsubscribe();
+    }
   }
 }
