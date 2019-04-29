@@ -147,7 +147,7 @@ export class MissionComponent implements OnInit {
   }
 
   doRescued(): void {
-    this.missionStatus = null;
+    this.missionStatus = 'CREATED';
     this.pickupData.features[0].geometry.coordinates = [];
     this.pickupData = { ...this.pickupData };
     this.deliverData.features[0].geometry.coordinates = [];

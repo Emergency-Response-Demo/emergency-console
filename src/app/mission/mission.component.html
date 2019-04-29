@@ -69,7 +69,7 @@
           type="button"
           class="btn btn-warning btn-lg mr-2"
           (click)="doStart()"
-          [disabled]="isLoading"
+          [disabled]="isLoading || inRecursion"
           *ngIf="missionStatus === 'CREATED'">
           <fa-icon [icon]="loadingIcon" [spin]="true" *ngIf="isLoading"></fa-icon> Start
         </button>
