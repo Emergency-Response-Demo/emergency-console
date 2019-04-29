@@ -32,7 +32,7 @@
       <mgl-marker [lngLat]="[shelter.lon, shelter.lat]" #shelterMarker>
         <div class="shelter" [ngStyle]="shelterStyle" (click)="markerClick([shelter.lon, shelter.lat])"></div>
       </mgl-marker>
-      <mgl-popup [marker]="shelterMarker" [offset]="[0, -12]">
+      <mgl-popup [marker]="shelterMarker" [offset]="[0, -12]" (open)="onPopup(null)">
         <div class="card-text">
           <p>
             <strong>Shelter Name: </strong> {{ shelter.name }}<br />
