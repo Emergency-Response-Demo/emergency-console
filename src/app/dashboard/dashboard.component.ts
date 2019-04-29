@@ -75,22 +75,25 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.incidents = new Array();
     this.responders = new Array();
 
-    this.shelterService.getShelters().subscribe((shelters: Shelter[]) => {
-      this.shelters = shelters;
-
-      this.missionService.getMissions().subscribe((missions: Mission[]) => {
+    this.shelterService.getShelters().toPromise()
+      .then((shelters: Shelter[]) => {
+        this.shelters = shelters;
+        return this.missionService.getMissions().toPromise();
+      })
+      .then((missions: Mission[]) => {
         this.handleMissions(missions);
         this.finalMissionRoutes = this.missionRoutes;
-        this.incidentService.getReported().subscribe((incidents: Incident[]) => {
-          this.handleIncidents(incidents);
-          this.finalIncidents = this.incidents;
-        });
-        this.responderService.getTotal().subscribe((stats: any) => {
-          this.handleResponders(stats);
-          this.finalResponders = this.responders;
-        });
+        this.finalResponders = this.responders;
+        return this.incidentService.getReported().toPromise();
+      })
+      .then((incidents: Incident[]) => {
+        this.handleIncidents(incidents);
+        this.finalIncidents = this.incidents;
+        return this.responderService.getTotal().toPromise();
+      })
+      .then((stats: any) => {
+        this.handleResponderStats(stats);
       });
-    });
   }
 
   private handleMissions(missions: Mission[]): void {
@@ -174,15 +177,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.requested++;
     });
 
-    this.incidentStatus.assigned = this.assigned;
-    this.incidentStatus.pickedUp = this.pickedUp;
-    this.incidentStatus.requested = this.requested;
-    this.incidentStatus.rescued = this.rescued;
+    this.incidentStatus = {
+      assigned: this.assigned,
+      pickedUp: this.pickedUp,
+      requested: this.requested,
+      rescued: this.rescued
+    };
+
     this.incidentStatus.total = this.incidentStatus.requested + this.incidentStatus.rescued + this.incidentStatus.assigned + this.incidentStatus.pickedUp;
     this.incidentStatus.percent = (this.incidentStatus.rescued / this.incidentStatus.total) * 100;
   }
 
-  private handleResponders(stats: any): void {
+  private handleResponderStats(stats: any): void {
     const total = stats.total;
     const active = this.assigned + this.pickedUp;
     this.responderStatus = {
