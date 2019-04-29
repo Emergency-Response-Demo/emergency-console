@@ -98,7 +98,7 @@ export class MapComponent implements OnInit {
     this.onPopup(missionId);
   }
 
-  private onPopup(id: string): void {
+  public onPopup(id: string): void {
     this.pickupData.features[0].geometry.coordinates = [];
     this.pickupData = { ...this.pickupData };
     this.deliverData.features[0].geometry.coordinates = [];
