@@ -60,10 +60,16 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.alertService.getAlerts().subscribe(res => {
-      this.alerts = res.map((alert: AlertModel) => {
-        alert.type = `text-${alert.type}`;
-        return alert;
+    // this.alertService.getAlerts().subscribe(res => {
+    //   this.alerts = res.map((alert: AlertModel) => {
+    //     alert.type = `text-${alert.type}`;
+    //     return alert;
+    //   });
+    // });
+    this.alertService.getAlerts().map((alert: AlertModel) => {
+      this.alerts.push({
+        type: `text-${alert.type}`,
+        message: alert.message
       });
     });
 

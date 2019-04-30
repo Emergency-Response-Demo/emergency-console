@@ -15,11 +15,10 @@ export class AlertService {
   private alertsUrl = 'alert-service/alerts';
 
   getAlerts() {
-    return this.http.get<AlertModel[]>(this.alertsUrl).pipe(
-      catchError(res => {
-        return this.handleError('getAlerts()', res);
-      })
-    );
+    return [{
+      type: 'danger',
+      message: 'Severe weather alert! Flooding due to hurricane.'
+    }];
   }
 
   private handleError(method: string, res: HttpErrorResponse): Observable<any> {
