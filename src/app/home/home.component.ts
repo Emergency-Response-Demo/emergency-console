@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
               responder.phoneNumber = profile['attributes'].phoneNumber[0];
               responder.boatCapacity = profile['attributes'].boatCapacity[0];
               responder.medicalKit = profile['attributes'].medical[0];
+              responder.enrolled = false;
               responder.person = true;
               responder.available = false;
 
