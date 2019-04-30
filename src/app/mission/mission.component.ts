@@ -75,8 +75,8 @@ export class MissionComponent implements OnInit {
 
   doAvailable(): void {
     this.isLoading = true;
-    this.responder.available = true;
-    // this.responder.enrolled = true;
+    //this.responder.available = true;
+    this.responder.enrolled = true;
 
     this.responderService.update(this.responder).subscribe(() => this.messageService.success('Waiting to receive a rescue mission'));
 
