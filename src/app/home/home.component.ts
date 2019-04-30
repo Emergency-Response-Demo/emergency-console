@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
               responder.medicalKit = profile['attributes'].medical[0];
               responder.enrolled = false;
               responder.person = true;
-              responder.available = false;
+              responder.available = true;
 
               this.messageService.info('Registering as new responder');
 
