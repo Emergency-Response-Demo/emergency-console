@@ -5,13 +5,14 @@ import { Observable } from 'rxjs/internal/Observable';
 import { MessageService } from './message.service';
 import { of } from 'rxjs/internal/observable/of';
 import { Responder } from '../models/responder';
+import { Socket } from 'ngx-socket-io';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResponderService {
 
-  constructor(private messageService: MessageService, private http: HttpClient) { }
+  constructor(private messageService: MessageService, private http: HttpClient, private socket: Socket) { }
 
   getTotal(): Observable<any> {
     const url = 'responder-service/stats';
@@ -54,6 +55,17 @@ export class ResponderService {
     return this.http.put<any>(url, responder).pipe(
       catchError(res => this.handleError('update()', res))
     );
+  }
+
+  watchLocation(responder: Responder): Observable<any> {
+    return Observable.create(observer => {
+      this.socket.on('topic-responder-location-update', update => {
+        if (!update || update.responderId !== `${responder.id}`) {
+          return;
+        }
+        observer.next(update);
+      });
+    });
   }
 
   private handleError(method: string, res: HttpErrorResponse): Observable<any> {

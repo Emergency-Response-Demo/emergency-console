@@ -11,6 +11,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { ToastrModule } from 'ngx-toastr';
+import { SocketIoModule } from 'ngx-socket-io';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routes';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
@@ -62,7 +63,10 @@ export function init(appInitService: AppInitService) {
       progressBar: true
     }),
     NgxMapboxGLModule,
-    KeycloakAngularModule
+    KeycloakAngularModule,
+    SocketIoModule.forRoot({
+      url: null
+    })
   ],
   providers: [
     {
