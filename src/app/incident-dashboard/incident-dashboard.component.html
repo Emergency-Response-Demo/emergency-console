@@ -1,0 +1,50 @@
+<div class="card-deck">
+  <div class="card">
+    <div class="card-header">Incidents</div>
+    <div class="card-body">
+      <div class="d-flex">
+        <form class="w-100">
+          <div class="form-group form-inline">
+            <input class="form-control w-100" placeholder="Search" type="text" [formControl]="filter"/>
+          </div>
+        </form>
+      </div>
+
+      <div class="d-flex flex-row-reverse">
+        <table
+          class="table"
+          data-search="true">
+          <thead>
+            <tr>
+              <th scope="col">Victim name</th>
+              <th scope="col">Number of people</th>
+              <th scope="col">Medical needed</th>
+              <th scope="col">Phone number</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let incident of currentPageIncidents; let i = index">
+              <th scope="row">{{incident.victimName}}</th>
+              <td>{{incident.numberOfPeople}}</td>
+              <td>{{incident.medicalNeeded}}</td>
+              <td>{{incident.victimPhoneNumber}}</td>
+              <td>{{incident.status}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="filteredIncidents.length" [(page)]="page" [pageSize]="pageSize">
+        </ngb-pagination>
+
+        <select class="custom-select pull-right" style="width: auto" [(ngModel)]="pageSize">
+          <option [ngValue]="10">10 items per page</option>
+          <option [ngValue]="50">50 items per page</option>
+          <option [ngValue]="100">100 items per page</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
