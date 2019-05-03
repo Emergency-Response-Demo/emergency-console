@@ -82,16 +82,25 @@ export class MissionComponent implements OnInit {
   }
 
   doPickedUp(): void {
-    this.messageService.info('Victim picked up');
-    this.responderSimulatorService.updateStatus(this.mission, 'PICKEDUP').subscribe(() => this.messageService.info('Pick up complete'));
+    this.responder.available = true;
+    this.responder.enrolled = false;
+    this.responderService.update(this.responder).subscribe(() => {
+      this.responderSimulatorService.updateStatus(this.mission, 'PICKEDUP').subscribe(() => this.messageService.info('Pick up complete'));
+    });
   }
 
-  doRescued(): void {
-    this.responder.enrolled = false;
-    this.responder.available = true;
-    this.responderService.update(this.responder).subscribe(() => {
-      this.responderSimulatorService.updateStatus(this.mission, 'DROPPED').subscribe(() => this.messageService.info('Drop off complete'));
+  getCurrentMissionStep(): any {
+    if (!this.mission || !this.mission.route || !this.mission.route.steps || !this.responder) {
+      return null;
+    }
+    return this.mission.route.steps.find((step: any) => {
+      return step.loc.lat === this.responder.latitude && step.loc.long === this.responder.longitude;
     });
+  }
+
+  onWaypoint(): boolean {
+    const currentStep = this.getCurrentMissionStep();
+    return currentStep ? currentStep.wayPoint : false;
   }
 
   setLocation(event: MapMouseEvent): void {
@@ -103,7 +112,7 @@ export class MissionComponent implements OnInit {
 
   handleMissionStatusUpdate(mission: Mission): void {
     if (mission === null || mission.status === 'COMPLETED') {
-      this.messageService.info('There is no mission available at this time');
+      this.messageService.success('Mission complete');
       this.isLoading = false;
       this.missionStatus = null;
       return;
@@ -134,11 +143,24 @@ export class MissionComponent implements OnInit {
   }
 
   handleResponderLocationUpdate(update: any): void {
+    // TODO: Set enrolled to false when status === DROPPED.
     if (update === null) {
       return;
     }
     this.responder.longitude = update.location.long;
     this.responder.latitude = update.location.lat;
+  }
+
+  handleResponderLocationFromMission(mission: Mission): void {
+    if (!mission || !mission.responderLocationHistory || !this.responder) {
+      return;
+    }
+    const lastLocation = mission.responderLocationHistory[mission.responderLocationHistory.length - 1];
+    if (!lastLocation) {
+      return;
+    }
+    this.responder.latitude = lastLocation.location.lat;
+    this.responder.longitude = lastLocation.location.long;
   }
 
   ngOnInit() {
@@ -147,13 +169,16 @@ export class MissionComponent implements OnInit {
         this.keycloak.loadUserProfile().then(profile => {
           const name = `${profile.firstName} ${profile.lastName}`;
           this.responderService.getByName(name).subscribe((responder: Responder) => {
-            // Watch missions filtered by the current responders ID.
             this.responder = responder;
+            // Watch missions filtered by the current responders ID.
             this.missionService.watchByResponder(responder).subscribe(this.handleMissionStatusUpdate.bind(this));
             // Watch for location update events on the current responder.
             this.responderService.watchLocation(responder).subscribe(this.handleResponderLocationUpdate.bind(this));
             // Check whether a mission is already in progress.
-            this.missionService.getByResponder(responder).subscribe(this.handleMissionStatusUpdate.bind(this));
+            this.missionService.getByResponder(responder).subscribe(mission => {
+              this.handleMissionStatusUpdate(mission);
+              this.handleResponderLocationFromMission(mission);
+            });
           });
         });
       }

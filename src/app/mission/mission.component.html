@@ -62,23 +62,17 @@
           class="btn btn-secondary btn-lg"
           [disabled]="(responder.longitude === 0 && responder.latitude === 0) || isLoading"
           (click)="doAvailable()"
-          *ngIf="missionStatus === null && responder.latitude != null">
+          *ngIf="missionStatus !== 'CREATED' && responder.latitude != null"
+          [disabled]="missionStatus === 'UPDATED'">
           <fa-icon [icon]="loadingIcon" [spin]="true" *ngIf="isLoading"></fa-icon> Available
         </button>
         <button
           type="button"
           class="btn btn-primary btn-lg mr-2"
           (click)="doPickedUp()"
-          *ngIf="missionStatus === 'CREATED'">
-          Picked Up
-        </button>
-        <button
-          type="button"
-          class="btn btn-success btn-lg"
-          (click)="doRescued()"
-          *ngIf="missionStatus === 'UPDATED'"
-          [disabled]="isLoading">
-          <fa-icon [icon]="loadingIcon" [spin]="true" *ngIf="isLoading"></fa-icon> Rescued
+          *ngIf="missionStatus === 'CREATED'"
+          [disabled]="isLoading || !onWaypoint()">
+          Picked up
         </button>
       </div>
     </div>
