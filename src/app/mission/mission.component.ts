@@ -12,6 +12,7 @@ import { ShelterService } from '../services/shelter.service';
 import { ResponderService } from '../services/responder.service';
 import { Incident } from '../models/incident';
 import { Mission } from '../models/mission';
+import { ResponderSimulatorService } from '../services/responder-simulator.service';
 
 @Component({
   selector: 'app-mission',
@@ -20,10 +21,10 @@ import { Mission } from '../models/mission';
 })
 export class MissionComponent implements OnInit {
   map: Map;
-  stepTime = 10000;
   isLoading = false;
   loadingIcon: IconDefinition = faCircleNotch;
   responder: Responder = new Responder();
+  mission: Mission = new Mission();
   center: LngLat = new LngLat(-77.886765, 34.210383);
   boundsOptions: FitBoundsOptions = {
     padding: 50
@@ -35,7 +36,6 @@ export class MissionComponent implements OnInit {
   bounds: LngLatBoundsLike;
   missionStatus: string = null;
   shelters: Shelter[];
-  inRecursion = false;
 
   readonly GREY = '#a4b7c1';
   readonly YELLOW = '#ffc107';
@@ -70,89 +70,37 @@ export class MissionComponent implements OnInit {
     private keycloak: KeycloakService,
     private missionService: MissionService,
     private shelterService: ShelterService,
-    private responderService: ResponderService
+    private responderService: ResponderService,
+    private responderSimulatorService: ResponderSimulatorService
   ) { }
 
   doAvailable(): void {
     this.isLoading = true;
-    //this.responder.available = true;
     this.responder.enrolled = true;
-
+    this.responder.available = true;
     this.responderService.update(this.responder).subscribe(() => this.messageService.success('Waiting to receive a rescue mission'));
-
-    // wait 61 seconds then ask for a mission
-    setTimeout(() => {
-      this.getMission();
-    }, 20000);
-  }
-
-  private getMission(): void {
-
-    this.missionService.getByResponder(this.responder).subscribe((mission: Mission) => {
-      if (mission === null || mission.status === 'COMPLETED') {
-        this.messageService.info('There is no mission available at this time');
-      } else {
-        this.messageService.success(`You have been assigned mission ${mission.id}`);
-        this.incident.lon = mission.incidentLong;
-        this.incident.lat = mission.incidentLat;
-        this.missionStatus = mission.status;
-        this.pickupPaint['line-color'] = this.RED;
-        this.pickupPaint = { ...this.pickupPaint };
-        this.incidentStyle['background-image'] = 'url(assets/img/marker-red.svg)';
-
-        const mapRoute = AppUtil.getRoute(mission.id, mission.route.steps);
-
-        this.deliverData.features[0].geometry.coordinates = mapRoute.deliverRoute;
-        this.deliverData = { ...this.deliverData };
-
-        this.pickupData.features[0].geometry.coordinates = mapRoute.pickupRoute;
-        this.pickupData = { ...this.pickupData };
-
-        this.bounds = AppUtil.getBounds(mapRoute.pickupRoute.concat(mapRoute.deliverRoute));
-      }
-      this.isLoading = false;
-    });
-
-  }
-
-  doStart(): void {
-    this.messageService.info('Mission started');
-    this.missionStatus = 'CREATED';
-    this.pickupPaint['line-color'] = this.YELLOW;
-    this.pickupPaint = { ...this.pickupPaint };
-    this.incidentStyle['background-image'] = 'url(assets/img/marker-yellow.svg)';
-    this.inRecursion = true;
-    this.locationRecurse(this.pickupData.features[0].geometry.coordinates);
-  }
-
-  private locationRecurse(coordinates: number[][]): void {
-    if (coordinates.length < 1) {
-      this.inRecursion = false;
-      return;
-    } else {
-      setTimeout(() => {
-        this.responder.longitude = coordinates[0][0];
-        this.responder.latitude = coordinates[0][1];
-        coordinates.shift();
-        this.locationRecurse(coordinates);
-      }, this.stepTime);
-    }
   }
 
   doPickedUp(): void {
-    this.missionStatus = 'UPDATED';
-    this.messageService.info('Victim picked up');
-    this.incident = new Incident();
-    this.inRecursion = true;
-    this.locationRecurse(this.deliverData.features[0].geometry.coordinates);
+    this.responder.available = true;
+    this.responder.enrolled = false;
+    this.responderService.update(this.responder).subscribe(() => {
+      this.responderSimulatorService.updateStatus(this.mission, 'PICKEDUP').subscribe(() => this.messageService.info('Pick up complete'));
+    });
   }
 
-  doRescued(): void {
-    this.missionStatus = 'CREATED';
-    this.pickupData.features[0].geometry.coordinates = [];
-    this.pickupData = { ...this.pickupData };
-    this.deliverData.features[0].geometry.coordinates = [];
-    this.deliverData = { ...this.deliverData };
+  getCurrentMissionStep(): any {
+    if (!this.mission || !this.mission.route || !this.mission.route.steps || !this.responder) {
+      return null;
+    }
+    return this.mission.route.steps.find((step: any) => {
+      return step.loc.lat === this.responder.latitude && step.loc.long === this.responder.longitude;
+    });
+  }
+
+  onWaypoint(): boolean {
+    const currentStep = this.getCurrentMissionStep();
+    return currentStep ? currentStep.wayPoint : false;
   }
 
   setLocation(event: MapMouseEvent): void {
@@ -162,6 +110,59 @@ export class MissionComponent implements OnInit {
     }
   }
 
+  handleMissionStatusUpdate(mission: Mission): void {
+    if (mission === null || mission.status === 'COMPLETED') {
+      this.messageService.success('Mission complete');
+      this.isLoading = false;
+      this.missionStatus = null;
+      return;
+    }
+    if (mission.status === 'CREATED') {
+      this.messageService.success(`You have been assigned mission ${mission.id}`);
+      this.responderSimulatorService.updateStatus(mission, 'MOVING').subscribe(() => this.messageService.info('Mission started'));
+    }
+    this.mission = mission;
+
+    this.incident.lon = mission.incidentLong;
+    this.incident.lat = mission.incidentLat;
+    this.missionStatus = mission.status;
+    this.pickupPaint['line-color'] = this.RED;
+    this.pickupPaint = { ...this.pickupPaint };
+    this.incidentStyle['background-image'] = 'url(assets/img/marker-red.svg)';
+
+    const mapRoute = AppUtil.getRoute(mission.id, mission.route.steps);
+
+    this.deliverData.features[0].geometry.coordinates = mapRoute.deliverRoute;
+    this.deliverData = { ...this.deliverData };
+
+    this.pickupData.features[0].geometry.coordinates = mapRoute.pickupRoute;
+    this.pickupData = { ...this.pickupData };
+
+    this.bounds = AppUtil.getBounds(mapRoute.pickupRoute.concat(mapRoute.deliverRoute));
+    this.isLoading = false;
+  }
+
+  handleResponderLocationUpdate(update: any): void {
+    // TODO: Set enrolled to false when status === DROPPED.
+    if (update === null) {
+      return;
+    }
+    this.responder.longitude = update.location.long;
+    this.responder.latitude = update.location.lat;
+  }
+
+  handleResponderLocationFromMission(mission: Mission): void {
+    if (!mission || !mission.responderLocationHistory || !this.responder) {
+      return;
+    }
+    const lastLocation = mission.responderLocationHistory[mission.responderLocationHistory.length - 1];
+    if (!lastLocation) {
+      return;
+    }
+    this.responder.latitude = lastLocation.location.lat;
+    this.responder.longitude = lastLocation.location.long;
+  }
+
   ngOnInit() {
     this.keycloak.isLoggedIn().then(isLoggedIn => {
       if (isLoggedIn) {
@@ -169,14 +170,19 @@ export class MissionComponent implements OnInit {
           const name = `${profile.firstName} ${profile.lastName}`;
           this.responderService.getByName(name).subscribe((responder: Responder) => {
             this.responder = responder;
+            // Watch missions filtered by the current responders ID.
+            this.missionService.watchByResponder(responder).subscribe(this.handleMissionStatusUpdate.bind(this));
+            // Watch for location update events on the current responder.
+            this.responderService.watchLocation(responder).subscribe(this.handleResponderLocationUpdate.bind(this));
+            // Check whether a mission is already in progress.
+            this.missionService.getByResponder(responder).subscribe(mission => {
+              this.handleMissionStatusUpdate(mission);
+              this.handleResponderLocationFromMission(mission);
+            });
           });
         });
       }
     });
     this.shelterService.getShelters().subscribe((shelters: Shelter[]) => this.shelters = shelters);
-    setTimeout(() => {
-      this.getMission();
-    }, 500);
-
   }
 }

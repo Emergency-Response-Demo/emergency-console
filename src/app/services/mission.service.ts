@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MessageService } from './message.service';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { Socket } from 'ngx-socket-io';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
@@ -29,6 +30,28 @@ export class MissionService {
     );
   }
 
+  watchMissions(): Observable<Mission> {
+    return Observable.create(observer => {
+      this.socket.on('topic-mission-event', mission => {
+        if (!mission.body) {
+          return;
+        }
+        observer.next(mission.body);
+      });
+    });
+  }
+
+  watchByResponder(responder: Responder): Observable<Mission> {
+    return Observable.create(observer => {
+      this.socket.on('topic-mission-event', mission => {
+        if (!mission.body || mission.body.responderId !== `${responder.id}`) {
+          return;
+        }
+        observer.next(mission.body);
+      });
+    });
+  }
+
   getDirections(responder: Responder, incident: Incident, shelter: Shelter) {
     const params = `${responder.longitude},${responder.latitude};${incident.lon},${incident.lat};${shelter.lon},${shelter.lat}`;
     const url = `/mapbox/directions/v5/mapbox/driving/${params}.json`;
@@ -46,5 +69,5 @@ export class MissionService {
     return of(null);
   }
 
-  constructor(private messageService: MessageService, private http: HttpClient) { }
+  constructor(private messageService: MessageService, private http: HttpClient, private socket: Socket) { }
 }

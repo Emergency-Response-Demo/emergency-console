@@ -8,6 +8,8 @@ let http = require('http');
 let fs = require('fs');
 let path = require('path');
 let proxy = require('http-proxy-middleware');
+let kafka = require('kafka-node');
+let socketIO = require('socket.io');
 
 let app = express();
 
@@ -18,12 +20,59 @@ app.set('alert-service', process.env.ALERT || 'http://alert-service:8080');
 app.set('responder-service', process.env.RESPONDER || 'http://responder-service:8080');
 app.set('mission-service', process.env.MISSION || 'http://mission-service:8080');
 app.set('process-viewer', process.env.PROCESS_VIEWER || 'http://process-viewer:8080');
+app.set('responder-simulator', process.env.RESPONDER_SIMULATOR || 'http://responder-simulator:8080');
+app.set('kafka-host', process.env.KAFKA_HOST || 'kafka-cluster-kafka-bootstrap.naps-emergency-response.svc:9092');
+app.set('kafka-message-topic', ['topic-mission-event', 'topic-responder-location-update']);
+if (process.env.KAFKA_TOPIC) {
+  app.set('kafka-message-topic', process.env.KAFKA_TOPIC.split(','));
+}
+app.set('kafka-groupid', process.env.KAFKA_GROUP_ID || 'emergency-console-group');
 
 app.use(compression());
 
 app.use(logger('combined'));
 
 app.use(express.static(path.join(__dirname, 'dist')));
+
+// setup server
+const certConfig = {
+  key: fs.readFileSync('server.key'),
+  cert: fs.readFileSync('server.cert')
+};
+
+let server = app.get('port') !== 8080 ? https.createServer(certConfig, app) : http.createServer(app);
+
+// setup socket
+let io = socketIO(server);
+io.on('connection', socket => {
+  socket.emit('init', { message: 'Socket initialization' });
+});
+
+// setup kafka connection
+console.log('Setting up Kafka client for ', app.get('kafka-host'), 'on topic', app.get('kafka-message-topic'));
+let kafkaConsumerGroup = new kafka.ConsumerGroup({
+  kafkaHost: app.get('kafka-host'),
+  groupId: app.get('kafka-groupid')
+}, app.get('kafka-message-topic'));
+
+kafkaConsumerGroup.on('message', msg => {
+  try {
+    const parsedMessage = JSON.parse(msg.value);
+    io.sockets.emit(msg.topic, parsedMessage);
+  } catch (e) {
+    console.error('Failed to parse Kafka message', msg);
+  }
+});
+
+kafkaConsumerGroup.on('error', err => {
+  console.error('Failed to connect to Kafka', err);
+  io.sockets.emit('error', { message: "Failed to connect to backing message queue's" });
+});
+
+kafkaConsumerGroup.on('offsetOutOfRange', (err) => {
+  console.error('Failed to consume message (offsetOutOfRange)', err);
+  io.sockets.emit('error', { message: "Failed to consume messages from backing message queue's" });
+})
 
 // incident server proxy
 app.use(
@@ -95,6 +144,20 @@ app.use(
   })
 );
 
+// responder simulator proxy
+app.use(
+  '/responder-simulator/*',
+  proxy({
+    target: app.get('responder-simulator'),
+    secure: false,
+    changeOrigin: true,
+    logLevel: 'debug',
+    pathRewrite: {
+      '^/responder-simulator': ''
+    }
+  })
+);
+
 // mapbox directions service
 app.use(
   '/mapbox/*',
@@ -126,19 +189,6 @@ app.use((req, res) => {
   res.type('txt').send('Not found');
 });
 
-const certConfig = {
-  key: fs.readFileSync('server.key'),
-  cert: fs.readFileSync('server.cert')
-};
-
-// for local ssl
-if (app.get('port') !== 8080) {
-  https.createServer(certConfig, app).listen(app.get('port'), () => {
-    console.log('Express secure server listening on port ' + app.get('port'));
-  });
-} else {
-  // on openshift let route control ssl
-  http.createServer(app).listen(app.get('port'), () => {
-    console.log('Express server listening on port ' + app.get('port'));
-  });
-}
+server.listen(app.get('port'), () => {
+  console.log('Express server listening on port ' + app.get('port'));
+});
