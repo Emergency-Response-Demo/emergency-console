@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
@@ -27,6 +27,8 @@ import { KeycloakAngularModule } from 'keycloak-angular';
 import { AppInitService } from './app-init.service';
 import { MissionComponent } from './mission/mission.component';
 import { LegendComponent } from './legend/legend.component';
+import { IncidentDashboardComponent } from './incident-dashboard/incident-dashboard.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function init(appInitService: AppInitService) {
   return () => appInitService.init();
@@ -44,7 +46,8 @@ export function init(appInitService: AppInitService) {
     IncidentComponent,
     MapComponent,
     MissionComponent,
-    LegendComponent
+    LegendComponent,
+    IncidentDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +67,8 @@ export function init(appInitService: AppInitService) {
     }),
     NgxMapboxGLModule,
     KeycloakAngularModule,
+    NgbModule,
+    ReactiveFormsModule,
     SocketIoModule.forRoot({
       url: null
     })
