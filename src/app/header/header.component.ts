@@ -2,9 +2,9 @@ import { Component, OnInit, Renderer2, HostListener } from '@angular/core';
 import { IconDefinition, faShieldAlt, faLock } from '@fortawesome/free-solid-svg-icons';
 import { AlertModel } from '../models/alert-model';
 import { AlertService } from '../services/alert.service';
-import { interval } from 'rxjs/internal/observable/interval';
 import { KeycloakService } from 'keycloak-angular';
-import { timeout } from 'rxjs/operators';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   styleUrls: ['./header.component.css'],
@@ -20,9 +20,13 @@ export class HeaderComponent implements OnInit {
   accountUrl: string;
   isLoggedIn: boolean;
 
-  constructor(private alertService: AlertService, private renderer: Renderer2, private keycloak: KeycloakService) {
+  constructor(private alertService: AlertService, private renderer: Renderer2, private keycloak: KeycloakService, private router: Router) {
     // hide sidebar by default on mobile
     this.checkForMobile();
+  }
+
+  isMobile(): boolean {
+    return window.innerWidth < 640;
   }
 
   doLogout(): void {
@@ -37,35 +41,39 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  toggleSidebar() {
-    this.sidebarVisible = !this.sidebarVisible;
+  setSidebar(enabled: boolean): void {
+    this.sidebarVisible = enabled;
     if (this.sidebarVisible === false) {
       this.renderer.removeClass(document.body, 'sidebar-show');
     } else {
       this.renderer.addClass(document.body, 'sidebar-show');
     }
 
-    if (window.innerWidth > 640) {
+    if (!this.isMobile()) {
       setTimeout(() => {
         window.dispatchEvent(new Event('resize'));
       }, 500);
     }
   }
 
+  toggleSidebar() {
+    this.setSidebar(!this.sidebarVisible);
+  }
+
   @HostListener('window:resize', ['$event'])
-  checkForMobile(event?) {
-    if (window.innerWidth < 640) {
-      this.toggleSidebar();
+  checkForMobile(_?) {
+    if (this.isMobile() && this.sidebarVisible) {
+      this.setSidebar(false);
     }
   }
 
   ngOnInit(): void {
-    // this.alertService.getAlerts().subscribe(res => {
-    //   this.alerts = res.map((alert: AlertModel) => {
-    //     alert.type = `text-${alert.type}`;
-    //     return alert;
-    //   });
-    // });
+    this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
+      if (this.isMobile()) {
+        this.setSidebar(false);
+      }
+    });
+
     this.alertService.getAlerts().map((alert: AlertModel) => {
       this.alerts.push({
         type: `text-${alert.type}`,

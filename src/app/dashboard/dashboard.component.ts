@@ -99,7 +99,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private handleMissions(missions: Mission[]): void {
     missions.forEach((mission: Mission) => {
       const status = mission.status;
-
       switch (status) {
         case 'CREATED': {
           this.assigned++;
