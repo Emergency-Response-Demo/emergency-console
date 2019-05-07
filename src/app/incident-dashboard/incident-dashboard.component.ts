@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Incident } from '../models/incident';
 import { IncidentService } from '../services/incident.service';
 import { FormControl } from '@angular/forms';
+import { AppUtil } from '../app-util';
 
 
 @Component({
@@ -13,6 +14,7 @@ export class IncidentDashboardComponent implements OnInit {
   filter = new FormControl('');
   page = 1;
   pageSize = 10;
+  isMobile = AppUtil.isMobile();
 
   constructor(private incidentService: IncidentService) {}
 
