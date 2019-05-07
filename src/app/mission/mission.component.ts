@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MessageService } from '../services/message.service';
 import { KeycloakService } from 'keycloak-angular';
 import { Responder } from '../models/responder';
@@ -13,13 +13,14 @@ import { ResponderService } from '../services/responder.service';
 import { Incident } from '../models/incident';
 import { Mission } from '../models/mission';
 import { ResponderSimulatorService } from '../services/responder-simulator.service';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-mission',
   templateUrl: './mission.component.html',
   styleUrls: ['./mission.component.scss']
 })
-export class MissionComponent implements OnInit {
+export class MissionComponent implements OnInit, OnDestroy {
   map: Map;
   isLoading = false;
   loadingIcon: IconDefinition = faCircleNotch;
@@ -71,7 +72,8 @@ export class MissionComponent implements OnInit {
     private missionService: MissionService,
     private shelterService: ShelterService,
     private responderService: ResponderService,
-    private responderSimulatorService: ResponderSimulatorService
+    private responderSimulatorService: ResponderSimulatorService,
+    private socket: Socket
   ) { }
 
   doAvailable(): void {
@@ -85,7 +87,7 @@ export class MissionComponent implements OnInit {
     this.responder.available = true;
     this.responder.enrolled = false;
     this.responderService.update(this.responder).subscribe(() => {
-      this.responderSimulatorService.updateStatus(this.mission, 'PICKEDUP').subscribe(() => this.messageService.info('Pick up complete'));
+      this.responderSimulatorService.updateStatus(this.mission, 'PICKEDUP').subscribe();
     });
   }
 
@@ -110,16 +112,20 @@ export class MissionComponent implements OnInit {
     }
   }
 
-  handleMissionStatusUpdate(mission: Mission): void {
+  handleMissionStatusUpdate(mission: Mission, showMessages: boolean = true): void {
     if (mission === null || mission.status === 'COMPLETED') {
-      this.messageService.success('Mission complete');
+      if (showMessages) {
+        this.messageService.success('Mission complete');
+      }
       this.isLoading = false;
       this.missionStatus = null;
       return;
     }
     if (mission.status === 'CREATED') {
-      this.messageService.success(`You have been assigned mission ${mission.id}`);
-      this.responderSimulatorService.updateStatus(mission, 'MOVING').subscribe(() => this.messageService.info('Mission started'));
+      if (showMessages) {
+        this.messageService.success(`You have been assigned mission ${mission.id}`);
+      }
+      this.responderSimulatorService.updateStatus(mission, 'MOVING').subscribe();
     }
     this.mission = mission;
 
@@ -143,7 +149,6 @@ export class MissionComponent implements OnInit {
   }
 
   handleResponderLocationUpdate(update: any): void {
-    // TODO: Set enrolled to false when status === DROPPED.
     if (update === null) {
       return;
     }
@@ -176,7 +181,7 @@ export class MissionComponent implements OnInit {
             this.responderService.watchLocation(responder).subscribe(this.handleResponderLocationUpdate.bind(this));
             // Check whether a mission is already in progress.
             this.missionService.getByResponder(responder).subscribe(mission => {
-              this.handleMissionStatusUpdate(mission);
+              this.handleMissionStatusUpdate(mission, false);
               this.handleResponderLocationFromMission(mission);
             });
           });
@@ -184,5 +189,9 @@ export class MissionComponent implements OnInit {
       }
     });
     this.shelterService.getShelters().subscribe((shelters: Shelter[]) => this.shelters = shelters);
+  }
+
+  ngOnDestroy() {
+    this.socket.removeAllListeners();
   }
 }
