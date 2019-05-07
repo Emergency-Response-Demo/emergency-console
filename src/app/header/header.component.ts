@@ -5,6 +5,7 @@ import { AlertService } from '../services/alert.service';
 import { KeycloakService } from 'keycloak-angular';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { AppUtil } from '../app-util';
 
 @Component({
   styleUrls: ['./header.component.css'],
@@ -23,10 +24,6 @@ export class HeaderComponent implements OnInit {
   constructor(private alertService: AlertService, private renderer: Renderer2, private keycloak: KeycloakService, private router: Router) {
     // hide sidebar by default on mobile
     this.checkForMobile();
-  }
-
-  isMobile(): boolean {
-    return window.innerWidth < 640;
   }
 
   doLogout(): void {
@@ -49,7 +46,7 @@ export class HeaderComponent implements OnInit {
       this.renderer.addClass(document.body, 'sidebar-show');
     }
 
-    if (!this.isMobile()) {
+    if (!AppUtil.isMobile()) {
       setTimeout(() => {
         window.dispatchEvent(new Event('resize'));
       }, 500);
@@ -62,14 +59,14 @@ export class HeaderComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   checkForMobile(_?) {
-    if (this.isMobile() && this.sidebarVisible) {
+    if (AppUtil.isMobile() && this.sidebarVisible) {
       this.setSidebar(false);
     }
   }
 
   ngOnInit(): void {
     this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
-      if (this.isMobile()) {
+      if (AppUtil.isMobile()) {
         this.setSidebar(false);
       }
     });

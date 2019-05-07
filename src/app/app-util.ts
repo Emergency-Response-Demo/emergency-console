@@ -54,4 +54,8 @@ export class AppUtil {
       ]
     };
   }
+
+  public static isMobile(): boolean {
+    return window.innerWidth < 640;
+  }
 }

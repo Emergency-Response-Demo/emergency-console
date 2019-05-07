@@ -22,11 +22,12 @@ export class MapComponent implements OnInit {
 
   stats: IncidentStatus;
 
-  center: number[] = [-77.886765, 34.210383];
+  center: number[] = AppUtil.isMobile() ? [-77.886765, 34.139921] : [-77.886765, 34.158808];
   accessToken: string = window['_env'].accessToken;
 
   pickupData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
   deliverData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
+  zoom: number[] = [AppUtil.isMobile() ? 10 : 10.5];
 
   bounds: LngLatBoundsLike;
   boundsOptions: FitBoundsOptions = {
