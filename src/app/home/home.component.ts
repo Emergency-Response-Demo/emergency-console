@@ -29,7 +29,10 @@ export class HomeComponent implements OnInit {
               responder.name = this.fullName;
               responder.name = `${profile.firstName} ${profile.lastName}`;
               responder.phoneNumber = profile['attributes'].phoneNumber[0];
-              responder.boatCapacity = profile['attributes'].boatCapacity[0];
+              let boatCapacity = profile['attributes'].boatCapacity[0];
+              // Clamp boatCapacity between 0 and 255 (inclusive).
+              boatCapacity = boatCapacity <= 0 ? 0 : boatCapacity >= 12 ? 12 : boatCapacity;
+              responder.boatCapacity = boatCapacity;
               responder.medicalKit = profile['attributes'].medical[0];
               responder.enrolled = false;
               responder.person = true;
