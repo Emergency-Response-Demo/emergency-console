@@ -2,8 +2,22 @@
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+export var servicesMap = new Map();
+servicesMap.set('incident-service', 'd3fa642d9b83043af5b92805ebdaf7d2');
+servicesMap.set('alert-service', 'xxx'),
+servicesMap.set('responder-service', '884e490b9c52e6c6354b8c6e7cb8ee14'),
+servicesMap.set('mission-service', '3865ce20837908ebae41c32a8ae3e829');
+
 export const environment = {
-  production: false
+  production: false,
+  isGatewayEnabled: true,
+  service: servicesMap,
+  servicesNames: [
+    'incident-service',
+    'alert-service',
+    'responder-service',
+    'mission-service',
+  ]
 };
 
 /*
