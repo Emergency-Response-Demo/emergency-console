@@ -1,5 +1,6 @@
 import { LngLatBoundsLike } from 'mapbox-gl';
 import { MissionRoute } from './models/mission-route';
+import { MissionStep } from './models/mission';
 
 export class AppUtil {
   public static getBounds(coordinates: number[][]): LngLatBoundsLike {
@@ -18,15 +19,15 @@ export class AppUtil {
     return bounds;
   }
 
-  public static getRoute(id: string, steps: any): MissionRoute {
+  public static getRoute(id: string, steps: MissionStep[]): MissionRoute {
     const pickup = [];
     const deliver = [];
     let foundWayPoint = false;
-    steps.forEach((step: any) => {
+    steps.forEach((step: MissionStep) => {
       if (foundWayPoint) {
-        deliver.push([step.loc.long, step.loc.lat]);
+        deliver.push([step.lon, step.lat]);
       } else {
-        pickup.push([step.loc.long, step.loc.lat]);
+        pickup.push([step.lon, step.lat]);
       }
       if (step.wayPoint) {
         foundWayPoint = true;

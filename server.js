@@ -22,7 +22,7 @@ app.set('mission-service', process.env.MISSION || 'http://mission-service:8080')
 app.set('process-viewer', process.env.PROCESS_VIEWER || 'http://process-viewer:8080');
 app.set('responder-simulator', process.env.RESPONDER_SIMULATOR || 'http://responder-simulator:8080');
 app.set('kafka-host', process.env.KAFKA_HOST || 'kafka-cluster-kafka-bootstrap.naps-emergency-response.svc:9092');
-app.set('kafka-message-topic', ['topic-mission-event', 'topic-responder-location-update']);
+app.set('kafka-message-topic', ['topic-mission-event', 'topic-responder-location-update', 'topic-incident-event', 'topic-responder-event', 'topic-incident-command', 'topic-responder-command']);
 if (process.env.KAFKA_TOPIC) {
   app.set('kafka-message-topic', process.env.KAFKA_TOPIC.split(','));
 }
@@ -47,12 +47,15 @@ let io = socketIO(server);
 io.on('connection', socket => {
   socket.emit('init', { message: 'Socket initialization' });
 });
+io.of('/shelters').on('connection', socket => {
+  socket.emit('init', { message: 'Shelters init' });
+});
 
 // setup kafka connection
 console.log('Setting up Kafka client for ', app.get('kafka-host'), 'on topic', app.get('kafka-message-topic'));
 let kafkaConsumerGroup = new kafka.ConsumerGroup({
   kafkaHost: app.get('kafka-host'),
-  groupId: app.get('kafka-groupid')
+  groupId: app.get('kafka-groupid'),
 }, app.get('kafka-message-topic'));
 
 kafkaConsumerGroup.on('message', msg => {
@@ -73,6 +76,26 @@ kafkaConsumerGroup.on('offsetOutOfRange', (err) => {
   console.error('Failed to consume message (offsetOutOfRange)', err);
   io.sockets.emit('error', { message: "Failed to consume messages from backing message queue's" });
 })
+
+// mock shelter service proxy
+app.get('/shelter-service/api/shelters', (_, res) => {
+  res.json([{
+    name: 'Port City Marina',
+    lat: 34.2461,
+    lon: -77.9519,
+    rescued: 0
+  }, {
+    name: 'Wilmington Marine Center',
+    lat: 34.1706,
+    lon: -77.949,
+    rescued: 0
+  }, {
+    name: 'Carolina Beach Yacht Club',
+    lat: 34.0583,
+    lon: -77.8885,
+    rescued: 0
+  }]);
+});
 
 // incident server proxy
 app.use(

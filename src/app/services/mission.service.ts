@@ -9,28 +9,28 @@ import { Shelter } from '../models/shelter';
 import { Mission } from '../models/mission';
 import { Responder } from '../models/responder';
 import { Incident } from '../models/incident';
+import { TopicMissionEvent } from '../models/topic';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MissionService {
 
-  getMissions(): Observable<Mission[]> {
+  async getMissions(): Promise<Mission[]> {
     const url = 'mission-service/api/missions';
     return this.http.get<Mission[]>(url).pipe(
       catchError(err => this.handleError('getMissions()', err))
-    );
+    ).toPromise();
   }
 
-  getByResponder(responder: Responder): Observable<Mission> {
+  async getByResponder(responder: Responder): Promise<Mission> {
     const url = `mission-service/api/missions/responders/${responder.id}`;
-    // const url = 'assets/data/mission.json';
     return this.http.get<Mission[]>(url).pipe(
       catchError(err => this.handleError('getByResponder()', err))
-    );
+    ).toPromise();
   }
 
-  watchMissions(): Observable<Mission> {
+  watch(): Observable<Mission> {
     return Observable.create(observer => {
       this.socket.on('topic-mission-event', mission => {
         if (!mission.body) {
@@ -43,8 +43,8 @@ export class MissionService {
 
   watchByResponder(responder: Responder): Observable<Mission> {
     return Observable.create(observer => {
-      this.socket.on('topic-mission-event', mission => {
-        if (!mission.body || mission.body.responderId !== `${responder.id}`) {
+      this.socket.on('topic-mission-event', (mission: TopicMissionEvent) => {
+        if (!mission.body || `${mission.body.responderId}` !== `${responder.id}`) {
           return;
         }
         observer.next(mission.body);
@@ -52,7 +52,7 @@ export class MissionService {
     });
   }
 
-  getDirections(responder: Responder, incident: Incident, shelter: Shelter) {
+  async getDirections(responder: Responder, incident: Incident, shelter: Shelter): Promise<any> {
     const params = `${responder.longitude},${responder.latitude};${incident.lon},${incident.lat};${shelter.lon},${shelter.lat}`;
     const url = `/mapbox/directions/v5/mapbox/driving/${params}.json`;
     const httpParams = new HttpParams()
@@ -61,7 +61,7 @@ export class MissionService {
 
     return this.http.get<any>(url, { params: httpParams }).pipe(
       catchError(res => this.handleError('getDirections()', res))
-    );
+    ).toPromise();
   }
 
   private handleError(method: string, res: HttpErrorResponse): Observable<any> {

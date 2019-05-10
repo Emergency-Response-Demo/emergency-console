@@ -42,7 +42,7 @@ export class IncidentDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.incidentService.getAll().subscribe((incidents: Incident[]) => {
+    this.incidentService.getAll().then((incidents: Incident[]) => {
       this.incidents = incidents;
     });
     this.filter.valueChanges.subscribe(this.filterIncidents.bind(this));

@@ -11,9 +11,10 @@ import { Shelter } from '../models/shelter';
 import { ShelterService } from '../services/shelter.service';
 import { ResponderService } from '../services/responder.service';
 import { Incident } from '../models/incident';
-import { Mission } from '../models/mission';
+import { Mission, MissionStep } from '../models/mission';
 import { ResponderSimulatorService } from '../services/responder-simulator.service';
 import { Socket } from 'ngx-socket-io';
+import { ResponderLocationStatus } from '../models/responder-status';
 
 @Component({
   selector: 'app-mission',
@@ -48,7 +49,7 @@ export class MissionComponent implements OnInit, OnDestroy {
     'background-image': 'url(assets/img/responder-person.svg)'
   };
   incidentStyle: any = {
-    'background-image': 'url(assets/img/marker-red.svg)'
+    'background-image': 'url(assets/img/marker-yellow.svg)'
   };
   shelterStyle: any = {
     'background-image': 'url(assets/img/shelter.svg)'
@@ -92,11 +93,11 @@ export class MissionComponent implements OnInit, OnDestroy {
   }
 
   getCurrentMissionStep(): any {
-    if (!this.mission || !this.mission.route || !this.mission.route.steps || !this.responder) {
+    if (!this.mission || !this.mission.steps || !this.responder) {
       return null;
     }
-    return this.mission.route.steps.find((step: any) => {
-      return step.loc.lat === this.responder.latitude && step.loc.long === this.responder.longitude;
+    return this.mission.steps.find((step: MissionStep) => {
+      return step.lat === this.responder.latitude && step.lon === this.responder.longitude;
     });
   }
 
@@ -132,11 +133,10 @@ export class MissionComponent implements OnInit, OnDestroy {
     this.incident.lon = mission.incidentLong;
     this.incident.lat = mission.incidentLat;
     this.missionStatus = mission.status;
-    this.pickupPaint['line-color'] = this.RED;
+    this.pickupPaint['line-color'] = this.YELLOW;
     this.pickupPaint = { ...this.pickupPaint };
-    this.incidentStyle['background-image'] = 'url(assets/img/marker-red.svg)';
-
-    const mapRoute = AppUtil.getRoute(mission.id, mission.route.steps);
+    this.incidentStyle['background-image'] = 'url(assets/img/marker-yellow.svg)';
+    const mapRoute = AppUtil.getRoute(mission.id, mission.steps);
 
     this.deliverData.features[0].geometry.coordinates = mapRoute.deliverRoute;
     this.deliverData = { ...this.deliverData };
@@ -148,12 +148,12 @@ export class MissionComponent implements OnInit, OnDestroy {
     this.isLoading = false;
   }
 
-  handleResponderLocationUpdate(update: any): void {
+  handleResponderLocationUpdate(update: ResponderLocationStatus): void {
     if (update === null) {
       return;
     }
-    this.responder.longitude = update.location.long;
-    this.responder.latitude = update.location.lat;
+    this.responder.longitude = update.lon;
+    this.responder.latitude = update.lat;
   }
 
   handleResponderLocationFromMission(mission: Mission): void {
@@ -164,31 +164,27 @@ export class MissionComponent implements OnInit, OnDestroy {
     if (!lastLocation) {
       return;
     }
-    this.responder.latitude = lastLocation.location.lat;
-    this.responder.longitude = lastLocation.location.long;
+    this.responder.latitude = lastLocation.lat;
+    this.responder.longitude = lastLocation.lon;
   }
 
-  ngOnInit() {
-    this.keycloak.isLoggedIn().then(isLoggedIn => {
-      if (isLoggedIn) {
-        this.keycloak.loadUserProfile().then(profile => {
-          const name = `${profile.firstName} ${profile.lastName}`;
-          this.responderService.getByName(name).subscribe((responder: Responder) => {
-            this.responder = responder;
-            // Watch missions filtered by the current responders ID.
-            this.missionService.watchByResponder(responder).subscribe(this.handleMissionStatusUpdate.bind(this));
-            // Watch for location update events on the current responder.
-            this.responderService.watchLocation(responder).subscribe(this.handleResponderLocationUpdate.bind(this));
-            // Check whether a mission is already in progress.
-            this.missionService.getByResponder(responder).subscribe(mission => {
-              this.handleMissionStatusUpdate(mission, false);
-              this.handleResponderLocationFromMission(mission);
-            });
-          });
-        });
-      }
-    });
-    this.shelterService.getShelters().subscribe((shelters: Shelter[]) => this.shelters = shelters);
+  async ngOnInit() {
+    const isLoggedIn = await this.keycloak.isLoggedIn();
+    if (!isLoggedIn) {
+      return;
+    }
+    const profile = await this.keycloak.loadUserProfile();
+    const responderName = `${profile.firstName} ${profile.lastName}`;
+    this.responder = await this.responderService.getByName(responderName);
+    // Watch missions filtered by the current responders ID.
+    this.missionService.watchByResponder(this.responder).subscribe(this.handleMissionStatusUpdate.bind(this));
+    // Watch for location update events on the current responder.
+    this.responderService.watchLocation(this.responder).subscribe(this.handleResponderLocationUpdate.bind(this));
+    // Check whether a mission is already in progress.
+    const currentMission = await this.missionService.getByResponder(this.responder);
+    this.handleMissionStatusUpdate(currentMission, false);
+    this.handleResponderLocationFromMission(currentMission);
+    this.shelters = await this.shelterService.getShelters();
   }
 
   ngOnDestroy() {

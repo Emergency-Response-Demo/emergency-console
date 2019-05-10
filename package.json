@@ -10,7 +10,7 @@
   "ng": "node_modules/@angular/cli/bin/ng",
   "scripts": {
     "ng": "$npm_package_ng",
-    "build": "$npm_package_ng build --delete-output-path --prod",
+    "build": "$npm_package_ng build --delete-output-path",
     "buildDev": "$npm_package_ng build --watch",
     "start": "node set-config.js && node server.js",
     "e2e": "ng e2e"

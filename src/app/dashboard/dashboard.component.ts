@@ -1,19 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IconDefinition, faSync, faBan } from '@fortawesome/free-solid-svg-icons';
-import { interval } from 'rxjs/internal/observable/interval';
 import { IncidentStatus } from '../models/incident-status';
 import { Shelter } from '../models/shelter';
 import { Responder } from '../models/responder';
 import { Incident } from '../models/incident';
-import { MissionRoute } from '../models/mission-route';
-import { MessageService } from '../services/message.service';
 import { IncidentService } from '../services/incident.service';
 import { ResponderService } from '../services/responder.service';
 import { Mission } from '../models/mission';
-import { ResponderStatus } from '../models/responder-status';
+import { ResponderStatus, ResponderTotalStatus, ResponderLocationStatus } from '../models/responder-status';
 import { ShelterService } from '../services/shelter.service';
 import { MissionService } from '../services/mission.service';
-import { AppUtil } from '../app-util';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,189 +19,125 @@ import { AppUtil } from '../app-util';
 export class DashboardComponent implements OnInit, OnDestroy {
   refreshIcon: IconDefinition = faSync;
   stopIcon: IconDefinition = faBan;
-  polling: any;
-  interval: number = Number(window['_env'].pollingInterval) || 10000;
-  isPolling = false;
-  incidentStatus: IncidentStatus = new IncidentStatus();
-  responderStatus: ResponderStatus;
 
-  // use final variables as double buffer and prevent page flicker
-  responders: Responder[] = new Array();
-  finalResponders: Responder[] = new Array();
-
-  incidents: Incident[] = new Array();
-  finalIncidents: Incident[] = new Array();
-
-  missionRoutes: MissionRoute[] = new Array();
-  finalMissionRoutes: MissionRoute[] = new Array();
-
-  requested: number;
-  assigned: number;
-  pickedUp: number;
-  rescued: number;
+  // Use maps here to speed up access on large sets.
+  responderMap = new Map<string, Responder>();
+  missionMap = new Map<string, Mission>();
+  incidentMap = new Map<string, Incident>();
 
   shelters: Shelter[] = new Array();
+  totalResponders = 0;
 
   constructor(
-    private messageService: MessageService,
     private incidentService: IncidentService,
     private responderService: ResponderService,
     private shelterService: ShelterService,
-    private missionService: MissionService
+    private missionService: MissionService,
+    private socket: Socket
   ) { }
 
-  togglePolling() {
-    this.isPolling = !this.isPolling;
-
-    if (this.isPolling === true) {
-      this.polling = interval(this.interval).subscribe(n => {
-        this.load();
-      });
-    } else {
-      this.polling.unsubscribe();
-    }
-  }
-
-  load() {
-    // init
-    this.requested = 0;
-    this.assigned = 0;
-    this.pickedUp = 0;
-    this.rescued = 0;
-    this.missionRoutes = new Array();
-    this.incidents = new Array();
-    this.responders = new Array();
-
-    this.shelterService.getShelters().toPromise()
-      .then((shelters: Shelter[]) => {
+  async load(): Promise<void> {
+    return Promise.all([
+      this.missionService.getMissions(),
+      this.incidentService.getAll(),
+      this.shelterService.getShelters(),
+      this.responderService.getAvailable(),
+      this.responderService.getTotal()])
+      .then(([missions, incidents, shelters, responders, responderStatus]: [Mission[], Incident[], Shelter[], Responder[], ResponderTotalStatus]) => {
         this.shelters = shelters;
-        return this.missionService.getMissions().toPromise();
-      })
-      .then((missions: Mission[]) => {
-        this.handleMissions(missions);
-        this.finalMissionRoutes = this.missionRoutes;
-        this.finalResponders = this.responders;
-        return this.incidentService.getReported().toPromise();
-      })
-      .then((incidents: Incident[]) => {
-        this.handleIncidents(incidents);
-        this.finalIncidents = this.incidents;
-        return this.responderService.getTotal().toPromise();
-      })
-      .then((stats: any) => {
-        this.handleResponderStats(stats);
+
+        const tempIncidents = new Map<string, Incident>();
+        incidents.forEach(m => tempIncidents[m.id] = m);
+        this.incidentMap = tempIncidents;
+        // Use a temp map so we don't trigger a UI update on each update to
+        // this.missionsMap.
+        const tempMissions = new Map<string, Mission>();
+        missions.forEach(m => tempMissions[m.id] = m);
+        this.missionMap = tempMissions;
+        // Do the same again for responders.
+        const tempResponders = new Map<string, Responder>();
+        responders.forEach(r => tempResponders[r.id] = r);
+        this.responderMap = tempResponders;
+        this.totalResponders = responderStatus.total;
       });
   }
 
-  private handleMissions(missions: Mission[]): void {
-    missions.forEach((mission: Mission) => {
-      const status = mission.status;
-      switch (status) {
-        case 'CREATED': {
-          this.assigned++;
-          this.missionCreated(mission);
-          break;
-        }
-        case 'UPDATED': {
-          this.pickedUp++;
-          this.missionUpdated(mission);
-          break;
-        }
-        case 'COMPLETED': {
-          this.rescued++;
-          this.missionCompleted(mission);
-          break;
-        }
-        default: {
-          this.messageService.warning(`status: '${status}' is not a known code`);
-          break;
-        }
+  get incidentStatus(): IncidentStatus {
+    const incidentStatus = new IncidentStatus();
+
+    this.missions.forEach(m => {
+      if (m.status === 'CREATED') {
+        incidentStatus.assigned++;
+      } else if (m.status === 'UPDATED') {
+        incidentStatus.pickedUp++;
+      } else if (m.status === 'COMPLETED') {
+        incidentStatus.rescued++;
       }
     });
+    const inProgress = (incidentStatus.assigned + incidentStatus.pickedUp + incidentStatus.rescued);
+    incidentStatus.requested = this.incidents.length - inProgress;
+    return incidentStatus;
   }
 
-  private missionCreated(mission: Mission): void {
-    this.incidents.push({
-      missionId: mission.id,
-      id: mission.incidentId,
-      lat: mission.incidentLat,
-      lon: mission.incidentLong,
-      status: mission.status
-    });
+  get responderStatus(): ResponderStatus {
+    const responderStatus = new ResponderStatus();
 
-    this.responders.push({
-      missionId: mission.id,
-      id: mission.responderId,
-      latitude: mission.responderStartLat,
-      longitude: mission.responderStartLong,
-      missionStatus: mission.status
-    });
-
-    if (mission.route && mission.route.steps) {
-      const missionRoute: MissionRoute = AppUtil.getRoute(mission.id, mission.route.steps);
-
-      this.missionRoutes.push(missionRoute);
+    responderStatus.active = this.missions.filter(m => m.status !== 'COMPLETED').length;
+    if (this.totalResponders < responderStatus.active) {
+      this.totalResponders = responderStatus.active;
     }
+    responderStatus.idle = this.totalResponders - responderStatus.active;
+    return responderStatus;
   }
 
-  private missionUpdated(mission: Mission): void {
-    this.responders.push({
-      missionId: mission.id,
-      id: mission.responderId,
-      latitude: mission.responderStartLat,
-      longitude: mission.responderStartLong,
-      missionStatus: mission.status
-    });
-    if (mission.route && mission.route.steps.length > 0) {
-      const missionRoute: MissionRoute = AppUtil.getRoute(mission.id, mission.route.steps);
-      this.missionRoutes.push(missionRoute);
+  get responders(): Responder[] {
+    return Object.values(this.responderMap);
+  }
+
+
+  get missions(): Mission[] {
+    return Object.values(this.missionMap);
+  }
+
+  get incidents(): Incident[] {
+    return Object.values(this.incidentMap);
+  }
+
+  private handleIncidentUpdate(incident: Incident): void {
+    const currentIncident = this.incidentMap[incident.id];
+    this.incidentMap[incident.id] = Object.assign({}, currentIncident, incident);
+  }
+
+  private handleResponderUpdate(responder: Responder): void {
+    const currentResponder = this.responderMap[responder.id];
+    this.responderMap[responder.id] = Object.assign({}, currentResponder, responder);
+  }
+
+  private handleResponderLocationUpdate(update: ResponderLocationStatus): void {
+    if (!this.responderMap[update.responderId]) {
+      return;
     }
+    this.responderMap[update.responderId].latitude = update.lat;
+    this.responderMap[update.responderId].longitude = update.lon;
   }
 
-  private missionCompleted(mission: Mission): void {
-    this.shelters = this.shelters.map((shelter: Shelter) => {
-      if (shelter.lon === mission.destinationLong && shelter.lat === mission.destinationLat) {
-        shelter.rescued++;
-      }
-      return shelter;
-    });
+  private handleMissionUpdate(mission: Mission): void {
+    if (mission.status === 'COMPLETED') {
+      const shelterIdx = this.shelters.findIndex(s => s.lat === mission.destinationLat && s.lon === mission.destinationLong);
+      this.shelters[shelterIdx].rescued++;
+    }
+    this.missionMap[mission.id] = mission;
   }
 
-  private handleIncidents(incidents: Incident[]): void {
-    incidents.forEach(incident => {
-      this.incidents.push(incident);
-      this.requested++;
-    });
-
-    this.incidentStatus = {
-      assigned: this.assigned,
-      pickedUp: this.pickedUp,
-      requested: this.requested,
-      rescued: this.rescued
-    };
-
-    this.incidentStatus.total = this.incidentStatus.requested + this.incidentStatus.rescued + this.incidentStatus.assigned + this.incidentStatus.pickedUp;
-    this.incidentStatus.percent = (this.incidentStatus.rescued / this.incidentStatus.total) * 100;
-  }
-
-  private handleResponderStats(stats: any): void {
-    const total = stats.total;
-    const active = this.assigned + this.pickedUp;
-    this.responderStatus = {
-      active: active,
-      total: total,
-      idle: total - active,
-      data: [active, total - active]
-    };
-  }
-
-  ngOnInit() {
-    this.load();
+  async ngOnInit() {
+    await this.load();
+    this.missionService.watch().subscribe(this.handleMissionUpdate.bind(this));
+    this.incidentService.watch(['IncidentReportedEvent', 'UpdateIncidentCommand']).subscribe(this.handleIncidentUpdate.bind(this));
+    this.responderService.watch().subscribe(this.handleResponderUpdate.bind(this));
+    this.responderService.watchLocation().subscribe(this.handleResponderLocationUpdate.bind(this));
   }
 
   ngOnDestroy() {
-    if (this.polling) {
-      this.polling.unsubscribe();
-    }
+    this.socket.removeAllListeners();
   }
 }

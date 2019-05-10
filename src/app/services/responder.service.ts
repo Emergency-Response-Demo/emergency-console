@@ -6,6 +6,8 @@ import { MessageService } from './message.service';
 import { of } from 'rxjs/internal/observable/of';
 import { Responder } from '../models/responder';
 import { Socket } from 'ngx-socket-io';
+import { ResponderTotalStatus } from '../models/responder-status';
+import { TopicResponderEvent, TopicResponderCommand } from '../models/topic';
 
 @Injectable({
   providedIn: 'root'
@@ -14,25 +16,25 @@ export class ResponderService {
 
   constructor(private messageService: MessageService, private http: HttpClient, private socket: Socket) { }
 
-  getTotal(): Observable<any> {
+  async getTotal(): Promise<ResponderTotalStatus> {
     const url = 'responder-service/stats';
-    return this.http.get<any>(url).pipe(
+    return this.http.get<ResponderTotalStatus>(url).pipe(
       catchError(res => this.handleError('getTotal()', res))
-    );
+    ).toPromise();
   }
 
-  getAvailable(): Observable<Responder[]> {
+  async getAvailable(): Promise<Responder[]> {
     const url = 'responder-service/responders/available';
     return this.http.get<Responder[]>(url).pipe(
       catchError(res => this.handleError('getAvailable()', res))
-    );
+    ).toPromise();
   }
 
-  getByName(name: string): Observable<Responder> {
+  async getByName(name: string): Promise<Responder> {
     const url = `responder-service/responder/byname/${name}`;
     return this.http.get<Responder>(url).pipe(
       catchError(res => this.handleError('getResponder()', res))
-    );
+    ).toPromise();
   }
 
   getById(id: number): Observable<Responder> {
@@ -57,13 +59,37 @@ export class ResponderService {
     );
   }
 
-  watchLocation(responder: Responder): Observable<any> {
+  watchLocation(responder?: Responder): Observable<any> {
     return Observable.create(observer => {
-      this.socket.on('topic-responder-location-update', update => {
-        if (!update || update.responderId !== `${responder.id}`) {
+      this.socket.on('topic-responder-location-update', msg => {
+        if (!msg || (!!responder && msg.responderId !== `${responder.id}`)) {
           return;
         }
-        observer.next(update);
+        observer.next(msg);
+      });
+    });
+  }
+
+  watch(): Observable<any> {
+    return Observable.create(observer => {
+      this.socket.on('topic-responder-event', (msg: TopicResponderEvent) => {
+        if (!msg || !msg.body || !msg.body.responder) {
+          return;
+        }
+        observer.next(msg.body.responder);
+      });
+      this.socket.on('topic-responder-command', (msg: TopicResponderCommand) => {
+        if (!msg || !msg.body || !msg.body.responder) {
+          return;
+        }
+        const { responder } = msg.body;
+        // Clean the update to ensure we don't override any existing properties with null or undefined.
+        Object.keys(responder).forEach(key => {
+          if (responder[key] === undefined || responder[key] === null) {
+            delete responder[key];
+          }
+        });
+        observer.next(responder);
       });
     });
   }
