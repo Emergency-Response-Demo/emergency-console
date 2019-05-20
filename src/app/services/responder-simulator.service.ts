@@ -14,7 +14,7 @@ export class ResponderSimulatorService {
 
   constructor(private messageService: MessageService, private http: HttpClient) { }
 
-  updateStatus(mission: Mission, status: string): Observable<Responder> {
+  async updateStatus(mission: Mission, status: string): Promise<Responder> {
     const url = `responder-simulator/api/responders`;
     const data = {
       responderId: mission.responderId,
@@ -22,7 +22,7 @@ export class ResponderSimulatorService {
     };
     return this.http.post<any>(url, data).pipe(
       catchError(res => this.handleError('updateStatus()', res))
-    );
+    ).toPromise();
   }
 
   private handleError(method: string, res: HttpErrorResponse): Observable<any> {

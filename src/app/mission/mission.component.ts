@@ -77,19 +77,18 @@ export class MissionComponent implements OnInit, OnDestroy {
     private socket: Socket
   ) { }
 
-  doAvailable(): void {
+  async doAvailable(): Promise<void> {
     this.isLoading = true;
     this.responder.enrolled = true;
     this.responder.available = true;
-    this.responderService.update(this.responder).subscribe(() => this.messageService.success('Waiting to receive a rescue mission'));
+    await this.responderService.update(this.responder); this.messageService.success('Waiting to receive a rescue mission');
   }
 
-  doPickedUp(): void {
+  async doPickedUp(): Promise<void> {
     this.responder.available = true;
     this.responder.enrolled = false;
-    this.responderService.update(this.responder).subscribe(() => {
-      this.responderSimulatorService.updateStatus(this.mission, 'PICKEDUP').subscribe();
-    });
+    await this.responderService.update(this.responder);
+    await this.responderSimulatorService.updateStatus(this.mission, 'PICKEDUP');
   }
 
   getCurrentMissionStep(): any {
@@ -126,7 +125,7 @@ export class MissionComponent implements OnInit, OnDestroy {
       if (showMessages) {
         this.messageService.success(`You have been assigned mission ${mission.id}`);
       }
-      this.responderSimulatorService.updateStatus(mission, 'MOVING').subscribe();
+      this.responderSimulatorService.updateStatus(mission, 'MOVING');
     }
     this.mission = mission;
 

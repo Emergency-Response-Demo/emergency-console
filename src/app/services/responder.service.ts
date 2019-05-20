@@ -37,26 +37,19 @@ export class ResponderService {
     ).toPromise();
   }
 
-  getById(id: number): Observable<Responder> {
-    const url = `responder-service/responder/${id}`;
-    return this.http.get<Responder>(url).pipe(
-      catchError(res => this.handleError('getById()', res))
-    );
-  }
-
-  add(responder: Responder): Observable<any> {
+  async add(responder: Responder): Promise<any> {
     delete responder.id;
     const url = 'responder-service/responder';
     return this.http.post<any>(url, responder).pipe(
       catchError(res => this.handleError('add()', res))
-    );
+    ).toPromise();
   }
 
-  update(responder: Responder): Observable<any> {
+  async update(responder: Responder): Promise<any> {
     const url = 'responder-service/responder';
     return this.http.put<any>(url, responder).pipe(
       catchError(res => this.handleError('update()', res))
-    );
+    ).toPromise();
   }
 
   watchLocation(responder?: Responder): Observable<any> {
