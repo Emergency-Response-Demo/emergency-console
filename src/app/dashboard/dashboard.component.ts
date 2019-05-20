@@ -137,7 +137,5 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.responderService.watchLocation().subscribe(this.handleResponderLocationUpdate.bind(this));
   }
 
-  ngOnDestroy() {
-    this.socket.removeAllListeners();
-  }
+  ngOnDestroy() {}
 }

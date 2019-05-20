@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
 
               this.messageService.info('Registering as new responder');
 
-              this.responderService.add(responder).subscribe(() => this.messageService.success(`Succesfully registered ${this.fullName}`));
+              this.responderService.add(responder).then(() => this.messageService.success(`Succesfully registered ${this.fullName}`));
             }
           });
         });
