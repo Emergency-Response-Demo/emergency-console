@@ -64,10 +64,7 @@ export class MapComponent implements OnInit {
   }
 
   get activeResponders(): Responder[] {
-    // Responders are no longer 'available' once a mission is assigned to it,
-    // only show responders with a mission currently active.
-    const responderIds = this.missions.filter(m => m.status !== 'COMPLETED').map(m => m.responderId);
-    return this.responders.filter(r => responderIds.includes(r.id));
+    return this.responders;
   }
 
   markerClick(lngLat: number[]): void {

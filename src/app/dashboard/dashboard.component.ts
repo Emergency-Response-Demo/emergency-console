@@ -32,8 +32,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private incidentService: IncidentService,
     private responderService: ResponderService,
     private shelterService: ShelterService,
-    private missionService: MissionService,
-    private socket: Socket
+    private missionService: MissionService
   ) { }
 
   async load(): Promise<void> {
@@ -46,16 +45,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .then(([missions, incidents, shelters, responders, responderStatus]: [Mission[], Incident[], Shelter[], Responder[], ResponderTotalStatus]) => {
         this.shelters = shelters;
 
+        // Use temp values so we have a double buffer, avoid needless updates.
         const tempIncidents = new Map<string, Incident>();
         incidents.forEach(m => tempIncidents[m.id] = m);
         this.incidentMap = tempIncidents;
-        // Use a temp map so we don't trigger a UI update on each update to
-        // this.missionsMap.
+
         const tempMissions = new Map<string, Mission>();
-        missions.forEach(m => tempMissions[m.id] = m);
-        this.missionMap = tempMissions;
-        // Do the same again for responders.
         const tempResponders = new Map<string, Responder>();
+        missions.forEach(m => {
+          tempMissions[m.id] = m;
+          const tempResponder = this.buildResponderFromMission(m);
+          if (tempResponder && m.status !== 'COMPLETED') {
+            tempResponders[m.responderId] = tempResponder;
+          }
+        });
+        this.missionMap = tempMissions;
+
+        // Override any responders that we can get real information for.
         responders.forEach(r => tempResponders[r.id] = r);
         this.responderMap = tempResponders;
         this.totalResponders = responderStatus.total;
@@ -94,7 +100,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return Object.values(this.responderMap);
   }
 
-
   get missions(): Mission[] {
     return Object.values(this.missionMap);
   }
@@ -119,6 +124,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
     this.responderMap[update.responderId].latitude = update.lat;
     this.responderMap[update.responderId].longitude = update.lon;
+    this.responderMap[update.responderId].person = update.human;
   }
 
   private handleMissionUpdate(mission: Mission): void {
@@ -127,6 +133,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.shelters[shelterIdx].rescued++;
     }
     this.missionMap[mission.id] = mission;
+  }
+
+  private buildResponderFromMission(mission: Mission): Responder {
+    if (!mission.responderLocationHistory || mission.responderLocationHistory.length < 1) {
+      return null;
+    }
+    const lastLocation = mission.responderLocationHistory[mission.responderLocationHistory.length - 1];
+
+    const responder = new Responder();
+    responder.id = mission.responderId;
+    responder.latitude = lastLocation.lat;
+    responder.longitude = lastLocation.lon;
+    return responder;
   }
 
   async ngOnInit() {
