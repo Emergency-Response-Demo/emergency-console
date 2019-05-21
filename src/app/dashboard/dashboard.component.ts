@@ -103,6 +103,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return Object.values(this.responderMap);
   }
 
+  get activeResponders(): Responder[] {
+    return this.missions.filter(m => m.status !== 'COMPLETED').map(m => this.responderMap[m.responderId]).filter(r => !!r);
+  }
+
   get missions(): Mission[] {
     return Object.values(this.missionMap);
   }

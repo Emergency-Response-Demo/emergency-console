@@ -2,6 +2,12 @@
   <div class="card">
     <div class="card-header">Mission</div>
     <div class="card-body">
+      <div
+        class="alert alert-info"
+        role="alert"
+        *ngIf="responder.longitude === null">
+        <strong>Your location is not set.</strong> Set your location by clicking on the map.
+      </div>
       <mgl-map
         [style]="'mapbox://styles/mapbox/streets-v9'"
         [zoom]="[11]"
@@ -62,8 +68,8 @@
           class="btn btn-secondary btn-lg"
           [disabled]="(responder.longitude === 0 && responder.latitude === 0) || isLoading"
           (click)="doAvailable()"
-          *ngIf="missionStatus !== 'CREATED' && responder.latitude != null"
-          [disabled]="missionStatus === 'UPDATED'">
+          *ngIf="missionStatus !== 'CREATED'"
+          [disabled]="missionStatus === 'UPDATED' || responder.latitude == null">
           <fa-icon [icon]="loadingIcon" [spin]="true" *ngIf="isLoading"></fa-icon> Available
         </button>
         <button
