@@ -74,18 +74,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   get incidentStatus(): IncidentStatus {
     const incidentStatus = new IncidentStatus();
-
-    this.missions.forEach(m => {
-      if (m.status === 'CREATED') {
+    this.incidents.forEach(i => {
+      if (i.status === 'REPORTED') {
+        incidentStatus.requested++;
+      } else if (i.status === 'ASSIGNED') {
         incidentStatus.assigned++;
-      } else if (m.status === 'UPDATED') {
+      } else if (i.status === 'PICKEDUP') {
         incidentStatus.pickedUp++;
-      } else if (m.status === 'COMPLETED') {
+      } else if (i.status === 'RESCUED') {
         incidentStatus.rescued++;
       }
     });
-    const inProgress = (incidentStatus.assigned + incidentStatus.pickedUp + incidentStatus.rescued);
-    incidentStatus.requested = this.incidents.length - inProgress;
     return incidentStatus;
   }
 
