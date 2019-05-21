@@ -32,7 +32,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private incidentService: IncidentService,
     private responderService: ResponderService,
     private shelterService: ShelterService,
-    private missionService: MissionService
+    private missionService: MissionService,
+    private socket: Socket
   ) { }
 
   async load(): Promise<void> {
@@ -57,6 +58,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
           const tempResponder = this.buildResponderFromMission(m);
           if (tempResponder && m.status !== 'COMPLETED') {
             tempResponders[m.responderId] = tempResponder;
+          }
+          if (m.status === 'COMPLETED') {
+            this.handleMissionComplete(m);
           }
         });
         this.missionMap = tempMissions;
@@ -129,10 +133,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   private handleMissionUpdate(mission: Mission): void {
     if (mission.status === 'COMPLETED') {
-      const shelterIdx = this.shelters.findIndex(s => s.lat === mission.destinationLat && s.lon === mission.destinationLong);
-      this.shelters[shelterIdx].rescued++;
+      this.handleMissionComplete(mission);
     }
     this.missionMap[mission.id] = mission;
+  }
+
+  private handleMissionComplete(mission: Mission): void {
+    if (mission.status !== 'COMPLETED') {
+      return;
+    }
+    this.shelters = this.shelters.map(s => {
+      if (mission.destinationLat === s.lat && mission.destinationLong === s.lon) {
+        s.rescued++;
+      }
+      return s;
+    });
   }
 
   private buildResponderFromMission(mission: Mission): Responder {
@@ -156,5 +171,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.responderService.watchLocation().subscribe(this.handleResponderLocationUpdate.bind(this));
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.socket.removeAllListeners();
+  }
 }
