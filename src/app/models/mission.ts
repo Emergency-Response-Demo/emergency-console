@@ -1,11 +1,7 @@
-export interface Location {
-  lat: number;
-  long: number;
-}
-
 export interface LocationHistory {
   timestamp: number;
-  location: Location;
+  lat: number;
+  lon: number;
 }
 
 export class Mission {
@@ -19,6 +15,13 @@ export class Mission {
   destinationLat: number;
   destinationLong: number;
   responderLocationHistory: LocationHistory[];
-  route: any;
+  steps: MissionStep[];
   status: string;
+}
+
+export class MissionStep {
+  destination: boolean;
+  wayPoint: boolean;
+  lat: number;
+  lon: number;
 }

@@ -6,17 +6,17 @@
     [accessToken]="accessToken"
     [fitBounds]="bounds"
     [fitBoundsOptions]="boundsOptions">
-    <span *ngFor="let responder of responders; index as i">
+    <span *ngFor="let responder of activeResponders; index as i">
       <mgl-marker [lngLat]="[responder.longitude, responder.latitude]" #responderMarker>
         <div class="marker" (click)="markerClick([responder.longitude, responder.latitude])" [ngStyle]="{
           'background-image': 'url(assets/img/' + getResponderIcon(responder.person) +')'
         }" ></div>
       </mgl-marker>
-      <mgl-popup [marker]="responderMarker" [offset]="[0, -12]" (open)="onResponderPopup(responder.id, i, responder.missionId)">
+      <mgl-popup [marker]="responderMarker" [offset]="[0, -12]" (open)="onResponderPopup(responder)">
         <div class="card-text">
           <p>
-            <strong>Mission ID: </strong> {{ responder.missionId }}<br />
-            <strong>Mission Status: </strong> {{ responder.missionStatus }}<br />
+            <strong>Mission ID: </strong> {{ getResponderMission(responder) ? getResponderMission(responder).id : null }}<br />
+            <strong>Mission Status: </strong> {{ getResponderMission(responder) ? getResponderMission(responder).status : null }}<br />
             <strong>Responder ID: </strong> {{ responder.id }}<br />
             <strong>Long/Lat: </strong> {{ responder.longitude + ',' + responder.latitude }}<br />
             <strong>Full Name: </strong> {{ responder.name }}<br />
@@ -42,17 +42,17 @@
         </div>
       </mgl-popup>
     </span>
-    <span *ngFor="let incident of incidents; index as i">
+    <span *ngFor="let incident of currentIncidents; index as i">
       <mgl-marker [lngLat]="[incident.lon, incident.lat]" #incidentMarker>
         <div class="marker" [ngStyle]="{
-            'background-image': 'url(assets/img/' + getIncidentIcon(incident.status) + ')'
+            'background-image': 'url(assets/img/' + getIncidentIcon(incident) + ')'
           }" (click)="markerClick([incident.lon, incident.lat])"></div>
       </mgl-marker>
-      <mgl-popup [marker]="incidentMarker" [offset]="[0, -12]" (open)="onIncidentPopup(incident.id, i, incident.missionId)">
+      <mgl-popup [marker]="incidentMarker" [offset]="[0, -12]" (open)="onIncidentPopup(incident)">
         <div class="card-text">
           <p>
-            <strong>Mission ID: </strong> {{ incident.missionId }}<br />
-            <strong>Mission Status: </strong> {{ incident.status }}<br />
+            <strong>Mission ID: </strong> {{ getIncidentMission(incident) ? getIncidentMission(incident).id : null }}<br />
+            <strong>Mission Status: </strong> {{ getIncidentMission(incident) ? getIncidentMission(incident).status : null }}<br />
             <strong>Incident ID: </strong> {{ incident.id }}<br />
             <strong>Long/Lat: </strong> {{ incident.lon + ',' + incident.lat }}<br />
             <strong>Name: </strong> {{ incident.victimName }}<br />

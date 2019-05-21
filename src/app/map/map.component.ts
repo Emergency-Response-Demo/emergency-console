@@ -1,26 +1,24 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Incident } from '../models/incident';
 import { Responder } from '../models/responder';
 import { Shelter } from '../models/shelter';
-import { IncidentStatus } from '../models/incident-status';
 import { LineLayout, LinePaint, LngLatBoundsLike, FitBoundsOptions } from 'mapbox-gl';
-import { MissionRoute } from '../models/mission-route';
 import { AppUtil } from '../app-util';
 import { ResponderService } from '../services/responder.service';
 import { IncidentService } from '../services/incident.service';
+import { Mission } from '../models/mission';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css']
+  styleUrls: ['./map.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapComponent implements OnInit {
   @Input() responders: Responder[];
   @Input() incidents: Incident[];
   @Input() shelters: Shelter[];
-  @Input() missionRoutes: MissionRoute[];
-
-  stats: IncidentStatus;
+  @Input() missions: Mission[];
 
   center: number[] = AppUtil.isMobile() ? [-77.886765, 34.139921] : [-77.886765, 34.158808];
   accessToken: string = window['_env'].accessToken;
@@ -61,60 +59,70 @@ export class MapComponent implements OnInit {
 
   constructor(public responderService: ResponderService, public incidentService: IncidentService) { }
 
+  get currentIncidents(): Incident[] {
+    return this.incidents.filter(i => i.status !== 'RESCUED');
+  }
+
+  get activeResponders(): Responder[] {
+    return this.responders;
+  }
+
   markerClick(lngLat: number[]): void {
     this.center = lngLat;
   }
 
   // icons colored with coreui hex codes from https://iconscout.com/icon/location-62
-  getIncidentIcon(missionStatus: string): string {
-    return (missionStatus === 'REPORTED' ? 'marker-red.svg' : 'marker-yellow.svg');
+  getIncidentIcon(incident: Incident): string {
+    return !incident.status || incident.status === 'REPORTED' ? 'marker-red.svg' : 'marker-yellow.svg';
   }
 
   getResponderIcon(person: boolean): string {
     return (person ? 'responder-person.svg' : 'responder.svg');
   }
 
-  onResponderPopup(responderId: number, index: number, missionId: string): void {
-    this.responderService.getById(responderId).subscribe((responder: Responder) => {
-      if (responder != null) {
-        this.responders[index].name = responder.name;
-        this.responders[index].phoneNumber = responder.phoneNumber;
-        this.responders[index].boatCapacity = responder.boatCapacity;
-        this.responders[index].medicalKit = responder.medicalKit;
-        this.responders[index].person = responder.person;
-      }
-    });
-    this.onPopup(missionId);
+  getResponderMission(responder: Responder) {
+    return this.missions.find(m => m.responderId === responder.id && m.status !== 'COMPLETED');
   }
 
-  onIncidentPopup(incidentId: string, index: number, missionId: string): void {
-    this.incidentService.getById(incidentId).subscribe((incident: Incident) => {
-      if (incident != null) {
-        this.incidents[index].victimName = incident.victimName;
-        this.incidents[index].victimPhoneNumber = incident.victimPhoneNumber;
-        this.incidents[index].medicalNeeded = incident.medicalNeeded;
-        this.incidents[index].numberOfPeople = incident.numberOfPeople;
-      }
-    });
-    this.onPopup(missionId);
+  getIncidentMission(incident: Incident) {
+    return this.missions.find(m => m.incidentId === incident.id);
   }
 
-  public onPopup(id: string): void {
+  onResponderPopup(responder: Responder): void {
+    const mission = this.getResponderMission(responder);
+    if (!mission) {
+      return;
+    }
+    this.onPopup(mission);
+  }
+
+  onIncidentPopup(incident: Incident): void {
+    const mission = this.getIncidentMission(incident);
+    if (!mission) {
+      return;
+    }
+    this.onPopup(mission);
+  }
+
+  public onPopup(mission: Mission): void {
+    if (!mission || mission.status === 'COMPLETED') {
+      return;
+    }
+
     this.pickupData.features[0].geometry.coordinates = [];
     this.pickupData = { ...this.pickupData };
     this.deliverData.features[0].geometry.coordinates = [];
     this.deliverData = { ...this.deliverData };
-
-    if (id) {
-      const missionRoute = this.missionRoutes.find((route: MissionRoute) => route.id === id);
-      if (missionRoute) {
-        this.pickupData.features[0].geometry.coordinates = missionRoute.pickupRoute;
-        this.deliverData.features[0].geometry.coordinates = missionRoute.deliverRoute;
-        this.pickupData = { ...this.pickupData };
-        this.deliverData = { ...this.deliverData };
-        this.bounds = AppUtil.getBounds(missionRoute.pickupRoute.concat(missionRoute.deliverRoute));
-      }
+    const missionRoute = AppUtil.getRoute(mission.id, mission.steps);
+    if (!missionRoute) {
+      return;
     }
+
+    this.pickupData.features[0].geometry.coordinates = missionRoute.pickupRoute;
+    this.deliverData.features[0].geometry.coordinates = missionRoute.deliverRoute;
+    this.pickupData = { ...this.pickupData };
+    this.deliverData = { ...this.deliverData };
+    this.bounds = AppUtil.getBounds(missionRoute.pickupRoute.concat(missionRoute.deliverRoute));
   }
 
   ngOnInit() {

@@ -9,13 +9,10 @@ import { Shelter } from '../models/shelter';
   providedIn: 'root'
 })
 export class ShelterService {
-
-    private url = 'assets/data/shelters.json';
-
-    getShelters(): Observable<Shelter[]> {
-      return this.http.get<Shelter[]>(this.url).pipe(
+    async getShelters(): Promise<Shelter[]> {
+      return this.http.get<Shelter[]>('/shelter-service/api/shelters').pipe(
         catchError(res => this.handleError('getShelters()', res))
-      );
+      ).toPromise();
     }
 
     private handleError(method: string, res: HttpErrorResponse): Observable<any> {
