@@ -4,7 +4,7 @@ oc project naps-emergency-response
 
 oc new-app \
 --image-stream=nodejs \
---code=https://github.com/NAPS-emergency-response-project/emergency-console \
+--code=https://github.com/Emergency-Response-Demo/emergency-console \
 --name=emergency-console
 
 oc create route edge --service=emergency-console --cert=server.cert --key=server.key
