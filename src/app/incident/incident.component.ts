@@ -4,8 +4,7 @@ import { IncidentStatus } from '../models/incident-status';
 @Component({
   selector: 'app-incident',
   templateUrl: './incident.component.html',
-  styleUrls: ['./incident.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./incident.component.css']
 })
 export class IncidentComponent implements OnInit {
 

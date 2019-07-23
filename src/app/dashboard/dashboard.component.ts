@@ -117,7 +117,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   private handleIncidentUpdate(incident: Incident): void {
     const currentIncident = this.incidentMap[incident.id];
-    this.incidentMap[incident.id] = Object.assign({}, currentIncident, incident);
+    this.incidentMap[incident.id] = Object.assign({ status: 'REPORTED' }, currentIncident, incident);
   }
 
   private handleResponderUpdate(responder: Responder): void {
