@@ -45,7 +45,7 @@ Once `run-local.sh` has been updated, two scripts been to be executed
 npm run buildDev
 ```
 
-to watch the project and rebuild when neeeded, and
+to watch the project and rebuild when needed, and
 
 ```
 ./run-local.sh
