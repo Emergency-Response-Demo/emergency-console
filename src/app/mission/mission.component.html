@@ -21,6 +21,21 @@
           <mgl-marker [lngLat]="[incident.lon, incident.lat]" #incidentMarker>
             <div class="marker" [ngStyle]="incidentStyle"></div>
           </mgl-marker>
+          <mgl-popup [marker]="incidentMarker" [offset]="[0, -12]">
+            <div class="card-text">
+              <p>
+                <strong>Mission ID: </strong> {{ mission ? mission.id : null }}<br />
+                <strong>Mission Status: </strong> {{ mission ? mission.status : null }}<br />
+                <strong>Incident ID: </strong> {{ incident.id }}<br />
+                <strong>Long/Lat: </strong> {{ incident.lon + ',' + incident.lat }}<br />
+                <strong>Name: </strong> {{ incident.victimName || 'Pending...' }}<br />
+                <strong>Phone Number: </strong> {{ incident.victimPhoneNumber || 'Pending...' }}<br />
+                <strong>Medical Needed?: </strong> {{ incident.medicalNeeded }}<br />
+                <strong>Number of People: </strong> {{ incident.numberOfPeople || 'Pending...' }}<br />
+                <a target="_blank" href="process-viewer/data/process/instance/{{ incident.id }}">Process Diagram</a>
+              </p>
+            </div>
+          </mgl-popup>
         </span>
         <span *ngIf="responder.longitude && responder.latitude">
           <mgl-marker [lngLat]="[responder.longitude, responder.latitude]" #responderMarker>

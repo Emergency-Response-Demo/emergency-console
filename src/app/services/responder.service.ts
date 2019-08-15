@@ -7,7 +7,8 @@ import { of } from 'rxjs/internal/observable/of';
 import { Responder } from '../models/responder';
 import { Socket } from 'ngx-socket-io';
 import { ResponderTotalStatus } from '../models/responder-status';
-import { TopicResponderEvent, TopicResponderCommand } from '../models/topic';
+import { TopicResponderEvent, TopicResponderCommand, TopicResponderCreateEvent, TopicResponderDeleteEvent } from '../models/topic';
+import { ObserveOnOperator } from 'rxjs/internal/operators/observeOn';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,13 @@ export class ResponderService {
     const url = 'responder-service/responders/available';
     return this.http.get<Responder[]>(url).pipe(
       catchError(res => this.handleError('getAvailable()', res))
+    ).toPromise();
+  }
+
+  async getById(id: number): Promise<Responder> {
+    const url = `responder-service/responder/${id}`;
+    return this.http.get<Responder>(url).pipe(
+      catchError(res => this.handleError('getById()', res))
     ).toPromise();
   }
 
@@ -59,6 +67,29 @@ export class ResponderService {
           return;
         }
         observer.next(msg);
+      });
+    });
+  }
+
+  watchDeletes(): Observable<any> {
+    return Observable.create(observer => {
+      this.socket.on('topic-responder-event', (msg: TopicResponderDeleteEvent) => {
+        if (!msg || msg.messageType !== 'RespondersDeletedEvent' || !msg.body || !msg.body.deleted) {
+          return;
+        }
+        msg.body.responders.forEach(id => observer.next(id));
+      });
+    });
+  }
+
+  watchCreates(): Observable<any> {
+    return Observable.create(observer => {
+      this.socket.on('topic-responder-event', (msg: TopicResponderCreateEvent) => {
+        if (!msg || msg.messageType !== 'RespondersCreatedEvent' || !msg.body || !msg.body.created) {
+          return;
+        }
+        Promise.all(msg.body.responders.map(id => this.getById(id)))
+          .then(responders => responders.forEach(r => observer.next(r)));
       });
     });
   }

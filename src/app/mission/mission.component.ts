@@ -15,6 +15,7 @@ import { Mission, MissionStep } from '../models/mission';
 import { ResponderSimulatorService } from '../services/responder-simulator.service';
 import { Socket } from 'ngx-socket-io';
 import { ResponderLocationStatus } from '../models/responder-status';
+import { IncidentService } from '../services/incident.service';
 
 @Component({
   selector: 'app-mission',
@@ -74,6 +75,7 @@ export class MissionComponent implements OnInit, OnDestroy {
     private shelterService: ShelterService,
     private responderService: ResponderService,
     private responderSimulatorService: ResponderSimulatorService,
+    private incidentService: IncidentService,
     private socket: Socket
   ) { }
 
@@ -112,7 +114,7 @@ export class MissionComponent implements OnInit, OnDestroy {
     }
   }
 
-  handleMissionStatusUpdate(mission: Mission, showMessages: boolean = true): void {
+  async handleMissionStatusUpdate(mission: Mission, showMessages: boolean = true): Promise<void> {
     if (mission === null || mission.status === 'COMPLETED') {
       if (showMessages) {
         this.messageService.success('Mission complete');
@@ -131,6 +133,8 @@ export class MissionComponent implements OnInit, OnDestroy {
 
     this.incident.lon = mission.incidentLong;
     this.incident.lat = mission.incidentLat;
+    this.incident.id = mission.incidentId;
+
     this.missionStatus = mission.status;
     this.pickupPaint['line-color'] = this.YELLOW;
     this.pickupPaint = { ...this.pickupPaint };
@@ -145,6 +149,8 @@ export class MissionComponent implements OnInit, OnDestroy {
 
     this.bounds = AppUtil.getBounds(mapRoute.pickupRoute.concat(mapRoute.deliverRoute));
     this.isLoading = false;
+
+    this.incident = await this.incidentService.getById(this.incident.id);
   }
 
   handleResponderLocationUpdate(update: ResponderLocationStatus): void {
