@@ -9,6 +9,7 @@ import { Socket } from 'ngx-socket-io';
 import { ResponderTotalStatus } from '../models/responder-status';
 import { TopicResponderEvent, TopicResponderCommand, TopicResponderCreateEvent, TopicResponderDeleteEvent } from '../models/topic';
 import { ObserveOnOperator } from 'rxjs/internal/operators/observeOn';
+import { AppUtil } from '../app-util';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,7 @@ export class ResponderService {
   async getById(id: number): Promise<Responder> {
     const url = `responder-service/responder/${id}`;
     return this.http.get<Responder>(url).pipe(
+      AppUtil.retryWithBackoff(1000),
       catchError(res => this.handleError('getById()', res))
     ).toPromise();
   }
@@ -88,8 +90,10 @@ export class ResponderService {
         if (!msg || msg.messageType !== 'RespondersCreatedEvent' || !msg.body || !msg.body.created) {
           return;
         }
-        Promise.all(msg.body.responders.map(id => this.getById(id)))
-          .then(responders => responders.forEach(r => observer.next(r)));
+        msg.body.responders.forEach(async (id) => {
+          const responder = await this.getById(id);
+          observer.next(responder);
+        });
       });
     });
   }
