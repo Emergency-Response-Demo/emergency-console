@@ -1,6 +1,8 @@
 import { LngLatBoundsLike } from 'mapbox-gl';
 import { MissionRoute } from './models/mission-route';
 import { MissionStep } from './models/mission';
+import { Observable, of, throwError } from 'rxjs';
+import { retryWhen, mergeMap, delay } from 'rxjs/operators';
 
 export class AppUtil {
   public static getBounds(coordinates: number[][]): LngLatBoundsLike {
@@ -54,6 +56,22 @@ export class AppUtil {
         }
       ]
     };
+  }
+
+  public static retryWithBackoff(delayMs: number, maxRetries = 5, backoff = 1000) {
+    let retries = maxRetries;
+    return (src: Observable<any>) => src.pipe(
+      retryWhen((errors: Observable<any>) => errors.pipe(
+        mergeMap(error => {
+          if (retries-- > 0) {
+            console.warn('retrying request after backoff');
+            const backoffTime = delayMs + (maxRetries - retries) * backoff;
+            return of(error).pipe(delay(backoffTime));
+          }
+          return throwError(`failed to perform request after ${maxRetries} attempts`);
+        })
+      ))
+    );
   }
 
   public static isMobile(): boolean {

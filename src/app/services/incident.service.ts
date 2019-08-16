@@ -13,6 +13,13 @@ import { TopicIncidentEvent, TopicIncidentCommand } from '../models/topic';
 })
 export class IncidentService {
 
+  async getById(id): Promise<Incident> {
+    const url = `incident-service/incidents/incident/${id}`;
+    return this.http.get<Incident>(url).pipe(
+      catchError(res => this.handleError('getById()', res))
+    ).toPromise();
+  }
+
   async getAll(): Promise<Incident[]> {
     const url = 'incident-service/incidents';
     return this.http.get<Incident[]>(url).pipe(

@@ -9,7 +9,12 @@ import { MessageService } from '../services/message.service';
   selector: 'app-home',
   templateUrl: './home.component.html'
 })
+
 export class HomeComponent implements OnInit {
+  static DEFAULT_PHONE_NUMBER = '001001001';
+  static DEFAULT_BOAT_CAPACITY = 12;
+  static DEFAULT_MEDICAL_KIT = true;
+
   fullName = '';
 
   constructor(
@@ -28,12 +33,23 @@ export class HomeComponent implements OnInit {
             if (responder.id === 0) {
               responder.name = this.fullName;
               responder.name = `${profile.firstName} ${profile.lastName}`;
-              responder.phoneNumber = profile['attributes'].phoneNumber[0];
-              let boatCapacity = profile['attributes'].boatCapacity[0];
-              // Clamp boatCapacity between 0 and 255 (inclusive).
-              boatCapacity = boatCapacity <= 0 ? 0 : boatCapacity >= 12 ? 12 : boatCapacity;
-              responder.boatCapacity = boatCapacity;
-              responder.medicalKit = profile['attributes'].medical[0];
+              responder.phoneNumber = HomeComponent.DEFAULT_PHONE_NUMBER;
+              responder.boatCapacity = HomeComponent.DEFAULT_BOAT_CAPACITY;
+              responder.medicalKit = HomeComponent.DEFAULT_MEDICAL_KIT;
+              if (profile && profile['attributes']) {
+                const attrs = profile['attributes'];
+                if (attrs.phoneNumber && attrs.phoneNumber[0]) {
+                  responder.phoneNumber = attrs.phoneNumber[0];
+                }
+                if (attrs.boatCapacity && attrs.boatCapacity[0]) {
+                  // clamp between 0 and 12
+                  const boatCapacity = attrs.boatCapacity[0] <= 0 ? 0 : attrs.boatCapacity[0] >= 12 ? 12 : attrs.boatCapacity[0];
+                  responder.boatCapacity = boatCapacity;
+                }
+                if (attrs.medical && attrs.medical[0]) {
+                  responder.medicalKit = attrs.medical[0];
+                }
+              }
               responder.enrolled = false;
               responder.person = true;
               responder.available = true;

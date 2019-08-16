@@ -26,6 +26,20 @@ export interface TopicResponderEvent extends TopicMessage {
   };
 }
 
+export interface TopicResponderCreateEvent extends TopicMessage {
+  body: {
+    created: number,
+    responders: number[]
+  };
+}
+
+export interface TopicResponderDeleteEvent extends TopicMessage {
+  body: {
+    deleted: number,
+    responders: number[]
+  };
+}
+
 export interface TopicResponderCommand extends TopicMessage {
   body: {
     responder: Responder;

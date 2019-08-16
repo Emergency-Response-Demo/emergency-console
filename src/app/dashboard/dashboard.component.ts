@@ -125,6 +125,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.responderMap[responder.id] = Object.assign({}, currentResponder, responder);
   }
 
+  private handleResponderCreate(responder: Responder): void {
+    const currentResponder = this.responderMap[responder.id];
+    this.responderMap[responder.id] = Object.assign({}, currentResponder, responder);
+    this.totalResponders = Object.values(this.responderMap).length;
+  }
+
+  private handleResponderDelete(responderId: number): void {
+    delete this.responderMap[responderId];
+    this.totalResponders = Object.values(this.responderMap).length;
+  }
+
   private handleResponderLocationUpdate(update: ResponderLocationStatus): void {
     if (!this.responderMap[update.responderId]) {
       return;
@@ -171,6 +182,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.missionService.watch().subscribe(this.handleMissionUpdate.bind(this));
     this.incidentService.watch(['IncidentReportedEvent', 'UpdateIncidentCommand']).subscribe(this.handleIncidentUpdate.bind(this));
     this.responderService.watch().subscribe(this.handleResponderUpdate.bind(this));
+    this.responderService.watchCreates().subscribe(this.handleResponderCreate.bind(this));
+    this.responderService.watchDeletes().subscribe(this.handleResponderDelete.bind(this));
     this.responderService.watchLocation().subscribe(this.handleResponderLocationUpdate.bind(this));
   }
 
