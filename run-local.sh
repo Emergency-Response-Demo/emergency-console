@@ -9,6 +9,8 @@ export PROCESS_VIEWER="http://process-viewer-naps-emergency-response.apps.753d.o
 export AUTH_URL="https://sso-naps-emergency-response.apps.753d.openshift.opentlc.com/auth"
 export KEYCLOAK="true"
 export POLLING="10000"
+export REALM="emergency-realm"
+export CLIENTID="js"
 
 # https://account.mapbox.com/access-tokens/
 export TOKEN=${MAPBOX_TOKEN}

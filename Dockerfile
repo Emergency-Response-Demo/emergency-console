@@ -5,7 +5,7 @@ WORKDIR /usr/src/emergency-console
 COPY . ./
 
 RUN npm install
-RUN npm build
+RUN npm run-script build
 
 EXPOSE 8080
 
