@@ -3,8 +3,8 @@
   window._env = window._env || {};
 
   window._env.url = '';
-  window._env.realm = 'emergency-realm';
-  window._env.clientId = 'js';
+  window._env.realm = '';
+  window._env.clientId = '';
   window._env.enabled = '';
   window._env.accessToken = '';
   window._env.pollingInterval = '';
