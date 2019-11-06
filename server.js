@@ -10,8 +10,10 @@ let path = require('path');
 let proxy = require('http-proxy-middleware');
 let kafka = require('kafka-node');
 let socketIO = require('socket.io');
+let cors = require('cors');
 
 let app = express();
+app.use(cors());
 
 // these ENV variables are only set for local development. Default to services on Openshift
 app.set('port', process.env.PORT || 8080);
