@@ -1,0 +1,75 @@
+version: 2
+jobs:
+  build_and_test:
+    working_directory: ~/emergency-console
+    docker:
+      - image: circleci/node:10-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: emergency-console-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - run: npm install
+      - save_cache:
+          key: emergency-console-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - "node_modules"
+      - run: npm run build
+  
+  container_latest:
+    working_directory: ~/emergency-console
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: make container_build_latest
+      - run: make container_push_latest
+
+  container_master:
+    working_directory: ~/emergency-console
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: make container_build_master
+      - run: make container_push_master
+
+  container_release:
+    working_directory: ~/emergency-console
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: make container_build_release
+      - run: make container_push_release
+
+workflows:
+  version: 2
+  build_and_push:
+    jobs:
+      - build_and_test
+      - container_latest:
+          requires:
+            - build_and_test
+          filters:
+            tags:
+              only: /.*/
+      - container_master:
+          requires:
+            - build_and_test
+          filters:
+            branches:
+              only:
+                - master
+      - container_release:
+          requires:
+            - build_and_test
+          filters:
+            tags:
+              only: /\d\.\d\.\d(.*?)/
+            branches:
+              ignore: /.*/
+
+  
