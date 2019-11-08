@@ -1,0 +1,12 @@
+e2e
+node_modules
+tmp
+dist
+Dockerfile
+.git
+.gitignore
+.circleci
+npm-debug.log
+README.md
+docs
+ocp-*.sh
