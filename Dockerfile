@@ -7,6 +7,8 @@ COPY . ./
 RUN npm install
 RUN npm run-script build
 
+RUN chmod 777 dist/assets/js/env.js
+
 EXPOSE 8080
 
 ENTRYPOINT [ "npm", "run", "start" ]
