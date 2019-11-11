@@ -12,7 +12,7 @@ container_build_latest:
 
 .PHONY: container_push_latest
 container_push_latest:
-				@docker login -u $(QUAY_USERNAME) -p $(QUAY_PASSWORD) ${SERVER}
+				@docker login -u $(QUAY_USERNAME) -p "$(QUAY_PASSWORD)" ${SERVER}
 				docker push $(CONTAINER_LATEST_TAG)
 
 .PHONY: container_build_release
