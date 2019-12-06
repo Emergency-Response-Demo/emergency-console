@@ -87,9 +87,6 @@ export class MissionComponent implements OnInit, OnDestroy {
   }
 
   async doPickedUp(): Promise<void> {
-    this.responder.available = true;
-    this.responder.enrolled = false;
-    await this.responderService.update(this.responder);
     await this.responderSimulatorService.updateStatus(this.mission, 'PICKEDUP');
   }
 
