@@ -7,6 +7,7 @@ import { AppUtil } from '../app-util';
 import { ResponderService } from '../services/responder.service';
 import { IncidentService } from '../services/incident.service';
 import { Mission } from '../models/mission';
+import { CircleMode, DragCircleMode, DirectMode, SimpleSelectMode, MapboxDraw } from 'mapbox-gl-draw-circle';
 
 @Component({
   selector: 'app-map',
@@ -133,10 +134,29 @@ export class MapComponent implements OnInit {
   public addPriorityZone(click: MapMouseEvent):void {
     if (click.lngLat) {
       new Marker({
-        draggable: false
+        draggable: true
         })
         .setLngLat([click.lngLat.lng, click.lngLat.lat])
         .addTo(this.map);
     }
+  }
+
+  public loadMap(map: Map):void {
+    // userProperties has to be enabled
+const draw = new MapboxDraw({
+  defaultMode: "draw_circle",
+  userProperties: true,
+  modes: {
+    ...MapboxDraw.modes,
+    draw_circle  : CircleMode,
+    drag_circle  : DragCircleMode,
+    direct_select: DirectMode,
+    simple_select: SimpleSelectMode
+  }
+});
+
+// Add this draw object to the map when map loads
+map.addControl(draw);
+this.map = map;
   }
 }

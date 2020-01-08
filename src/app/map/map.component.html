@@ -72,5 +72,6 @@
     <mgl-geojson-source id="deliverJson" [data]="deliverData"> </mgl-geojson-source>
     <mgl-layer id="deliverRoute" type="line" source="deliverJson" [layout]="lineLayout" [paint]="deliverPaint"> </mgl-layer>
   </mgl-map>
+  <app-map-overlay></app-map-overlay>
   <app-legend [bottom]="'50px'"></app-legend>
 </div>

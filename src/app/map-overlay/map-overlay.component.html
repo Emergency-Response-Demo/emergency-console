@@ -1,0 +1,16 @@
+<script>
+  var priorityMode = false;
+  function togglePriorityMode() {
+    priorityMode = !priorityMode;
+    alert(priorityMode);
+  }
+</script>
+
+<div class="map-overlay top">
+  <div class="map-overlay-inner">
+    <fieldset>
+      <label>Add Priority Zone</label>
+      <button id="priority-mode" onclick="return togglePriorityMode()"></button>
+    </fieldset>
+  </div>
+</div>
