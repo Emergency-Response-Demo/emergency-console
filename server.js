@@ -117,7 +117,7 @@ app.post('/priority-zone/create', (_, res) => {
   if (_.body.centerLongitude && _.body.centerLatitude) {
     var payload = [{
       topic: 'topic-priority-zone',
-      messages: new kafka.KeyedMessage(uuidv1(), _.body)
+      messages: new kafka.KeyedMessage(uuidv1(), JSON.stringify(_.body))
     }];
     kafkaProducer.send(payload, (err, data) => {
       console.log(payload);
