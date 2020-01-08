@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 import { Incident } from '../models/incident';
 import { Responder } from '../models/responder';
 import { Shelter } from '../models/shelter';
-import { LineLayout, LinePaint, LngLatBoundsLike, FitBoundsOptions } from 'mapbox-gl';
+import { LineLayout, LinePaint, LngLatBoundsLike, FitBoundsOptions, MapMouseEvent, Map, Marker } from 'mapbox-gl';
 import { AppUtil } from '../app-util';
 import { ResponderService } from '../services/responder.service';
 import { IncidentService } from '../services/incident.service';
@@ -19,6 +19,8 @@ export class MapComponent implements OnInit {
   @Input() incidents: Incident[];
   @Input() shelters: Shelter[];
   @Input() missions: Mission[];
+
+  map: Map;
 
   center: number[] = AppUtil.isMobile() ? [-77.886765, 34.139921] : [-77.886765, 34.158808];
   accessToken: string = window['_env'].accessToken;
@@ -126,5 +128,15 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  public addPriorityZone(click: MapMouseEvent):void {
+    if (click.lngLat) {
+      new Marker({
+        draggable: false
+        })
+        .setLngLat([click.lngLat.lng, click.lngLat.lat])
+        .addTo(this.map);
+    }
   }
 }

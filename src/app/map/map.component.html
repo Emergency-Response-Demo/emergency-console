@@ -5,7 +5,10 @@
     [center]="center"
     [accessToken]="accessToken"
     [fitBounds]="bounds"
-    [fitBoundsOptions]="boundsOptions">
+    [fitBoundsOptions]="boundsOptions"
+    (click)="addPriorityZone($event)"
+    (load)="map = $event">
+
     <span *ngFor="let responder of activeResponders; index as i">
       <mgl-marker [lngLat]="[responder.longitude, responder.latitude]" #responderMarker>
         <div class="marker" (click)="markerClick([responder.longitude, responder.latitude])" [ngStyle]="{
