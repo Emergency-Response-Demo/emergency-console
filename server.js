@@ -133,6 +133,8 @@ app.post('/priority-zone/create', (_, res) => {
       console.log(data);
       console.log(`Created Priority Zone with the center at [${_.body.centerLongitude}, ${_.body.centerLatitude}]`);
     });
+
+    res.send({response:`Created Priority Zone with the center at [${_.body.centerLongitude}, ${_.body.centerLatitude}]`});
   }
 });
 
