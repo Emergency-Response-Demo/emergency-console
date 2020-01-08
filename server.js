@@ -115,9 +115,18 @@ app.get('/shelter-service/api/shelters', (_, res) => {
 // create new priority zone
 app.post('/priority-zone/create', (_, res) => {
   if (_.body.centerLongitude && _.body.centerLatitude) {
+    var body = _.body;
+    body.id = uuidv1();
+
     var payload = [{
       topic: 'topic-priority-zone',
-      messages: new kafka.KeyedMessage(uuidv1(), JSON.stringify(_.body))
+      messages: [{
+        key: uuidv1(),
+        value: JSON.stringify(body),
+        headers: {
+          'messageType': 'PriorityZoneCreatedEvent'
+        }
+      }]
     }];
     kafkaProducer.send(payload, (err, data) => {
       console.log(payload);
