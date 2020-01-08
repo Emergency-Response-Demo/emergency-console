@@ -11,6 +11,8 @@ let proxy = require('http-proxy-middleware');
 let kafka = require('kafka-node');
 let socketIO = require('socket.io');
 let cors = require('cors');
+let bodyParser = require('body-parser');
+let uuidv4 = require('uuid/v4');
 
 let app = express();
 app.use(cors());
@@ -24,7 +26,7 @@ app.set('mission-service', process.env.MISSION || 'http://mission-service:8080')
 app.set('process-viewer', process.env.PROCESS_VIEWER || 'http://process-viewer:8080');
 app.set('responder-simulator', process.env.RESPONDER_SIMULATOR || 'http://responder-simulator:8080');
 app.set('kafka-host', process.env.KAFKA_HOST || 'kafka-cluster-kafka-bootstrap.naps-emergency-response.svc:9092');
-app.set('kafka-message-topic', ['topic-mission-event', 'topic-responder-location-update', 'topic-incident-event', 'topic-responder-event', 'topic-incident-command', 'topic-responder-command']);
+app.set('kafka-message-topic', ['topic-mission-event', 'topic-responder-location-update', 'topic-incident-event', 'topic-responder-event', 'topic-incident-command', 'topic-responder-command', 'topic-priority-zone-event']);
 if (process.env.KAFKA_TOPIC) {
   app.set('kafka-message-topic', process.env.KAFKA_TOPIC.split(','));
 }
@@ -35,6 +37,10 @@ app.use(compression());
 app.use(logger('combined'));
 
 app.use(express.static(path.join(__dirname, 'dist')));
+
+app.use(bodyParser.json());
+
+app.use(uuidv4);
 
 // setup server
 const certConfig = {
@@ -57,8 +63,12 @@ io.of('/shelters').on('connection', socket => {
 console.log('Setting up Kafka client for ', app.get('kafka-host'), 'on topic', app.get('kafka-message-topic'));
 let kafkaConsumerGroup = new kafka.ConsumerGroup({
   kafkaHost: app.get('kafka-host'),
-  groupId: app.get('kafka-groupid'),
+  groupId: app.get('kafka-groupid')
 }, app.get('kafka-message-topic'));
+
+let kafkaProducer = new kafka.Producer(new kafka.KafkaClient({
+  kafkaHost: app.get('kafka-host')
+}));
 
 kafkaConsumerGroup.on('message', msg => {
   try {
@@ -67,6 +77,11 @@ kafkaConsumerGroup.on('message', msg => {
   } catch (e) {
     console.error('Failed to parse Kafka message', msg);
   }
+});
+
+kafkaProducer.on('error', err => {
+  console.error('Failed to connect to Kafka PRODUCER', err);
+  io.sockets.emit('error', { message: "Failed to connect to backing message queue's" });
 });
 
 kafkaConsumerGroup.on('error', err => {
@@ -97,6 +112,20 @@ app.get('/shelter-service/api/shelters', (_, res) => {
     lon: -77.8885,
     rescued: 0
   }]);
+});
+
+// create new priority zone
+app.post('/priority-zone/create', (_, res) => {
+  if (_.body.centerLongitude && _.body.centerLatitude) {
+    var payload = [{
+      topic: 'topic-priority-zone',
+      messages: new KeyedMessage(uuid(), _.body)
+    }];
+    kafkaProducer.send(payload, (err, data) => {
+      console.log(data);
+      console.log(`Created Priority Zone with the center at [${_.body.centerLongitude}, ${_.body.centerLatitude}]`);
+    });
+  }
 });
 
 // incident server proxy

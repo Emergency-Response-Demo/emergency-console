@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Incident } from '../models/incident';
 import { Responder } from '../models/responder';
 import { Shelter } from '../models/shelter';
@@ -7,7 +8,8 @@ import { AppUtil } from '../app-util';
 import { ResponderService } from '../services/responder.service';
 import { IncidentService } from '../services/incident.service';
 import { Mission } from '../models/mission';
-import { CircleMode, DragCircleMode, DirectMode, SimpleSelectMode, MapboxDraw } from 'mapbox-gl-draw-circle';
+import { PriorityZone } from '../models/priority-zone';
+import { CircleMode, DragCircleMode, DirectMode, SimpleSelectMode } from 'mapbox-gl-draw-circle';
 
 @Component({
   selector: 'app-map',
@@ -20,6 +22,7 @@ export class MapComponent implements OnInit {
   @Input() incidents: Incident[];
   @Input() shelters: Shelter[];
   @Input() missions: Mission[];
+  @Input() priorityZones: PriorityZone[];
 
   map: Map;
 
@@ -60,7 +63,7 @@ export class MapComponent implements OnInit {
     'background-image': 'url(assets/img/shelter.svg)'
   };
 
-  constructor(public responderService: ResponderService, public incidentService: IncidentService) { }
+  constructor(public responderService: ResponderService, public incidentService: IncidentService, private httpClient: HttpClient) { }
 
   get currentIncidents(): Incident[] {
     return this.incidents.filter(i => i.status !== 'RESCUED');
@@ -133,30 +136,15 @@ export class MapComponent implements OnInit {
 
   public addPriorityZone(click: MapMouseEvent):void {
     if (click.lngLat) {
-      new Marker({
-        draggable: true
-        })
+      new Marker({draggable: true})
         .setLngLat([click.lngLat.lng, click.lngLat.lat])
         .addTo(this.map);
+
+        var json = {centerLongitude:click.lngLat.lng, centerLatitude:click.lngLat.lat};
+
+        this.httpClient.post<any>("/priority-zone/create", json).subscribe(data => {
+          
+        });
     }
-  }
-
-  public loadMap(map: Map):void {
-    // userProperties has to be enabled
-const draw = new MapboxDraw({
-  defaultMode: "draw_circle",
-  userProperties: true,
-  modes: {
-    ...MapboxDraw.modes,
-    draw_circle  : CircleMode,
-    drag_circle  : DragCircleMode,
-    direct_select: DirectMode,
-    simple_select: SimpleSelectMode
-  }
-});
-
-// Add this draw object to the map when map loads
-map.addControl(draw);
-this.map = map;
   }
 }
