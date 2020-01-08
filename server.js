@@ -12,7 +12,7 @@ let kafka = require('kafka-node');
 let socketIO = require('socket.io');
 let cors = require('cors');
 let bodyParser = require('body-parser');
-let uuidv4 = require('uuid/v4');
+let uuidv1 = require('uuid/v1');
 
 let app = express();
 app.use(cors());
@@ -39,8 +39,6 @@ app.use(logger('combined'));
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use(bodyParser.json());
-
-app.use(uuidv4);
 
 // setup server
 const certConfig = {
@@ -119,9 +117,10 @@ app.post('/priority-zone/create', (_, res) => {
   if (_.body.centerLongitude && _.body.centerLatitude) {
     var payload = [{
       topic: 'topic-priority-zone',
-      messages: new KeyedMessage(uuid(), _.body)
+      messages: new kafka.KeyedMessage(uuidv1(), _.body)
     }];
     kafkaProducer.send(payload, (err, data) => {
+      console.log(payload);
       console.log(data);
       console.log(`Created Priority Zone with the center at [${_.body.centerLongitude}, ${_.body.centerLatitude}]`);
     });
