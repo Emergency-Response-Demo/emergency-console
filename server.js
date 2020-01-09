@@ -119,15 +119,10 @@ app.post('/priority-zone/create', (_, res) => {
     body.id = uuidv1();
 
     var payload = [{
-      topic: 'topic-priority-zone',
-      messages: [{
-        key: uuidv1(),
-        value: JSON.stringify(body),
-        headers: {
-          'messageType': 'PriorityZoneCreatedEvent'
-        }
-      }]
+      topic: 'topic-priority-zone-event',
+      messages: [new kafka.KeyedMessage(uuidv1(), JSON.stringify(body))]
     }];
+    
     kafkaProducer.send(payload, (err, data) => {
       console.log(payload);
       console.log(data);
