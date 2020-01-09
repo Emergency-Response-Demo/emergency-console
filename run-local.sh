@@ -2,7 +2,7 @@
 
 export PORT=4200
 export INCIDENT="http://user4-incident-service.apps.cluster-e222.e222.example.opentlc.com"
-export KAFKA_HOST="kafka-cluster-kafka-bootstrap-user4-er-demo.apps.cluster-e222.e222.example.opentlc.com:443"
+export KAFKA_HOST="localhost:9092"
 export ALERT="http://alert-service-naps-emergency-response.apps.753d.openshift.opentlc.com"
 export RESPONDER="http://user4-responder-service.apps.cluster-e222.e222.example.opentlc.com"
 export MISSION="http://user4-mission-service.apps.cluster-e222.e222.example.opentlc.com"
@@ -17,6 +17,6 @@ export JASON_MAPBOX_TOKEN=pk.eyJ1IjoiamFzb25yZWRoYXQiLCJhIjoiY2lseHVmZmkwMDVzMTg
 export TOKEN=${JASON_MAPBOX_TOKEN}
 
 # https://account.mapbox.com/access-tokens/
-# export TOKEN=${MAPBOX_TOKEN}
+export TOKEN="pk.eyJ1IjoiYW5keWtyb2hnIiwiYSI6ImNrNTQ4OXhxejBncXgzdG1jbW5rNDltd2UifQ.RZRBlpS3XZcnbs13uhwVlg"
 
 npm run start
