@@ -3,13 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { Incident } from '../models/incident';
 import { Responder } from '../models/responder';
 import { Shelter } from '../models/shelter';
-import { LineLayout, LinePaint, LngLatBoundsLike, FitBoundsOptions, MapMouseEvent, Map, Marker } from 'mapbox-gl';
 import { AppUtil } from '../app-util';
 import { ResponderService } from '../services/responder.service';
 import { IncidentService } from '../services/incident.service';
 import { Mission } from '../models/mission';
-import { PriorityZone } from '../models/priority-zone';
+import { LineLayout, LinePaint, LngLatBoundsLike, FitBoundsOptions, LngLat, Point,
+          MapMouseEvent, Map, Marker, NavigationControl } from 'mapbox-gl';
+import { default as MapboxDraw } from '@mapbox/mapbox-gl-draw';
 import { CircleMode, DragCircleMode, DirectMode, SimpleSelectMode } from 'mapbox-gl-draw-circle';
+import { default as DrawStyles } from './util/draw-styles.js';
+import { PriorityZone } from '../models/priority-zone';
 
 @Component({
   selector: 'app-map',
@@ -25,6 +28,7 @@ export class MapComponent implements OnInit {
   @Input() priorityZones: PriorityZone[];
 
   map: Map;
+  mapDrawTools: MapboxDraw;
 
   center: number[] = AppUtil.isMobile() ? [-77.886765, 34.139921] : [-77.886765, 34.158808];
   accessToken: string = window['_env'].accessToken;
@@ -32,6 +36,7 @@ export class MapComponent implements OnInit {
   pickupData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
   deliverData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
   zoom: number[] = [AppUtil.isMobile() ? 10 : 10.5];
+  enableDrawingPriorityZones = true;  // TODO make a button to toggle this?
 
   bounds: LngLatBoundsLike;
   boundsOptions: FitBoundsOptions = {
@@ -134,6 +139,70 @@ export class MapComponent implements OnInit {
   ngOnInit() {
   }
 
+  getLL(data): LngLat {
+    return new LngLat(+data.lng, +data.lat);
+  }
+
+  projectLL(ll: LngLat): Point {
+    return this.map.project(this.getLL(ll));
+  }
+
+  public onDrawPriorityZoneButtonClick(): void {
+    this.enableDrawingPriorityZones = !this.enableDrawingPriorityZones; // toggle mode
+    if (this.enableDrawingPriorityZones === true) {
+      // this.map.dragPan.disable();
+      // this.map.scrollZoom.disable();
+    } else {
+      // this.map.dragPan.enable();
+      // this.map.scrollZoom.enable();
+      this.mapDrawTools.changeMode('drag_circle', { initialRadiusInKm: 2 });
+    }
+  }
+
+  public onPriorityZoneDeleteButtonClick(): void {
+    this.mapDrawTools.deleteAll();
+  }
+
+  public createdDrawArea() {
+    var data = this.mapDrawTools.getAll();
+    // alert('created a priority area' + data);
+  }
+
+  public updatedDrawArea() {
+    var data = this.mapDrawTools.getAll();
+    // alert('updated a priority area' + data);
+  }
+
+  public onMapMouseDown(click: MapMouseEvent): void {}
+  public onMapMouseUp(click: MapMouseEvent): void {}
+  public onMapMouseMove(click: MapMouseEvent): void {}
+  public onMapClick(click: MapMouseEvent): void {}
+
+  public loadMap(map: Map): void {
+    this.map = map;
+    // MapBoxDraw gives us drawing and editing features in mapbox
+    this.mapDrawTools = new MapboxDraw({
+      defaultMode: 'drag_circle',
+      displayControlsDefault: false,
+      userProperties: true,
+      styles: DrawStyles,
+      modes: {
+        ...MapboxDraw.modes,
+        draw_circle  : CircleMode,
+        drag_circle  : DragCircleMode,
+        direct_select: DirectMode,
+        simple_select: SimpleSelectMode
+      }
+    });
+    this.map.addControl(this.mapDrawTools);
+
+    // Can't override these or the events don't fire to MapboxDraw custom modes - TODO figure out how to get events
+    // this.map.on('draw.create', this.createdDrawArea);
+    // this.map.on('draw.update', this.updatedDrawArea);
+
+    this.map.addControl(new NavigationControl(), 'top-right');
+  }
+
   public addPriorityZone(click: MapMouseEvent):void {
     if (click.lngLat) {
       new Marker({draggable: true})
@@ -143,7 +212,7 @@ export class MapComponent implements OnInit {
         var json = {centerLongitude:click.lngLat.lng, centerLatitude:click.lngLat.lat};
 
         this.httpClient.post<any>("/priority-zone/create", json).subscribe(data => {
-          
+
         });
     }
   }
