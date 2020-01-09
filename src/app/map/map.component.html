@@ -1,5 +1,6 @@
 <div class="card-header">Map</div>
 <div class="card-body">
+  <!-- https://github.com/Wykks/ngx-mapbox-gl/wiki/API-Documentation -->
   <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'"
     [zoom]="zoom"
     [center]="center"
@@ -74,6 +75,10 @@
     <mgl-geojson-source id="deliverJson" [data]="deliverData"> </mgl-geojson-source>
     <mgl-layer id="deliverRoute" type="line" source="deliverJson" [layout]="lineLayout" [paint]="deliverPaint"> </mgl-layer>
   </mgl-map>
-  <app-map-overlay [hidden]="!enableDrawingPriorityZones" (click)="onDrawPriorityZoneButtonClick"></app-map-overlay>
+  <div class="btn-group" role="group" aria-label="Drawing Tools">
+    <button type="button" class="btn btn-draw" (click)="onDrawPriorityZoneButtonClick()">{{ priZoneButtonText }}</button>
+    <button type="button" class="btn btn-delete" (click)="onPriorityZoneDeleteButtonClick()">Delete Priority Zones</button>
+  </div>
+  <app-map-overlay [hidden]="!enableDrawingPriorityZones"></app-map-overlay>
   <app-legend [bottom]="'50px'"></app-legend>
 </div>
