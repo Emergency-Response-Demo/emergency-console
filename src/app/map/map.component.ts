@@ -241,10 +241,13 @@ export class MapComponent implements OnInit {
 
   public addedOrUpdatedPriorityZone(id, lat, lon, radiusInKm) {
     var json = {
-      centerLongitude: lon,
-      centerLatitude: lat,
-      id: id,
-      radius: radiusInKm
+      messageType: "PriorityZoneApplicationEvent",
+      body: {
+        centerLongitude: lon,
+        centerLatitude: lat,
+        id: id,
+        radius: radiusInKm
+      }
     };
 
     this.httpClient.post<any>("/priority-zone/apply", json).subscribe(data => {});
