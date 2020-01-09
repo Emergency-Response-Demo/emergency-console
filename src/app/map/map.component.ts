@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Incident } from '../models/incident';
 import { Responder } from '../models/responder';
 import { Shelter } from '../models/shelter';
@@ -11,6 +12,7 @@ import { LineLayout, LinePaint, LngLatBoundsLike, FitBoundsOptions, LngLat, Poin
 import { default as MapboxDraw } from '@mapbox/mapbox-gl-draw';
 import { CircleMode, DragCircleMode, DirectMode, SimpleSelectMode } from 'mapbox-gl-draw-circle';
 import { default as DrawStyles } from './util/draw-styles.js';
+import { PriorityZone } from '../models/priority-zone';
 
 @Component({
   selector: 'app-map',
@@ -23,6 +25,7 @@ export class MapComponent implements OnInit {
   @Input() incidents: Incident[];
   @Input() shelters: Shelter[];
   @Input() missions: Mission[];
+  @Input() priorityZones: PriorityZone[];
 
   map: Map;
   mapDrawTools: MapboxDraw;
@@ -65,7 +68,7 @@ export class MapComponent implements OnInit {
     'background-image': 'url(assets/img/shelter.svg)'
   };
 
-  constructor(public responderService: ResponderService, public incidentService: IncidentService) { }
+  constructor(public responderService: ResponderService, public incidentService: IncidentService, private httpClient: HttpClient) { }
 
   get currentIncidents(): Incident[] {
     return this.incidents.filter(i => i.status !== 'RESCUED');
@@ -162,12 +165,12 @@ export class MapComponent implements OnInit {
 
   public createdDrawArea() {
     var data = this.mapDrawTools.getAll();
-    //alert('created a priority area' + data);
+    // alert('created a priority area' + data);
   }
 
   public updatedDrawArea() {
     var data = this.mapDrawTools.getAll();
-    //alert('updated a priority area' + data);
+    // alert('updated a priority area' + data);
   }
 
   public onMapMouseDown(click: MapMouseEvent): void {}
@@ -194,10 +197,23 @@ export class MapComponent implements OnInit {
     this.map.addControl(this.mapDrawTools);
 
     // Can't override these or the events don't fire to MapboxDraw custom modes - TODO figure out how to get events
-    //this.map.on('draw.create', this.createdDrawArea);
-    //this.map.on('draw.update', this.updatedDrawArea);
+    // this.map.on('draw.create', this.createdDrawArea);
+    // this.map.on('draw.update', this.updatedDrawArea);
 
     this.map.addControl(new NavigationControl(), 'top-right');
+  }
 
+  public addPriorityZone(click: MapMouseEvent):void {
+    if (click.lngLat) {
+      new Marker({draggable: true})
+        .setLngLat([click.lngLat.lng, click.lngLat.lat])
+        .addTo(this.map);
+
+        var json = {centerLongitude:click.lngLat.lng, centerLatitude:click.lngLat.lat};
+
+        this.httpClient.post<any>("/priority-zone/create", json).subscribe(data => {
+
+        });
+    }
   }
 }
