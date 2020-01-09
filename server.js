@@ -12,7 +12,6 @@ let kafka = require('kafka-node');
 let socketIO = require('socket.io');
 let cors = require('cors');
 let bodyParser = require('body-parser');
-let uuidv1 = require('uuid/v1');
 
 let app = express();
 app.use(cors());
@@ -113,24 +112,18 @@ app.get('/shelter-service/api/shelters', (_, res) => {
 });
 
 // create new priority zone
-app.post('/priority-zone/create', (_, res) => {
-  if (_.body.centerLongitude && _.body.centerLatitude) {
-    var body = _.body;
-    body.id = uuidv1();
+app.post('/priority-zone/apply', (_, res) => {
+  var payload = [{
+    topic: 'topic-priority-zone-event',
+    messages: JSON.stringify(_.body)
+  }];
+  
+  kafkaProducer.send(payload, (err, data) => {
+    console.log(payload);
+    console.log(data);
+  });
 
-    var payload = [{
-      topic: 'topic-priority-zone-event',
-      messages: [new kafka.KeyedMessage(uuidv1(), JSON.stringify(body))]
-    }];
-    
-    kafkaProducer.send(payload, (err, data) => {
-      console.log(payload);
-      console.log(data);
-      console.log(`Created Priority Zone with the center at [${_.body.centerLongitude}, ${_.body.centerLatitude}]`);
-    });
-
-    res.send({response:`Created Priority Zone with the center at [${_.body.centerLongitude}, ${_.body.centerLatitude}]`});
-  }
+  res.send({response:`Applied Priority Zone with the center at [${_.body.centerLongitude}, ${_.body.centerLatitude}]`});
 });
 
 // incident server proxy

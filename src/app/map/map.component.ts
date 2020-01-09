@@ -160,11 +160,11 @@ export class MapComponent implements OnInit {
 
       const data = this.mapDrawTools.getAll();
       if (data.features) {
-        data.features.forEach(function(feature) {
+        data.features.forEach((feature) => {
           // alert(JSON.stringify(feature));
           // e.g. feature.properties {"isCircle":true,"center":[-78.05985704920441,34.139520841135806],"radiusInKm":4.440545224272349}
           if (feature.properties.isCircle === true) {
-            this.addedOrUpdatedPriorityZone(feature.id, feature.properties.center[0], feature.properties.center[1], feature.radiusInKm);
+            this.addedOrUpdatedPriorityZone(feature.id, feature.properties.center[0], feature.properties.center[1], feature.properties.radiusInKm);
           }
         });
       }
@@ -240,20 +240,13 @@ export class MapComponent implements OnInit {
   }
 
   public addedOrUpdatedPriorityZone(id, lat, lon, radiusInKm) {
-    // TODO: Andy
-  }
+    var json = {
+      centerLongitude: lon,
+      centerLatitude: lat,
+      id: id,
+      radius: radiusInKm
+    };
 
-  public addPriorityZone(click: MapMouseEvent):void {
-    if (click.lngLat) {
-      new Marker({draggable: true})
-        .setLngLat([click.lngLat.lng, click.lngLat.lat])
-        .addTo(this.map);
-
-        var json = {centerLongitude:click.lngLat.lng, centerLatitude:click.lngLat.lat};
-
-        this.httpClient.post<any>("/priority-zone/create", json).subscribe(data => {
-
-        });
-    }
+    this.httpClient.post<any>("/priority-zone/apply", json).subscribe(data => {});
   }
 }
