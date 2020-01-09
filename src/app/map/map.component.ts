@@ -172,7 +172,8 @@ export class MapComponent implements OnInit {
   }
 
   public onPriorityZoneDeleteButtonClick(): void {
-    this.mapDrawTools.deleteAll();
+    this.mapDrawTools.deleteAll();  // this deletes the drawn ones
+    // TODO: delete in Kafka?
   }
 
   // Fired when a feature is created. The following interactions will trigger this event:
