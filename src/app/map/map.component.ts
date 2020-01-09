@@ -141,7 +141,7 @@ export class MapComponent implements OnInit {
   }
 
   getLLFromFeatureData(data): LngLat {
-    if (data.type != "Feature") { return null; } // error, not a feature
+    if (data.type !== 'Feature') { return null; } // error, not a feature
     return new LngLat(+data.properties.center[0], +data.properties.center[1]);
   }
 
@@ -162,7 +162,7 @@ export class MapComponent implements OnInit {
       if (data.features) {
         data.features.forEach(function(feature) {
           // alert(JSON.stringify(feature));
-          //e.g. feature.properties {"isCircle":true,"center":[-78.05985704920441,34.139520841135806],"radiusInKm":4.440545224272349}
+          // e.g. feature.properties {"isCircle":true,"center":[-78.05985704920441,34.139520841135806],"radiusInKm":4.440545224272349}
           if (feature.properties.isCircle === true) {
             this.addedOrUpdatedPriorityZone(feature.id, feature.properties.center[0], feature.properties.center[1], feature.radiusInKm);
           }
@@ -190,11 +190,11 @@ export class MapComponent implements OnInit {
   // Fired when one or more features are updated. The following interactions will trigger
   // this event, which can be subcategorized by action:
   // action: 'move'
-  //   * Finish moving one or more selected features in simple_select mode. 
+  //   * Finish moving one or more selected features in simple_select mode.
   //     The event will only fire when the movement is finished (i.e. when the user
   //     releases the mouse button or hits Enter).
   // action: 'change_coordinates'
-  //   * Finish moving one or more vertices of a selected feature in direct_select mode. 
+  //   * Finish moving one or more vertices of a selected feature in direct_select mode.
   //     The event will only fire when the movement is finished (i.e. when the user releases
   //     the mouse button or hits Enter, or her mouse leaves the map container).
   //   * Delete one or more vertices of a selected feature in direct_select mode, which can
