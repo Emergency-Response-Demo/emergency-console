@@ -36,7 +36,8 @@ export class MapComponent implements OnInit {
   pickupData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
   deliverData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
   zoom: number[] = [AppUtil.isMobile() ? 10 : 10.5];
-  enableDrawingPriorityZones = true;  // TODO make a button to toggle this?
+  enableDrawingPriorityZones = false;  // TODO make a button to toggle this?
+  priZoneButtonText = 'Create Priority Zone';
 
   bounds: LngLatBoundsLike;
   boundsOptions: FitBoundsOptions = {
@@ -139,23 +140,34 @@ export class MapComponent implements OnInit {
   ngOnInit() {
   }
 
-  getLL(data): LngLat {
-    return new LngLat(+data.lng, +data.lat);
+  getLLFromFeatureData(data): LngLat {
+    if (data.type != "Feature") { return null; } // error, not a feature
+    return new LngLat(+data.properties.center[0], +data.properties.center[1]);
   }
 
-  projectLL(ll: LngLat): Point {
-    return this.map.project(this.getLL(ll));
+  projectFeatureDataToPoint(data): Point {
+    return this.map.project(this.getLLFromFeatureData(data));
   }
 
   public onDrawPriorityZoneButtonClick(): void {
     this.enableDrawingPriorityZones = !this.enableDrawingPriorityZones; // toggle mode
-    if (this.enableDrawingPriorityZones === true) {
-      // this.map.dragPan.disable();
-      // this.map.scrollZoom.disable();
-    } else {
-      // this.map.dragPan.enable();
-      // this.map.scrollZoom.enable();
+    if (this.enableDrawingPriorityZones === true) { // toggled on
+      this.priZoneButtonText = 'Done Drawing';
       this.mapDrawTools.changeMode('drag_circle', { initialRadiusInKm: 2 });
+    } else { // toggled off
+      this.priZoneButtonText = 'Create Priority Zone';
+      this.mapDrawTools.changeMode('simple_select', { initialRadiusInKm: 2 });
+
+      const data = this.mapDrawTools.getAll();
+      if (data.features) {
+        data.features.forEach(function(feature) {
+          // alert(JSON.stringify(feature));
+          //e.g. feature.properties {"isCircle":true,"center":[-78.05985704920441,34.139520841135806],"radiusInKm":4.440545224272349}
+          if (feature.properties.isCircle === true) {
+            this.addedOrUpdatedPriorityZone(feature.id, feature.properties.center[0], feature.properties.center[1], feature.radiusInKm);
+          }
+        });
+      }
     }
   }
 
@@ -163,14 +175,36 @@ export class MapComponent implements OnInit {
     this.mapDrawTools.deleteAll();
   }
 
-  public createdDrawArea() {
-    var data = this.mapDrawTools.getAll();
-    // alert('created a priority area' + data);
+  // Fired when a feature is created. The following interactions will trigger this event:
+  // Finish drawing a feature.
+  // Simply clicking will create a Point.
+  // A LineString or Polygon is only created when the user has finished drawing it
+  // i.e. double-clicked the last vertex or hit Enter — and the drawn feature is valid.
+  //
+  // The event data is an object - features: Array<Object>
+  public createdDrawArea(event) {
+    // TODO?
   }
 
-  public updatedDrawArea() {
-    var data = this.mapDrawTools.getAll();
-    // alert('updated a priority area' + data);
+  // Fired when one or more features are updated. The following interactions will trigger
+  // this event, which can be subcategorized by action:
+  // action: 'move'
+  //   * Finish moving one or more selected features in simple_select mode. 
+  //     The event will only fire when the movement is finished (i.e. when the user
+  //     releases the mouse button or hits Enter).
+  // action: 'change_coordinates'
+  //   * Finish moving one or more vertices of a selected feature in direct_select mode. 
+  //     The event will only fire when the movement is finished (i.e. when the user releases
+  //     the mouse button or hits Enter, or her mouse leaves the map container).
+  //   * Delete one or more vertices of a selected feature in direct_select mode, which can
+  //     be done by hitting the Backspace or Delete keys, clicking the Trash button, or invoking draw.trash().
+  //   * Add a vertex to the selected feature by clicking a midpoint on that feature in direct_select mode.
+  //
+  // This event will not fire when a feature is created or deleted. To track those interactions, listen for draw.create and draw.delete events.
+  //
+  // The event data is an object - features: Array<Feature>, action: string
+  public updatedDrawArea(event) {
+    // TODO?
   }
 
   public onMapMouseDown(click: MapMouseEvent): void {}
@@ -182,7 +216,7 @@ export class MapComponent implements OnInit {
     this.map = map;
     // MapBoxDraw gives us drawing and editing features in mapbox
     this.mapDrawTools = new MapboxDraw({
-      defaultMode: 'drag_circle',
+      defaultMode: 'simple_select',
       displayControlsDefault: false,
       userProperties: true,
       styles: DrawStyles,
@@ -197,10 +231,15 @@ export class MapComponent implements OnInit {
     this.map.addControl(this.mapDrawTools);
 
     // Can't override these or the events don't fire to MapboxDraw custom modes - TODO figure out how to get events
+    // https://github.com/mapbox/mapbox-gl-draw/blob/master/docs/API.md
     // this.map.on('draw.create', this.createdDrawArea);
     // this.map.on('draw.update', this.updatedDrawArea);
 
     this.map.addControl(new NavigationControl(), 'top-right');
+  }
+
+  public addedOrUpdatedPriorityZone(id, lat, lon, radiusInKm) {
+    // TODO: Andy
   }
 
   public addPriorityZone(click: MapMouseEvent):void {
