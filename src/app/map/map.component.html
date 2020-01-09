@@ -6,9 +6,11 @@
     [accessToken]="accessToken"
     [fitBounds]="bounds"
     [fitBoundsOptions]="boundsOptions"
-    (click)="addPriorityZone($event)"
-    (load)="map = $event">
-
+    (load)="loadMap($event)">
+    <!-- (click)="onMapClick($event)"
+    (mouseDown)="onMapMouseDown($event)"
+    (mouseUp)="onMapMouseUp($event)"
+    (mouseMove)="onMapMouseMove($event)" -->
     <span *ngFor="let responder of activeResponders; index as i">
       <mgl-marker [lngLat]="[responder.longitude, responder.latitude]" #responderMarker>
         <div class="marker" (click)="markerClick([responder.longitude, responder.latitude])" [ngStyle]="{
@@ -25,7 +27,7 @@
             <strong>Full Name: </strong> {{ responder.name }}<br />
             <strong>Phone Number: </strong> {{ responder.phoneNumber }}<br />
             <strong>Provides Medical?: </strong> {{ responder.medicalKit }}<br />
-            <strong>Boat Capcacity: </strong> {{ responder.boatCapacity }}<br />
+            <strong>Boat Capacity: </strong> {{ responder.boatCapacity }}<br />
             <strong>User generated: </strong> {{ responder.person }}<br />
           </p>
         </div>
@@ -72,6 +74,6 @@
     <mgl-geojson-source id="deliverJson" [data]="deliverData"> </mgl-geojson-source>
     <mgl-layer id="deliverRoute" type="line" source="deliverJson" [layout]="lineLayout" [paint]="deliverPaint"> </mgl-layer>
   </mgl-map>
-  <app-map-overlay></app-map-overlay>
+  <app-map-overlay [hidden]="!enableDrawingPriorityZones" (click)="onDrawPriorityZoneButtonClick"></app-map-overlay>
   <app-legend [bottom]="'50px'"></app-legend>
 </div>

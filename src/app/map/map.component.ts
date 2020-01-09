@@ -2,12 +2,15 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 import { Incident } from '../models/incident';
 import { Responder } from '../models/responder';
 import { Shelter } from '../models/shelter';
-import { LineLayout, LinePaint, LngLatBoundsLike, FitBoundsOptions, MapMouseEvent, Map, Marker } from 'mapbox-gl';
 import { AppUtil } from '../app-util';
 import { ResponderService } from '../services/responder.service';
 import { IncidentService } from '../services/incident.service';
 import { Mission } from '../models/mission';
-import { CircleMode, DragCircleMode, DirectMode, SimpleSelectMode, MapboxDraw } from 'mapbox-gl-draw-circle';
+import { LineLayout, LinePaint, LngLatBoundsLike, FitBoundsOptions, LngLat, Point,
+          MapMouseEvent, Map, Marker, NavigationControl } from 'mapbox-gl';
+import { default as MapboxDraw } from '@mapbox/mapbox-gl-draw';
+import { CircleMode, DragCircleMode, DirectMode, SimpleSelectMode } from 'mapbox-gl-draw-circle';
+import { default as DrawStyles } from './util/draw-styles.js';
 
 @Component({
   selector: 'app-map',
@@ -22,6 +25,7 @@ export class MapComponent implements OnInit {
   @Input() missions: Mission[];
 
   map: Map;
+  mapDrawTools: MapboxDraw;
 
   center: number[] = AppUtil.isMobile() ? [-77.886765, 34.139921] : [-77.886765, 34.158808];
   accessToken: string = window['_env'].accessToken;
@@ -29,6 +33,7 @@ export class MapComponent implements OnInit {
   pickupData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
   deliverData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
   zoom: number[] = [AppUtil.isMobile() ? 10 : 10.5];
+  enableDrawingPriorityZones = true;  // TODO make a button to toggle this?
 
   bounds: LngLatBoundsLike;
   boundsOptions: FitBoundsOptions = {
@@ -131,32 +136,68 @@ export class MapComponent implements OnInit {
   ngOnInit() {
   }
 
-  public addPriorityZone(click: MapMouseEvent):void {
-    if (click.lngLat) {
-      new Marker({
-        draggable: true
-        })
-        .setLngLat([click.lngLat.lng, click.lngLat.lat])
-        .addTo(this.map);
+  getLL(data): LngLat {
+    return new LngLat(+data.lng, +data.lat);
+  }
+
+  projectLL(ll: LngLat): Point {
+    return this.map.project(this.getLL(ll));
+  }
+
+  public onDrawPriorityZoneButtonClick(): void {
+    this.enableDrawingPriorityZones = !this.enableDrawingPriorityZones; // toggle mode
+    if (this.enableDrawingPriorityZones === true) {
+      // this.map.dragPan.disable();
+      // this.map.scrollZoom.disable();
+    } else {
+      // this.map.dragPan.enable();
+      // this.map.scrollZoom.enable();
+      this.mapDrawTools.changeMode('drag_circle', { initialRadiusInKm: 2 });
     }
   }
 
-  public loadMap(map: Map):void {
-    // userProperties has to be enabled
-const draw = new MapboxDraw({
-  defaultMode: "draw_circle",
-  userProperties: true,
-  modes: {
-    ...MapboxDraw.modes,
-    draw_circle  : CircleMode,
-    drag_circle  : DragCircleMode,
-    direct_select: DirectMode,
-    simple_select: SimpleSelectMode
+  public onPriorityZoneDeleteButtonClick(): void {
+    this.mapDrawTools.deleteAll();
   }
-});
 
-// Add this draw object to the map when map loads
-map.addControl(draw);
-this.map = map;
+  public createdDrawArea() {
+    var data = this.mapDrawTools.getAll();
+    //alert('created a priority area' + data);
+  }
+
+  public updatedDrawArea() {
+    var data = this.mapDrawTools.getAll();
+    //alert('updated a priority area' + data);
+  }
+
+  public onMapMouseDown(click: MapMouseEvent): void {}
+  public onMapMouseUp(click: MapMouseEvent): void {}
+  public onMapMouseMove(click: MapMouseEvent): void {}
+  public onMapClick(click: MapMouseEvent): void {}
+
+  public loadMap(map: Map): void {
+    this.map = map;
+    // MapBoxDraw gives us drawing and editing features in mapbox
+    this.mapDrawTools = new MapboxDraw({
+      defaultMode: 'drag_circle',
+      displayControlsDefault: false,
+      userProperties: true,
+      styles: DrawStyles,
+      modes: {
+        ...MapboxDraw.modes,
+        draw_circle  : CircleMode,
+        drag_circle  : DragCircleMode,
+        direct_select: DirectMode,
+        simple_select: SimpleSelectMode
+      }
+    });
+    this.map.addControl(this.mapDrawTools);
+
+    // Can't override these or the events don't fire to MapboxDraw custom modes - TODO figure out how to get events
+    //this.map.on('draw.create', this.createdDrawArea);
+    //this.map.on('draw.update', this.updatedDrawArea);
+
+    this.map.addControl(new NavigationControl(), 'top-right');
+
   }
 }
