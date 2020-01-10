@@ -243,10 +243,10 @@ export class MapComponent implements OnInit {
     var json = {
       messageType: "PriorityZoneApplicationEvent",
       body: {
-        centerLongitude: lon,
-        centerLatitude: lat,
+        centerLongitude: lon.toString(),
+        centerLatitude: lat.toString(),
         id: id,
-        radius: radiusInKm
+        radius: radiusInKm.toString()
       }
     };
 
