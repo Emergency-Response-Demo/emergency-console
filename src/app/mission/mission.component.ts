@@ -47,13 +47,13 @@ export class MissionComponent implements OnInit, OnDestroy {
   readonly GREEN = '#4dbd74';
 
   responderStyle: any = {
-    'background-image': 'url(assets/img/responder-person.svg)'
+    'background-image': 'url(assets/img/responder-with-person-colored.svg)'
   };
   incidentStyle: any = {
-    'background-image': 'url(assets/img/marker-yellow.svg)'
+    'background-image': 'url(assets/img/marker-incident-helpassigned-inv.svg)'
   };
   shelterStyle: any = {
-    'background-image': 'url(assets/img/shelter.svg)'
+    'background-image': 'url(assets/img/shelter-hospital-colored.svg)'
   };
   lineLayout: LineLayout = {
     'line-join': 'round',
@@ -135,7 +135,7 @@ export class MissionComponent implements OnInit, OnDestroy {
     this.missionStatus = mission.status;
     this.pickupPaint['line-color'] = this.YELLOW;
     this.pickupPaint = { ...this.pickupPaint };
-    this.incidentStyle['background-image'] = 'url(assets/img/marker-yellow.svg)';
+    this.incidentStyle['background-image'] = 'url(assets/img/marker-incident-helpassigned-colored.svg)';
     const mapRoute = AppUtil.getRoute(mission.id, mission.steps);
 
     this.deliverData.features[0].geometry.coordinates = mapRoute.deliverRoute;

@@ -117,13 +117,16 @@ app.post('/priority-zone/apply', (_, res) => {
     topic: 'topic-priority-zone-event',
     messages: JSON.stringify(_.body)
   }];
-  
-  kafkaProducer.send(payload, (err, data) => {
-    console.log(payload);
-    console.log(data);
-  });
-
-  res.send({response:`Applied Priority Zone with the center at [${_.body.centerLongitude}, ${_.body.centerLatitude}]`});
+  try { // TRY/CATCH, JUST PLUGGING A HOLE FOR: https://github.com/SOHU-Co/kafka-node/issues/995
+    kafkaProducer.send(payload, (err, data) => {
+      console.log(payload);
+      console.log(data);
+      res.send({response:`Applied Priority Zone with the center at [${_.body.centerLongitude}, ${_.body.centerLatitude}]`});
+    });
+  } catch (ex) {
+      console.log('errors with Kafka producer - could not send pri zone:');
+      console.log(data);
+  }
 });
 
 // incident server proxy

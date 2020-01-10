@@ -56,9 +56,7 @@
         </span>
         <span *ngFor="let shelter of shelters">
           <mgl-marker [lngLat]="[shelter.lon, shelter.lat]" #shelterMarker>
-            <div class="shelter" [ngStyle]="{
-                'background-image': 'url(assets/img/shelter.svg)'
-              }"></div>
+            <div class="shelter" [ngStyle]="shelterStyle"></div>
           </mgl-marker>
           <mgl-popup [marker]="shelterMarker" [offset]="[0, -12]">
             <div class="card-text">

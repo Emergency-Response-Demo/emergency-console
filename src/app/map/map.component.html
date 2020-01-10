@@ -8,13 +8,10 @@
     [fitBounds]="bounds"
     [fitBoundsOptions]="boundsOptions"
     (load)="loadMap($event)">
-    <!-- (click)="onMapClick($event)"
-    (mouseDown)="onMapMouseDown($event)"
-    (mouseUp)="onMapMouseUp($event)"
-    (mouseMove)="onMapMouseMove($event)" -->
     <span *ngFor="let responder of activeResponders; index as i">
+      <!-- TODO: consider switching to Layer as it will use WebGL and render faster - this doesn't -->
       <mgl-marker [lngLat]="[responder.longitude, responder.latitude]" #responderMarker>
-        <div class="marker" (click)="markerClick([responder.longitude, responder.latitude])" [ngStyle]="{
+        <div class="responderMarker" (click)="markerClick([responder.longitude, responder.latitude])" [ngStyle]="{
           'background-image': 'url(assets/img/' + getResponderIcon(responder.person) +')'
         }" ></div>
       </mgl-marker>
@@ -35,6 +32,7 @@
       </mgl-popup>
     </span>
     <span *ngFor="let shelter of shelters">
+      <!-- TODO: consider switching to Layer as it will use WebGL and render faster - this doesn't -->
       <mgl-marker [lngLat]="[shelter.lon, shelter.lat]" #shelterMarker>
         <div class="shelter" [ngStyle]="shelterStyle" (click)="markerClick([shelter.lon, shelter.lat])"></div>
       </mgl-marker>
@@ -49,8 +47,9 @@
       </mgl-popup>
     </span>
     <span *ngFor="let incident of currentIncidents; index as i">
+      <!-- TODO: consider switching to Layer as it will use WebGL and render faster - this doesn't -->
       <mgl-marker [lngLat]="[incident.lon, incident.lat]" #incidentMarker>
-        <div class="marker" [ngStyle]="{
+        <div class="incidentMarker" [ngStyle]="{
             'background-image': 'url(assets/img/' + getIncidentIcon(incident) + ')'
           }" (click)="markerClick([incident.lon, incident.lat])"></div>
       </mgl-marker>

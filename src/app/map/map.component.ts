@@ -13,6 +13,7 @@ import { default as MapboxDraw } from '@mapbox/mapbox-gl-draw';
 import { CircleMode, DragCircleMode, DirectMode, SimpleSelectMode } from 'mapbox-gl-draw-circle';
 import { default as DrawStyles } from './util/draw-styles.js';
 import { PriorityZone } from '../models/priority-zone';
+import { default as UUID } from 'uuid/v1';
 
 @Component({
   selector: 'app-map',
@@ -66,7 +67,7 @@ export class MapComponent implements OnInit {
   };
 
   shelterStyle: any = {
-    'background-image': 'url(assets/img/shelter.svg)'
+   'background-image': 'url(assets/img/circle-shelter-hospital-colored.svg)'
   };
 
   constructor(public responderService: ResponderService, public incidentService: IncidentService, private httpClient: HttpClient) { }
@@ -83,13 +84,13 @@ export class MapComponent implements OnInit {
     this.center = lngLat;
   }
 
-  // icons colored with coreui hex codes from https://iconscout.com/icon/location-62
+  // RED if REPORTED, YELLOW otherwise (I guess assigned is the only other state right now)
   getIncidentIcon(incident: Incident): string {
-    return !incident.status || incident.status === 'REPORTED' ? 'marker-red.svg' : 'marker-yellow.svg';
+    return !incident.status || incident.status === 'REPORTED' ? 'marker-incident-helpme-colored.svg' : 'marker-incident-helpassigned-colored.svg';
   }
 
   getResponderIcon(person: boolean): string {
-    return (person ? 'responder-person.svg' : 'responder.svg');
+    return (person ? 'responder-with-person-colored.svg' : 'responder-vehicle-colored.svg');
   }
 
   getResponderMission(responder: Responder) {
@@ -173,7 +174,9 @@ export class MapComponent implements OnInit {
 
   public onPriorityZoneDeleteButtonClick(): void {
     this.mapDrawTools.deleteAll();  // this deletes the drawn ones
-    // TODO: delete in Kafka?
+
+    // TODO: Andy delete in Kafka?
+
   }
 
   // Fired when a feature is created. The following interactions will trigger this event:
@@ -208,11 +211,6 @@ export class MapComponent implements OnInit {
     // TODO?
   }
 
-  public onMapMouseDown(click: MapMouseEvent): void {}
-  public onMapMouseUp(click: MapMouseEvent): void {}
-  public onMapMouseMove(click: MapMouseEvent): void {}
-  public onMapClick(click: MapMouseEvent): void {}
-
   public loadMap(map: Map): void {
     this.map = map;
     // MapBoxDraw gives us drawing and editing features in mapbox
@@ -231,7 +229,7 @@ export class MapComponent implements OnInit {
     });
     this.map.addControl(this.mapDrawTools);
 
-    // Can't override these or the events don't fire to MapboxDraw custom modes - TODO figure out how to get events
+    // Can't override these or the events don't fire to MapboxDraw custom modes - TODO figure out how to get events for drag/updates
     // https://github.com/mapbox/mapbox-gl-draw/blob/master/docs/API.md
     // this.map.on('draw.create', this.createdDrawArea);
     // this.map.on('draw.update', this.updatedDrawArea);
@@ -240,8 +238,9 @@ export class MapComponent implements OnInit {
   }
 
   public addedOrUpdatedPriorityZone(id, lat, lon, radiusInKm) {
-    var json = {
-      messageType: "PriorityZoneApplicationEvent",
+    const json = {
+      id: UUID.uuidv1(),
+      messageType: 'PriorityZoneApplicationEvent',
       body: {
         centerLongitude: lon,
         centerLatitude: lat,
@@ -249,7 +248,6 @@ export class MapComponent implements OnInit {
         radius: radiusInKm
       }
     };
-
-    this.httpClient.post<any>("/priority-zone/apply", json).subscribe(data => {});
+    this.httpClient.post<any>('/priority-zone/apply', json).subscribe(data => {});
   }
 }

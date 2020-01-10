@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61.2 (89653) - https://sketch.com -->
+    <title>map_icons</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="noun_hospital_circle_LARGE" transform="translate(14.000000, 14.000000)" fill="#000000" fill-rule="nonzero">
+            <path d="M26,52 C40.34,52 52,40.34 52,26 C52,11.66 40.34,0 26,0 C11.66,0 0,11.66 0,26 C0,40.34 11.66,52 26,52 Z M11.1,22.46 C11.1,22.18 11.32,21.96 11.6,21.96 L21.96,21.96 L21.96,11.6 C21.96,11.32 22.18,11.1 22.46,11.1 L29.53,11.1 C29.81,11.1 30.03,11.32 30.03,11.6 L30.03,21.96 L40.4,21.96 C40.68,21.96 40.9,22.18 40.9,22.46 L40.9,29.53 C40.9,29.81 40.68,30.03 40.4,30.03 L30.04,30.03 L30.04,40.4 C30.04,40.68 29.82,40.9 29.54,40.9 L22.47,40.9 C22.19,40.9 21.97,40.68 21.97,40.4 L21.97,30.04 L11.6,30.04 C11.32,30.04 11.1,29.82 11.1,29.54 L11.1,22.46 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>
