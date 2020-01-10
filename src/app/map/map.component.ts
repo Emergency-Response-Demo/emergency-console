@@ -242,10 +242,10 @@ export class MapComponent implements OnInit {
       id: UUID.uuidv1(),
       messageType: 'PriorityZoneApplicationEvent',
       body: {
-        centerLongitude: lon,
-        centerLatitude: lat,
+        centerLongitude: lon.toString(),
+        centerLatitude: lat.toString(),
         id: id,
-        radius: radiusInKm
+        radius: radiusInKm.toString()
       }
     };
     this.httpClient.post<any>('/priority-zone/apply', json).subscribe(data => {});
