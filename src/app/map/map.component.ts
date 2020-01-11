@@ -175,8 +175,12 @@ export class MapComponent implements OnInit {
   public onPriorityZoneDeleteButtonClick(): void {
     this.mapDrawTools.deleteAll();  // this deletes the drawn ones
 
-    // TODO: Andy delete in Kafka?
-
+    const json = {
+      id: uuid(),
+      messageType: 'PriorityZoneClearEvent',
+      body: {}
+    };
+    this.httpClient.post<any>('/priority-zone/clear', json).subscribe(data => {});
   }
 
   // Fired when a feature is created. The following interactions will trigger this event:
@@ -242,8 +246,8 @@ export class MapComponent implements OnInit {
       id: uuid(),
       messageType: 'PriorityZoneApplicationEvent',
       body: {
-        centerLongitude: lon.toString(),
-        centerLatitude: lat.toString(),
+        lon: lon.toString(),
+        lat: lat.toString(),
         id: id,
         radius: radiusInKm.toString()
       }

@@ -129,6 +129,24 @@ app.post('/priority-zone/apply', (_, res) => {
   }
 });
 
+// delete all priority zones
+app.post('/priority-zone/clear', (_, res) => {
+  var payload = [{
+    topic: 'topic-priority-zone-event',
+    messages: JSON.stringify(_.body)
+  }];
+  try { // TRY/CATCH, JUST PLUGGING A HOLE FOR: https://github.com/SOHU-Co/kafka-node/issues/995
+    kafkaProducer.send(payload, (err, data) => {
+      console.log(payload);
+      console.log(data);
+      res.send({response:'Cleared Priority Zones'});
+    });
+  } catch (ex) {
+      console.log('errors with Kafka producer - could not clear priority zone');
+      console.log(data);
+  }
+});
+
 // incident server proxy
 app.use(
   '/incident-service/*',
