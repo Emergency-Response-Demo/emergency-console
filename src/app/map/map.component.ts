@@ -13,7 +13,7 @@ import { default as MapboxDraw } from '@mapbox/mapbox-gl-draw';
 import { CircleMode, DragCircleMode, DirectMode, SimpleSelectMode } from 'mapbox-gl-draw-circle';
 import { default as DrawStyles } from './util/draw-styles.js';
 import { PriorityZone } from '../models/priority-zone';
-import { default as UUID } from 'uuid/v1';
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-map',
@@ -239,7 +239,7 @@ export class MapComponent implements OnInit {
 
   public addedOrUpdatedPriorityZone(id, lat, lon, radiusInKm) {
     const json = {
-      id: UUID.uuidv1(),
+      id: uuid(),
       messageType: 'PriorityZoneApplicationEvent',
       body: {
         centerLongitude: lon.toString(),
