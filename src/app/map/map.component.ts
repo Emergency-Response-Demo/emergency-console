@@ -241,7 +241,7 @@ export class MapComponent implements OnInit {
     this.map.addControl(new NavigationControl(), 'top-right');
   }
 
-  public addedOrUpdatedPriorityZone(id, lat, lon, radiusInKm) {
+  public addedOrUpdatedPriorityZone(id, lon, lat, radiusInKm) {
     const json = {
       id: uuid(),
       messageType: 'PriorityZoneApplicationEvent',
