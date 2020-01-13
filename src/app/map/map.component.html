@@ -1,5 +1,7 @@
 <div class="card-header">Map</div>
 <div class="card-body">
+  <app-map-overlay [hidden]="!enableDrawingPriorityZones"></app-map-overlay>
+  <app-legend [bottom]="'50px'"></app-legend>
   <!-- https://github.com/Wykks/ngx-mapbox-gl/wiki/API-Documentation -->
   <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'"
     [zoom]="zoom"
@@ -78,6 +80,4 @@
     <button type="button" class="btn btn-draw" (click)="onDrawPriorityZoneButtonClick()">{{ priZoneButtonText }}</button>
     <button type="button" class="btn btn-delete" (click)="onPriorityZoneDeleteButtonClick()">Delete Priority Zones</button>
   </div>
-  <app-map-overlay [hidden]="!enableDrawingPriorityZones"></app-map-overlay>
-  <app-legend [bottom]="'50px'"></app-legend>
 </div>
