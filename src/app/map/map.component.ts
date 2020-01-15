@@ -212,8 +212,14 @@ export class MapComponent implements OnInit {
   // This event will not fire when a feature is created or deleted. To track those interactions, listen for draw.create and draw.delete events.
   //
   // The event data is an object - features: Array<Feature>, action: string
-  public updatedDrawArea(event) {
-    // TODO?
+  public updatedDrawArea = (event) => {
+    if (event.features && event.features.length === 0) {
+      return;
+    } 
+    var feature = event.features[0];
+    if (feature.properties.isCircle === true) {
+      this.addedOrUpdatedPriorityZone(feature.id, feature.properties.center[0], feature.properties.center[1], feature.properties.radiusInKm);
+    }
   }
 
   public loadMap(map: Map): void {
@@ -237,7 +243,7 @@ export class MapComponent implements OnInit {
     // Can't override these or the events don't fire to MapboxDraw custom modes - TODO figure out how to get events for drag/updates
     // https://github.com/mapbox/mapbox-gl-draw/blob/master/docs/API.md
     // this.map.on('draw.create', this.createdDrawArea);
-    // this.map.on('draw.update', this.updatedDrawArea);
+    this.map.on('draw.update', this.updatedDrawArea);
 
     this.map.addControl(new NavigationControl(), 'top-right');
 
