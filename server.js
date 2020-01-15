@@ -204,7 +204,7 @@ app.use(
   })
 );
 
-// mission server proxy
+// incident priority server proxy
 app.use(
   '/incident-priority-service/*',
   proxy({
