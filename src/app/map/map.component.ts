@@ -90,7 +90,7 @@ export class MapComponent implements OnInit {
   }
 
   getResponderIcon(person: boolean): string {
-    return (person ? 'responder-with-person-colored.svg' : 'responder-vehicle-colored.svg');
+    return (person ? 'circle-responder-boat-with-person-colored.svg' : 'circle-responder-boat-colored.svg');
   }
 
   getResponderMission(responder: Responder) {

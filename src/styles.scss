@@ -23,6 +23,9 @@
 
 .shelter {
   @extend .marker;
+  background-size: contain;
+  width: 1.5em;
+  height: 1.5em;
   // we could do this with CSS and something like this - vs. the current weird code based way
   // mask: url(assets/img/shelter-hospital.svg) no-repeat center;
   // -webkit-mask: url(assets/img/shelter-hospital.svg) no-repeat center;
@@ -31,8 +34,14 @@
 
 .incidentMarker {
   @extend .marker;
+  background-size: contain;
+  width: 1.5em;
+  height: 1.5em;
 }
 
 .responderMarker {
   @extend .marker;
+  background-size: contain;
+  width: 1.5em;
+  height: 1.5em;
 }
