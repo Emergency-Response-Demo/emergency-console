@@ -14,6 +14,7 @@ import { CircleMode, DragCircleMode, DirectMode, SimpleSelectMode } from 'mapbox
 import { default as DrawStyles } from './util/draw-styles.js';
 import { PriorityZone } from '../models/priority-zone';
 import { v4 as uuid } from 'uuid';
+import { default as Circle } from '@turf/circle';
 
 @Component({
   selector: 'app-map',
@@ -211,8 +212,14 @@ export class MapComponent implements OnInit {
   // This event will not fire when a feature is created or deleted. To track those interactions, listen for draw.create and draw.delete events.
   //
   // The event data is an object - features: Array<Feature>, action: string
-  public updatedDrawArea(event) {
-    // TODO?
+  public updatedDrawArea = (event) => {
+    if (event.features && event.features.length === 0) {
+      return;
+    } 
+    var feature = event.features[0];
+    if (feature.properties.isCircle === true) {
+      this.addedOrUpdatedPriorityZone(feature.id, feature.properties.center[0], feature.properties.center[1], feature.properties.radiusInKm);
+    }
   }
 
   public loadMap(map: Map): void {
@@ -236,12 +243,17 @@ export class MapComponent implements OnInit {
     // Can't override these or the events don't fire to MapboxDraw custom modes - TODO figure out how to get events for drag/updates
     // https://github.com/mapbox/mapbox-gl-draw/blob/master/docs/API.md
     // this.map.on('draw.create', this.createdDrawArea);
-    // this.map.on('draw.update', this.updatedDrawArea);
+    this.map.on('draw.update', this.updatedDrawArea);
 
     this.map.addControl(new NavigationControl(), 'top-right');
 
-    // var feature = {"id":"f024c249dccee2ed8c10b596e7917ee0","type":"Feature","properties":{"isCircle":true,"center":[-78.04676819361207,34.190086783124514],"radiusInKm":5.9317764928329},"geometry":{}};//{"coordinates":[[[-78.05309341804741,34.243175420794124],[-78.05935761222806,34.24240679209363],[-78.06550033808311,34.241133987136614],[-78.07146233603478,34.239369286249186],[-78.07718609962207,34.23712971476574],[-78.08261643275308,34.23443687789704],[-78.08770098408702,34.23131675123683],[-78.0923907532908,34.22779942897985],[-78.09664056421482,34.22391883233852],[-78.10040950038247,34.21971238103471],[-78.10366129858363,34.21522063110081],[-78.10636469680064,34.210486882548615],[-78.10849373316702,34.20555676075213],[-78.11002799316238,34.200477775637765],[-78.11095280277291,34.19529886298131],[-78.1112593658905,34.19006991227361],[-78.11094484477877,34.184841285734194],[-78.11001238299461,34.17966333312508],[-78.10847107071426,34.17458590704312],[-78.10633585296645,34.16965788335156],[-78.10362738181844,34.16492669134803],[-78.10037181408677,34.160437858159995],[-78.09660055665044,34.156234571710534],[-78.09234996192525,34.152357266408565],[-78.08766097650962,34.14884323549169],[-78.08257874643333,34.145726273687934],[-78.07715218282547,34.14303635356825],[-78.07143349216659,34.14079933863717],[-78.06547767559894,34.13903673585839],[-78.05934200203625,34.137765489936925],[-78.05308546004026,34.13699782128588],[-78.04676819361207,34.13674110919385],[-78.04045092718387,34.13699782128588],[-78.03419438518787,34.137765489936925],[-78.02805871162519,34.13903673585839],[-78.02210289505754,34.14079933863717],[-78.01638420439866,34.14303635356825],[-78.0109576407908,34.145726273687934],[-78.00587541071451,34.14884323549169],[-78.00118642529888,34.152357266408565],[-77.99693583057369,34.156234571710534],[-77.99316457313736,34.160437858159995],[-77.98990900540569,34.16492669134803],[-77.98720053425768,34.16965788335156],[-77.98506531650987,34.17458590704312],[-77.98352400422952,34.17966333312508],[-77.98259154244536,34.184841285734194],[-77.98227702133363,34.19006991227361],[-77.98258358445122,34.19529886298131],[-77.98350839406176,34.200477775637765],[-77.98504265405711,34.20555676075213],[-77.9871716904235,34.210486882548615],[-77.9898750886405,34.21522063110081],[-77.99312688684167,34.21971238103471],[-77.99689582300931,34.22391883233852],[-78.00114563393333,34.22779942897985],[-78.00583540313711,34.23131675123683],[-78.01091995447106,34.23443687789704],[-78.01635028760207,34.23712971476574],[-78.02207405118935,34.239369286249186],[-78.02803604914102,34.241133987136614],[-78.03417877499608,34.24240679209363],[-78.04044296917672,34.243175420794124],[-78.05309341804741,34.243175420794124]]],"type":"Polygon"}};
-    // this.mapDrawTools.add(feature);
+    // Add existing priority zones to the map
+    for (var i = 0; i < this.priorityZones.length; i++) {
+      var priorityZone = this.priorityZones[i];
+      var turfCircle = Circle([parseFloat(priorityZone.lon), parseFloat(priorityZone.lat)], parseFloat(priorityZone.radius));
+      var feature = {"id":priorityZone.id,"type":"Feature","properties":{"isCircle":true,"center":[parseFloat(priorityZone.lon), parseFloat(priorityZone.lat)],"radiusInKm":parseFloat(priorityZone.radius)},"geometry":{"coordinates":turfCircle.geometry.coordinates,"type":"Polygon"}};
+      this.mapDrawTools.add(feature);
+    }
   }
 
   public addedOrUpdatedPriorityZone(id, lon, lat, radiusInKm) {

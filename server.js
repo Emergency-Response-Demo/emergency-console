@@ -26,7 +26,7 @@ app.set('incident-priority-service', process.env.PRIORITY || 'http://incident-pr
 app.set('process-viewer', process.env.PROCESS_VIEWER || 'http://process-viewer:8080');
 app.set('responder-simulator', process.env.RESPONDER_SIMULATOR || 'http://responder-simulator:8080');
 app.set('kafka-host', process.env.KAFKA_HOST || 'kafka-cluster-kafka-bootstrap.naps-emergency-response.svc:9092');
-app.set('kafka-message-topic', ['topic-mission-event', 'topic-responder-location-update', 'topic-incident-event', 'topic-responder-event', 'topic-incident-command', 'topic-responder-command', 'topic-priority-zone-event']);
+app.set('kafka-message-topic', ['topic-mission-event', 'topic-responder-location-update', 'topic-incident-event', 'topic-responder-event', 'topic-incident-command', 'topic-responder-command']);
 if (process.env.KAFKA_TOPIC) {
   app.set('kafka-message-topic', process.env.KAFKA_TOPIC.split(','));
 }
@@ -122,10 +122,10 @@ app.post('/priority-zone/apply', (_, res) => {
     kafkaProducer.send(payload, (err, data) => {
       console.log(payload);
       console.log(data);
-      res.send({response:`Applied Priority Zone with the center at [${_.body.centerLongitude}, ${_.body.centerLatitude}]`});
+      res.send({response:`Applied Priority Zone with the center at [${_.body.body.lon}, ${_.body.body.lat}]`});
     });
   } catch (ex) {
-      console.log('errors with Kafka producer - could not send pri zone:');
+      console.log('errors with Kafka producer - could not send priority zone:');
       console.log(data);
   }
 });
@@ -204,7 +204,7 @@ app.use(
   })
 );
 
-// mission server proxy
+// incident priority server proxy
 app.use(
   '/incident-priority-service/*',
   proxy({

@@ -26,8 +26,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   responderMap = new Map<string, Responder>();
   missionMap = new Map<string, Mission>();
   incidentMap = new Map<string, Incident>();
-  priorityZoneMap = new Map<string, PriorityZone>();
 
+  priorityZones: PriorityZone[] = new Array();
   shelters: Shelter[] = new Array();
   totalResponders = 0;
 
@@ -50,6 +50,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.responderService.getTotal()])
       .then(([missions, incidents, shelters, responders, priorityZones, responderStatus]: [Mission[], Incident[], Shelter[], Responder[], PriorityZone[], ResponderTotalStatus]) => {
         this.shelters = shelters;
+        this.priorityZones = priorityZones;
 
         // Use temp values so we have a double buffer, avoid needless updates.
         const tempIncidents = new Map<string, Incident>();
@@ -118,10 +119,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   get incidents(): Incident[] {
     return Object.values(this.incidentMap);
-  }
-
-  get priorityZones(): PriorityZone[] {
-    return Object.values(this.priorityZoneMap);
   }
 
   private handleIncidentUpdate(incident: Incident): void {
