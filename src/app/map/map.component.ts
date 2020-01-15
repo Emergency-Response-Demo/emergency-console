@@ -247,12 +247,7 @@ export class MapComponent implements OnInit {
 
     this.map.addControl(new NavigationControl(), 'top-right');
 
-    // this.priorityZones[0] = new PriorityZone();
-    // this.priorityZones[0].id = "f024c249dccee2ed8c10b596e7917ee0";
-    // this.priorityZones[0].lon = "-78.04676819361207";
-    // this.priorityZones[0].lat = "34.190086783124514";
-    // this.priorityZones[0].radius = "5.9317764928329";
-
+    // Add existing priority zones to the map
     for (var i = 0; i < this.priorityZones.length; i++) {
       var priorityZone = this.priorityZones[i];
       var turfCircle = Circle([parseFloat(priorityZone.lon), parseFloat(priorityZone.lat)], parseFloat(priorityZone.radius));
