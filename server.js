@@ -22,6 +22,7 @@ app.set('incident-service', process.env.INCIDENT || 'http://incident-service:808
 app.set('alert-service', process.env.ALERT || 'http://alert-service:8080');
 app.set('responder-service', process.env.RESPONDER || 'http://responder-service:8080');
 app.set('mission-service', process.env.MISSION || 'http://mission-service:8080');
+app.set('incident-priority-service', process.env.PRIORITY || 'http://incident-priority-service:8080');
 app.set('process-viewer', process.env.PROCESS_VIEWER || 'http://process-viewer:8080');
 app.set('responder-simulator', process.env.RESPONDER_SIMULATOR || 'http://responder-simulator:8080');
 app.set('kafka-host', process.env.KAFKA_HOST || 'kafka-cluster-kafka-bootstrap.naps-emergency-response.svc:9092');
@@ -199,6 +200,20 @@ app.use(
     logLevel: 'debug',
     pathRewrite: {
       '^/mission-service': ''
+    }
+  })
+);
+
+// mission server proxy
+app.use(
+  '/incident-priority-service/*',
+  proxy({
+    target: app.get('incident-priority-service'),
+    secure: false,
+    changeOrigin: true,
+    logLevel: 'debug',
+    pathRewrite: {
+      '^/incident-priority-service': ''
     }
   })
 );
