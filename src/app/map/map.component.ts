@@ -91,7 +91,7 @@ export class MapComponent implements OnInit {
   }
 
   getResponderIcon(person: boolean): string {
-    return (person ? 'circle-responder-boat-with-person-colored.svg' : 'circle-responder-boat-colored.svg');
+    return (person ? 'circle-responder-boat-colored.svg' : 'circle-responder-boat-simulated-colored.svg');
   }
 
   getResponderMission(responder: Responder) {
