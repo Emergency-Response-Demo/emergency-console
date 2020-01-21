@@ -87,11 +87,11 @@ export class MapComponent implements OnInit {
 
   // RED if REPORTED, YELLOW otherwise (I guess assigned is the only other state right now)
   getIncidentIcon(incident: Incident): string {
-    return !incident.status || incident.status === 'REPORTED' ? 'marker-incident-helpme-colored.svg' : 'marker-incident-helpassigned-colored.svg';
+    return !incident.status || incident.status === 'REPORTED' ? 'marker-incident-helpme-colored2.svg' : 'marker-incident-helpassigned-colored2.svg';
   }
 
   getResponderIcon(person: boolean): string {
-    return (person ? 'circle-responder-boat-with-person-colored.svg' : 'circle-responder-boat-colored.svg');
+    return (person ? 'circle-responder-boat-colored.svg' : 'circle-responder-boat-simulated-colored.svg');
   }
 
   getResponderMission(responder: Responder) {
