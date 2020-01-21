@@ -65,7 +65,10 @@ let kafkaConsumerGroup = new kafka.ConsumerGroup({
 }, app.get('kafka-message-topic'));
 
 let kafkaProducer = new kafka.Producer(new kafka.KafkaClient({
-  kafkaHost: app.get('kafka-host')
+  kafkaHost: app.get('kafka-host'),
+  connectRetryOptions: {
+    forever: true
+  }
 }));
 
 kafkaConsumerGroup.on('message', msg => {
