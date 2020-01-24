@@ -11,6 +11,7 @@ let proxy = require('http-proxy-middleware');
 let kafka = require('kafka-node');
 let socketIO = require('socket.io');
 let cors = require('cors');
+let bodyParser = require('body-parser');
 
 let app = express();
 app.use(cors());
@@ -21,6 +22,7 @@ app.set('incident-service', process.env.INCIDENT || 'http://incident-service:808
 app.set('alert-service', process.env.ALERT || 'http://alert-service:8080');
 app.set('responder-service', process.env.RESPONDER || 'http://responder-service:8080');
 app.set('mission-service', process.env.MISSION || 'http://mission-service:8080');
+app.set('incident-priority-service', process.env.PRIORITY || 'http://incident-priority-service:8080');
 app.set('process-viewer', process.env.PROCESS_VIEWER || 'http://process-viewer:8080');
 app.set('responder-simulator', process.env.RESPONDER_SIMULATOR || 'http://responder-simulator:8080');
 app.set('kafka-host', process.env.KAFKA_HOST || 'kafka-cluster-kafka-bootstrap.naps-emergency-response.svc:9092');
@@ -35,6 +37,8 @@ app.use(compression());
 app.use(logger('combined'));
 
 app.use(express.static(path.join(__dirname, 'dist')));
+
+app.use(bodyParser.json());
 
 // setup server
 const certConfig = {
@@ -57,8 +61,15 @@ io.of('/shelters').on('connection', socket => {
 console.log('Setting up Kafka client for ', app.get('kafka-host'), 'on topic', app.get('kafka-message-topic'));
 let kafkaConsumerGroup = new kafka.ConsumerGroup({
   kafkaHost: app.get('kafka-host'),
-  groupId: app.get('kafka-groupid'),
+  groupId: app.get('kafka-groupid')
 }, app.get('kafka-message-topic'));
+
+let kafkaProducer = new kafka.Producer(new kafka.KafkaClient({
+  kafkaHost: app.get('kafka-host'),
+  connectRetryOptions: {
+    forever: true
+  }
+}));
 
 kafkaConsumerGroup.on('message', msg => {
   try {
@@ -67,6 +78,11 @@ kafkaConsumerGroup.on('message', msg => {
   } catch (e) {
     console.error('Failed to parse Kafka message', msg);
   }
+});
+
+kafkaProducer.on('error', err => {
+  console.error('Failed to connect to Kafka PRODUCER', err);
+  io.sockets.emit('error', { message: "Failed to connect to backing message queue's" });
 });
 
 kafkaConsumerGroup.on('error', err => {
@@ -97,6 +113,42 @@ app.get('/shelter-service/api/shelters', (_, res) => {
     lon: -77.8885,
     rescued: 0
   }]);
+});
+
+// create new priority zone
+app.post('/priority-zone/apply', (_, res) => {
+  var payload = [{
+    topic: 'topic-priority-zone-event',
+    messages: JSON.stringify(_.body)
+  }];
+  try { // TRY/CATCH, JUST PLUGGING A HOLE FOR: https://github.com/SOHU-Co/kafka-node/issues/995
+    kafkaProducer.send(payload, (err, data) => {
+      console.log(payload);
+      console.log(data);
+      res.send({response:`Applied Priority Zone with the center at [${_.body.body.lon}, ${_.body.body.lat}]`});
+    });
+  } catch (ex) {
+      console.log('errors with Kafka producer - could not send priority zone:');
+      console.log(data);
+  }
+});
+
+// delete all priority zones
+app.post('/priority-zone/clear', (_, res) => {
+  var payload = [{
+    topic: 'topic-priority-zone-event',
+    messages: JSON.stringify(_.body)
+  }];
+  try { // TRY/CATCH, JUST PLUGGING A HOLE FOR: https://github.com/SOHU-Co/kafka-node/issues/995
+    kafkaProducer.send(payload, (err, data) => {
+      console.log(payload);
+      console.log(data);
+      res.send({response:'Cleared Priority Zones'});
+    });
+  } catch (ex) {
+      console.log('errors with Kafka producer - could not clear priority zone');
+      console.log(data);
+  }
 });
 
 // incident server proxy
@@ -151,6 +203,20 @@ app.use(
     logLevel: 'debug',
     pathRewrite: {
       '^/mission-service': ''
+    }
+  })
+);
+
+// incident priority server proxy
+app.use(
+  '/incident-priority-service/*',
+  proxy({
+    target: app.get('incident-priority-service'),
+    secure: false,
+    changeOrigin: true,
+    logLevel: 'debug',
+    pathRewrite: {
+      '^/incident-priority-service': ''
     }
   })
 );

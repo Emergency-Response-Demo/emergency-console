@@ -27,6 +27,7 @@ import { KeycloakAngularModule } from 'keycloak-angular';
 import { AppInitService } from './app-init.service';
 import { MissionComponent } from './mission/mission.component';
 import { LegendComponent } from './legend/legend.component';
+import { MapOverlayComponent } from './map-overlay/map-overlay.component';
 import { IncidentDashboardComponent } from './incident-dashboard/incident-dashboard.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -47,6 +48,7 @@ export function init(appInitService: AppInitService) {
     MapComponent,
     MissionComponent,
     LegendComponent,
+    MapOverlayComponent,
     IncidentDashboardComponent
   ],
   imports: [

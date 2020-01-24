@@ -1,3 +1,27 @@
 mgl-map {
   height: 40em;
 }
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  margin-right: 10;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-image: none;
+border: 1px solid transparent;
+border-radius: 4px;
+}
+.btn-draw, .btn-draw:hover, .btn-draw:active, .btn-draw:focus, .btn-draw:target {
+color: #fff;
+background-color: rgba(250, 137, 7, 0.733);
+}
+.btn-delete, .btn-delete:hover, .btn-delete:active, .btn-delete:focus, .btn-delete:target {
+  color: #fff;
+  background-color: rgba(228, 30, 23, 0.87);
+}

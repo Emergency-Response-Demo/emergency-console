@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61.2 (89653) - https://sketch.com -->
+    <title>map_icons</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="noun_hospital_square" transform="translate(12.000000, 13.000000)" fill="#000000" fill-rule="nonzero">
+            <path d="M49.5,0 L5.5,0 C2.462625,0 0,2.462625 0,5.5 L0,49.5 C0,52.537375 2.462625,55 5.5,55 L49.5,55 C52.537375,55 55,52.537375 55,49.5 L55,5.5 C55,2.462625 52.537375,0 49.5,0 Z M27.5,48.4 C15.956875,48.4 6.6,39.04175 6.6,27.5 C6.6,15.95825 15.95825,6.6 27.5,6.6 C39.043125,6.6 48.4,15.95825 48.4,27.5 C48.4,39.043125 39.043125,48.4 27.5,48.4 Z" id="Shape"></path>
+            <polygon id="Path" points="30.2225976 14 24.7774024 14 24.7774024 24.7774024 14 24.7774024 14 30.2225976 24.7774024 30.2225976 24.7774024 41 30.2225976 41 30.2225976 30.2225976 41 30.2225976 41 24.7774024 30.2225976 24.7774024"></polygon>
+        </g>
+    </g>
+</svg>

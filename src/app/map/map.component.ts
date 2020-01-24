@@ -1,12 +1,20 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Incident } from '../models/incident';
 import { Responder } from '../models/responder';
 import { Shelter } from '../models/shelter';
-import { LineLayout, LinePaint, LngLatBoundsLike, FitBoundsOptions } from 'mapbox-gl';
 import { AppUtil } from '../app-util';
 import { ResponderService } from '../services/responder.service';
 import { IncidentService } from '../services/incident.service';
 import { Mission } from '../models/mission';
+import { LineLayout, LinePaint, LngLatBoundsLike, FitBoundsOptions, LngLat, Point,
+          MapMouseEvent, Map, Marker, NavigationControl } from 'mapbox-gl';
+import { default as MapboxDraw } from '@mapbox/mapbox-gl-draw';
+import { CircleMode, DragCircleMode, DirectMode, SimpleSelectMode } from 'mapbox-gl-draw-circle';
+import { default as DrawStyles } from './util/draw-styles.js';
+import { PriorityZone } from '../models/priority-zone';
+import { v4 as uuid } from 'uuid';
+import { default as Circle } from '@turf/circle';
 
 @Component({
   selector: 'app-map',
@@ -19,6 +27,10 @@ export class MapComponent implements OnInit {
   @Input() incidents: Incident[];
   @Input() shelters: Shelter[];
   @Input() missions: Mission[];
+  @Input() priorityZones: PriorityZone[];
+
+  map: Map;
+  mapDrawTools: MapboxDraw;
 
   center: number[] = AppUtil.isMobile() ? [-77.886765, 34.139921] : [-77.886765, 34.158808];
   accessToken: string = window['_env'].accessToken;
@@ -26,6 +38,8 @@ export class MapComponent implements OnInit {
   pickupData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
   deliverData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
   zoom: number[] = [AppUtil.isMobile() ? 10 : 10.5];
+  enableDrawingPriorityZones = false;  // TODO make a button to toggle this?
+  priZoneButtonText = 'Create Priority Zone';
 
   bounds: LngLatBoundsLike;
   boundsOptions: FitBoundsOptions = {
@@ -54,10 +68,10 @@ export class MapComponent implements OnInit {
   };
 
   shelterStyle: any = {
-    'background-image': 'url(assets/img/shelter.svg)'
+   'background-image': 'url(assets/img/circle-shelter-hospital-colored.svg)'
   };
 
-  constructor(public responderService: ResponderService, public incidentService: IncidentService) { }
+  constructor(public responderService: ResponderService, public incidentService: IncidentService, private httpClient: HttpClient) { }
 
   get currentIncidents(): Incident[] {
     return this.incidents.filter(i => i.status !== 'RESCUED');
@@ -71,13 +85,13 @@ export class MapComponent implements OnInit {
     this.center = lngLat;
   }
 
-  // icons colored with coreui hex codes from https://iconscout.com/icon/location-62
+  // RED if REPORTED, YELLOW otherwise (I guess assigned is the only other state right now)
   getIncidentIcon(incident: Incident): string {
-    return !incident.status || incident.status === 'REPORTED' ? 'marker-red.svg' : 'marker-yellow.svg';
+    return !incident.status || incident.status === 'REPORTED' ? 'marker-incident-helpme-colored2.svg' : 'marker-incident-helpassigned-colored2.svg';
   }
 
   getResponderIcon(person: boolean): string {
-    return (person ? 'responder-person.svg' : 'responder.svg');
+    return (person ? 'circle-responder-boat-colored.svg' : 'circle-responder-boat-simulated-colored.svg');
   }
 
   getResponderMission(responder: Responder) {
@@ -126,5 +140,133 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  getLLFromFeatureData(data): LngLat {
+    if (data.type !== 'Feature') { return null; } // error, not a feature
+    return new LngLat(+data.properties.center[0], +data.properties.center[1]);
+  }
+
+  projectFeatureDataToPoint(data): Point {
+    return this.map.project(this.getLLFromFeatureData(data));
+  }
+
+  public onDrawPriorityZoneButtonClick(): void {
+    this.enableDrawingPriorityZones = !this.enableDrawingPriorityZones; // toggle mode
+    if (this.enableDrawingPriorityZones === true) { // toggled on
+      this.priZoneButtonText = 'Done Drawing';
+      this.mapDrawTools.changeMode('drag_circle', { initialRadiusInKm: 2 });
+    } else { // toggled off
+      this.priZoneButtonText = 'Create Priority Zone';
+      this.mapDrawTools.changeMode('simple_select', { initialRadiusInKm: 2 });
+
+      const data = this.mapDrawTools.getAll();
+      if (data.features) {
+        data.features.forEach((feature) => {
+          // alert(JSON.stringify(feature));
+          // e.g. feature.properties {"isCircle":true,"center":[-78.05985704920441,34.139520841135806],"radiusInKm":4.440545224272349}
+          if (feature.properties.isCircle === true) {
+            this.addedOrUpdatedPriorityZone(feature.id, feature.properties.center[0], feature.properties.center[1], feature.properties.radiusInKm);
+          }
+        });
+      }
+    }
+  }
+
+  public onPriorityZoneDeleteButtonClick(): void {
+    this.mapDrawTools.deleteAll();  // this deletes the drawn ones
+
+    const json = {
+      id: uuid(),
+      messageType: 'PriorityZoneClearEvent',
+      body: {}
+    };
+    this.httpClient.post<any>('/priority-zone/clear', json).subscribe(data => {});
+  }
+
+  // Fired when a feature is created. The following interactions will trigger this event:
+  // Finish drawing a feature.
+  // Simply clicking will create a Point.
+  // A LineString or Polygon is only created when the user has finished drawing it
+  // i.e. double-clicked the last vertex or hit Enter — and the drawn feature is valid.
+  //
+  // The event data is an object - features: Array<Object>
+  public createdDrawArea(event) {
+    // TODO?
+  }
+
+  // Fired when one or more features are updated. The following interactions will trigger
+  // this event, which can be subcategorized by action:
+  // action: 'move'
+  //   * Finish moving one or more selected features in simple_select mode.
+  //     The event will only fire when the movement is finished (i.e. when the user
+  //     releases the mouse button or hits Enter).
+  // action: 'change_coordinates'
+  //   * Finish moving one or more vertices of a selected feature in direct_select mode.
+  //     The event will only fire when the movement is finished (i.e. when the user releases
+  //     the mouse button or hits Enter, or her mouse leaves the map container).
+  //   * Delete one or more vertices of a selected feature in direct_select mode, which can
+  //     be done by hitting the Backspace or Delete keys, clicking the Trash button, or invoking draw.trash().
+  //   * Add a vertex to the selected feature by clicking a midpoint on that feature in direct_select mode.
+  //
+  // This event will not fire when a feature is created or deleted. To track those interactions, listen for draw.create and draw.delete events.
+  //
+  // The event data is an object - features: Array<Feature>, action: string
+  public updatedDrawArea = (event) => {
+    if (event.features && event.features.length === 0) {
+      return;
+    } 
+    var feature = event.features[0];
+    if (feature.properties.isCircle === true) {
+      this.addedOrUpdatedPriorityZone(feature.id, feature.properties.center[0], feature.properties.center[1], feature.properties.radiusInKm);
+    }
+  }
+
+  public loadMap(map: Map): void {
+    this.map = map;
+    // MapBoxDraw gives us drawing and editing features in mapbox
+    this.mapDrawTools = new MapboxDraw({
+      defaultMode: 'simple_select',
+      displayControlsDefault: false,
+      userProperties: true,
+      styles: DrawStyles,
+      modes: {
+        ...MapboxDraw.modes,
+        draw_circle  : CircleMode,
+        drag_circle  : DragCircleMode,
+        direct_select: DirectMode,
+        simple_select: SimpleSelectMode
+      }
+    });
+    this.map.addControl(this.mapDrawTools);
+
+    // Can't override these or the events don't fire to MapboxDraw custom modes - TODO figure out how to get events for drag/updates
+    // https://github.com/mapbox/mapbox-gl-draw/blob/master/docs/API.md
+    // this.map.on('draw.create', this.createdDrawArea);
+    this.map.on('draw.update', this.updatedDrawArea);
+
+    this.map.addControl(new NavigationControl(), 'top-right');
+
+    // Add existing priority zones to the map
+    for (var i = 0; i < this.priorityZones.length; i++) {
+      var priorityZone = this.priorityZones[i];
+      var turfCircle = Circle([parseFloat(priorityZone.lon), parseFloat(priorityZone.lat)], parseFloat(priorityZone.radius));
+      var feature = {"id":priorityZone.id,"type":"Feature","properties":{"isCircle":true,"center":[parseFloat(priorityZone.lon), parseFloat(priorityZone.lat)],"radiusInKm":parseFloat(priorityZone.radius)},"geometry":{"coordinates":turfCircle.geometry.coordinates,"type":"Polygon"}};
+      this.mapDrawTools.add(feature);
+    }
+  }
+
+  public addedOrUpdatedPriorityZone(id, lon, lat, radiusInKm) {
+    const json = {
+      id: uuid(),
+      messageType: 'PriorityZoneApplicationEvent',
+      body: {
+        lon: lon.toString(),
+        lat: lat.toString(),
+        id: id,
+        radius: radiusInKm.toString()
+      }
+    };
+    this.httpClient.post<any>('/priority-zone/apply', json).subscribe(data => {});
   }
 }

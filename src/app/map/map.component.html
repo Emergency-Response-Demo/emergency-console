@@ -1,14 +1,19 @@
 <div class="card-header">Map</div>
 <div class="card-body">
+  <app-map-overlay [hidden]="!enableDrawingPriorityZones"></app-map-overlay>
+  <app-legend [bottom]="'50px'"></app-legend>
+  <!-- https://github.com/Wykks/ngx-mapbox-gl/wiki/API-Documentation -->
   <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'"
     [zoom]="zoom"
     [center]="center"
     [accessToken]="accessToken"
     [fitBounds]="bounds"
-    [fitBoundsOptions]="boundsOptions">
+    [fitBoundsOptions]="boundsOptions"
+    (load)="loadMap($event)">
     <span *ngFor="let responder of activeResponders; index as i">
+      <!-- TODO: consider switching to Layer as it will use WebGL and render faster - this doesn't -->
       <mgl-marker [lngLat]="[responder.longitude, responder.latitude]" #responderMarker>
-        <div class="marker" (click)="markerClick([responder.longitude, responder.latitude])" [ngStyle]="{
+        <div class="responderMarker" (click)="markerClick([responder.longitude, responder.latitude])" [ngStyle]="{
           'background-image': 'url(assets/img/' + getResponderIcon(responder.person) +')'
         }" ></div>
       </mgl-marker>
@@ -22,13 +27,14 @@
             <strong>Full Name: </strong> {{ responder.name }}<br />
             <strong>Phone Number: </strong> {{ responder.phoneNumber }}<br />
             <strong>Provides Medical?: </strong> {{ responder.medicalKit }}<br />
-            <strong>Boat Capcacity: </strong> {{ responder.boatCapacity }}<br />
+            <strong>Boat Capacity: </strong> {{ responder.boatCapacity }}<br />
             <strong>User generated: </strong> {{ responder.person }}<br />
           </p>
         </div>
       </mgl-popup>
     </span>
     <span *ngFor="let shelter of shelters">
+      <!-- TODO: consider switching to Layer as it will use WebGL and render faster - this doesn't -->
       <mgl-marker [lngLat]="[shelter.lon, shelter.lat]" #shelterMarker>
         <div class="shelter" [ngStyle]="shelterStyle" (click)="markerClick([shelter.lon, shelter.lat])"></div>
       </mgl-marker>
@@ -43,8 +49,9 @@
       </mgl-popup>
     </span>
     <span *ngFor="let incident of currentIncidents; index as i">
+      <!-- TODO: consider switching to Layer as it will use WebGL and render faster - this doesn't -->
       <mgl-marker [lngLat]="[incident.lon, incident.lat]" #incidentMarker>
-        <div class="marker" [ngStyle]="{
+        <div class="incidentMarker" [ngStyle]="{
             'background-image': 'url(assets/img/' + getIncidentIcon(incident) + ')'
           }" (click)="markerClick([incident.lon, incident.lat])"></div>
       </mgl-marker>
@@ -69,5 +76,8 @@
     <mgl-geojson-source id="deliverJson" [data]="deliverData"> </mgl-geojson-source>
     <mgl-layer id="deliverRoute" type="line" source="deliverJson" [layout]="lineLayout" [paint]="deliverPaint"> </mgl-layer>
   </mgl-map>
-  <app-legend [bottom]="'50px'"></app-legend>
+  <div class="btn-group" role="group" aria-label="Drawing Tools">
+    <button type="button" class="btn btn-draw" (click)="onDrawPriorityZoneButtonClick()">{{ priZoneButtonText }}</button>
+    <button type="button" class="btn btn-delete" (click)="onPriorityZoneDeleteButtonClick()">Delete Priority Zones</button>
+  </div>
 </div>

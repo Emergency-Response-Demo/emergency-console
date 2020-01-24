@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61.2 (89653) - https://sketch.com -->
+    <title>map_icons</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="circle_hospital_colored" fill-rule="nonzero">
+            <path d="M80,40 C80,62.0916923 62.0916923,80 40,80 C17.9083077,80 0,62.0916923 0,40 C0,17.9083077 17.9083077,0 40,0 C62.0916923,0 80,17.9083077 80,40 Z" id="Path" fill-opacity="0.390406469" fill="#000000"></path>
+            <path d="M40,66 C54.34,66 66,54.34 66,40 C66,25.66 54.34,14 40,14 C25.66,14 14,25.66 14,40 C14,54.34 25.66,66 40,66 Z" id="Path" stroke="#00EC41" fill="#FFFFFF"></path>
+            <path d="M25.1,36.46 C25.1,36.18 25.32,35.96 25.6,35.96 L35.96,35.96 L35.96,25.6 C35.96,25.32 36.18,25.1 36.46,25.1 L43.53,25.1 C43.81,25.1 44.03,25.32 44.03,25.6 L44.03,35.96 L54.4,35.96 C54.68,35.96 54.9,36.18 54.9,36.46 L54.9,43.53 C54.9,43.81 54.68,44.03 54.4,44.03 L44.04,44.03 L44.04,54.4 C44.04,54.68 43.82,54.9 43.54,54.9 L36.47,54.9 C36.19,54.9 35.97,54.68 35.97,54.4 L35.97,44.04 L25.6,44.04 C25.32,44.04 25.1,43.82 25.1,43.54 L25.1,36.46 Z" id="Path" fill="#CD4A4A"></path>
+        </g>
+    </g>
+</svg>
