@@ -9,10 +9,11 @@ import { IncidentService } from '../services/incident.service';
 import { Mission } from '../models/mission';
 import { LineLayout, LinePaint, LngLatBoundsLike, FitBoundsOptions, LngLat, Point,
           MapMouseEvent, Map, Marker, NavigationControl } from 'mapbox-gl';
-import { default as MapboxDraw } from '@mapbox/mapbox-gl-draw';
+import { default as MapboxDraw, default as StaticMode } from '@mapbox/mapbox-gl-draw';
 import { CircleMode, DragCircleMode, DirectMode, SimpleSelectMode } from 'mapbox-gl-draw-circle';
 import { default as DrawStyles } from './util/draw-styles.js';
 import { PriorityZone } from '../models/priority-zone';
+import { KeycloakService } from 'keycloak-angular';
 import { v4 as uuid } from 'uuid';
 import { default as Circle } from '@turf/circle';
 
@@ -22,6 +23,7 @@ import { default as Circle } from '@turf/circle';
   styleUrls: ['./map.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class MapComponent implements OnInit {
   @Input() responders: Responder[];
   @Input() incidents: Incident[];
@@ -31,6 +33,8 @@ export class MapComponent implements OnInit {
 
   map: Map;
   mapDrawTools: MapboxDraw;
+
+  incidentCommander: boolean;
 
   center: number[] = AppUtil.isMobile() ? [-77.886765, 34.139921] : [-77.886765, 34.158808];
   accessToken: string = window['_env'].accessToken;
@@ -71,7 +75,11 @@ export class MapComponent implements OnInit {
    'background-image': 'url(assets/img/circle-shelter-hospital-colored.svg)'
   };
 
-  constructor(public responderService: ResponderService, public incidentService: IncidentService, private httpClient: HttpClient) { }
+  constructor(public responderService: ResponderService, public incidentService: IncidentService, private httpClient: HttpClient, private keycloak: KeycloakService,) { 
+    StaticMode.toDisplayFeatures = function(state, geojson, display) {
+      display(geojson);
+    };
+  }
 
   get currentIncidents(): Incident[] {
     return this.incidents.filter(i => i.status !== 'RESCUED');
@@ -140,6 +148,13 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.keycloak.isLoggedIn().then(isLoggedIn => {
+      if (isLoggedIn) {
+        this.keycloak.loadUserProfile().then(profile => {
+          this.incidentCommander = profile['attributes'].incidentCommander;
+        });
+      }
+    });
   }
 
   getLLFromFeatureData(data): LngLat {
@@ -232,12 +247,14 @@ export class MapComponent implements OnInit {
       styles: DrawStyles,
       modes: {
         ...MapboxDraw.modes,
+        static       : StaticMode,
         draw_circle  : CircleMode,
         drag_circle  : DragCircleMode,
         direct_select: DirectMode,
         simple_select: SimpleSelectMode
       }
     });
+
     this.map.addControl(this.mapDrawTools);
 
     // Can't override these or the events don't fire to MapboxDraw custom modes - TODO figure out how to get events for drag/updates
@@ -253,6 +270,10 @@ export class MapComponent implements OnInit {
       var turfCircle = Circle([parseFloat(priorityZone.lon), parseFloat(priorityZone.lat)], parseFloat(priorityZone.radius));
       var feature = {"id":priorityZone.id,"type":"Feature","properties":{"isCircle":true,"center":[parseFloat(priorityZone.lon), parseFloat(priorityZone.lat)],"radiusInKm":parseFloat(priorityZone.radius)},"geometry":{"coordinates":turfCircle.geometry.coordinates,"type":"Polygon"}};
       this.mapDrawTools.add(feature);
+    }
+
+    if ( ! this.incidentCommander ) {
+      this.mapDrawTools.changeMode('static');
     }
   }
 
