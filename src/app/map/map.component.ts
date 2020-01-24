@@ -149,9 +149,7 @@ export class MapComponent implements OnInit {
     };
     this.keycloak.isLoggedIn().then(isLoggedIn => {
       if (isLoggedIn) {
-        this.keycloak.loadUserProfile().then(profile => {
-          this.incidentCommander = profile['attributes'].incidentCommander;
-        });
+        this.incidentCommander = this.keycloak.isUserInRole('incident_commander');
       }
     });
   }
