@@ -75,11 +75,7 @@ export class MapComponent implements OnInit {
    'background-image': 'url(assets/img/circle-shelter-hospital-colored.svg)'
   };
 
-  constructor(public responderService: ResponderService, public incidentService: IncidentService, private httpClient: HttpClient, private keycloak: KeycloakService,) { 
-    StaticMode.toDisplayFeatures = function(state, geojson, display) {
-      display(geojson);
-    };
-  }
+  constructor(public responderService: ResponderService, public incidentService: IncidentService, private httpClient: HttpClient, private keycloak: KeycloakService,) { }
 
   get currentIncidents(): Incident[] {
     return this.incidents.filter(i => i.status !== 'RESCUED');
@@ -148,6 +144,9 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
+    StaticMode.toDisplayFeatures = function(state, geojson, display) {
+      display(geojson);
+    };
     this.keycloak.isLoggedIn().then(isLoggedIn => {
       if (isLoggedIn) {
         this.keycloak.loadUserProfile().then(profile => {
