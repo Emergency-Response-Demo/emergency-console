@@ -258,7 +258,6 @@ export class MapComponent implements OnInit {
       var priorityZone = this.priorityZones[i];
       try {
         var turfCircle = Circle([parseFloat(priorityZone.lon), parseFloat(priorityZone.lat)], parseFloat(priorityZone.radius));
-        turfCircle.geometry.coordinates[turfCircle.geometry.coordinates.length-1] = turfCircle.geometry.coordinates[0];
         var feature = {"id":priorityZone.id,"type":"Feature","properties":{"isCircle":true,"center":[parseFloat(priorityZone.lon), parseFloat(priorityZone.lat)],"radiusInKm":parseFloat(priorityZone.radius)},"geometry":{"coordinates":turfCircle.geometry.coordinates,"type":"Polygon"}};
         this.mapDrawTools.add(feature);
       } catch {} //swallow exception for mismatched start and end coordinates thrown by Circle library
