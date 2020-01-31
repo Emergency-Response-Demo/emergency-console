@@ -7,14 +7,12 @@ import { AppUtil } from '../app-util';
 import { ResponderService } from '../services/responder.service';
 import { IncidentService } from '../services/incident.service';
 import { Mission } from '../models/mission';
-import { LineLayout, LinePaint, LngLatBoundsLike, FitBoundsOptions, LngLat, Point,
-          MapMouseEvent, Map, Marker, NavigationControl } from 'mapbox-gl';
+import { LineLayout, LinePaint, LngLatBoundsLike, FitBoundsOptions, LngLat, Point, Map, NavigationControl } from 'mapbox-gl';
 import { default as MapboxDraw, default as StaticMode } from '@mapbox/mapbox-gl-draw';
 import { CircleMode, DragCircleMode, DirectMode, SimpleSelectMode } from 'mapbox-gl-draw-circle';
 import { default as DrawStyles } from './util/draw-styles.js';
 import { PriorityZone } from '../models/priority-zone';
 import { KeycloakService } from 'keycloak-angular';
-import { v4 as uuid } from 'uuid';
 import { default as Circle } from '@turf/circle';
 
 @Component({
@@ -187,13 +185,7 @@ export class MapComponent implements OnInit {
 
   public onPriorityZoneDeleteButtonClick(): void {
     this.mapDrawTools.deleteAll();  // this deletes the drawn ones
-
-    const json = {
-      id: uuid(),
-      messageType: 'PriorityZoneClearEvent',
-      body: {}
-    };
-    this.httpClient.post<any>('/priority-zone/clear', json).subscribe(data => {});
+    this.httpClient.delete<any>('/incident-priority-service/priority-zones').subscribe(data => {});
   }
 
   // Fired when a feature is created. The following interactions will trigger this event:
@@ -264,9 +256,12 @@ export class MapComponent implements OnInit {
     // Add existing priority zones to the map
     for (var i = 0; i < this.priorityZones.length; i++) {
       var priorityZone = this.priorityZones[i];
-      var turfCircle = Circle([parseFloat(priorityZone.lon), parseFloat(priorityZone.lat)], parseFloat(priorityZone.radius));
-      var feature = {"id":priorityZone.id,"type":"Feature","properties":{"isCircle":true,"center":[parseFloat(priorityZone.lon), parseFloat(priorityZone.lat)],"radiusInKm":parseFloat(priorityZone.radius)},"geometry":{"coordinates":turfCircle.geometry.coordinates,"type":"Polygon"}};
-      this.mapDrawTools.add(feature);
+      try {
+        var turfCircle = Circle([parseFloat(priorityZone.lon), parseFloat(priorityZone.lat)], parseFloat(priorityZone.radius));
+        turfCircle.geometry.coordinates[turfCircle.geometry.coordinates.length-1] = turfCircle.geometry.coordinates[0];
+        var feature = {"id":priorityZone.id,"type":"Feature","properties":{"isCircle":true,"center":[parseFloat(priorityZone.lon), parseFloat(priorityZone.lat)],"radiusInKm":parseFloat(priorityZone.radius)},"geometry":{"coordinates":turfCircle.geometry.coordinates,"type":"Polygon"}};
+        this.mapDrawTools.add(feature);
+      } catch {} //swallow exception for mismatched start and end coordinates thrown by Circle library
     }
 
     if ( ! this.incidentCommander ) {
@@ -276,15 +271,10 @@ export class MapComponent implements OnInit {
 
   public addedOrUpdatedPriorityZone(id, lon, lat, radiusInKm) {
     const json = {
-      id: uuid(),
-      messageType: 'PriorityZoneApplicationEvent',
-      body: {
-        lon: lon.toString(),
-        lat: lat.toString(),
-        id: id,
-        radius: radiusInKm.toString()
-      }
+      lon: lon.toString(),
+      lat: lat.toString(),
+      radius: radiusInKm.toString()
     };
-    this.httpClient.post<any>('/priority-zone/apply', json).subscribe(data => {});
+    this.httpClient.post<any>(`incident-priority-service/priority-zone/${id}`, json).subscribe(data => {});
   }
 }

@@ -11,7 +11,6 @@ let proxy = require('http-proxy-middleware');
 let kafka = require('kafka-node');
 let socketIO = require('socket.io');
 let cors = require('cors');
-let bodyParser = require('body-parser');
 
 let app = express();
 app.use(cors());
@@ -38,8 +37,6 @@ app.use(logger('combined'));
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
-app.use(bodyParser.json());
-
 // setup server
 const certConfig = {
   key: fs.readFileSync('server.key'),
@@ -64,13 +61,6 @@ let kafkaConsumerGroup = new kafka.ConsumerGroup({
   groupId: app.get('kafka-groupid')
 }, app.get('kafka-message-topic'));
 
-let kafkaProducer = new kafka.Producer(new kafka.KafkaClient({
-  kafkaHost: app.get('kafka-host'),
-  connectRetryOptions: {
-    forever: true
-  }
-}));
-
 kafkaConsumerGroup.on('message', msg => {
   try {
     const parsedMessage = JSON.parse(msg.value);
@@ -78,11 +68,6 @@ kafkaConsumerGroup.on('message', msg => {
   } catch (e) {
     console.error('Failed to parse Kafka message', msg);
   }
-});
-
-kafkaProducer.on('error', err => {
-  console.error('Failed to connect to Kafka PRODUCER', err);
-  io.sockets.emit('error', { message: "Failed to connect to backing message queue's" });
 });
 
 kafkaConsumerGroup.on('error', err => {
@@ -113,42 +98,6 @@ app.get('/shelter-service/api/shelters', (_, res) => {
     lon: -77.8885,
     rescued: 0
   }]);
-});
-
-// create new priority zone
-app.post('/priority-zone/apply', (_, res) => {
-  var payload = [{
-    topic: 'topic-priority-zone-event',
-    messages: JSON.stringify(_.body)
-  }];
-  try { // TRY/CATCH, JUST PLUGGING A HOLE FOR: https://github.com/SOHU-Co/kafka-node/issues/995
-    kafkaProducer.send(payload, (err, data) => {
-      console.log(payload);
-      console.log(data);
-      res.send({response:`Applied Priority Zone with the center at [${_.body.body.lon}, ${_.body.body.lat}]`});
-    });
-  } catch (ex) {
-      console.log('errors with Kafka producer - could not send priority zone:');
-      console.log(data);
-  }
-});
-
-// delete all priority zones
-app.post('/priority-zone/clear', (_, res) => {
-  var payload = [{
-    topic: 'topic-priority-zone-event',
-    messages: JSON.stringify(_.body)
-  }];
-  try { // TRY/CATCH, JUST PLUGGING A HOLE FOR: https://github.com/SOHU-Co/kafka-node/issues/995
-    kafkaProducer.send(payload, (err, data) => {
-      console.log(payload);
-      console.log(data);
-      res.send({response:'Cleared Priority Zones'});
-    });
-  } catch (ex) {
-      console.log('errors with Kafka producer - could not clear priority zone');
-      console.log(data);
-  }
 });
 
 // incident server proxy
