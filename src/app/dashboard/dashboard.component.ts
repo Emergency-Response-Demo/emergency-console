@@ -8,7 +8,7 @@ import { IncidentService } from '../services/incident.service';
 import { ResponderService } from '../services/responder.service';
 import { Mission } from '../models/mission';
 import { ResponderStatus, ResponderTotalStatus, ResponderLocationStatus } from '../models/responder-status';
-import { ShelterService } from '../services/shelter.service';
+import { DisasterService } from '../services/disaster.service';
 import { MissionService } from '../services/mission.service';
 import { IncidentPriorityService } from '../services/incident-priority.service';
 import { PriorityZone } from '../models/priority-zone';
@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     private incidentService: IncidentService,
     private responderService: ResponderService,
-    private shelterService: ShelterService,
+    private disasterService: DisasterService,
     private missionService: MissionService,
     private incidentPriorityService: IncidentPriorityService,
     private socket: Socket
@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return Promise.all([
       this.missionService.getMissions(),
       this.incidentService.getAll(),
-      this.shelterService.getShelters(),
+      this.disasterService.getShelters(),
       this.responderService.getAvailable(),
       this.incidentPriorityService.getPriorityZones(),
       this.responderService.getTotal()])

@@ -30,6 +30,7 @@ import { LegendComponent } from './legend/legend.component';
 import { MapOverlayComponent } from './map-overlay/map-overlay.component';
 import { IncidentDashboardComponent } from './incident-dashboard/incident-dashboard.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DisasterLocationComponent } from './disaster-location/disaster-location.component';
 
 export function init(appInitService: AppInitService) {
   return () => appInitService.init();
@@ -49,7 +50,8 @@ export function init(appInitService: AppInitService) {
     MissionComponent,
     LegendComponent,
     MapOverlayComponent,
-    IncidentDashboardComponent
+    IncidentDashboardComponent,
+    DisasterLocationComponent
   ],
   imports: [
     BrowserModule,

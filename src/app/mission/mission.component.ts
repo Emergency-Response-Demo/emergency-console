@@ -8,7 +8,7 @@ import { AppUtil } from '../app-util';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Shelter } from '../models/shelter';
-import { ShelterService } from '../services/shelter.service';
+import { DisasterService } from '../services/disaster.service';
 import { ResponderService } from '../services/responder.service';
 import { Incident } from '../models/incident';
 import { Mission, MissionStep } from '../models/mission';
@@ -72,7 +72,7 @@ export class MissionComponent implements OnInit, OnDestroy {
     private messageService: MessageService,
     private keycloak: KeycloakService,
     private missionService: MissionService,
-    private shelterService: ShelterService,
+    private shelterService: DisasterService,
     private responderService: ResponderService,
     private responderSimulatorService: ResponderSimulatorService,
     private incidentService: IncidentService,

@@ -43,7 +43,7 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "node_modules/@coreui/icons/css/coreui-icons.css",
+              "node_modules/@coreui/icons/css/all.css",
               "node_modules/simple-line-icons/css/simple-line-icons.css",
               "node_modules/mapbox-gl/dist/mapbox-gl.css",
               "src/styles.scss"
