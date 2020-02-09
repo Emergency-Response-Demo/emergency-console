@@ -144,6 +144,9 @@ export class DisasterLocationComponent implements OnInit, OnDestroy {
         .addTo(this.map);
 
       this.unNamedShelters.set(shelterId, new Shelter(shelterId, event.lngLat.lng, event.lngLat.lat));
+      this.toggleShelterMode();
+      marker.togglePopup();
+      document.getElementById(shelterId).focus();
     }
   }
 
@@ -152,7 +155,7 @@ export class DisasterLocationComponent implements OnInit, OnDestroy {
       document.getElementById("shelterButton").innerHTML = "Place Shelter";
       this.map.getCanvas().style.cursor = ''
     } else {
-      document.getElementById("shelterButton").innerHTML = "Done";
+      document.getElementById("shelterButton").innerHTML = "Cancel";
       this.map.getCanvas().style.cursor = 'crosshair';
     }
     this.shelterMode = ! this.shelterMode;
@@ -160,7 +163,12 @@ export class DisasterLocationComponent implements OnInit, OnDestroy {
 
   public clearShelters() {
     var shelters = document.getElementsByClassName("mapboxgl-marker");
+    var popups = document.getElementsByClassName("mapboxgl-popup");
     Array.from(shelters).forEach((el) => {
+      el.parentNode.removeChild(el);
+    });
+    //remove popups if applicable
+    Array.from(popups).forEach((el) => {
       el.parentNode.removeChild(el);
     });
     this.shelters = [];

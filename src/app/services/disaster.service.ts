@@ -25,7 +25,7 @@ export class DisasterService {
 
     async getDisasterCenter(): Promise<DisasterCenter> {
       return this.http.get<Shelter[]>('/disaster-service/center').pipe(
-        catchError(res => this.handleError('getInclusionZones()', res))
+        catchError(res => this.handleError('getDisasterCenter()', res))
       ).toPromise();
     }
 
