@@ -29,10 +29,9 @@ export class DisasterLocationComponent implements OnInit, OnDestroy {
   };
   accessToken: string = window['_env'].accessToken;
   bounds: mapboxgl.LngLatBoundsLike;
-  shelters: Shelter[];
+  shelters: Map<string, Shelter> = new Map<string, Shelter>();
   mapDrawTools: MapboxDraw;
   shelterMode: boolean = false;
-  unNamedShelters: Map<string, Shelter> = new Map<string, Shelter>();
   inclusionZones: InclusionZone[];
 
   constructor(
@@ -84,7 +83,8 @@ export class DisasterLocationComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    this.shelters = await this.disasterService.getShelters();
+    var shelterArray:Shelter[] = await this.disasterService.getShelters();
+    shelterArray.forEach(shelter => this.shelters.set(shelter.id, shelter));
     this.inclusionZones = await this.disasterService.getInclusionZones();
     this.center = await this.disasterService.getDisasterCenter();
     console.log(this.center);
@@ -103,9 +103,9 @@ export class DisasterLocationComponent implements OnInit, OnDestroy {
     if (! event.target._easeOptions.center.lng) {
       return;
     }
-    var lngLat = [event.target._easeOptions.center.lng, event.target._easeOptions.center.lat];
-    this.center.lon = lngLat[0];
-    this.center.lat = lngLat[1];
+    var lngLat = this.map.getCenter().toArray();
+    this.center.lat = this.map.getCenter().lat;
+    this.center.lon = this.map.getCenter().lng;
     var geocodingClient = geocodingService(mapboxSdk({accessToken:this.accessToken}));
     geocodingClient.reverseGeocode({
       query: lngLat,
@@ -123,31 +123,32 @@ export class DisasterLocationComponent implements OnInit, OnDestroy {
   }
 
   public placeShelter(event) {
-    if (event.lngLat && this.shelterMode) {
-      var el = document.createElement("div");
-      el.className = "shelter";
+    if (event.lngLat && event.type === "click" && this.shelterMode) {
       var shelterId = uuid();
-
-      const popup = new mapboxgl.Popup({offset: [0, -12]}).setHTML(
-        `<div class="card-text">
-            <p>
-                <strong>Shelter Name: </strong><span><input type="text" id='${shelterId}' autofocus/></span><br />
-                <strong>Rescued: </strong>0<br />
-                <strong>Long/Lat: </strong> ${event.lngLat.lng},${event.lngLat.lat}<br />
-            </p>
-        </div>`
-      )
-
-      const marker = new mapboxgl.Marker(el)
-        .setLngLat(event.lngLat)
-        .setPopup(popup)
-        .addTo(this.map);
-
-      this.unNamedShelters.set(shelterId, new Shelter(shelterId, event.lngLat.lng, event.lngLat.lat));
+      this.shelters.set(shelterId, new Shelter(shelterId, event.lngLat.lng, event.lngLat.lat));
       this.toggleShelterMode();
-      marker.togglePopup();
-      document.getElementById(shelterId).focus();
+      setTimeout(()=>{
+        document.getElementById(shelterId).click();
+        (<HTMLElement>document.getElementsByClassName(shelterId)[0]).focus();
+      }, 250);
     }
+  }
+
+  public showPopup(marker:mapboxgl.Marker, event) {
+    if (! event.isTrusted) {
+      marker.togglePopup();
+    }
+  }
+
+  public moveShelter = (event) => {
+    if (event.target) {
+      event = event.target;
+    }
+
+    var shelterId = event._element.firstChild.id;
+
+    this.shelters.get(shelterId).lon = event._lngLat.lng;
+    this.shelters.get(shelterId).lat = event._lngLat.lat
   }
 
   public toggleShelterMode() {
@@ -162,17 +163,7 @@ export class DisasterLocationComponent implements OnInit, OnDestroy {
   }
 
   public clearShelters() {
-    var shelters = document.getElementsByClassName("mapboxgl-marker");
-    var popups = document.getElementsByClassName("mapboxgl-popup");
-    Array.from(shelters).forEach((el) => {
-      el.parentNode.removeChild(el);
-    });
-    //remove popups if applicable
-    Array.from(popups).forEach((el) => {
-      el.parentNode.removeChild(el);
-    });
-    this.shelters = [];
-    this.unNamedShelters.clear();
+    this.shelters.clear();
   }
 
   public clearInclusionZones() {
@@ -181,12 +172,13 @@ export class DisasterLocationComponent implements OnInit, OnDestroy {
   }
 
   public save() {
-    if (this.unNamedShelters.size > 0) {
-      var clause = this.unNamedShelters.size == 1 ? "is 1 shelter" : `are ${this.unNamedShelters.size} shelters`;
+    var unNamedShelters = Array.from(this.shelters.values()).filter(shelter => !shelter.name);
+    if (unNamedShelters.length > 0) {
+      var clause = unNamedShelters.length == 1 ? "is 1 shelter" : `are ${unNamedShelters.length} shelters`;
       alert(`There ${clause} with no name! Please click each shelter icon to enter one.`);
       return;
     }
-    if (this.shelters.length == 0) {
+    if (this.shelters.size == 0) {
       alert("There are no shelters! Without at least one, responders won't have anywhere to take incident victims.");
       return;
     }
@@ -207,7 +199,7 @@ export class DisasterLocationComponent implements OnInit, OnDestroy {
 
     var json = {
       center: this.center,
-      shelters: this.shelters,
+      shelters: Array.from(this.shelters.values()),
       inclusionZones: this.inclusionZones
     }
 
@@ -216,12 +208,8 @@ export class DisasterLocationComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('keydown', ['$event']) updateShelterName(event) {
-    if (event.key === 'Enter' && this.unNamedShelters.has(event.target.id)) {
-      var shelter:Shelter = this.unNamedShelters.get(event.target.id);
-      shelter.name = event.target.value;
-      event.target.parentNode.innerHTML = event.target.value;
-      this.unNamedShelters.delete(event.target.id);
-      this.shelters.push(shelter);
+    if (event.key === 'Enter' && this.shelters.has(event.target.className)) {
+      this.shelters.get(event.target.className).name = event.target.value;
     }
  }
 }

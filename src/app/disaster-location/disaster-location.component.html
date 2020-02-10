@@ -59,17 +59,20 @@
           (load)="loadMap($event)"
           (moveEnd)="dragChangeCenter($event)"
           (click)="placeShelter($event)">
-          <span *ngFor="let shelter of shelters">
+
+          <span *ngFor="let shelter of shelters | keyvalue">
             <!-- TODO: consider switching to Layer as it will use WebGL and render faster - this doesn't -->
-            <mgl-marker [lngLat]="[shelter.lon, shelter.lat]" #shelterMarker>
-              <div class="shelter"></div>
+            <mgl-marker [lngLat]="[shelter.value.lon, shelter.value.lat]" (dragEnd) = "moveShelter($event)" [draggable]="true" #shelterMarker>
+              <div class="shelter" [id]="shelter.key" (click)="showPopup(shelterMarker, $event)"></div>
             </mgl-marker>
             <mgl-popup [marker]="shelterMarker" [offset]="[0, -12]">
               <div class="card-text">
                 <p>
-                  <strong>Shelter Name: </strong> <span>{{ shelter.name }}</span><br />
-                  <strong>Rescued: </strong> {{ shelter.rescued }}<br />
-                  <strong>Long/Lat: </strong> {{ shelter.lon + ',' + shelter.lat }}<br />
+                  <strong>Shelter Name: </strong> 
+                    <span *ngIf="shelter.value.name; else textBox">{{ shelter.value.name }}</span>
+                    <ng-template #textBox><span><input type="text" placeholder="Enter a name" [class]="shelter.key"/></span></ng-template><br />
+                  <strong>Rescued: </strong> {{ shelter.value.rescued }}<br />
+                  <strong>Long/Lat: </strong> {{ shelter.value.lon + ',' + shelter.value.lat }}<br />
                 </p>
               </div>
             </mgl-popup>
