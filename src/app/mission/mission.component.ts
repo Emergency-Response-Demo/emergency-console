@@ -16,6 +16,7 @@ import { ResponderSimulatorService } from '../services/responder-simulator.servi
 import { Socket } from 'ngx-socket-io';
 import { ResponderLocationStatus } from '../models/responder-status';
 import { IncidentService } from '../services/incident.service';
+import { DisasterCenter } from '../models/disasterCenter';
 
 @Component({
   selector: 'app-mission',
@@ -28,7 +29,7 @@ export class MissionComponent implements OnInit, OnDestroy {
   loadingIcon: IconDefinition = faCircleNotch;
   responder: Responder = new Responder();
   mission: Mission = new Mission();
-  center: LngLat = new LngLat(-77.886765, 34.210383);
+  center: DisasterCenter;
   boundsOptions: FitBoundsOptions = {
     padding: 50
   };
@@ -76,6 +77,7 @@ export class MissionComponent implements OnInit, OnDestroy {
     private responderService: ResponderService,
     private responderSimulatorService: ResponderSimulatorService,
     private incidentService: IncidentService,
+    private disasterService: DisasterService,
     private socket: Socket
   ) { }
 
@@ -171,6 +173,7 @@ export class MissionComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
+    this.center = await this.disasterService.getDisasterCenter();
     const isLoggedIn = await this.keycloak.isLoggedIn();
     if (!isLoggedIn) {
       return;

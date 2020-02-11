@@ -13,6 +13,7 @@ import { MissionService } from '../services/mission.service';
 import { IncidentPriorityService } from '../services/incident-priority.service';
 import { PriorityZone } from '../models/priority-zone';
 import { Socket } from 'ngx-socket-io';
+import { DisasterCenter } from '../models/disasterCenter';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,6 +32,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   shelters: Shelter[] = new Array();
   totalResponders = 0;
 
+  center: DisasterCenter;
+
   constructor(
     private incidentService: IncidentService,
     private responderService: ResponderService,
@@ -47,10 +50,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.disasterService.getShelters(),
       this.responderService.getAvailable(),
       this.incidentPriorityService.getPriorityZones(),
+      this.disasterService.getDisasterCenter(),
       this.responderService.getTotal()])
-      .then(([missions, incidents, shelters, responders, priorityZones, responderStatus]: [Mission[], Incident[], Shelter[], Responder[], PriorityZone[], ResponderTotalStatus]) => {
+      .then(([missions, incidents, shelters, responders, priorityZones, disasterCenter, responderStatus]: [Mission[], Incident[], Shelter[], Responder[], PriorityZone[], DisasterCenter, ResponderTotalStatus]) => {
         this.shelters = shelters;
         this.priorityZones = priorityZones;
+        this.center = disasterCenter;
 
         // Use temp values so we have a double buffer, avoid needless updates.
         const tempIncidents = new Map<string, Incident>();

@@ -6,6 +6,7 @@ import { Shelter } from '../models/shelter';
 import { AppUtil } from '../app-util';
 import { ResponderService } from '../services/responder.service';
 import { IncidentService } from '../services/incident.service';
+import { DisasterService } from '../services/disaster.service';
 import { Mission } from '../models/mission';
 import { LineLayout, LinePaint, LngLatBoundsLike, FitBoundsOptions, LngLat, Point, Map, NavigationControl } from 'mapbox-gl';
 import { default as MapboxDraw, default as StaticMode } from '@mapbox/mapbox-gl-draw';
@@ -14,6 +15,7 @@ import { default as DrawStyles } from './util/draw-styles.js';
 import { PriorityZone } from '../models/priority-zone';
 import { KeycloakService } from 'keycloak-angular';
 import { default as Circle } from '@turf/circle';
+import { DisasterCenter } from '../models/disasterCenter';
 
 @Component({
   selector: 'app-map',
@@ -28,13 +30,13 @@ export class MapComponent implements OnInit {
   @Input() shelters: Shelter[];
   @Input() missions: Mission[];
   @Input() priorityZones: PriorityZone[];
+  @Input() center: DisasterCenter;
 
   map: Map;
   mapDrawTools: MapboxDraw;
 
   incidentCommander: boolean;
 
-  center: number[] = AppUtil.isMobile() ? [-77.886765, 34.139921] : [-77.886765, 34.158808];
   accessToken: string = window['_env'].accessToken;
 
   pickupData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
@@ -73,7 +75,7 @@ export class MapComponent implements OnInit {
    'background-image': 'url(assets/img/circle-shelter-hospital-colored.svg)'
   };
 
-  constructor(public responderService: ResponderService, public incidentService: IncidentService, private httpClient: HttpClient, private keycloak: KeycloakService) { }
+  constructor(public responderService: ResponderService, public incidentService: IncidentService, private httpClient: HttpClient, private keycloak: KeycloakService, private disasterService: DisasterService) { }
 
   get currentIncidents(): Incident[] {
     return this.incidents.filter(i => i.status !== 'RESCUED');
@@ -84,7 +86,8 @@ export class MapComponent implements OnInit {
   }
 
   markerClick(lngLat: number[]): void {
-    this.center = lngLat;
+    this.center.lon = lngLat[0];
+    this.center.lat = lngLat[1];
   }
 
   // RED if REPORTED, YELLOW otherwise (I guess assigned is the only other state right now)

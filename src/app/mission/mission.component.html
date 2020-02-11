@@ -11,7 +11,7 @@
       <mgl-map
         [style]="'mapbox://styles/mapbox/streets-v9'"
         [zoom]="[11]"
-        [center]="center"
+        [center]="[center.lon, center.lat]"
         (click)="setLocation($event)"
         [fitBounds]="bounds"
         [fitBoundsOptions]="boundsOptions"
