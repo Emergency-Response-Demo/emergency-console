@@ -76,7 +76,7 @@
     <mgl-geojson-source id="deliverJson" [data]="deliverData"> </mgl-geojson-source>
     <mgl-layer id="deliverRoute" type="line" source="deliverJson" [layout]="lineLayout" [paint]="deliverPaint"> </mgl-layer>
   </mgl-map>
-  <div class="btn-group" role="group" aria-label="Drawing Tools">
+  <div class="btn-group" role="group" aria-label="Drawing Tools" *ngIf="incidentCommander">
     <button type="button" class="btn btn-draw" (click)="onDrawPriorityZoneButtonClick()">{{ priZoneButtonText }}</button>
     <button type="button" class="btn btn-delete" (click)="onPriorityZoneDeleteButtonClick()">Delete Priority Zones</button>
   </div>

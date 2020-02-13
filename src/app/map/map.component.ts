@@ -7,13 +7,12 @@ import { AppUtil } from '../app-util';
 import { ResponderService } from '../services/responder.service';
 import { IncidentService } from '../services/incident.service';
 import { Mission } from '../models/mission';
-import { LineLayout, LinePaint, LngLatBoundsLike, FitBoundsOptions, LngLat, Point,
-          MapMouseEvent, Map, Marker, NavigationControl } from 'mapbox-gl';
-import { default as MapboxDraw } from '@mapbox/mapbox-gl-draw';
+import { LineLayout, LinePaint, LngLatBoundsLike, FitBoundsOptions, LngLat, Point, Map, NavigationControl } from 'mapbox-gl';
+import { default as MapboxDraw, default as StaticMode } from '@mapbox/mapbox-gl-draw';
 import { CircleMode, DragCircleMode, DirectMode, SimpleSelectMode } from 'mapbox-gl-draw-circle';
 import { default as DrawStyles } from './util/draw-styles.js';
 import { PriorityZone } from '../models/priority-zone';
-import { v4 as uuid } from 'uuid';
+import { KeycloakService } from 'keycloak-angular';
 import { default as Circle } from '@turf/circle';
 
 @Component({
@@ -22,6 +21,7 @@ import { default as Circle } from '@turf/circle';
   styleUrls: ['./map.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class MapComponent implements OnInit {
   @Input() responders: Responder[];
   @Input() incidents: Incident[];
@@ -31,6 +31,8 @@ export class MapComponent implements OnInit {
 
   map: Map;
   mapDrawTools: MapboxDraw;
+
+  incidentCommander: boolean;
 
   center: number[] = AppUtil.isMobile() ? [-77.886765, 34.139921] : [-77.886765, 34.158808];
   accessToken: string = window['_env'].accessToken;
@@ -71,7 +73,7 @@ export class MapComponent implements OnInit {
    'background-image': 'url(assets/img/circle-shelter-hospital-colored.svg)'
   };
 
-  constructor(public responderService: ResponderService, public incidentService: IncidentService, private httpClient: HttpClient) { }
+  constructor(public responderService: ResponderService, public incidentService: IncidentService, private httpClient: HttpClient, private keycloak: KeycloakService) { }
 
   get currentIncidents(): Incident[] {
     return this.incidents.filter(i => i.status !== 'RESCUED');
@@ -140,6 +142,14 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
+    StaticMode.toDisplayFeatures = function(state, geojson, display) {
+      display(geojson);
+    };
+    this.keycloak.isLoggedIn().then(isLoggedIn => {
+      if (isLoggedIn) {
+        this.incidentCommander = this.keycloak.isUserInRole('incident_commander');
+      }
+    });
   }
 
   getLLFromFeatureData(data): LngLat {
@@ -175,13 +185,7 @@ export class MapComponent implements OnInit {
 
   public onPriorityZoneDeleteButtonClick(): void {
     this.mapDrawTools.deleteAll();  // this deletes the drawn ones
-
-    const json = {
-      id: uuid(),
-      messageType: 'PriorityZoneClearEvent',
-      body: {}
-    };
-    this.httpClient.post<any>('/priority-zone/clear', json).subscribe(data => {});
+    this.httpClient.delete<any>('/incident-priority-service/priority-zones').subscribe(data => {});
   }
 
   // Fired when a feature is created. The following interactions will trigger this event:
@@ -232,12 +236,14 @@ export class MapComponent implements OnInit {
       styles: DrawStyles,
       modes: {
         ...MapboxDraw.modes,
+        static       : StaticMode,
         draw_circle  : CircleMode,
         drag_circle  : DragCircleMode,
         direct_select: DirectMode,
         simple_select: SimpleSelectMode
       }
     });
+
     this.map.addControl(this.mapDrawTools);
 
     // Can't override these or the events don't fire to MapboxDraw custom modes - TODO figure out how to get events for drag/updates
@@ -250,23 +256,24 @@ export class MapComponent implements OnInit {
     // Add existing priority zones to the map
     for (var i = 0; i < this.priorityZones.length; i++) {
       var priorityZone = this.priorityZones[i];
-      var turfCircle = Circle([parseFloat(priorityZone.lon), parseFloat(priorityZone.lat)], parseFloat(priorityZone.radius));
-      var feature = {"id":priorityZone.id,"type":"Feature","properties":{"isCircle":true,"center":[parseFloat(priorityZone.lon), parseFloat(priorityZone.lat)],"radiusInKm":parseFloat(priorityZone.radius)},"geometry":{"coordinates":turfCircle.geometry.coordinates,"type":"Polygon"}};
-      this.mapDrawTools.add(feature);
+      try {
+        var turfCircle = Circle([parseFloat(priorityZone.lon), parseFloat(priorityZone.lat)], parseFloat(priorityZone.radius));
+        var feature = {"id":priorityZone.id,"type":"Feature","properties":{"isCircle":true,"center":[parseFloat(priorityZone.lon), parseFloat(priorityZone.lat)],"radiusInKm":parseFloat(priorityZone.radius)},"geometry":{"coordinates":turfCircle.geometry.coordinates,"type":"Polygon"}};
+        this.mapDrawTools.add(feature);
+      } catch {} //swallow exception for mismatched start and end coordinates thrown by Circle library
+    }
+
+    if ( ! this.incidentCommander ) {
+      this.mapDrawTools.changeMode('static');
     }
   }
 
   public addedOrUpdatedPriorityZone(id, lon, lat, radiusInKm) {
     const json = {
-      id: uuid(),
-      messageType: 'PriorityZoneApplicationEvent',
-      body: {
-        lon: lon.toString(),
-        lat: lat.toString(),
-        id: id,
-        radius: radiusInKm.toString()
-      }
+      lon: lon.toString(),
+      lat: lat.toString(),
+      radius: radiusInKm.toString()
     };
-    this.httpClient.post<any>('/priority-zone/apply', json).subscribe(data => {});
+    this.httpClient.post<any>(`incident-priority-service/priority-zone/${id}`, json).subscribe(data => {});
   }
 }
