@@ -83,16 +83,17 @@ export class DisasterLocationComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
+    const isLoggedIn = await this.keycloak.isLoggedIn();
+
+    //only load component for incident_commander
+    if (!isLoggedIn || ! this.keycloak.isUserInRole('incident_commander')) {
+      location.replace("/home/dashboard");
+      return;
+    }
     var shelterArray:Shelter[] = await this.disasterService.getShelters();
     shelterArray.forEach(shelter => this.shelters.set(shelter.id, shelter));
     this.inclusionZones = await this.disasterService.getInclusionZones();
     this.center = await this.disasterService.getDisasterCenter();
-    console.log(this.center);
-    const isLoggedIn = await this.keycloak.isLoggedIn();
-    if (!isLoggedIn) {
-      return;
-    }
-    const profile = await this.keycloak.loadUserProfile();
   }
 
   ngOnDestroy() {
@@ -211,5 +212,10 @@ export class DisasterLocationComponent implements OnInit, OnDestroy {
     if (event.key === 'Enter' && this.shelters.has(event.target.className)) {
       this.shelters.get(event.target.className).name = event.target.value;
     }
- }
+  }
+
+  public presetLocation(event) {
+    this.httpClient.get(<any>(`disaster-service/disaster/defaults/${event.target.value}`)).subscribe(data => {});
+    location.reload();
+  }
 }

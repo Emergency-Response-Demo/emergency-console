@@ -7,6 +7,13 @@
     <div class="card-body">
       <p>Choose a new location for the Disaster Simulation by clicking and dragging, or by using the Search Box in the top right corner of the map.</p>
       <p><strong>Disaster Location: </strong><span id = "centerCity">{{ center.name }}</span></p>
+      <p>
+        <select class="custom-select" (change)="presetLocation($event)">
+          <option selected disabled>Or Select a Preloaded Location...</option>
+          <option value="wilmington">Wilmington, North Carolina, United States</option>
+          <option value="new-york">New York, New York, United States</option>
+        </select>
+      </p>
     </div>
   </div>
   <div class="card">

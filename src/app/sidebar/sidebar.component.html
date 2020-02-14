@@ -11,7 +11,7 @@
         <a class="nav-link" routerLink="home/incidents"
         routerLinkActive="nav-link-primary"> <i class="nav-icon cil-location-pin"></i> Incidents </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="incidentCommander">
         <a class="nav-link" routerLink="home/disaster-location"
         routerLinkActive="nav-link-primary"> <i class="nav-icon cil-globe-alt"></i> Disaster Location </a>
       </li>
