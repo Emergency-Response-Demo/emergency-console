@@ -16,7 +16,7 @@ import { ResponderSimulatorService } from '../services/responder-simulator.servi
 import { Socket } from 'ngx-socket-io';
 import { ResponderLocationStatus } from '../models/responder-status';
 import { IncidentService } from '../services/incident.service';
-import { DisasterCenter } from '../models/disasterCenter';
+import { DisasterCenter } from '../models/disaster-center';
 
 @Component({
   selector: 'app-mission',

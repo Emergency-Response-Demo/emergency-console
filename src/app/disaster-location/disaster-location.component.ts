@@ -11,7 +11,7 @@ import * as mapboxgl from 'mapbox-gl';
 import * as mapboxSdk from '@mapbox/mapbox-sdk';
 import { default as geocodingService } from '@mapbox/mapbox-sdk/services/geocoding';
 import { default as uuid } from 'uuid/v1';
-import { DisasterCenter } from '../models/disasterCenter';
+import { DisasterCenter } from '../models/disaster-center';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -197,6 +197,8 @@ export class DisasterLocationComponent implements OnInit, OnDestroy {
         new InclusionZone(feature.id, feature.geometry.coordinates[0])
       );
     });
+
+    this.center.zoom = this.map.getZoom();
 
     var json = {
       center: this.center,

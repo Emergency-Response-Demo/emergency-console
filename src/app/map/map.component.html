@@ -4,7 +4,7 @@
   <app-legend [bottom]="'50px'"></app-legend>
   <!-- https://github.com/Wykks/ngx-mapbox-gl/wiki/API-Documentation -->
   <mgl-map [style]="'mapbox://styles/mapbox/streets-v9'"
-    [zoom]="zoom"
+    [zoom]="center.zoom"
     [center]="[center.lon, center.lat]"
     [accessToken]="accessToken"
     [fitBounds]="bounds"

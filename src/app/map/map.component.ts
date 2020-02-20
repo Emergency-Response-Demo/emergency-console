@@ -15,7 +15,7 @@ import { default as DrawStyles } from './util/draw-styles.js';
 import { PriorityZone } from '../models/priority-zone';
 import { KeycloakService } from 'keycloak-angular';
 import { default as Circle } from '@turf/circle';
-import { DisasterCenter } from '../models/disasterCenter';
+import { DisasterCenter } from '../models/disaster-center';
 
 @Component({
   selector: 'app-map',
@@ -41,7 +41,6 @@ export class MapComponent implements OnInit {
 
   pickupData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
   deliverData: GeoJSON.FeatureCollection<GeoJSON.LineString> = AppUtil.initGeoJson();
-  zoom: number[] = [AppUtil.isMobile() ? 10 : 10.5];
   enableDrawingPriorityZones = false;  // TODO make a button to toggle this?
   priZoneButtonText = 'Create Priority Zone';
 

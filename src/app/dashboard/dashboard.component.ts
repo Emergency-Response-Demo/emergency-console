@@ -13,7 +13,7 @@ import { MissionService } from '../services/mission.service';
 import { IncidentPriorityService } from '../services/incident-priority.service';
 import { PriorityZone } from '../models/priority-zone';
 import { Socket } from 'ngx-socket-io';
-import { DisasterCenter } from '../models/disasterCenter';
+import { DisasterCenter } from '../models/disaster-center';
 
 @Component({
   selector: 'app-dashboard',

@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 import { Shelter } from '../models/shelter';
 import { InclusionZone } from '../models/inclusion-zone';
-import { DisasterCenter } from '../models/disasterCenter';
+import { DisasterCenter } from '../models/disaster-center';
 
 @Injectable({
   providedIn: 'root'

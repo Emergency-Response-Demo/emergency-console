@@ -58,7 +58,7 @@
     <div class="card-body">
       <mgl-map
           [style]="'mapbox://styles/mapbox/streets-v9'"
-          [zoom]="[10.5]"
+          [zoom]="[center.zoom]"
           [center]="[center.lon, center.lat]"
           [fitBounds]="bounds"
           [fitBoundsOptions]="boundsOptions"
