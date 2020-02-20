@@ -59,7 +59,10 @@ io.of('/shelters').on('connection', socket => {
 console.log('Setting up Kafka client for ', app.get('kafka-host'), 'on topic', app.get('kafka-message-topic'));
 let kafkaConsumerGroup = new kafka.ConsumerGroup({
   kafkaHost: app.get('kafka-host'),
-  groupId: app.get('kafka-groupid')
+  groupId: app.get('kafka-groupid'),
+  connectRetryOptions: {
+    forever: true
+  }
 }, app.get('kafka-message-topic'));
 
 kafkaConsumerGroup.on('message', msg => {
