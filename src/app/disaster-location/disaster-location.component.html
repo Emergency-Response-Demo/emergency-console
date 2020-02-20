@@ -1,0 +1,90 @@
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css" type="text/css" />
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.css" type="text/css" />
+
+<div class="card-deck">
+  <div class="card">
+    <div class="card-header"><strong>1. Select A Location</strong></div>
+    <div class="card-body">
+      <p>Choose a new location for the Disaster Simulation by clicking and dragging, or by using the Search Box in the top right corner of the map.</p>
+      <p><strong>Disaster Location: </strong><span id = "centerCity">{{ center.name }}</span></p>
+      <p>
+        <select class="custom-select" (change)="presetLocation($event)">
+          <option selected disabled>Or Select a Preloaded Location...</option>
+          <option value="wilmington">Wilmington, North Carolina, United States</option>
+          <option value="new-york">New York, New York, United States</option>
+        </select>
+      </p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><strong>2. Draw Disaster Area</strong></div>
+    <div class="card-body">
+      <p>
+        Click the <span id = "drawButton" class = "mapbox-gl-draw_polygon"></span> in the top right corner of the 
+        map to draw a shape (or shapes) around the disaster area. Incidents will only spawn inside the shapes you draw.
+      </p>
+      <p>
+        Double click to finish drawing each shape.
+      </p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><strong>3. Add Shelters</strong></div>
+    <div class="card-body">
+      <p>
+        Use the <strong>Place Shelter</strong> button to add a shelter to the disaster area by clicking on the map. Then enter a name for the shelter.
+      </p>
+      <div class="text-center shelterButtons">
+        <button (click)="toggleShelterMode()" id = "shelterButton" class="btn btn-primary" type="button">Place Shelter</button>
+        <button (click)="clearShelters()" class="btn btn-light" type="button">Clear Shelters</button>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><strong>4. Finish</strong></div>
+    <div class="card-body">
+      <p>
+        When everything looks good, click <strong>Save</strong> to persist your changes.
+      </p>
+      <div class="text-center shelterButtons">
+        <button class="btn btn-success btn-lg" type="button" (click)="save()"><strong>Save</strong></button>
+      </div>
+    </div>
+  </div>
+</div>
+<br/>
+<div class="card-deck">
+  <div class="card">
+    <div class="card-body">
+      <mgl-map
+          [style]="'mapbox://styles/mapbox/streets-v9'"
+          [zoom]="[center.zoom]"
+          [center]="[center.lon, center.lat]"
+          [fitBounds]="bounds"
+          [fitBoundsOptions]="boundsOptions"
+          [accessToken]="accessToken"
+          (load)="loadMap($event)"
+          (moveEnd)="dragChangeCenter($event)"
+          (click)="placeShelter($event)">
+
+          <span *ngFor="let shelter of shelters | keyvalue">
+            <!-- TODO: consider switching to Layer as it will use WebGL and render faster - this doesn't -->
+            <mgl-marker [lngLat]="[shelter.value.lon, shelter.value.lat]" (dragEnd) = "moveShelter($event)" [draggable]="true" #shelterMarker>
+              <div class="shelter" [id]="shelter.key" (click)="showPopup(shelterMarker, $event)"></div>
+            </mgl-marker>
+            <mgl-popup [marker]="shelterMarker" [offset]="[0, -12]">
+              <div class="card-text">
+                <p>
+                  <strong>Shelter Name: </strong> 
+                    <span *ngIf="shelter.value.name; else textBox">{{ shelter.value.name }}</span>
+                    <ng-template #textBox><span><input type="text" placeholder="Enter a name" [class]="shelter.key"/></span></ng-template><br />
+                  <strong>Rescued: </strong> {{ shelter.value.rescued }}<br />
+                  <strong>Long/Lat: </strong> {{ shelter.value.lon + ',' + shelter.value.lat }}<br />
+                </p>
+              </div>
+            </mgl-popup>
+          </span>
+        </mgl-map>
+      </div>
+  </div>
+</div>

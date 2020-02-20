@@ -8,11 +8,12 @@ import { IncidentService } from '../services/incident.service';
 import { ResponderService } from '../services/responder.service';
 import { Mission } from '../models/mission';
 import { ResponderStatus, ResponderTotalStatus, ResponderLocationStatus } from '../models/responder-status';
-import { ShelterService } from '../services/shelter.service';
+import { DisasterService } from '../services/disaster.service';
 import { MissionService } from '../services/mission.service';
 import { IncidentPriorityService } from '../services/incident-priority.service';
 import { PriorityZone } from '../models/priority-zone';
 import { Socket } from 'ngx-socket-io';
+import { DisasterCenter } from '../models/disaster-center';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,10 +32,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   shelters: Shelter[] = new Array();
   totalResponders = 0;
 
+  center: DisasterCenter;
+
   constructor(
     private incidentService: IncidentService,
     private responderService: ResponderService,
-    private shelterService: ShelterService,
+    private disasterService: DisasterService,
     private missionService: MissionService,
     private incidentPriorityService: IncidentPriorityService,
     private socket: Socket
@@ -44,13 +47,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return Promise.all([
       this.missionService.getMissions(),
       this.incidentService.getAll(),
-      this.shelterService.getShelters(),
+      this.disasterService.getShelters(),
       this.responderService.getAvailable(),
       this.incidentPriorityService.getPriorityZones(),
+      this.disasterService.getDisasterCenter(),
       this.responderService.getTotal()])
-      .then(([missions, incidents, shelters, responders, priorityZones, responderStatus]: [Mission[], Incident[], Shelter[], Responder[], PriorityZone[], ResponderTotalStatus]) => {
+      .then(([missions, incidents, shelters, responders, priorityZones, disasterCenter, responderStatus]: [Mission[], Incident[], Shelter[], Responder[], PriorityZone[], DisasterCenter, ResponderTotalStatus]) => {
         this.shelters = shelters;
         this.priorityZones = priorityZones;
+        this.center = disasterCenter;
 
         // Use temp values so we have a double buffer, avoid needless updates.
         const tempIncidents = new Map<string, Incident>();

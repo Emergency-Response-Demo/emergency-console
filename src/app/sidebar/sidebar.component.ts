@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,10 +9,14 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 })
 export class SidebarComponent implements OnInit {
   githubIcon: IconDefinition;
+  incidentCommander: boolean;
 
-  constructor() {
+  constructor(private keycloak: KeycloakService) {
     this.githubIcon = faGithub;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    const isLoggedIn = this.keycloak.isLoggedIn();
+    this.incidentCommander = isLoggedIn && this.keycloak.isUserInRole('incident_commander');
+  }
 }

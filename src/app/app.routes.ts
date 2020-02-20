@@ -3,6 +3,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { MissionComponent } from './mission/mission.component';
 import { IncidentDashboardComponent } from './incident-dashboard/incident-dashboard.component';
+import { DisasterLocationComponent } from './disaster-location/disaster-location.component';
 
 export const AppRoutes: Routes = [
   {
@@ -31,6 +32,13 @@ export const AppRoutes: Routes = [
         component: IncidentDashboardComponent,
         data: {
           breadcrumb: 'Incidents'
+        }
+      },
+      {
+        path: 'disaster-location',
+        component: DisasterLocationComponent,
+        data: {
+          breadcrumb: 'Disaster Location'
         }
       }
     ]

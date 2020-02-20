@@ -2,14 +2,18 @@
   <nav class="sidebar-nav ps">
     <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link" routerLink="home/dashboard" routerLinkActive="nav-link-primary"> <i class="nav-icon cui-dashboard"></i> Dashboard </a>
+        <a class="nav-link" routerLink="home/dashboard" routerLinkActive="nav-link-primary"> <i class="nav-icon cil-compass"></i> Dashboard </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="home/mission" routerLinkActive="nav-link-primary"> <i class="nav-icon cui-map"></i> Mission </a>
+        <a class="nav-link" routerLink="home/mission" routerLinkActive="nav-link-primary"> <i class="nav-icon cil-map"></i> Mission </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="home/incidents"
-        routerLinkActive="nav-link-primary"> <i class="nav-icon cui-location-pin"></i> Incidents </a>
+        routerLinkActive="nav-link-primary"> <i class="nav-icon cil-location-pin"></i> Incidents </a>
+      </li>
+      <li class="nav-item" *ngIf="incidentCommander">
+        <a class="nav-link" routerLink="home/disaster-location"
+        routerLinkActive="nav-link-primary"> <i class="nav-icon cil-globe-alt"></i> Disaster Location </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="https://github.com/Emergency-Response-Demo" target="_blank">

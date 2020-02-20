@@ -4,14 +4,28 @@ import { catchError } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 import { Shelter } from '../models/shelter';
+import { InclusionZone } from '../models/inclusion-zone';
+import { DisasterCenter } from '../models/disaster-center';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ShelterService {
+export class DisasterService {
     async getShelters(): Promise<Shelter[]> {
-      return this.http.get<Shelter[]>('/shelter-service/api/shelters').pipe(
+      return this.http.get<Shelter[]>('/disaster-service/shelters').pipe(
         catchError(res => this.handleError('getShelters()', res))
+      ).toPromise();
+    }
+
+    async getInclusionZones(): Promise<InclusionZone[]> {
+      return this.http.get<Shelter[]>('/disaster-service/inclusion-zones').pipe(
+        catchError(res => this.handleError('getInclusionZones()', res))
+      ).toPromise();
+    }
+
+    async getDisasterCenter(): Promise<DisasterCenter> {
+      return this.http.get<Shelter[]>('/disaster-service/center').pipe(
+        catchError(res => this.handleError('getDisasterCenter()', res))
       ).toPromise();
     }
 
