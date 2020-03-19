@@ -25,6 +25,7 @@ app.set('mission-service', process.env.MISSION || 'http://mission-service:8080')
 app.set('incident-priority-service', process.env.PRIORITY || 'http://incident-priority-service:8080');
 app.set('process-viewer', process.env.PROCESS_VIEWER || 'http://process-viewer:8080');
 app.set('responder-simulator', process.env.RESPONDER_SIMULATOR || 'http://responder-simulator:8080');
+app.set('disaster-simulator', process.env.DISASTER_SIMULATOR || 'http://disaster-simulator:8080');
 app.set('kafka-host', process.env.KAFKA_HOST || 'kafka-cluster-kafka-bootstrap.naps-emergency-response.svc:9092');
 app.set('kafka-message-topic', ['topic-mission-event', 'topic-responder-location-update', 'topic-incident-event', 'topic-responder-event', 'topic-incident-command', 'topic-responder-command']);
 if (process.env.KAFKA_TOPIC) {
@@ -178,6 +179,26 @@ app.use(
     logLevel: 'debug',
     pathRewrite: {
       '^/process-viewer': ''
+    }
+  })
+);
+
+app.use(
+  '/disaster-simulator$', function(req, res) {
+    res.redirect(app.get("disaster-simulator"));
+  }
+);
+
+// disaster simulator proxy
+app.use(
+  '/disaster-simulator/*',
+  proxy({
+    target: app.get('disaster-simulator'),
+    secure: false,
+    changeOrigin: true,
+    logLevel: 'debug',
+    pathRewrite: {
+      '^/disaster-simulator': ''
     }
   })
 );

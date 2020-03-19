@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-header">Incident Status</div>
     <div class="card-body">
-      <app-incident [status]="incidentStatus"></app-incident>
+      <app-incident [status]="incidentStatus" [incidentCommander]="incidentCommander"></app-incident>
     </div>
   </div>
   <div class="card">
@@ -12,7 +12,7 @@
 </div>
 <div class="card-deck">
   <div class="card">
-    <app-map [missions]="missions" [shelters]="shelters" [responders]="activeResponders" [incidents]="incidents" [priorityZones]="priorityZones" [center]="center">
+    <app-map [missions]="missions" [shelters]="shelters" [responders]="activeResponders" [incidents]="incidents" [priorityZones]="priorityZones" [center]="center" [incidentCommander]="incidentCommander">
     </app-map>
   </div>
 </div>

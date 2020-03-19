@@ -31,11 +31,10 @@ export class MapComponent implements OnInit {
   @Input() missions: Mission[];
   @Input() priorityZones: PriorityZone[];
   @Input() center: DisasterCenter;
+  @Input() incidentCommander: boolean;
 
   map: Map;
   mapDrawTools: MapboxDraw;
-
-  incidentCommander: boolean;
 
   accessToken: string = window['_env'].accessToken;
 
