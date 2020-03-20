@@ -33,6 +33,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   shelters: Shelter[] = new Array();
   totalResponders = 0;
 
+  displayKickstart: boolean;
+
   center: DisasterCenter;
 
   incidentCommander: boolean;
@@ -100,6 +102,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         incidentStatus.rescued++;
       }
     });
+    this.displayKickstart = incidentStatus.requested == 0 && incidentStatus.assigned == 0 && incidentStatus.pickedUp == 0;
     return incidentStatus;
   }
 

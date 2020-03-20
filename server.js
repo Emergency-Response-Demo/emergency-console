@@ -45,7 +45,7 @@ const certConfig = {
   cert: fs.readFileSync('server.cert')
 };
 
-let server = app.get('port') !== 8080 ? https.createServer(certConfig, app) : http.createServer(app);
+let server = app.get('port') != 8080 ? https.createServer(certConfig, app) : http.createServer(app);
 
 // setup socket
 let io = socketIO(server);

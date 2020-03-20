@@ -13,6 +13,8 @@ export class IncidentComponent implements OnInit {
   status: IncidentStatus = new IncidentStatus();
   @Input()
   incidentCommander: boolean;
+  @Input()
+  displayKickstart: boolean;
 
   constructor(public disasterSimulatorService: DisasterSimulatorService) { }
 
@@ -20,6 +22,7 @@ export class IncidentComponent implements OnInit {
   }
 
   public startSimulation() {
+    this.displayKickstart = false;
     this.disasterSimulatorService.clearResponders();
     this.disasterSimulatorService.generateIncidents();
     this.disasterSimulatorService.generateResponders();

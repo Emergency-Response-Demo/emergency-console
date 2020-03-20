@@ -21,14 +21,16 @@
     <progressbar max="100" [value]="status.percent" type="success" [animate]="true"></progressbar>
   </div>
 </div>
-<div *ngIf="incidentCommander && status.requested == 0 && status.assigned == 0 && status.pickedUp == 0" class="text-center">
+<div *ngIf="incidentCommander" class="text-center">
   <br/>
-  <button (click)="startSimulation()" id="startSimulationButton" class="btn btn-primary btn-lg" type="button"><strong>Start Simulation</strong></button>
-  <ng-template #popContent>
-    Spawn a new disaster with 50 incidents and 25 responders. For additional control over disaster participants, visit the <a href="/disaster-simulator" target="_blank">disaster simulator</a>. 
-  </ng-template>
-  <button type="button" class="btn btn-link" placement="right"
-        [ngbPopover]="popContent" popoverTitle="Start Simulation">
-        <span class="badge badge-primary badge-pill">?</span>
-  </button>
+  <div [hidden]="!displayKickstart">
+    <button (click)="startSimulation()" id="startSimulationButton" class="btn btn-primary btn-lg" type="button"><strong>Start Simulation</strong></button>
+    <ng-template #popContent>
+      Spawn a new disaster with 50 incidents and 25 responders. For additional control over disaster participants, visit the <a href="/disaster-simulator" target="_blank">disaster simulator</a>. 
+    </ng-template>
+    <button type="button" class="btn btn-link" placement="right"
+          [ngbPopover]="popContent" popoverTitle="Start Simulation">
+          <span class="badge badge-primary badge-pill">?</span>
+    </button>
+  </div>
 </div>
