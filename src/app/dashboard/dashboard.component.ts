@@ -14,6 +14,7 @@ import { IncidentPriorityService } from '../services/incident-priority.service';
 import { PriorityZone } from '../models/priority-zone';
 import { Socket } from 'ngx-socket-io';
 import { DisasterCenter } from '../models/disaster-center';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,7 +33,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   shelters: Shelter[] = new Array();
   totalResponders = 0;
 
+  displayKickstart: boolean;
+
   center: DisasterCenter;
+
+  incidentCommander: boolean;
 
   constructor(
     private incidentService: IncidentService,
@@ -40,7 +45,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private disasterService: DisasterService,
     private missionService: MissionService,
     private incidentPriorityService: IncidentPriorityService,
-    private socket: Socket
+    private socket: Socket,
+    private keycloak: KeycloakService
   ) { }
 
   async load(): Promise<void> {
@@ -96,6 +102,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         incidentStatus.rescued++;
       }
     });
+    this.displayKickstart = incidentStatus.requested == 0 && incidentStatus.assigned == 0 && incidentStatus.pickedUp == 0;
     return incidentStatus;
   }
 
@@ -196,6 +203,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.responderService.watchCreates().subscribe(this.handleResponderCreate.bind(this));
     this.responderService.watchDeletes().subscribe(this.handleResponderDelete.bind(this));
     this.responderService.watchLocation().subscribe(this.handleResponderLocationUpdate.bind(this));
+
+    this.keycloak.isLoggedIn().then(isLoggedIn => {
+      if (isLoggedIn) {
+        this.incidentCommander = this.keycloak.isUserInRole('incident_commander');
+      }
+    });
   }
 
   ngOnDestroy() {
