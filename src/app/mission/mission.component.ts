@@ -54,7 +54,7 @@ export class MissionComponent implements OnInit, OnDestroy {
     'background-image': 'url(assets/img/marker-incident-helpassigned-colored2.svg)'
   };
   shelterStyle: any = {
-    'background-image': 'url(assets/img/shelter-hospital-colored.svg)'
+    'background-image': 'url(assets/img/circle-shelter-hospital-colored.svg)'
   };
   lineLayout: LineLayout = {
     'line-join': 'round',
