@@ -73,7 +73,6 @@ export class MissionComponent implements OnInit, OnDestroy {
     private messageService: MessageService,
     private keycloak: KeycloakService,
     private missionService: MissionService,
-    private shelterService: DisasterService,
     private responderService: ResponderService,
     private responderSimulatorService: ResponderSimulatorService,
     private incidentService: IncidentService,
@@ -174,6 +173,7 @@ export class MissionComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.center = await this.disasterService.getDisasterCenter();
+    this.shelters = await this.disasterService.getShelters();
     const isLoggedIn = await this.keycloak.isLoggedIn();
     if (!isLoggedIn) {
       return;
@@ -189,7 +189,6 @@ export class MissionComponent implements OnInit, OnDestroy {
     const currentMission = await this.missionService.getByResponder(this.responder);
     this.handleMissionStatusUpdate(currentMission, false);
     this.handleResponderLocationFromMission(currentMission);
-    this.shelters = await this.shelterService.getShelters();
   }
 
   ngOnDestroy() {
