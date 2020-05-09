@@ -32,6 +32,13 @@ export class ResponderService {
     ).toPromise();
   }
 
+  async getAllResponders(): Promise<Responder[]> {
+    const url = 'responder-service/responders';
+    return this.http.get<Responder[]>(url).pipe(
+      catchError(res => this.handleError('getAllResponders()', res))
+    ).toPromise();
+  }
+
   async getById(id: number): Promise<Responder> {
     const url = `responder-service/responder/${id}`;
     return this.http.get<Responder>(url).pipe(

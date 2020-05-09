@@ -54,7 +54,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.missionService.getMissions(),
       this.incidentService.getAll(),
       this.disasterService.getShelters(),
-      this.responderService.getAvailable(),
+
+      // https://trello.com/c/Dlr5jK7G/179-responders-not-showing-metadata
+      //this.responderService.getAvailable(),
+      this.responderService.getAllResponders(),
+
       this.incidentPriorityService.getPriorityZones(),
       this.disasterService.getDisasterCenter(),
       this.responderService.getTotal()])
