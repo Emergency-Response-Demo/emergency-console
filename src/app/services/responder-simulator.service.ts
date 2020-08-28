@@ -15,9 +15,9 @@ export class ResponderSimulatorService {
   constructor(private messageService: MessageService, private http: HttpClient) { }
 
   async updateStatus(mission: Mission, status: string): Promise<Responder> {
-    const url = `responder-simulator/api/responders`;
+    const url = `responder-simulator/api/mission`;
     const data = {
-      responderId: mission.responderId,
+      missionId: mission.id,
       status
     };
     return this.http.post<any>(url, data).pipe(
