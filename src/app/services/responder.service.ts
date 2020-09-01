@@ -97,8 +97,7 @@ export class ResponderService {
         if (!msg || msg.messageType !== 'RespondersCreatedEvent' || !msg.body || !msg.body.created) {
           return;
         }
-        msg.body.responders.forEach(async (id) => {
-          const responder = await this.getById(id);
+        msg.body.responders.forEach(async (responder) => {
           observer.next(responder);
         });
       });
