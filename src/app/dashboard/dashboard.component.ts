@@ -153,7 +153,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.totalResponders = Object.values(this.responderMap).length;
   }
 
-  private handleResponderDelete(responderId: number): void {
+  private handleResponderDelete(responderId: string): void {
     delete this.responderMap[responderId];
     this.totalResponders = Object.values(this.responderMap).length;
   }
