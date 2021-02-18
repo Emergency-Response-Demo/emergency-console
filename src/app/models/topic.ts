@@ -1,47 +1,24 @@
 import { Incident } from './incident';
-import { Mission } from './mission';
 import { Responder } from './responder';
 
-interface TopicMessage {
-  messageType: string;
+export interface TopicIncidentCommand {
+  incident: Incident;
 }
 
-export interface TopicIncidentEvent extends TopicMessage {
-  body: Incident;
+export interface TopicResponderEvent {
+  responder: Responder;
 }
 
-export interface TopicIncidentCommand extends TopicMessage {
-  body: {
-    incident: Incident;
-  };
+export interface TopicResponderCreateEvent  {
+  created: number,
+  responders: Responder[]
 }
 
-export interface TopicMissionEvent extends TopicMessage {
-  body: Mission;
+export interface TopicResponderDeleteEvent  {
+  deleted: number,
+  responders: string[]
 }
 
-export interface TopicResponderEvent extends TopicMessage {
-  body: {
-    responder: Responder;
-  };
-}
-
-export interface TopicResponderCreateEvent extends TopicMessage {
-  body: {
-    created: number,
-    responders: number[]
-  };
-}
-
-export interface TopicResponderDeleteEvent extends TopicMessage {
-  body: {
-    deleted: number,
-    responders: number[]
-  };
-}
-
-export interface TopicResponderCommand extends TopicMessage {
-  body: {
-    responder: Responder;
-  };
+export interface TopicResponderCommand  {
+  responder: Responder;
 }

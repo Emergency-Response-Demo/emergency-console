@@ -9,7 +9,7 @@ import { Shelter } from '../models/shelter';
 import { Mission } from '../models/mission';
 import { Responder } from '../models/responder';
 import { Incident } from '../models/incident';
-import { TopicMissionEvent } from '../models/topic';
+import { CloudEvent} from '../cloudevents/cloudevent';
 
 @Injectable({
   providedIn: 'root'
@@ -32,22 +32,26 @@ export class MissionService {
 
   watch(): Observable<Mission> {
     return Observable.create(observer => {
-      this.socket.on('topic-mission-event', mission => {
-        if (!mission.body) {
+      this.socket.on('topic-mission-event', (event: CloudEvent) => {
+        if (!event.data) {
           return;
-        }
-        observer.next(mission.body);
+        }        
+        observer.next(event.data);
       });
     });
   }
 
   watchByResponder(responder: Responder): Observable<Mission> {
     return Observable.create(observer => {
-      this.socket.on('topic-mission-event', (mission: TopicMissionEvent) => {
-        if (!mission.body || `${mission.body.responderId}` !== `${responder.id}`) {
+      this.socket.on('topic-mission-event', (event: CloudEvent) => {
+        if (!event.data) {
           return;
         }
-        observer.next(mission.body);
+        const mission = event.data as Mission;
+        if (`${mission.responderId}` !== `${responder.id}`) {
+          return;
+        }
+        observer.next(mission);
       });
     });
   }
