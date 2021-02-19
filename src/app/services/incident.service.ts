@@ -6,7 +6,8 @@ import { MessageService } from './message.service';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { Incident } from '../models/incident';
 import { Socket } from 'ngx-socket-io';
-import { TopicIncidentEvent, TopicIncidentCommand } from '../models/topic';
+import { TopicIncidentCommand } from '../models/topic';
+import { CloudEvent} from '../cloudevents/cloudevent';
 
 @Injectable({
   providedIn: 'root'
@@ -38,17 +39,18 @@ export class IncidentService {
     const incidentEventTopic = 'topic-incident-event';
     const incidentCommandTopic = 'topic-incident-command';
     return Observable.create(observer => {
-      this.socket.on(incidentEventTopic, (msg: TopicIncidentEvent) => {
-        if (!msg.body || (!!types && !types.includes(msg.messageType))) {
+      this.socket.on(incidentEventTopic, (event: CloudEvent) => {
+        if (!event.data || (!!types && !types.includes(event.type))) {
            return;
         }
-        observer.next(msg.body);
+        observer.next(event.data);
       });
-      this.socket.on(incidentCommandTopic, (msg: TopicIncidentCommand) => {
-        if (!msg.body || !msg.body.incident || (!!types && !types.includes(msg.messageType))) {
+      this.socket.on(incidentCommandTopic, (event: CloudEvent) => {
+        const incidentCommand = event.data as TopicIncidentCommand;
+        if (!event.data || !incidentCommand.incident || (!!types && !types.includes(event.type))) {
           return;
         }
-        observer.next(msg.body.incident);
+        observer.next(incidentCommand.incident);
       });
     });
   }

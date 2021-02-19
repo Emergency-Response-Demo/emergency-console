@@ -8,7 +8,9 @@ let http = require('http');
 let fs = require('fs');
 let path = require('path');
 let proxy = require('http-proxy-middleware');
-let kafka = require('kafka-node');
+const { Kafka, logLevel } = require('kafkajs')
+const { CloudEvent } = require("cloudevents");
+const { KafkaMessage } = require("./src/modules/cloudevents")
 let socketIO = require('socket.io');
 let cors = require('cors');
 
@@ -27,7 +29,7 @@ app.set('process-viewer', process.env.PROCESS_VIEWER || 'http://process-viewer:8
 app.set('responder-simulator', process.env.RESPONDER_SIMULATOR || 'http://responder-simulator:8080');
 app.set('disaster-simulator', process.env.DISASTER_SIMULATOR || 'http://disaster-simulator:8080');
 app.set('disaster-simulator-route', process.env.DISASTER_SIMULATOR_ROUTE || 'http://disaster-simulator:8080');
-app.set('kafka-host', process.env.KAFKA_HOST || 'kafka-cluster-kafka-bootstrap.naps-emergency-response.svc:9092');
+app.set('kafka-host', process.env.KAFKA_HOST.split(','));
 app.set('kafka-message-topic', ['topic-mission-event', 'topic-responder-location-update', 'topic-incident-event', 'topic-responder-event', 'topic-incident-command', 'topic-responder-command']);
 if (process.env.KAFKA_TOPIC) {
   app.set('kafka-message-topic', process.env.KAFKA_TOPIC.split(','));
@@ -58,33 +60,40 @@ io.of('/shelters').on('connection', socket => {
 });
 
 // setup kafka connection
-console.log('Setting up Kafka client for ', app.get('kafka-host'), 'on topic', app.get('kafka-message-topic'));
-let kafkaConsumerGroup = new kafka.ConsumerGroup({
-  kafkaHost: app.get('kafka-host'),
-  groupId: app.get('kafka-groupid'),
-  connectRetryOptions: {
-    forever: true
-  }
-}, app.get('kafka-message-topic'));
-
-kafkaConsumerGroup.on('message', msg => {
-  try {
-    const parsedMessage = JSON.parse(msg.value);
-    io.sockets.emit(msg.topic, parsedMessage);
-  } catch (e) {
-    console.error('Failed to parse Kafka message', msg);
-  }
+const kafka = new Kafka({
+  logLevel: logLevel.INFO,
+  brokers: app.get('kafka-host'),
+  connectionTimeout: 3000
 });
+const consumer = kafka.consumer({ groupId: app.get('kafka-groupid') });
 
-kafkaConsumerGroup.on('error', err => {
-  console.error('Failed to connect to Kafka', err);
-  io.sockets.emit('error', { message: "Failed to connect to backing message queue's" });
-});
+const run = async () => {
+  console.log('Setting up Kafka client for ', app.get('kafka-host'));
+  await consumer.connect();
 
-kafkaConsumerGroup.on('offsetOutOfRange', (err) => {
-  console.error('Failed to consume message (offsetOutOfRange)', err);
-  io.sockets.emit('error', { message: "Failed to consume messages from backing message queue's" });
-})
+  app.get('kafka-message-topic').forEach((t) => {
+      const run2 = async () => {
+          console.log('Setting up Kafka client for ', app.get('kafka-host'), 'on topic', t);
+          await consumer.subscribe({ topic: t });
+      }
+      run2().catch(e => console.error(`[server.js] ${e.message}`, e))
+  });
+
+  await consumer.run({
+      eachMessage: async ({ topic, partition, message }) => {
+          try {
+              const event = KafkaMessage.toEvent({ headers: message.headers, body: message.value });
+              io.sockets.emit(topic, event);
+          } catch (err) {
+              console.error(`Error when transforming incoming message to CloudEvent. ${err.message}`, err);
+              console.error('    Topic: ', topic);
+              console.error('    Message:', message);
+          }
+      },
+  })
+};
+
+run().catch(e => console.error(`[server.js] ${e.message}`, e))
 
 // disaster server proxy
 app.use(

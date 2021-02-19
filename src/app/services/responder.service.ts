@@ -6,10 +6,11 @@ import { MessageService } from './message.service';
 import { of } from 'rxjs/internal/observable/of';
 import { Responder } from '../models/responder';
 import { Socket } from 'ngx-socket-io';
-import { ResponderTotalStatus } from '../models/responder-status';
+import { ResponderLocationStatus, ResponderTotalStatus } from '../models/responder-status';
 import { TopicResponderEvent, TopicResponderCommand, TopicResponderCreateEvent, TopicResponderDeleteEvent } from '../models/topic';
 import { ObserveOnOperator } from 'rxjs/internal/operators/observeOn';
 import { AppUtil } from '../app-util';
+import { CloudEvent } from '../cloudevents/cloudevent';
 
 @Injectable({
   providedIn: 'root'
@@ -69,35 +70,48 @@ export class ResponderService {
     ).toPromise();
   }
 
-  watchLocation(responder?: Responder): Observable<any> {
+  watchLocation(responder?: Responder): Observable<ResponderLocationStatus> {
     return Observable.create(observer => {
-      this.socket.on('topic-responder-location-update', msg => {
-        if (!msg || (!!responder && msg.responderId !== `${responder.id}`)) {
+      this.socket.on('topic-responder-location-update', (event: CloudEvent) => {
+        if (!event.data) {
           return;
         }
-        observer.next(msg);
+        const responderLocationStatus = event.data as ResponderLocationStatus;
+
+        if (!!responder && `${responderLocationStatus.responderId}` !== `${responder.id}`) {
+          return;
+        }
+        observer.next(responderLocationStatus);
       });
     });
   }
 
   watchDeletes(): Observable<any> {
     return Observable.create(observer => {
-      this.socket.on('topic-responder-event', (msg: TopicResponderDeleteEvent) => {
-        if (!msg || msg.messageType !== 'RespondersDeletedEvent' || !msg.body || !msg.body.deleted) {
+      this.socket.on('topic-responder-event', (event: CloudEvent) => {
+        if ( event.type !== 'RespondersDeletedEvent' || !event.data) {
           return;
         }
-        msg.body.responders.forEach(id => observer.next(id));
+        const responderDeleteEvent = event.data as TopicResponderDeleteEvent;
+        if (!responderDeleteEvent.deleted) {
+          return;
+        }
+        responderDeleteEvent.responders.forEach(id => observer.next(id));
       });
     });
   }
 
   watchCreates(): Observable<any> {
     return Observable.create(observer => {
-      this.socket.on('topic-responder-event', (msg: TopicResponderCreateEvent) => {
-        if (!msg || msg.messageType !== 'RespondersCreatedEvent' || !msg.body || !msg.body.created) {
+      this.socket.on('topic-responder-event', (event: CloudEvent) => {
+        if ( event.type !== 'RespondersCreatedEvent' || !event.data ) {
           return;
         }
-        msg.body.responders.forEach(async (responder) => {
+        const responderCreateEvent = event.data as TopicResponderCreateEvent;
+        if (!responderCreateEvent.created) {
+          return;
+        }
+        responderCreateEvent.responders.forEach(async (responder) => {
           observer.next(responder);
         });
       });
@@ -106,17 +120,19 @@ export class ResponderService {
 
   watch(): Observable<any> {
     return Observable.create(observer => {
-      this.socket.on('topic-responder-event', (msg: TopicResponderEvent) => {
-        if (!msg || !msg.body || !msg.body.responder) {
+      this.socket.on('topic-responder-event', (event: CloudEvent) => {
+        if ( !event.data || event.type !== 'ResponderUpdatedEvent' ) {
           return;
         }
-        observer.next(msg.body.responder);
+        const responderEvent = event.data as TopicResponderEvent;
+        observer.next(responderEvent.responder);
       });
-      this.socket.on('topic-responder-command', (msg: TopicResponderCommand) => {
-        if (!msg || !msg.body || !msg.body.responder) {
+      this.socket.on('topic-responder-command', (event: CloudEvent) => {
+        if (!event.data) {
           return;
         }
-        const { responder } = msg.body;
+        const responderCommand = event.data as TopicResponderCommand;
+        const { responder } = responderCommand;
         // Clean the update to ensure we don't override any existing properties with null or undefined.
         Object.keys(responder).forEach(key => {
           if (responder[key] === undefined || responder[key] === null) {
