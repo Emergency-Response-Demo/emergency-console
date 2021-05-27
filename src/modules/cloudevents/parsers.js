@@ -21,8 +21,17 @@ class JSONParser {
             payload = this.decorator.parse(payload);
         }
         validation_1.isDefinedOrThrow(payload, new ValidationError("null or undefined payload"));
-        validation_1.isBufferOrStringOrObjectOrThrow(payload, new ValidationError("invalid payload type, allowed are: uffer, string or object"));
-        const parseJSON = (v) => (validation_1.isBuffer(v) ? JSON.parse(v.toString()) : validation_1.isString(v) ? JSON.parse(v) : v);
+        validation_1.isBufferOrStringOrObjectOrThrow(payload, new ValidationError("invalid payload type, allowed are: buffer, string or object"));
+        const escape = (s) => {
+            if (s.substring(0, 1) == '"') {
+               s = s.replace(/\\/g,"");
+               s = s.substring(1, s.length-1);
+               return s;
+            } else {
+                return s;
+            }
+        }; 
+        const parseJSON = (v) => (validation_1.isBuffer(v) ? JSON.parse(escape(v.toString())) : validation_1.isString(escape(v)) ? JSON.parse(v) : v);
         return parseJSON(payload);
     }
 }
